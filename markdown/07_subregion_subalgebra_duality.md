@@ -1,0 +1,688 @@
+# Sec. VII: Subregion-Subalgebra Duality
+
+# Sec.~VII: Subregion-subalgebra duality
+
+This is the section the paper's title is named for, and everything in Secs.~II—VI was, in one way or another,
+building toward it. The claim is simple to state and enormous in consequence: **an arbitrary bulk
+spacetime region, in the strict large-$N$ limit, is not merely *emph* one.} Not approximately, not up to some correction: the bulk region and the
+boundary algebra are two names for the same mathematical object, described in two different languages.
+
+## Sec.~VII.A: general formulation
+
+### Where the identification comes from
+
+Recall from Sec.~VI.A that eq.~6.15 identified the bulk Fock space (built by ordinary quantization of small
+fluctuations around a classical background) with the boundary GNS Hilbert space (built from the algebra of
+operators surviving the large-$N$ limit, via GNS). Since these are literally the same Hilbert space, their
+full operator algebras must coincide too:
+
+$$
+
+B(\HH_\Psi^{\text{Fock}}) = B(\HH_\Psi^{\text{GNS}})
+
+$$
+
+(eq.~7.1). It's worth noticing something a little surprising buried in this equation: $B(\HH_\Psi^{\text{Fock}})$
+is naturally built from data on a single bulk Cauchy slice (ordinary canonical quantization only ever needs
+one moment of time), while $B(\HH_\Psi^{\text{GNS}})$ is built from the entire boundary spacetime (or, per
+eq.~6.33 of Sec.~VI.B, at least a finite time band). These look like they should be different-sized objects —
+and they're reconciled by the fact that the bulk has one more spatial dimension than the boundary: a whole
+extra dimension's worth of bulk data, spread across one Cauchy slice, is exactly matched by a chunk of
+boundary *emph*, not boundary space. This is already a first hint of the general phenomenon Sec.~VIII
+develops in full: boundary time and bulk radial position are intimately linked.
+
+At the free (quadratic) level, different bulk fields decouple from each other entirely, so both the Hilbert
+space and its algebra of operators split into independent tensor factors, one per field species $i$:
+$\HH_\Psi^{\text{GNS}}=\bigotimes_i\HH_{\Psi,i}^{\text{GNS}}$, with $\HH_{\Psi,i}^{\text{Fock}}=
+\HH_{\Psi,i}^{\text{GNS}}$ field by field (eqs.~7.2—7.3) — nothing conceptually new here, just bookkeeping
+that the identification holds mode by mode, not just for the whole theory at once.
+
+### The duality, stated precisely
+
+Because eq.~7.1 is an identity of entire operator algebras, it must hold subalgebra by subalgebra too: take
+any open bulk subregion $b$ on a Cauchy slice, with its associated bulk operator algebra $\widetilde\M_b
+\subset B(\HH_\Psi^{\text{Fock}})$ (bulk algebras are written with a tilde throughout this section, to keep
+them visually distinct from boundary algebras). There must be a corresponding boundary subalgebra $\M_b
+\subset B(\HH_\Psi^{\text{GNS}})$ identified with it:
+
+$$
+
+\widetilde\M_b = \M_b
+
+$$
+
+(eq.~7.4). Read this the way you'd read $\M=\mathcal M$ in ordinary mathematics, not as an analogy or a
+correspondence of properties — it's a literal identity of two descriptions of one mathematical object.
+Because $\M_b$ (via the general Sec.~IV.D dictionary — causal structure, entanglement, modular flow) encodes
+everything about the algebra's causal, geometric, and entanglement structure, and $\M_b=\widetilde\M_b$
+identically, **$\M_b$ already encodes everything about the bulk region $b$'s geometry too** — where the
+modular operator of $\widetilde\M_b$ (hence the entanglement structure of $b$ with its complement) is exactly
+the modular operator of $\M_b$, computable purely from boundary data. **This is why a bulk region can be
+fully "reconstructed" from the corresponding boundary algebra** — this is subregion-subalgebra duality, and
+you've already seen two special cases of it without the general name attached: the black-hole exterior
+identifications of Sec.~VI.C—D (eqs.~6.49, 6.53) are exactly eq.~7.4 with $b$ taken to be the entire exterior
+region.
+
+Because $\widetilde\M_b$ is a genuine local algebra of an (effectively free, at this order) bulk quantum field
+theory, it inherits every structural property established for such algebras back in Sec.~IV.D — and by
+eq.~7.4, so does the boundary algebra $\M_b$ that equals it:
+
+1. **Reeh—Schlieder**: the bulk "vacuum" $\ket0_{\phi_c}$ is cyclic and separating for
+$\widetilde\M_b$, so (since $\ket0_{\phi_c}=\ket1_\Psi$, eq.~6.16) the boundary GNS vacuum $\ket1_\Psi$ is
+cyclic and separating for $\M_b$ too.
+2. **Causality**: $\widetilde\M_b=\widetilde\M_{\widehat b}$ (eq.~7.5) — the algebra of a region equals
+the algebra of its full domain of dependence $\widehat b$ (Sec.~IV.D.3's time-slice axiom), so $\M_b$
+reconstructs the whole of $\widehat b$, not merely $b$ itself.
+3. **Type $\mathrm{III**_1$}: $\widetilde\M_b$ is type $\mathrm{III}_1$ (any local bulk QFT algebra
+is, per Sec.~IV.D.1), so $\M_b$ must be too.
+4. **Additivity** for topologically trivial regions, $\widetilde\M_{b_1\cup b_2}=\widetilde\M_{b_1}
+\vee\widetilde\M_{b_2}$ (eq.~7.6).
+5. **Haag duality**, $\widetilde\M_{b'}=\widetilde\M_b'$ (eq.~7.7, $b'$ the bulk causal complement of
+$b$ on its Cauchy slice).
+
+Every one of these bulk statements becomes a testable, checkable statement about boundary algebras once
+translated through eq.~7.4 — this is exactly the source of every worked example in the rest of this section.
+
+## Sec.~VII.B: entanglement wedge reconstruction, algebraically
+
+### Defining the boundary algebra $X_A$ properly
+
+Take a boundary spatial region $A$ on a constant-time Cauchy slice. Its **Ryu—Takayanagi (RT) surface**
+$\gamma_A$ is the bulk minimal-area surface anchored on $\partial A$; the bulk region $b_A$ between $A$ and
+$\gamma_A$ is its dual bulk region, and the **entanglement wedge** $\widehat b_A$ is $b_A$'s bulk domain
+of dependence (Fig.~14 of the paper). By subregion-subalgebra duality (eq.~7.8),
+
+$$
+
+X_A \equiv \M_{b_A} = \widetilde\M_{b_A} = \widetilde\M_{\widehat b_A} ,
+
+$$
+
+where $X_A\subset B(\HH_\Psi^{\text{GNS}})$ denotes the boundary algebra dual to $A$'s entanglement wedge —
+this restates the ordinary entanglement-wedge-reconstruction statement (physics inside $\widehat b_A$ is fully
+recoverable from $A$ alone) as a literal algebra identity.
+
+Constructing $X_A$ precisely takes a little care, and it's worth seeing exactly how, since the construction
+recurs constantly. At finite $N$, there's an ordinary von Neumann algebra $B_A^{(N)}$ of operators localized in
+$A$, satisfying $B_A^{(N)}=B_{\widehat A}^{(N)}$ (eq.~7.9, the ordinary time-slice axiom). As $N\to\infty$,
+many operators in $B_A^{(N)}$ simply fail to have a sensible limit and drop out — so the right object is
+
+$$
+
+X_A \equiv \pi_\Psi\Big(\lim_{N\to\infty,\Psi}B_A^{(N)}\Big)'' = X_{\widehat A}
+
+$$
+
+(eq.~7.10 — the double commutant, exactly as in the GNS construction of Sec.~II.D, ensures you get a genuine
+von Neumann algebra out the other end; the equality with $X_{\widehat A}$ follows from eq.~7.9 surviving the
+limit). There's a second, more easily constructed algebra sitting alongside it: $Y_{\widehat A}$, generated
+purely by single-trace operators restricted to $\widehat A$ (the object $Y_O$ from eq.~6.11 of Sec.~VI.A).
+Since single-trace operators restricted to any region always survive the large-$N$ limit by construction,
+
+$$
+
+Y_{\widehat A} \subseteq X_A
+
+$$
+
+(eq.~7.11) — and this inclusion is the entire content of the next subsection.
+
+### Causal wedge reconstruction: the "easy" part of $X_A$
+
+Causal wedge reconstruction — also known as (global) HKLL reconstruction, likely familiar already if you've
+seen any AdS/CFT course — states that bulk fields in the **causal wedge** $C_{\widehat A}\equiv
+\widetilde J^+(\widehat A)\cap\widetilde J^-(\widehat A)$ (points reachable causally both from and to
+$\widehat A$) can be written directly in terms of single-trace operators smeared over $\widehat A$ itself,
+
+$$
+
+\Phi(X) = \int d^dx\,K_A^{(C)}(X;x)\,\pi_\Psi(O(x)), \qquad X\in C_{\widehat A},\ x\in\widehat A
+
+$$
+
+(eq.~7.12, with $K_A^{(C)}$ an explicit — if generally distributional — kernel). This is exactly the vacuum-
+sector HKLL construction of Sec.~VI.B, eq.~6.32, now applied to a general region rather than the whole
+boundary. Algebraically, this identifies
+
+$$
+
+\widetilde\M_{C_{\widehat A}} = Y_{\widehat A}
+
+$$
+
+(eq.~7.13; eqs.~6.49 and 6.53 of Sec.~VI are exactly this statement for $A$ equal to a full boundary). Since
+the causal wedge always sits inside the entanglement wedge, $C_{\widehat A}\subseteq\widehat b_A$ (a standard
+geometric fact — geometrically, causal reconstruction is always more conservative than entanglement-based
+reconstruction), eqs.~7.8 and 7.13 immediately make eq.~7.11's inclusion $Y_{\widehat A}\subseteq X_A$
+completely obvious: it's just the algebraic shadow of $C_{\widehat A}\subseteq\widehat b_A$.
+
+### Where the rest of $X_A$ comes from: modular flow, made explicit
+
+Equation~7.10 defines $X_A$ abstractly but doesn't say what's actually *emph* it beyond $Y_{\widehat A}$. On
+the gravity side, it's well known that the entanglement wedge is generically strictly bigger than the causal
+wedge (equality only in special, highly symmetric cases) — so generically $Y_{\widehat A}\subsetneq X_A$. Here
+is where Sec.~IV.A's ergodic Lemma~IV.1 (a modular flow, applied to any subalgebra sharing the same
+cyclic-separating vector, regenerates the entire larger algebra) does real, load-bearing work: since $b_A$ is
+an honest bulk local region, $\ket1_\Psi$ is cyclic and separating for $X_A=\widetilde\M_{b_A}$, with some
+modular operator $\Delta_{X_A}$ (which, by eq.~7.4, equals the bulk modular operator $\widetilde\Delta_{b_A}$
+directly). Apply the Lemma to the subalgebra $Y_A^\epsilon$ — single-trace operators smeared within an
+infinitesimally thin time band of width $\epsilon$ around $A$ itself (Fig.~15 of the paper) — and modular flow
+of the *emph* algebra $X_A$ regenerates all of $X_A$ starting just from this razor-thin sliver:
+
+$$
+
+X_A = \Big\{\, \Delta_{X_A}^{-is}\,O_\epsilon(\vec x)\,\Delta_{X_A}^{is} \ :\ \vec x\in A,\ s\in\mathbb R
+\,\Big\}''
+
+$$
+
+(eq.~7.15). **The extra operators in $X_A$, beyond ordinary single-trace ones smeared over $\widehat
+A$, are literally single-trace operators run through modular flow.** Plugging this back gives an explicit
+formula for bulk fields anywhere in the full entanglement wedge, not just the causal wedge,
+
+$$
+
+\Phi(X) = \int_{-\infty}^\infty ds\int d\vec x\,K_A^{(E)}(X;s,\vec x)\,O(s;\vec x), \qquad X\in\widehat b_A
+
+$$
+
+(eq.~7.16) — the entanglement-wedge generalization of the HKLL formula, first conjectured on other grounds and
+now derived directly from modular theory.
+
+When does the "easy" causal-wedge piece already exhaust everything, $X_A=Y_{\widehat A}$? Exactly when the
+bulk modular flow of $b_A$ happens to act *emph* — as an honest, pointwise coordinate
+transformation (like the Rindler-wedge boost of Sec.~IV.D.1) — because a flow like that simply sweeps out
+points already inside $\widehat A$, generating nothing new. This happens for a half-space or spherical region
+in the vacuum, or for the full boundary in the thermofield double — exactly the cases already worked out
+explicitly, where $X_A=Y_{\widehat A}$ and $\widehat b_A=C_{\widehat A}$ (eq.~7.18) hold on the nose. In
+general, though, modular flow is *emph* geometric, and the inclusion is strict.
+
+
+> [!NOTE] **Physics Connection: Modular Flow and Operator Generation**
+> **This is the same fact you already checked by hand in Sec.~IV.A.** There, the single-pair modular flow
+> $\sigma_s(A)=\rho_R^{-is}A\rho_R^{is}$ was an ordinary, honest unitary conjugation — completely mundane, and
+> you verified its eigenvalues directly on a $4\times4$ matrix. Here, the same object — modular flow of a
+> boundary algebra — is doing something with no finite-dimensional analogue: it's *emph*, because the algebra it's flowing is infinite-dimensional and
+> type $\mathrm{III}_1$. On a qubit, conjugating $A$ by a unitary never produces an operator that wasn't already
+> some combination of Pauli matrices — there's nowhere new for it to go. In a type $\mathrm{III}_1$ algebra,
+> modular flow can genuinely sweep out an entire larger algebra starting from an arbitrarily thin sliver of it —
+> exactly Sec.~IV.A's "ergodic" lemma, now doing the physical work of building an entire black-hole interior
+> or entanglement wedge out of a sliver of boundary time. Nothing about the *emph* of modular flow
+> changed; what changed is that infinite dimensions let it do something a finite matrix conjugation never can.
+
+
+### Two logically distinct sources of type $\mathrm{III_1$}
+
+Both $X_A$ and $Y_{\widehat A}$ are type $\mathrm{III}_1$ — but it's worth being careful, because this fact
+has *emph* that happen to coincide only once $N\to\infty$ is taken
+strictly. Put the boundary theory on a lattice at any finite $N$: then $B_A^{(N)}$ is manifestly type I
+(finite matrices, minimal projections and all) — yet $X_A$ and $Y_{\widehat A}$ are *emph* type
+$\mathrm{III}_1$. So the type $\mathrm{III}_1$-ness of the emergent large-$N$ algebras has nothing to do with
+the type $\mathrm{III}_1$-ness of $B_A^{(N)}$ at finite $N$ before the limit is taken (which doesn't even
+exist yet). The finite-$N$ type $\mathrm{III}_1$ of a genuine continuum QFT algebra (Sec.~IV.D.1) comes from
+infinite *emph*-range entanglement piling up right at $\partial A$ — mirrored, in the bulk, by the
+infinitely long proper distance to the AdS boundary. The emergent, large-$N$ type $\mathrm{III}_1$ of $X_A$
+and $Y_{\widehat A}$ instead comes from infinite *emph*-range entanglement between $A$ and its
+complement that only appears in the strict $N\to\infty$ limit — mirrored, in the bulk, by infinite
+short-range entanglement concentrated right at the RT surface $\gamma_A$ (or the edge $\chi_{\widehat A}$ of
+the causal wedge) itself. Two logically independent mechanisms, producing the same type of algebra, at two
+different points (finite $N$ vs.\ strict $N\to\infty$) in the same construction.
+
+As a genuinely elegant bonus: since bulk modular flow acts as a local boost near $\gamma_A$ (Sec.~IV.D.1's
+local-Rindler argument, applied here right at the RT surface), and $\gamma_A$ is exactly the fixed
+("invariant") submanifold of that boost, **the RT surface itself can be redefined, with no bulk metric
+assumed, as the asymptotic fixed-point set of the boundary modular flow** — a genuinely algebraic
+reformulation, and reinterpretation, of the RT-surface-finding procedure itself.
+
+### Extended gravitational systems: algebra without any geometry to point to
+
+The whole entanglement/causal wedge story generalizes cleanly beyond geometric boundary regions: replace $A$
+by *emph* von Neumann subalgebra $\M$ of the boundary theory, and define $X_\M$ by the direct analogue of
+eq.~7.10 — no bulk geometric picture is required for this definition to make sense, even though one might not
+exist. And you can go further still: couple a genuinely gravitational sector $B$ (with its own boundary dual)
+to an ordinary, non-gravitational sector $R$ (e.g.\ radiation that has already escaped to infinity), and for
+any subsystem $Q$ of the combined system $B\cup R$, define $X_Q\equiv\lim_{G_N\to0,\Psi}B_Q$ (eq.~7.19, the
+entanglement wedge algebra of $Q$, whether or not it has any geometric meaning) and a corresponding causal
+wedge algebra $Y_Q$ (the algebra of $Q$'s ordinary low-energy effective description). This abstraction is
+exactly what's needed for the evaporating-black-hole discussion two subsections from now, where $Q$ will be
+taken to be the emitted Hawking radiation itself.
+
+## Sec.~VII.C: quantum informational aspects of entanglement wedge reconstruction
+
+### Superadditivity, and its boundary origin
+
+**Entanglement wedge nesting** is a standard geometric fact (a consequence of RT-surface extremality):
+for boundary regions $A_1\subseteq A_2$, the entanglement wedges satisfy $\widehat b_{A_1}\subseteq
+\widehat b_{A_2}$. Algebraically this is nothing but $X_{A_1}\subseteq X_{A_2}$ — immediate from $A_1
+\subseteq A_2$ and the definition of $X_A$. A direct geometric consequence, worth checking is genuinely a
+*emph* and not an independent assumption: for two regions $A_1,A_2$ on one Cauchy slice,
+
+$$
+
+b_{A_1}\cup b_{A_2} \subseteq b_{A_1\cup A_2}, \qquad b_{A_1\cap A_2}\subseteq b_{A_1}\cap b_{A_2}
+
+$$
+
+(eq.~7.20) — the entanglement wedge of a union is at least as big as the union of the entanglement wedges,
+generically strictly bigger (**superadditivity of entanglement wedges**, illustrated with two explicit
+AdS$_3$ examples in Fig.~17 of the paper: overlapping intervals, and two disjoint intervals placed close
+together — in both cases the RT surface of the union "jumps" to enclose visibly more bulk than either
+piece alone). Translated through eq.~7.8, this becomes a statement purely about boundary algebras,
+
+$$
+
+X_{A_1}\vee X_{A_2} \subseteq X_{A_1\cup A_2}, \qquad X_{A_1\cap A_2}\subseteq X_{A_1}\wedge X_{A_2}
+
+$$
+
+(eq.~7.21). Compare this to Sec.~IV.D.3's additivity axiom for an ordinary, finite-$N$ relativistic QFT,
+$B_{A_1}^{(N)}\vee B_{A_2}^{(N)}=B_{A_1\cup A_2}^{(N)}$ (eq.~7.22, expected to hold for topologically trivial
+regions at finite $N$): **for eq.~7.21's inclusions to be genuinely strict, ordinary additivity has to
+fail in the strict large-$N$ limit** — and it can be shown to fail explicitly on exactly the examples of
+Fig.~17 (worked out in detail in Fig.~18 of the paper, using a classic result of Araki identifying $X_{A_1}
+\vee X_{A_2}$ concretely as the algebra of single-trace operators in a specific larger causal region, strictly
+smaller than $X_{A_1\cup A_2}$). **Superadditivity of entanglement wedges is, quite literally, the bulk
+geometric shadow of the failure of ordinary locality-additivity for boundary algebras in the strict large-$N$
+limit** — algebras associated with local regions are no longer "locally generated" the way an ordinary
+finite-$N$ QFT's are.
+
+Haag duality, by contrast, is more robust: assuming it holds for the bulk algebras ($\widetilde\M_{b'}=
+\widetilde\M_b'$, eq.~7.7, using that $A,\bar A$ share the same RT surface for a pure global state, so
+$b_A=b_{\bar A}$, eq.~7.26), it survives intact into the large-$N$ limit,
+
+$$
+
+X_{A}' = X_{\bar A}
+
+$$
+
+(eq.~7.24) — in sharp contrast to the single-trace algebra $Y_{\widehat A}$, which is additive by
+construction but does *emph* satisfy Haag duality.
+
+### Quantum error correction, made precise
+
+Entanglement wedge reconstruction has long been interpreted through the lens of quantum error correction:
+recovering all the information in $b_A$ from boundary data on $A$ alone means that information is robust
+against "erasing" the complementary region $\bar A$ entirely. Superadditivity sharpens this into something
+more precise and checkable: take an operator $\Phi(X)$ with $X$ lying in a bulk region $b$ that sits in the
+*emph* of the entanglement wedges of two different boundary regions $A$ and $\widetilde A$, but
+outside the entanglement wedge of $A\cap\widetilde A$ (Fig.~19 of the paper). Using the HKLL-type formula
+eq.~7.12 (specializing, for concreteness, to a case where causal and entanglement wedges coincide for both
+$A$ and $\widetilde A$),
+
+$$
+
+\Phi(X) = \pi_\Omega(O_A(X)) = \pi_\Omega(O_{\widetilde A}(X))
+
+$$
+
+(eq.~7.27) — two *emph* boundary operators, built from entirely different single-trace
+data smeared over $A$ versus $\widetilde A$ respectively (eq.~7.28), happen to coincide once represented on
+the GNS Hilbert space. There is, in fact, an infinite family of such reconstructions, one for every boundary
+region whose entanglement wedge encloses $b$. **This means $\Phi(X)$ — any bulk degree of freedom in
+$b$ — cannot be identified with any specific boundary region at all: it is collectively, redundantly encoded
+across the boundary system, exactly the defining signature of a quantum error-correcting code**, and this
+redundancy is now seen to be a direct, checkable consequence of superadditivity (eq.~7.21) rather than an
+independent postulate bolted onto the holographic dictionary.
+
+### Worked calculation: the 3-qubit holographic toy code
+
+To see this error-correcting redundancy at the level of elementary matrix algebra, let us work through the classic 3-qubit holographic toy code.
+Let the bulk logical state be a single qubit at the center of the disk:
+
+$$
+
+\ket{\psi}_L = \alpha \ket{0}_L + \beta \ket{1}_L, \qquad |\alpha|^2 + |\beta|^2 = 1
+
+$$
+
+The boundary consists of 3 physical qubits $A, B, C$. The holographic encoding isometry $V: \mathbb{C}^2 \to (\mathbb{C}^2)^{\otimes 3}$ is defined by:
+
+$$
+
+\ket{0}_L \mapsto \frac{1}{\sqrt{2}}\big(\ket{000} + \ket{111}\big), \qquad \ket{1}_L \mapsto \frac{1}{\sqrt{2}}\big(\ket{100} + \ket{011}\big)
+
+$$
+
+Thus the encoded physical boundary state is:
+
+$$
+
+\ket{\Psi(\alpha,\beta)} = \frac{\alpha}{\sqrt{2}}\big(\ket{000}_{ABC} + \ket{111}_{ABC}\big) + \frac{\beta}{\sqrt{2}}\big(\ket{100}_{ABC} + \ket{011}_{ABC}\big)
+
+$$
+
+Let us compute the reduced density matrix on a single boundary subregion, say qubit $C$, by tracing out qubits $A$ and $B$:
+
+$$
+
+\rho_C = \Tr_{AB}\big(\ket{\Psi}\bra{\Psi}\big) = \sum_{a,b \in \{0,1\}} \braket{ab|\Psi}\braket{\Psi|ab}
+
+$$
+
+Evaluating the inner products with the four orthogonal basis states of $AB$:
+\begin{align*}
+\braket{00|\Psi} &= \frac{\alpha}{\sqrt{2}}\ket{0}_C \implies \braket{00|\Psi}\braket{\Psi|00} = \frac{|\alpha|^2}{2}\ket{0}\bra{0}_C \\
+\braket{10|\Psi} &= \frac{\beta}{\sqrt{2}}\ket{0}_C \implies \braket{10|\Psi}\braket{\Psi|10} = \frac{|\beta|^2}{2}\ket{0}\bra{0}_C \\
+\braket{11|\Psi} &= \frac{\alpha}{\sqrt{2}}\ket{1}_C \implies \braket{11|\Psi}\braket{\Psi|11} = \frac{|\alpha|^2}{2}\ket{1}\bra{1}_C \\
+\braket{01|\Psi} &= \frac{\beta}{\sqrt{2}}\ket{1}_C \implies \braket{01|\Psi}\braket{\Psi|01} = \frac{|\beta|^2}{2}\ket{1}\bra{1}_C
+\end{align*}
+Summing all four terms:
+
+$$
+
+\rho_C = \left(\frac{|\alpha|^2 + |\beta|^2}{2}\right)\ket{0}\bra{0}_C + \left(\frac{|\alpha|^2 + |\beta|^2}{2}\right)\ket{1}\bra{1}_C = \frac{1}{2}\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = \frac{1}{2}\id_2
+
+$$
+
+Notice the remarkable result: $\rho_C$ is strictly proportional to the identity matrix, completely independent of the logical amplitudes $\alpha$ and $\beta$. By exact cyclic symmetry of the code:
+
+$$
+
+\rho_A = \frac{1}{2}\id_2, \qquad \rho_B = \frac{1}{2}\id_2, \qquad \rho_C = \frac{1}{2}\id_2
+
+$$
+
+Any single boundary qubit contains **zero** information about the central bulk qubit!
+
+Now consider reconstructing logical operations using any *emph* qubits (a subregion of size 2):
+
+1. **Logical $Z_L = \ket{0**_L\bra{0} - \ket{1}_L\bra{1}$}:
+Define the boundary operator $Z_{AB} \equiv Z_A \otimes Z_B$ acting on region $AB$:
+\begin{align*}
+(Z_A \otimes Z_B \otimes \id_C)\ket{0}_L &= \frac{1}{\sqrt{2}}\big( (+1)(+1)\ket{000} + (-1)(-1)\ket{111}\big) = \ket{0}_L \\
+(Z_A \otimes Z_B \otimes \id_C)\ket{1}_L &= \frac{1}{\sqrt{2}}\big( (-1)(+1)\ket{100} + (+1)(-1)\ket{011}\big) = -\ket{1}_L
+\end{align*}
+Hence $(Z_{AB} \otimes \id_C)\ket{\psi}_L = Z_L\ket{\psi}_L$.
+2. **Logical $X_L = \ket{0**_L\bra{1} + \ket{1}_L\bra{0}$}:
+Define the boundary operator $X_{AB} \equiv X_A \otimes \id_B$ on region $AB$:
+\begin{align*}
+(X_A \otimes \id_B \otimes \id_C)\ket{0}_L &= \frac{1}{\sqrt{2}}\big(\ket{100} + \ket{011}\big) = \ket{1}_L \\
+(X_A \otimes \id_B \otimes \id_C)\ket{1}_L &= \frac{1}{\sqrt{2}}\big(\ket{000} + \ket{111}\big) = \ket{0}_L
+\end{align*}
+Hence $(X_{AB} \otimes \id_C)\ket{\psi}_L = X_L\ket{\psi}_L$.
+
+Crucially, logical $X_L$ can also be reconstructed on region $BC$ as $X_{BC} \equiv \id_A \otimes X_B \otimes \id_C$:
+
+$$
+
+(\id_A \otimes X_B \otimes \id_C)\ket{0}_L = \frac{1}{\sqrt{2}}\big(\ket{010} + \ket{101}\big) \dots
+
+$$
+
+Both $X_A \otimes \id_B \otimes \id_C$ and $\id_A \otimes X_B \otimes \id_C$ act identically on the code subspace as the central bulk field operator $\Phi(0) = X_L$, yet they are supported on disjoint boundary complements. This is the exact algebraic mechanism of holographic error correction in action.
+
+(One honest caveat worth keeping: the
+"bulk Hilbert space as a code subspace" picture from the quantum-error-correction literature is only
+literally meaningful at finite $N$, whereas the bulk semiclassical Hilbert space is only precisely defined at
+$N=\infty$ — so holographic error correction is better understood as a framework connecting the two regimes,
+with any finite-$N$ code necessarily only *emph* isometric, not as a literal, exact
+implementation of the holographic dictionary.)
+
+
+> [!NOTE] **Physics Connection: Redundant Purifications and Code Subspaces**
+> The fact that $\Phi(X)$ can be written in terms of completely different boundary data (region $A$ or region
+> $\widetilde A$) while remaining, in every observable sense, the identical operator is a large-scale version of
+> a fact you already know from ordinary quantum information: **purification is never unique.** Take a
+> single mixed qubit, $\rho=\mathrm{diag}(0.7,0.3)$. One purification uses a second qubit as the ancilla,
+> $\ket\Psi_1=\sqrt{0.7}\ket{00}+\sqrt{0.3}\ket{11}$; a completely different one uses, say, a 3-level ancilla in
+> a different encoding, $\ket\Psi_2=\sqrt{0.7}\ket{0}\ket{a}+\sqrt{0.3}\ket{1}\ket{b}$ for any orthonormal
+> $\ket a,\ket b$ in the bigger ancilla space. Trace out the ancilla in either case and you get back the
+> identical $\rho$ — checked immediately from the definition of partial trace, since it only ever depended on the
+> Schmidt coefficients $\sqrt{0.7},\sqrt{0.3}$, never on which specific ancilla states carried them. **Any
+> measurement confined to the original qubit alone cannot tell you which purification — which ancilla, entangled
+> in which way — is "really" sitting on the other side.** The information is there, but it's not attached to
+> any single, canonical description of the environment; it's attached only to the reduced state itself.
+> 
+> This is precisely the mechanism in eq.~7.27, just replayed at the scale of an entire holographic boundary
+> instead of one ancilla qubit: $\Phi(X)$'s reduced, observable content on the GNS Hilbert space is fixed, but
+> which specific boundary data (which "purification," i.e.\ which choice of $A$ or $\widetilde A$) you use to
+> reconstruct it is exactly as non-unique as the choice of ancilla was above — and, exactly as in the qubit
+> example, no measurement confined to the reconstructed operator itself could ever tell you which region did the
+> reconstructing. What's new here, and has no counterpart in the single-qubit example, is the *emph*
+> content of that redundancy: it isn't merely a bookkeeping curiosity about how you choose to write $\rho$ as a
+> partial trace — superadditivity (eq.~7.21) ties it directly to genuine bulk geometry, turning ``purification
+> isn't unique'' into ``a bulk region is stored redundantly enough to survive erasing any one boundary
+> subregion,'' the operational content of a quantum error-correcting code.
+
+
+## Sec.~VII.D: an algebraic formulation of entanglement islands
+
+### The island phenomenon, restated algebraically
+
+The **entanglement island** phenomenon — central to modern derivations of the Page curve for an
+evaporating black hole — says that after the Page time $t_P$, the black hole interior stops being part of the
+black hole's own entanglement wedge and instead becomes part of the entanglement wedge of the emitted
+radiation $R$. Split the full system into the black-hole boundary theory $B$ and the radiation $R$
+(Fig.~20 of the paper): before $t_P$, the minimal quantum extremal surface for $B$ is empty, so $B$'s
+entanglement wedge is the whole Cauchy slice, interior $I$ and exterior $O$ together; after $t_P$, a new,
+nontrivial extremal surface $\alpha$ takes over, and $B$'s entanglement wedge shrinks to just the exterior
+$O$. Algebraically,
+
+$$
+
+X_B = \begin{cases} \widetilde\M_O\vee\widetilde\M_I & t<t_P \\ \widetilde\M_O & t>t_P \end{cases}
+
+$$
+
+(eq.~7.29) — and since $B\cup R$ is everything there is, once $\widetilde\M_I$ drops out of $X_B$ it must show
+up somewhere in $R$'s own description instead. Using the entanglement-wedge algebra $X_R$ and causal-wedge
+algebra $Y_R$ from the "extended gravitational systems" discussion above (Sec.~VII.B), this transfer is
+stated precisely as
+
+$$
+
+X_R = \begin{cases} Y_R & t<t_P \\ Y_R\vee\widetilde\M_I & t>t_P \end{cases}
+
+$$
+
+(eq.~7.30). This lets you *emph* the presence of an island using only data intrinsic to the radiation
+system, with no reference to $B$ at all:
+
+$$
+
+I_R \equiv Y_R'\cap X_R
+
+$$
+
+(eq.~7.31) — for $t>t_P$, this evaluates to exactly $\widetilde\M_I$: an island exists exactly when this
+intersection is nontrivial, meaning there are operators surviving the semiclassical limit that lie outside
+$R$'s ordinary low-energy effective description. (Exactly as with $X_A$ versus $Y_{\widehat A}$ above, these
+extra operators are generated from $Y_R$ by modular flow of $X_R$ — the identical mechanism, one more time.)
+The same definition, $I_Q\equiv Y_Q'\cap X_Q$ (eq.~7.32), applies to any subsystem $Q$ of an extended
+gravitational system, not just radiation specifically: an island for $Q$ is whatever survives the
+semiclassical limit but sits outside $Q$'s own low-energy description.
+
+Specializing back to an ordinary boundary region $A$ (so $Y_Q=Y_{\widehat A}$), the island algebra $I_A$
+consists of exactly the modular-flow-generated operators in $X_A$ that aren't in $Y_{\widehat A}$ —
+geometrically, the part of the entanglement wedge $b_A$ lying outside the causal wedge $c_{\widehat A}$,
+i.e.\ $b_A=c_{\widehat A}\cup i_A$ (a genuine, ordinary geometric decomposition, per Fig.~21 of the paper),
+giving $X_A=Y_{\widehat A}\vee\widetilde\M_{i_A}$ and $I_A=\widetilde\M_{i_A}$ — an island, in this
+language, is exactly the piece of an entanglement wedge that causal-wedge (HKLL) reconstruction alone could
+never reach.
+
+## Sec.~VII.E: boundary description of a bulk causal diamond
+
+This subsection works through several increasingly striking concrete examples of the duality applied to
+regions that *emph* — genuinely bulk, purely interior objects described
+entirely by boundary commutant structure.
+
+### A diamond in the center of AdS, defined purely algebraically
+
+In the vacuum sector, take a boundary time band $I_w$ of width $w<\pi R$. Its causal wedge is a ``spherical
+Rindler region'' $W_{\rho_w}$ of radius $\rho_w=R\tan(\tfrac\pi2-\tfrac w{2R})$ (eq.~7.34, Fig.~23 of the
+paper), identified with the single-trace time-band algebra: $\widetilde\M_{W_{\rho_w}}=Y_{I_w}$ (eq.~7.35).
+(At $w\ge\pi R$, $W_{\rho_w}$ swallows an entire Cauchy slice, and this reduces to eq.~6.27's full-boundary
+statement.) Now take the *emph* of both sides, and use Haag duality (eq.~7.7):
+
+$$
+
+\widetilde\M_{D_{\rho_w}} = Y_{I_w}'
+
+$$
+
+(eq.~7.36), where $D_{\rho_w}=W_{\rho_w}'$ is a small spherical diamond sitting right in the very center of
+global AdS — as far from the boundary as you can get. **This diamond region's boundary description is
+not geometric at all: it is defined purely algebraically, as the commutant of a boundary time-band algebra**,
+with no boundary region of its own to point to. As $w\to\pi R$, the time band swallows nearly the whole
+boundary, the causal wedge $W_{\rho_w}$ swallows nearly the whole bulk, and correspondingly the diamond
+$D_{\rho_w}$ shrinks to an arbitrarily small, local patch of nearly-flat spacetime — described, at every
+stage, by the commutant of an ever-larger boundary time-band algebra. This is presented explicitly as a
+precise, operator-algebraic realization of the familiar holographic **IR/UV relation**: probing longer
+boundary time scales (bigger $Y_{I_w}$) is dual to probing shorter bulk distance scales (smaller diamond
+$D_{\rho_w}$).
+
+### Detecting a horizon from commutant structure alone
+
+Now repeat this in the thermofield-double black hole above $T_{\text{HP}}$: taking $Y_{I_w}^{(R)}$ (a
+time band of width $w$ on the right boundary), its causal wedge is a spherical wedge region $W_{\rho_w}$
+sitting strictly inside the black hole exterior (eq.~7.38, Fig.~24(a)) — and crucially, *emph*, $W_{\rho_w}$ never manages to cover the entire $t=0$ slice of the exterior region: the
+horizon is precisely the obstruction preventing this. Algebraically,
+
+$$
+
+(Y_{I_w}^{(R)})' \cap Y_R \ne \varnothing, \qquad \text{for every } w
+
+$$
+
+(eq.~7.40): **the mere existence of a horizon in the bulk is detected, on the boundary, by the fact that
+no matter how wide a time band you take, its commutant (restricted to the $R$ algebra) never becomes
+trivial.** This is worth comparing directly to the vacuum-sector story just above: there, growing $w$ all the
+way to $\pi R$ eventually made the causal wedge cover the entire Cauchy slice (no horizon, and correspondingly
+the diamond commutant genuinely does shrink to nothing as $w\to\pi R$); here, past the Hawking—Page
+transition, that never happens, for any $w$ — a clean, purely boundary-intrinsic diagnostic distinguishing a
+horizon-free geometry (like empty AdS) from a black hole, using nothing but the growth pattern of commutants
+of nested time bands.
+
+### A single-sided collapsing black hole, and the emergence of a horizon in real time
+
+The richest example: take $\ket\Psi$ dual to a single-sided black hole formed by ordinary gravitational
+collapse (Fig.~25 of the paper) — on the boundary side, this corresponds to $\ket\Psi$ thermalizing over time.
+An early-time time band $I_0$, wide enough that its causal wedge already covers a full Cauchy slice, gives
+$Y_{I_0}=B(\HH_{\text{bulk}})$ (eq.~7.41) — a genuine, honest type I algebra (no horizon has formed yet, so
+there's nothing to obstruct full reconstruction). At late times, well after collapse, a semi-infinite time
+band $I_1$ instead reconstructs only the black hole exterior, $\widetilde\M_R=Y_{I_1}$, with the commutant
+$Y_{I_1}'$ giving an emergent "mirror" interior algebra $\widetilde\M_L$ — reproducing, entirely from a
+*emph* collapse geometry, the same thermofield-double-like split structure, $Y_{I_0}=Y_{I_1}\vee
+Y_{I_1}'=\widetilde\M_R\vee\widetilde\M_L$ (eq.~7.42), that the genuinely two-sided eternal black hole had.
+**The type of the time-band algebra changes qualitatively as the system evolves**: type I at early times
+(before a horizon exists), and — once the system thermalizes — type $\mathrm{III}_1$ for a time band of
+*emph* width, no matter how large, as long as its earliest endpoint stays fixed at some late reference
+time. **This qualitative change in algebra type, tracked purely from boundary data, is the operator-
+algebraic definition of horizon formation and thermalization happening in real time** — exactly the ``causal
+depth'' diagnostic previewed already, made fully precise here.
+
+### The general theorem, and its limits
+
+All of the examples above shared a convenient special feature: the boundary region considered was exactly the
+intersection of its own causal wedge with the boundary. This fails in general (null-geodesic focusing means a
+light ray fired from the boundary into the bulk and back out again generically lands somewhere different from
+where it started, due to caustics) — and correspondingly, for a generic boundary region $Y$, the naive
+single-trace algebra $Y_Y$ isn't even a genuine von Neumann algebra on its own (its double commutant can
+reach single-trace operators supported on a strictly larger region than $Y$ itself, exactly the
+Fig.~18 phenomenon from Sec.~VII.C above). A precise theorem fixes exactly when the naive causal-wedge story
+does work: $Y_Y$ admits standard causal-wedge reconstruction, and is already a genuine von Neumann algebra,
+if and only if $Y$ is **causally convex** and satisfies $C_Y\cap B=Y$ (eq.~7.44, where $C_Y\equiv
+(\widetilde J^+[Y]\cap\widetilde J^-[Y])''$ is the generalized causal wedge and $B$ the boundary manifold) —
+in which case $Y_Y=\widetilde\M_{C_Y}$ exactly (eq.~7.45), with commutant $Y_Y'=\widetilde\M_{C_Y'}$
+(eq.~7.46). For a region $Y$ failing this condition, $Y_Y''$ instead reconstructs the algebra of the larger
+region $Y_{\max}\equiv C_Y\cap B$ (eq.~7.47) — a clean, general characterization of exactly how much bigger
+the double commutant can get.
+
+## Sec.~VII.F: generalized entropy and subregion-subalgebra duality at finite $N$
+
+Everything above lived strictly at $N=\infty$. This closing subsection asks what survives at finite (but
+large) $N$, where a bulk subregion can no longer even be sharply defined due to genuine spacetime
+fluctuations, and gives an important piece of indirect evidence that the whole framework nonetheless extends.
+
+Take the thermofield double above $T_{\text{HP}}$. At finite $N$, $B(\HH_R)$ is an ordinary type I algebra
+with a perfectly well-defined entanglement entropy $S_R$; in the strict $N\to\infty$ limit, $S_R$ should match
+the **generalized entropy** of the dual black hole,
+
+$$
+
+S_{\text{gen}} \equiv \frac{A_{\text{hor}}}{4G_N(\epsilon)} + S_{\text{bulk}}(\epsilon)
+
+$$
+
+(eq.~7.48, with $\epsilon$ a bulk short-distance cutoff, and $G_N(\epsilon)$ the corresponding bare coupling).
+At strict $G_N\to0$, $\widetilde\M_R$ is type $\mathrm{III}_1$, so $S_{\text{bulk}}$ isn't even defined without
+first regularizing $\widetilde\M_R$ into a type I algebra $\widetilde\M_R^\epsilon$ using the cutoff $\epsilon$
+— whose entropy then has a leading UV divergence $S_{\text{bulk}}(\epsilon)=a\,A_{\text{hor}}/\epsilon^{d-1}+
+\cdots$ (eq.~7.49, the familiar area-law divergence from Sec.~IV.D.1 all over again), matched by a
+corresponding divergence in the bare coupling $G_N(\epsilon)$ in the first term. Neither term in eq.~7.48 is
+separately finite as $\epsilon\to0$ — but there are strong indications (from independent gravitational
+calculations) that the two divergences cancel exactly, leaving a finite $S_{\text{gen}}=\lim_{\epsilon\to0}
+\big(\tfrac{A_{\text{hor}}}{4G_N(\epsilon)}+S_{\text{bulk}}(\epsilon)\big)$ (eq.~7.50).
+
+### Worked calculation: cancellation of UV divergences in generalized entropy
+
+To see this cancellation explicitly, consider a free scalar field in the near-horizon Rindler region of a $(d+1)$-dimensional spacetime with metric:
+
+$$
+
+ds^2 = -\kappa^2 \rho^2 dt^2 + d\rho^2 + dx_\perp^2
+
+$$
+
+where $\rho$ is the proper distance to the horizon at $\rho = 0$, $\kappa = 2\pi/\beta$ is the surface gravity, and $x_\perp \in \mathbb{R}^{d-1}$ are the transverse horizon coordinates with total area $A_{\text{hor}} = \int d^{d-1}x_\perp$.
+Imposing a brick-wall cutoff at proper distance $\rho = \epsilon > 0$, the standard thermal entanglement entropy of the bulk quantum field modes in the exterior region $\rho \ge \epsilon$ yields:
+
+$$
+
+S_{\text{bulk}}(\epsilon) = \frac{c_{d-1}\, A_{\text{hor}}}{\epsilon^{d-1}} + S_{\text{bulk}}^{\text{finite}}
+
+$$
+
+where the leading geometric coefficient is $c_{d-1} = \frac{1}{6 (4\pi)^{(d-1)/2}\,\Gamma((d-1)/2)}$.
+In isolation, as $\epsilon \to 0$, $S_{\text{bulk}}(\epsilon) \to +\infty$ because the local field algebra is type $\mathrm{III}_1$.
+
+However, quantum fluctuations of the scalar field also generate 1-loop corrections to the gravitational effective action. Integrating out the scalar modes with the same UV cutoff $\epsilon$ shifts the effective Einstein—Hilbert action:
+
+$$
+
+S_{\text{eff}}[g] = \int d^{d+1}x \sqrt{-g} \left( \frac{1}{16\pi G_{N,0}} R + \dots \right) + \frac{1}{2}\Tr\log(-\Box)
+
+$$
+
+The heat-kernel expansion of $\Tr\log(-\Box)$ generates a 1-loop renormalization of the bare Newton constant:
+
+$$
+
+\frac{1}{16\pi G_N(\epsilon)} = \frac{1}{16\pi G_{N,\text{ren}}} - \frac{c_{d-1}}{4\,\epsilon^{d-1}} \implies \frac{1}{4G_N(\epsilon)} = \frac{1}{4G_{N,\text{ren}}} - \frac{c_{d-1}}{\epsilon^{d-1}}
+
+$$
+
+Now substitute this renormalized coupling back into the generalized entropy $S_{\text{gen}}(\epsilon)$:
+\begin{align*}
+S_{\text{gen}}(\epsilon) &= \frac{A_{\text{hor}}}{4G_N(\epsilon)} + S_{\text{bulk}}(\epsilon) \\
+&= \left(\frac{A_{\text{hor}}}{4G_{N,\text{ren}}} - \frac{c_{d-1}\,A_{\text{hor}}}{\epsilon^{d-1}}\right) + \left(\frac{c_{d-1}\,A_{\text{hor}}}{\epsilon^{d-1}} + S_{\text{bulk}}^{\text{finite}}\right) \\
+&= \frac{A_{\text{hor}}}{4G_{N,\text{ren}}} + S_{\text{bulk}}^{\text{finite}}
+\end{align*}
+The cutoff-dependent pole $\epsilon^{-(d-1)}$ cancels identically!
+This establishes that generalized entropy $S_{\text{gen}}$ is a genuinely cutoff-independent physical observable, even though its classical geometric part and quantum field-theoretic part are separately ill-defined without a regulator. This exact cancellation is what the algebraic crossed product of Sec.~V formalizes directly at the operator level.
+
+This finiteness gives real, if indirect, evidence for exactly the extension the whole section has been
+building toward: there should exist a boundary regularization, at finite $N$, producing a type I algebra
+$Y_R^\epsilon$ with $\widetilde\M_R^\epsilon=Y_R^\epsilon$ (eq.~7.51) — even though nobody currently knows how
+to write this regularization down explicitly for a general boundary theory. Pushing $\epsilon$ down to the
+Planck length $\ell_p$ (where the clean separation between the two terms of eq.~7.48 breaks down, since
+$1/G_N\sim1/\epsilon^{d-1}$ at that point), the natural expectation is
+
+$$
+
+\widetilde\M_R^\epsilon = Y_R^\epsilon = B(\HH_R), \qquad \epsilon\sim\ell_p
+
+$$
+
+(eq.~7.52): the emergent, large-$N$, type $\mathrm{III}_1$ algebra $Y_R$ is conjectured to be the strict
+$\epsilon\to0$ endpoint of a continuous family of finite-$N$, type I extensions, all the way down to the
+ordinary finite-$N$ algebra $B(\HH_R)$ itself — subregion-subalgebra duality, suitably reinterpreted, surviving
+all the way down to finite $N$, not just as a strict $N=\infty$ statement.
+
+\bigskip
+\noindent With subregion-subalgebra duality now established as the general principle — and worked through on
+the vacuum sector, the eternal and evaporating black hole, and purely-algebraic bulk diamonds — Sec.~VIII
+turns to the deepest consequence of all: reading bulk *emph*, including the very
+formation of a horizon and the connectivity of spacetime, directly off the type and commutant structure of
+boundary algebras, with no bulk metric assumed anywhere in the argument.

@@ -1,0 +1,137 @@
+% ================= COMPANION PREAMBLE =================
+\PassOptionsToPackage{colorlinks=true,linkcolor=cobalt,citecolor=cobalt,urlcolor=cobalt,pdfencoding=auto,psdextra}{hyperref}
+\usepackage[margin=1in, headheight=15pt, top=1in, bottom=1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{braket}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{microtype}
+\usepackage{setspace}
+\setstretch{1.08}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+
+% Modern, crisp typography
+\usepackage{lmodern}
+
+% Accessible, high-contrast color palette (WCAG AAA compliant)
+\definecolor{cobalt}{HTML}{1d4ed8}
+\definecolor{navyhead}{HTML}{0f172a}
+\definecolor{physbox}{HTML}{f0f7ff}
+\definecolor{physrule}{HTML}{1e40af}
+\definecolor{notebox}{HTML}{fffbeb}
+\definecolor{noterule}{HTML}{b45309}
+\definecolor{notetitle}{HTML}{78350f}
+\definecolor{exbox}{HTML}{f8fafc}
+\definecolor{exrule}{HTML}{475569}
+\definecolor{extitle}{HTML}{1e293b}
+
+\usepackage{hyperref}
+\usepackage[most]{tcolorbox}
+\usepackage{bookmark}
+
+% Headers & Footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{gray!70!black}\nouppercase{\leftmark}}
+\fancyhead[R]{\small\color{gray!70!black}\nouppercase{\rightmark}}
+\fancyfoot[C]{\small\color{gray!80!black}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Section Titles Styling
+\titleformat{\section}
+  {\Large\bfseries\color{navyhead}}
+  {\thesection}{1em}{}[\color{cobalt}\titlerule]
+\titleformat{\subsection}
+  {\large\bfseries\color{navyhead}}
+  {\thesubsection}{0.8em}{}
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{navyhead}}
+  {\thesubsubsection}{0.6em}{}
+
+% ================= TCOLORBOX STYLING =================
+% 1. Physics Connection Callout Box
+\newtcolorbox{physconnect}[1][]{%
+  enhanced, breakable,
+  colback=physbox,
+  colframe=physrule,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  coltitle=white,
+  fonttitle=\bfseries\small\sffamily,
+  colbacktitle=physrule,
+  toptitle=3.5pt, bottomtitle=3.5pt,
+  titlerule=0pt,
+  title={Physics Connection#1},
+  before skip=12pt, after skip=12pt
+}
+
+% 2. Reader Margin Note / Question Box
+\newtcolorbox{questioncallout}{%
+  enhanced, breakable,
+  colback=notebox,
+  colframe=noterule,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  coltitle=white,
+  fonttitle=\bfseries\small\sffamily,
+  colbacktitle=noterule,
+  toptitle=3.5pt, bottomtitle=3.5pt,
+  titlerule=0pt,
+  title={Margin Question},
+  before skip=10pt, after skip=10pt
+}
+
+% 3. Worked Example Box
+\newtcolorbox{workedexamplebox}[1][]{%
+  enhanced, breakable,
+  colback=exbox,
+  colframe=exrule,
+  boxrule=0.8pt,
+  arc=3pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  coltitle=white,
+  fonttitle=\bfseries\small\sffamily,
+  colbacktitle=exrule,
+  toptitle=3.5pt, bottomtitle=3.5pt,
+  titlerule=0pt,
+  title={Worked Example#1},
+  before skip=10pt, after skip=10pt
+}
+
+% Direct answer to margin questions
+\newcommand{\yourquestion}[1]{\begin{questioncallout}\textit{#1}\end{questioncallout}}
+
+% Math Operators & Shortcuts
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\ii}{\mathrm{i}}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\id}{\mathbf{1}}
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\Alg}{\mathcal{A}}
+\newcommand{\Sscr}{\mathcal{S}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\BH}{B(\HH)}
+
+% Paragraph Spacing
+\setlength{\parskip}{5pt}
+\setlength{\parindent}{0pt}
+\allowdisplaybreaks
+
+% Hyperref & PDF Metadata
+\hypersetup{
+  pdftitle={A Reading Companion to Hong Liu's Lectures on Entanglement, von Neumann Algebras, and Emergence of Spacetime},
+  pdfauthor={Reading Companion},
+  pdfsubject={Entanglement, von Neumann algebras, modular theory, AdS/CFT, and emergence of spacetime},
+  pdfkeywords={von Neumann algebras, modular theory, crossed product, quantum gravity, AdS/CFT}
+}
+\bookmarksetup{open,openlevel=2}
