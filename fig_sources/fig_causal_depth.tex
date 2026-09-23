@@ -1,0 +1,78 @@
+\documentclass[tikz,border=6pt]{standalone}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning,decorations.pathmorphing}
+
+\definecolor{cobalt}{HTML}{2b4c7e}
+\definecolor{navyhead}{HTML}{1a365d}
+\definecolor{boxblue}{HTML}{eef3fa}
+\definecolor{boxgreen}{HTML}{eaf6f0}
+\definecolor{ruleblue}{HTML}{2b6cb0}
+\definecolor{rulegold}{HTML}{b7791f}
+\definecolor{rulered}{HTML}{c0392b}
+\definecolor{rulegreen}{HTML}{1f8a5f}
+
+\begin{document}
+\begin{tikzpicture}[>=Latex, font=\small]
+
+  % ================= PANEL A: EMPTY ADS (T = pi R < infinity) =================
+  \begin{scope}[shift={(0,0)}]
+    \node[font=\bfseries\normalsize\color{navyhead}, align=center] at (2.5, 4.8) 
+      {\textbf{(a)} Empty AdS: Causal Depth $T = \pi R$};
+
+    % AdS boundary cylinder slice
+    \draw[thick] (0, 0) -- (0, 4.0);
+    \draw[thick] (5.0, 0) -- (5.0, 4.0);
+    \draw[dashed, color=gray!60] (0, 2.0) -- (5.0, 2.0) node[right, font=\tiny] {Cauchy slice};
+
+    % Bulk center r=0
+    \draw[dotted, color=gray!50] (2.5, 0) -- (2.5, 4.0);
+    \node[below, font=\scriptsize] at (2.5, 0) {Center $r=0$};
+
+    % Time band Iw on left and right boundaries
+    \draw[line width=2.5pt, color=ruleblue] (0, 0.75) -- (0, 3.25)
+      node[midway, left=2pt, font=\scriptsize\bfseries] {Band $I_w$};
+    \draw[line width=2.5pt, color=ruleblue] (5.0, 0.75) -- (5.0, 3.25);
+
+    % Light rays meeting at center r=0
+    \fill[boxblue, opacity=0.7] (0, 2.0) -- (2.5, 0.75) -- (5.0, 2.0) -- (2.5, 3.25) -- cycle;
+    \draw[thick, ruleblue] (0, 0.75) -- (2.5, 2.0) -- (0, 3.25);
+    \draw[thick, ruleblue] (5.0, 0.75) -- (2.5, 2.0) -- (5.0, 3.25);
+
+    \fill[ruleblue] (2.5, 2.0) circle (2pt);
+    \node[above=3pt, font=\tiny\bfseries\color{ruleblue}] at (2.5, 2.0) {Lightcones cross};
+
+    \node[below=4pt, font=\scriptsize\color{black!80}, align=center] at (2.5, -0.1) 
+      {For $w \ge \pi R$, domain of dependence\\covers entire Cauchy slice $\implies Y_{I_w}' = \mathbb{C}\mathbf{1}$.\\Finite causal depth $T = \pi R$.};
+  \end{scope}
+
+  % ================= PANEL B: BLACK HOLE (T = infinity) =================
+  \begin{scope}[shift={(7.5,0)}]
+    \node[font=\bfseries\normalsize\color{navyhead}, align=center] at (2.5, 4.8) 
+      {\textbf{(b)} Black Hole: Causal Depth $T = \infty$};
+
+    % Boundary and Horizon
+    \draw[thick] (0, 0) -- (0, 4.0);
+    \draw[thick] (5.0, 0) -- (5.0, 4.0);
+
+    % Black hole horizon in center
+    \fill[gray!20] (2.0, 0) rectangle (3.0, 4.0);
+    \draw[thick, dashed, color=rulered] (2.0, 0) -- (2.0, 4.0) node[above, font=\tiny] {$r_H$};
+    \draw[thick, dashed, color=rulered] (3.0, 0) -- (3.0, 4.0) node[above, font=\tiny] {$r_H$};
+    \node[font=\scriptsize\bfseries\color{rulered}, rotate=90] at (2.5, 2.0) {Black Hole};
+
+    % Time band on boundary
+    \draw[line width=2.5pt, color=ruleblue] (0, 0.3) -- (0, 3.7)
+      node[midway, left=2pt, font=\scriptsize\bfseries] {Any finite $w$};
+
+    % Infalling null geodesics dragging along horizon
+    \draw[thick, ruleblue] (0, 0.8) .. controls (1.5, 1.6) and (1.9, 2.8) .. (1.99, 4.0);
+    \draw[thick, ruleblue] (0, 3.2) .. controls (1.5, 2.4) and (1.9, 1.2) .. (1.99, 0.0);
+
+    \node[below=4pt, font=\scriptsize\color{black!80}, align=center] at (2.5, -0.1) 
+      {Light rays asymptotically wrap horizon\\without crossing $\implies Y_{I_w}' \ne \mathbb{C}\mathbf{1}$ for all $w < \infty$.\\Causal depth diverges: $T = \infty$ (Horizon signature).};
+  \end{scope}
+
+\end{tikzpicture}
+\end{document}

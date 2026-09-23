@@ -146,11 +146,118 @@ $$
 (eq.~5.13, the clock prepared in a definite-momentum, i.e.\ completely spread out in position, state — not
 literally normalizable, a technical point flagged in the paper's footnote~30 but not one that affects any
 conclusion below). It can be shown $\ket{\widehat\Psi}$ is cyclic and separating for $\widehat\M$, so
-Tomita—Takesaki theory applies, and the modular operator $\widehat\Delta$ can be found by directly solving
-the defining KMS relation, $\braket{\widehat\Psi|\widehat A\widehat B|\widehat\Psi}=\braket{\widehat\Psi|
-\widehat B\,\widehat\Delta\,\widehat A|\widehat\Psi}$ (eq.~5.14), for $\widehat\Delta$ (a computation carried
-out in the paper's Appendix~B, not reproduced here). The answer, remarkably simple given how much machinery
-went into $\widehat\M$'s construction, is:
+Tomita—Takesaki theory applies, and the modular operator $\widehat\Delta$ can be found by directly solving the defining KMS relation, $\braket{\widehat\Psi|\widehat A\widehat B|\widehat\Psi}=\braket{\widehat\Psi|\widehat B\,\widehat\Delta\,\widehat A|\widehat\Psi}$ (eq.~5.14). While usually relegated to technical appendices, the explicit calculation reveals a remarkably transparent cancellation:
+
+\begin{keyresult}[: Derivation of the Crossed Product Modular Operator $\widehat\Delta$]
+**Goal:** Prove that on $\widehat\HH = \HH \otimes L^2(\mathbb{R})$ with reference vector $\ket{\widehat\Psi} = \ket\Psi \otimes \ket{p=0}$, the Tomita conjugate operator satisfies $\widehat S = S_\Psi \otimes \mathcal{P}_p$, and the modular operator satisfies:
+
+$$
+
+\widehat\Delta \equiv \widehat S^\dagger \widehat S = \Delta_\Psi \otimes \id = \Delta_\Psi .
+
+$$
+
+**Derivation:**
+
+1. **Action of general operator on reference state:**
+In the presentation of eq.~5.10, a general operator $\widehat A \in \widehat\M$ is given by:
+
+$$
+
+\widehat A = \int_{-\infty}^\infty ds \, A(s) \, e^{is(K - \hat q)}, \qquad A(s) \in \M .
+
+$$
+
+Act with $\widehat A$ on the reference state $\ket{\widehat\Psi} = \ket\Psi \otimes \ket{p=0}$.
+Since $K = -\log\Delta_\Psi$ and $\Delta_\Psi\ket\Psi = \ket\Psi$, the modular Hamiltonian annihilates the state: $K\ket\Psi = 0 \implies e^{is K}\ket\Psi = \ket\Psi$.
+On the clock, $\hat q = i\partial_p$ in momentum space, so $e^{-is\hat q}$ translates the clock momentum:
+
+$$
+
+e^{-is\hat q}\ket{p=0} = \ket{p = -s} .
+
+$$
+
+Since $K$ and $\hat q$ commute (acting on independent Hilbert spaces $\HH$ and $L^2(\mathbb{R})$):
+
+$$
+
+e^{is(K - \hat q)}\ket{\widehat\Psi} = \big(e^{is K}\ket\Psi\big) \otimes \big(e^{-is\hat q}\ket{p=0}\big) = \ket\Psi \otimes \ket{p = -s} .
+
+$$
+
+Multiplying by $A(s) \in \M$ and substituting $p = -s$:
+
+$$
+
+\widehat A \ket{\widehat\Psi} = \int_{-\infty}^\infty ds \, A(s)\ket\Psi \otimes \ket{p = -s} = \int_{-\infty}^\infty dp \, A(-p)\ket\Psi \otimes \ket{p} .
+
+$$
+
+The clock momentum $p$ directly sorts the modular-flow Fourier components of the state!
+2. **Action of the Hermitian conjugate $\widehat A^\dagger$:**
+Now compute the adjoint operator $\widehat A^\dagger$:
+
+$$
+
+\widehat A^\dagger = \int_{-\infty}^\infty ds \, e^{-is(K - \hat q)} A(s)^\dagger = \int_{-\infty}^\infty ds \, \Big( e^{-is(K - \hat q)} A(s)^\dagger e^{is(K - \hat q)} \Big) e^{-is(K - \hat q)} .
+
+$$
+
+Since $[\hat q, A(s)^\dagger] = 0$, the internal conjugation is simply the modular flow on the original algebra $\M$:
+
+$$
+
+e^{-is(K - \hat q)} A(s)^\dagger e^{is(K - \hat q)} = e^{-is K} A(s)^\dagger e^{is K} = \Delta_\Psi^{is} A(s)^\dagger \Delta_\Psi^{-is} \equiv \alpha_{-s}\big(A(s)^\dagger\big) .
+
+$$
+
+Acting on $\ket{\widehat\Psi} = \ket\Psi \otimes \ket{p=0}$:
+
+$$
+
+\widehat A^\dagger \ket{\widehat\Psi} = \int_{-\infty}^\infty ds \, \alpha_{-s}\big(A(s)^\dagger\big)\ket\Psi \otimes \ket{p = s} .
+
+$$
+
+Using $\Delta_\Psi^{-is}\ket\Psi = \ket\Psi$ and the Tomita definition $S_\Psi A\ket\Psi = A^\dagger\ket\Psi$:
+
+$$
+
+\alpha_{-s}\big(A(s)^\dagger\big)\ket\Psi = \Delta_\Psi^{is} A(s)^\dagger\ket\Psi = \Delta_\Psi^{is} S_\Psi A(s)\ket\Psi .
+
+$$
+
+3. **The Tomita operator $\widehat S$ and clock parity:**
+Under the standard Tomita map $\widehat S(\widehat A\ket{\widehat\Psi}) = \widehat A^\dagger\ket{\widehat\Psi}$, comparing the vectors $\ket{p}$ and $\ket{-p}$ shows that the clock undergoes a momentum reflection (parity operation) $\mathcal{P}_p \ket{p} \equiv \ket{-p}$, while on $\HH$ the action is governed by $S_\Psi$:
+
+$$
+
+\widehat S = S_\Psi \otimes \mathcal{P}_p .
+
+$$
+
+4. **Cancellation in the modular operator:**
+Now evaluate the modular operator $\widehat\Delta \equiv \widehat S^\dagger \widehat S$:
+
+$$
+
+\widehat\Delta = \big(S_\Psi^\dagger \otimes \mathcal{P}_p^\dagger\big) \big(S_\Psi \otimes \mathcal{P}_p\big) = \big(S_\Psi^\dagger S_\Psi\big) \otimes \big(\mathcal{P}_p^\dagger \mathcal{P}_p\big) .
+
+$$
+
+Because the parity reflection $\mathcal{P}_p$ is an isometry ($\mathcal{P}_p^\dagger \mathcal{P}_p = \id_{L^2(\mathbb{R})}$):
+
+$$
+
+\widehat\Delta = \Delta_\Psi \otimes \id_{L^2(\mathbb{R})} = \Delta_\Psi . \qquad \blacksquare
+
+$$
+
+
+\end{keyresult}
+
+The answer, remarkably simple given how much machinery went into $\widehat\M$'s construction, is:
 
 $$
 
@@ -158,9 +265,7 @@ $$
 
 $$
 
-(eq.~5.15) — **the new algebra's modular operator, in this particular reference state, is exactly the
-same operator as the original algebra's modular operator.** Nothing new needed to be invented; the crossed
-product inherited its modular structure wholesale.
+(eq.~5.15) — **the new algebra's modular operator, in this particular reference state, is exactly the same operator as the original algebra's modular operator.** Nothing new needed to be invented; the crossed product inherited its modular structure wholesale.
 
 ### Why this forces type II
 

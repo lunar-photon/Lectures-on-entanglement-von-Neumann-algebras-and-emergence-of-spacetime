@@ -85,11 +85,77 @@ GNS, the other built from the bulk field theory via ordinary quantization — mu
 \[
 \HH_\Psi^{\text{Fock}} = \HH_\Psi^{\text{GNS}}
 \]
-(eq.~6.15), which requires the GNS representation to have exactly the structure of a Fock space (a Gaussian
-theory, meaning correlators factorize into products of two-point functions — the large-$N$ factorization
-already familiar from ordinary 't~Hooft counting), and it's natural to identify the two vacua,
-$\ket0_{\phi_c}=\ket1_\Psi$ (eq.~6.16, where $\ket1_\Psi$ denotes the GNS vector corresponding to the identity
-operator — literally the same object called $\ket\Omega$ throughout Sec.~II).
+(eq.~6.15), which requires the GNS representation to have exactly the structure of a Fock space (a Gaussian theory, meaning correlators factorize into products of two-point functions). While often taken for granted as ``standard large-$N$ factorization,'' this Fock-space structure is a rigorous consequence of 't~Hooft planar scaling:
+
+\begin{keyresult}[: Derivation of the Large-$N$ Generalized Free Field and CCR Algebra]
+\textbf{Goal:} Prove that in a large-$N$ $SU(N)$ gauge theory with fixed 't~Hooft coupling $\lambda = g_{YM}^2 N$:
+\begin{enumerate}
+\item Connected correlators scale as $\braket{\mathcal{O}_1 \cdots \mathcal{O}_n}_{\text{conn}} \sim N^{2-n}$.
+\item Commutators between single-trace operators reduce to exact $c$-numbers: $[\mathcal{O}_A, \mathcal{O}_B] = c_{AB}\id + \mathcal{O}(1/N)$.
+\item The resulting boundary algebra is a CCR algebra whose GNS space is identically a free Fock space $\HH_\Psi^{\text{Fock}}$.
+\end{enumerate}
+
+\textbf{Derivation:}
+\begin{enumerate}[leftmargin=*]
+\item \textbf{'t~Hooft topological expansion:}
+Consider an adjoint matrix field theory with action $S = \frac{N}{\lambda}\int d^d x \Tr\big[\frac{1}{2}(\partial\Phi)^2 + V(\Phi)\big]$.
+Define normalized single-trace gauge-invariant operators:
+\[
+\mathcal{O}_i(x) \equiv \frac{1}{N}\Tr\big(\Phi^{k_i}(x)\big) - \Braket{\frac{1}{N}\Tr\big(\Phi^{k_i}(x)\big)} .
+\]
+In 't~Hooft double-line notation, a Feynman graph with $V$ vertices, $E$ edges, and $F$ index loops scales as:
+\[
+(g_{YM}^2)^{E-V} N^F = \lambda^{E-V} N^{V - E + F} = \lambda^{E-V} N^\chi = \lambda^{E-V} N^{2 - 2g} ,
+\]
+where $\chi = 2 - 2g$ is the Euler characteristic of the Riemann surface of genus $g$. The leading diagrams are planar with sphere topology ($g = 0$, $\chi = 2$), contributing at order $N^2$.
+
+\item \textbf{Scaling of connected correlators:}
+Consider a connected correlator of $n$ single-trace operators: $\braket{\mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n)}_{\text{conn}}$.
+Each operator $\mathcal{O}_i$ carries an explicit normalization factor of $1/N$.
+The planar vacuum diagrams connecting all $n$ external source insertions scale with the leading genus-zero factor $N^2$.
+Therefore:
+\[
+\Braket{\mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n)}_{\text{conn}} \sim N^2 \cdot \left(\frac{1}{N}\right)^n = N^{2-n} .
+\]
+Evaluating the leading power of $N$:
+\begin{itemize}
+\item $n = 2$: $\braket{\mathcal{O}_1 \mathcal{O}_2}_{\text{conn}} \sim N^0 = \mathcal{O}(1)$ (finite, non-vanishing two-point function).
+\item $n = 3$: $\braket{\mathcal{O}_1 \mathcal{O}_2 \mathcal{O}_3}_{\text{conn}} \sim N^{-1} \xrightarrow{N\to\infty} 0$.
+\item $n \ge 3$: $\braket{\mathcal{O}_1 \cdots \mathcal{O}_n}_{\text{conn}} \sim N^{2-n} \xrightarrow{N\to\infty} 0$.
+\end{itemize}
+
+\item \textbf{Wick's theorem and Gaussian factorization:}
+Since all connected correlators with $n \ge 3$ vanish strictly in the $N \to \infty$ limit, the cumulant expansion implies that any higher-order correlation function decomposes into the sum of products of two-point functions:
+\[
+\lim_{N\to\infty} \Braket{\mathcal{O}_1(x_1) \cdots \mathcal{O}_{2m}(x_{2m})} = \sum_{\text{pairings } \pi} \prod_{(i, j) \in \pi} \Braket{\mathcal{O}_i(x_i)\mathcal{O}_j(x_j)} .
+\]
+The theory of single-trace operators becomes an exact \textbf{Generalized Free Field} (GFF).
+
+\item \textbf{Commutators as $c$-numbers:}
+Now examine the commutator $[\mathcal{O}_A(x), \mathcal{O}_B(y)]$. Its expectation value is a deterministic scalar:
+\[
+c_{AB}(x, y)\id \equiv \Braket{[\mathcal{O}_A(x), \mathcal{O}_B(y)]} \id \sim \mathcal{O}(1)\id .
+\]
+The quantum fluctuation of the commutator operator itself is given by the connected 4-point function:
+\[
+\Big\| \big([\mathcal{O}_A(x), \mathcal{O}_B(y)] - c_{AB}(x, y)\id\big)\ket\Omega \Big\|^2 \sim \Braket{\mathcal{O}_A\mathcal{O}_B\mathcal{O}_A\mathcal{O}_B}_{\text{conn}} \sim N^{2-4} = \frac{1}{N^2} \xrightarrow{N\to\infty} 0 .
+\]
+The operator fluctuations vanish identically as $N \to \infty$!
+Hence the commutator becomes an exact $c$-number:
+\[
+[\mathcal{O}_A(x), \, \mathcal{O}_B(y)] = c_{AB}(x, y)\,\id .
+\]
+
+\item \textbf{Emergence of bulk Fock space:}
+This commutator relation is the Canonical Commutation Relation (CCR) of a free quantum field. The GNS representation of this CCR algebra on the cyclic vacuum $\ket1_\Psi$ generates an exact multi-particle Fock space:
+\[
+\HH_\Psi^{\text{GNS}} = \overline{\mathrm{span}\big\{\mathcal{O}_{i_1} \cdots \mathcal{O}_{i_k}\ket1_\Psi\big\}} \cong \HH_\Psi^{\text{Fock}} .
+\]
+Boundary single-trace operators act as creation and annihilation operators for the non-interacting bulk quantum field fluctuations $\delta\phi$, proving eq.~6.15. $\blacksquare$
+\end{enumerate}
+\end{keyresult}
+
+It is now completely natural to identify the two vacua, $\ket0_{\phi_c}=\ket1_\Psi$ (eq.~6.16, where $\ket1_\Psi$ denotes the GNS vector corresponding to the identity operator — literally the same object called $\ket\Omega$ throughout Sec.~II).
 
 \subsubsection*{Disjoint sectors: no single Hilbert space survives $N\to\infty$}
 

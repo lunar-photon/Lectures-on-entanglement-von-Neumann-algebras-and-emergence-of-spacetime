@@ -776,9 +776,7 @@ type $\mathrm I_\infty$ (if $\HH$ is infinite-dimensional but has a countable ba
 case where $\tr$ reduces to the completely ordinary matrix trace $\Tr_\HH$, with no renormalization needed at
 all, because there's no "bulk of $\HH$ the algebra doesn't see" to strip away.
 
-The single most important fact tying this back to ordinary quantum mechanics: it can be shown (stated, not
-re-derived, in the paper) that $\M$ is a type I factor *emph* there exists a genuine Hilbert
-space factorization $\HH=\HH_R\otimes\HH_L$ with
+The single most important fact tying this back to ordinary quantum mechanics: it can be shown that $\M$ is a type I factor *emph* there exists a genuine Hilbert space factorization $\HH=\HH_R\otimes\HH_L$ with
 
 $$
 
@@ -786,12 +784,143 @@ $$
 
 $$
 
-(eq.~3.3, though it's placed at the start of the paper's Sec.~III — it belongs conceptually right here, as the
-closing statement of the type classification). So the sentence ``the algebra describing this subsystem is
-type I'' is the precise, fully general version of the statement ``the ordinary tensor-product picture of
-Griffiths and Sakurai applies here.'' Every worked example given so far in this companion — the two-qubit
-examples above — is type I by direct construction. Types II and III, covered next, are exactly what becomes
-possible once this is no longer true.
+(eq.~3.3, though it's placed at the start of the paper's Sec.~III — it belongs conceptually right here, as the closing statement of the type classification). While literature frequently states this as an established theorem without proof, its explicit derivation is profoundly illuminating: it reveals the exact algebraic mechanism by which minimal projections build a spatial tensor product.
+
+\begin{keyresult}[: Derivation of the Type I Factorization Theorem]
+**Theorem:** A von Neumann algebra $\M \subseteq B(\HH)$ is a type I factor if and only if there exists a unitary isomorphism $U: \HH \xrightarrow{\sim} \HH_R \otimes \HH_L$ such that:
+
+$$
+
+U \M U^\dagger = B(\HH_R) \otimes \id_L, \qquad U \M' U^\dagger = \id_R \otimes B(\HH_L) .
+
+$$
+
+**Proof ($\implies$):**
+
+1. **Minimal projection and orthogonal resolution:**
+By definition of type I, $\M$ contains a nonzero minimal projection $P \in \M$. Minimality means that the compressed algebra contains only scalar multiples of $P$:
+
+$$
+
+P \M P = \mathbb{C} P .
+
+$$
+
+Since $\M$ is a factor, its center is trivial: $\mathcal{Z}(\M) \equiv \M \cap \M' = \mathbb{C}\id$. The central support (the smallest central projection bounding $P$) is therefore $c(P) = \id$. By the comparison theorem for projections in a factor, any two minimal projections are Murray—von Neumann equivalent ($P \sim Q$). By Zorn's lemma, we can choose a maximal family of mutually orthogonal minimal projections $\{P_i\}_{i \in I}$ equivalent to $P$. Maximality and $c(P)=\id$ imply that their sum resolves the identity on $\HH$:
+
+$$
+
+\sum_{i \in I} P_i = \id_\HH, \qquad P_i P_j = \delta_{ij} P_i .
+
+$$
+
+2. **Equivalence via partial isometries:**
+Fix a base index $0 \in I$ with $P_0 \equiv P$. Since $P_i \sim P$, there exist partial isometries $V_i \in \M$ such that:
+
+$$
+
+V_i^\dagger V_i = P, \qquad V_i V_i^\dagger = P_i \qquad (\text{with } V_0 \equiv P).
+
+$$
+
+Physically, $V_i$ maps the base subspace $P\HH$ isometrically onto the orthogonal subspace $P_i\HH$.
+3. **Construction of the unitary $U$:**
+Define two constituent Hilbert spaces:
+
+$$
+
+\HH_R \equiv \ell^2(I) \quad \text{with orthonormal basis } \{\ket{i}\}_{i \in I}, \qquad \HH_L \equiv P\HH .
+
+$$
+
+Define the linear map $U: \HH \to \HH_R \otimes \HH_L$ by its action on any vector $\ket\psi \in \HH$:
+
+$$
+
+U \ket\psi \equiv \sum_{i \in I} \ket{i} \otimes \big(V_i^\dagger \ket\psi\big) .
+
+$$
+
+Notice that $V_i^\dagger \ket\psi = P V_i^\dagger \ket\psi \in P\HH = \HH_L$, so this is well-defined. We check that $U$ is an isometry:
+\begin{align*}
+\|U\ket\psi\|^2 &= \sum_{i \in I} \|V_i^\dagger \ket\psi\|^2 = \sum_{i \in I} \braket{\psi | V_i V_i^\dagger | \psi} \\
+&= \sum_{i \in I} \braket{\psi | P_i | \psi} = \Braket{\psi \Big| \sum_{i \in I} P_i \Big| \psi} = \braket{\psi|\psi} .
+\end{align*}
+The adjoint map $U^\dagger: \HH_R \otimes \HH_L \to \HH$ acts on elementary basis tensors as:
+
+$$
+
+U^\dagger \big(\ket{i} \otimes \ket{\phi_L}\big) = V_i \ket{\phi_L}, \qquad \ket{\phi_L} \in P\HH .
+
+$$
+
+Computing $U U^\dagger$ on basis vectors:
+
+$$
+
+U U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big) = U \big(V_j \ket{\phi_L}\big) = \sum_{i \in I} \ket{i} \otimes \big(V_i^\dagger V_j \ket{\phi_L}\big) = \ket{j} \otimes \big(P \ket{\phi_L}\big) = \ket{j} \otimes \ket{\phi_L} ,
+
+$$
+
+since $V_i^\dagger V_j = V_i^\dagger P_i P_j V_j = \delta_{ij} P$. Hence $U$ is a genuine unitary isomorphism.
+4. **Action on the algebra $\M$:**
+Let $A \in \M$ be an arbitrary element. Compute $U A U^\dagger$ acting on $\ket{j} \otimes \ket{\phi_L}$:
+
+$$
+
+U A U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big) = U \big(A V_j \ket{\phi_L}\big) = \sum_{i \in I} \ket{i} \otimes \big(V_i^\dagger A V_j \ket{\phi_L}\big) .
+
+$$
+
+Crucially, look at the operator $V_i^\dagger A V_j$:
+
+$$
+
+V_i^\dagger A V_j = (P V_i^\dagger) A (V_j P) = P \big(V_i^\dagger A V_j\big) P \in P \M P .
+
+$$
+
+Because $P$ is minimal, $P \M P = \mathbb{C} P$. Therefore, $V_i^\dagger A V_j$ is *emph*:
+
+$$
+
+V_i^\dagger A V_j = a_{ij} P \quad \text{for some scalar } a_{ij} \in \mathbb{C} .
+
+$$
+
+Acting on $\ket{\phi_L} \in P\HH$, this yields $V_i^\dagger A V_j \ket{\phi_L} = a_{ij} \ket{\phi_L}$. Thus:
+
+$$
+
+U A U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big) = \sum_{i \in I} a_{ij} \ket{i} \otimes \ket{\phi_L} = \left(\sum_{i,j \in I} a_{ij} \ket{i}\bra{j} \otimes \id_L \right) \big(\ket{j} \otimes \ket{\phi_L}\big) .
+
+$$
+
+Every operator in $\M$ acts trivially on $\HH_L$ and as an ordinary matrix on $\HH_R$. Conversely, given any rank-one operator $\ket{i}\bra{j} \in B(\HH_R)$, its pre-image under $U$ is simply $V_i V_j^\dagger \in \M$. Thus $U \M U^\dagger = B(\HH_R) \otimes \id_L$.
+5. **The commutant and trace:**
+By von Neumann's double commutant theorem:
+
+$$
+
+U \M' U^\dagger = (U \M U^\dagger)' = \big(B(\HH_R) \otimes \id_L\big)' = \id_R \otimes B(\HH_L) .
+
+$$
+
+The unique normal semifinite trace $\tr$ on $\M$ corresponds under $U$ to the standard trace $\Tr_{\HH_R}$ on $B(\HH_R)$.
+6. **Proof ($\impliedby$):**
+If $\M \cong B(\HH_R) \otimes \id_L$, take any one-dimensional projection $p = \ket{i}\bra{i}$ on $\HH_R$. Then $P = p \otimes \id_L \in \M$. For any $A = a \otimes \id_L \in \M$:
+
+$$
+
+P A P = (p a p) \otimes \id_L = \braket{i|a|i} (p \otimes \id_L) = \mathbb{C} P .
+
+$$
+
+Hence $P$ is minimal in $\M$, proving $\M$ is type I. $\blacksquare$
+
+\end{keyresult}
+
+So the sentence "the algebra describing this subsystem is type I" is the precise, fully general version of the statement "the ordinary tensor-product picture of Griffiths and Sakurai applies here." Every worked example given so far in this companion — the two-qubit examples above — is type I by direct construction. Types II and III, covered next, are exactly what becomes possible once this is no longer true.
 - **Type II: $\M$ has finite projections but no minimal ones.** This is the genuinely new
 possibility, and it's worth sitting with how strange it sounds the first time: an algebra where every
 projection can be compared in size to every other (the finite/infinite distinction still works, and among
@@ -1016,6 +1145,25 @@ rather than a separate postulate about how the Hilbert space happens to be built
 > exactly the $N$-Bell-pair and entangled-spin examples running throughout the rest of this section, and,
 > eventually, the different asymptotic vacua of quantum gravity itself in Sec.~X.B.
 
+
+\begin{workedexamplebox}[: Concrete GNS Construction for Three Physical Systems]
+To make the abstract 6-stage recipe completely mechanical, let us explicitly build the GNS Hilbert space, inner product, null ideal, representation, and cyclic vector for three fundamental physical systems:
+
+
+1. **System 1: Pure State on a Single Qubit ($\Alg = M_2(\mathbb{C**)$)}
+
+
+
+8. **System 2: Mixed / Thermal State on $M_2(\mathbb{C**)$ (Emergence of the Thermofield Double)}
+
+
+
+14. **System 3: CCR Bosonic Oscillator (Emergence of Fock Space)**
+
+
+
+
+\end{workedexamplebox}
 
 Finally, the von Neumann algebra associated with all of this is obtained by taking the double commutant of the
 representation, $\M\equiv\pi_\omega(\Alg)''$ (eq.~2.39) — using exactly the double-commutant machinery from

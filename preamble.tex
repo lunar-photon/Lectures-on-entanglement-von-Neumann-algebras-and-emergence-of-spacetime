@@ -105,6 +105,23 @@
   before skip=10pt, after skip=10pt
 }
 
+% 4. Key Result Callout Box
+\newtcolorbox{keyresult}[1][]{%
+  enhanced, breakable,
+  colback=physbox,
+  colframe=cobalt,
+  boxrule=1.0pt,
+  arc=3pt,
+  left=10pt, right=10pt, top=8pt, bottom=8pt,
+  coltitle=white,
+  fonttitle=\bfseries\small\sffamily,
+  colbacktitle=cobalt,
+  toptitle=3.5pt, bottomtitle=3.5pt,
+  titlerule=0pt,
+  title={Key Result / Core Concept#1},
+  before skip=12pt, after skip=12pt
+}
+
 % Direct answer to margin questions
 \newcommand{\yourquestion}[1]{\begin{questioncallout}\textit{#1}\end{questioncallout}}
 

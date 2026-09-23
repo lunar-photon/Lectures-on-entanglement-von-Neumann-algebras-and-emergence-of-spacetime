@@ -1,0 +1,65 @@
+\documentclass[tikz,border=6pt]{standalone}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,positioning}
+
+\definecolor{cobalt}{HTML}{2b4c7e}
+\definecolor{navyhead}{HTML}{1a365d}
+\definecolor{boxblue}{HTML}{eef3fa}
+\definecolor{ruleblue}{HTML}{2b6cb0}
+\definecolor{rulegold}{HTML}{b7791f}
+\definecolor{rulered}{HTML}{c0392b}
+\definecolor{rulegreen}{HTML}{1f8a5f}
+
+\begin{document}
+\begin{tikzpicture}[>=Latex, font=\small]
+
+  % Title / Header
+  \node[font=\bfseries\normalsize\color{navyhead}, align=center] at (5.5, 4.3) 
+    {Connes Classification of von Neumann Factors via the Modular Spectrum $S(\mathcal{M})$};
+
+  % Type I & II
+  \draw[->, thick, color=gray!70] (0, 3.2) -- (11.0, 3.2) node[right, font=\footnotesize] {$\mathbb{R}_{\ge 0}$};
+  \node[anchor=east, font=\bfseries\color{ruleblue}] at (-0.3, 3.2) {Types I \& II:};
+  \draw[thick] (1.0, 3.1) -- (1.0, 3.3) node[below=3pt, font=\scriptsize] {$0$};
+  \fill[ruleblue] (3.5, 3.2) circle (3pt) node[above=4pt, font=\footnotesize\bfseries] {$\{1\}$} node[below=3pt, font=\scriptsize] {$1$};
+  \node[right, font=\scriptsize\color{black!70}] at (4.5, 3.2) {Trivial modular spectrum; modular flow is purely inner ($\Delta^{it} \in \mathcal{M}$).};
+
+  % Type III_0
+  \draw[->, thick, color=gray!70] (0, 2.1) -- (11.0, 2.1) node[right, font=\footnotesize] {$\mathbb{R}_{\ge 0}$};
+  \node[anchor=east, font=\bfseries\color{rulegold}] at (-0.3, 2.1) {Type $\mathrm{III}_0$:};
+  \fill[rulegold] (1.0, 2.1) circle (3pt) node[below=3pt, font=\scriptsize] {$0$};
+  \fill[rulegold] (3.5, 2.1) circle (3pt) node[above=4pt, font=\footnotesize\bfseries] {$\{0, 1\}$} node[below=3pt, font=\scriptsize] {$1$};
+  \node[right, font=\scriptsize\color{black!70}] at (4.5, 2.1) {Krieger factors; modular flow acts non-ergodically on center of crossed product.};
+
+  % Type III_lambda
+  \draw[->, thick, color=gray!70] (0, 1.0) -- (11.0, 1.0) node[right, font=\footnotesize] {$\mathbb{R}_{\ge 0}$};
+  \node[anchor=east, font=\bfseries\color{rulered}] at (-0.3, 1.0) {Type $\mathrm{III}_\lambda$ ($0 < \lambda < 1$):};
+  \fill[rulered] (1.0, 1.0) circle (3pt) node[below=3pt, font=\scriptsize] {$0$};
+  \fill[rulered] (1.5, 1.0) circle (2pt) node[above=2pt, font=\tiny] {$\lambda^3$};
+  \fill[rulered] (2.0, 1.0) circle (2.2pt) node[above=2pt, font=\tiny] {$\lambda^2$};
+  \fill[rulered] (2.6, 1.0) circle (2.5pt) node[above=2pt, font=\scriptsize] {$\lambda$};
+  \fill[rulered] (3.5, 1.0) circle (3pt) node[above=2pt, font=\scriptsize\bfseries] {$1$} node[below=3pt, font=\scriptsize] {$1$};
+  \fill[rulered] (4.9, 1.0) circle (2.5pt) node[above=2pt, font=\scriptsize] {$\lambda^{-1}$};
+  \fill[rulered] (7.0, 1.0) circle (2.2pt) node[above=2pt, font=\tiny] {$\lambda^{-2}$};
+  \fill[rulered] (9.6, 1.0) circle (2pt) node[above=2pt, font=\tiny] {$\lambda^{-3}$};
+  \node[below=5pt, font=\footnotesize\color{rulered}] at (5.5, 0.9) 
+    {$S(\mathcal{M}) = \{0\} \cup \lambda^{\mathbb{Z}} = \{0\} \cup \{\dots, \lambda^2, \lambda, 1, \lambda^{-1}, \lambda^{-2}, \dots\}$ (Powers factors, spin chain)};
+
+  % Type III_1
+  \draw[->, thick, color=gray!70] (0, -0.4) -- (11.0, -0.4) node[right, font=\footnotesize] {$\mathbb{R}_{\ge 0}$};
+  \node[anchor=east, font=\bfseries\color{rulegreen}] at (-0.3, -0.4) {Type $\mathrm{III}_1$:};
+  \draw[thick] (1.0, -0.5) -- (1.0, -0.3) node[below=3pt, font=\scriptsize] {$0$};
+  % Continuous filled bar
+  \fill[rulegreen!35] (1.0, -0.5) rectangle (10.6, -0.3);
+  \draw[rulegreen, very thick] (1.0, -0.4) -- (10.6, -0.4);
+  \fill[rulegreen] (1.0, -0.4) circle (3pt);
+  \fill[rulegreen] (3.5, -0.4) circle (2pt) node[below=3pt, font=\scriptsize] {$1$};
+  \node[above=3pt, font=\footnotesize\bfseries\color{rulegreen}] at (5.5, -0.3) 
+    {$S(\mathcal{M}) = [0, \infty)$ (Full half-line, strictly continuous spectrum)};
+  \node[below=14pt, font=\scriptsize\color{black!80}] at (5.5, -0.4) 
+    {\textbf{Generic physical regime}: Continuum relativistic QFT subregions (Haag--Araki) and large-$N$ AdS/CFT boundary algebras.};
+
+\end{tikzpicture}
+\end{document}

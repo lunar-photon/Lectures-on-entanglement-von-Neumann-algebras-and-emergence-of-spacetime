@@ -692,18 +692,96 @@ type $\mathrm I_\infty$ (if $\HH$ is infinite-dimensional but has a countable ba
 case where $\tr$ reduces to the completely ordinary matrix trace $\Tr_\HH$, with no renormalization needed at
 all, because there's no ``bulk of $\HH$ the algebra doesn't see'' to strip away.
 
-The single most important fact tying this back to ordinary quantum mechanics: it can be shown (stated, not
-re-derived, in the paper) that $\M$ is a type I factor \emph{if and only if} there exists a genuine Hilbert
-space factorization $\HH=\HH_R\otimes\HH_L$ with
+The single most important fact tying this back to ordinary quantum mechanics: it can be shown that $\M$ is a type I factor \emph{if and only if} there exists a genuine Hilbert space factorization $\HH=\HH_R\otimes\HH_L$ with
 \[
 \M=B(\HH_R)\otimes\id_L, \qquad \tr=\Tr_{\HH_R}, \qquad \M'=\id_R\otimes B(\HH_L)
 \]
-(eq.~3.3, though it's placed at the start of the paper's Sec.~III — it belongs conceptually right here, as the
-closing statement of the type classification). So the sentence ``the algebra describing this subsystem is
-type I'' is the precise, fully general version of the statement ``the ordinary tensor-product picture of
-Griffiths and Sakurai applies here.'' Every worked example given so far in this companion — the two-qubit
-examples above — is type I by direct construction. Types II and III, covered next, are exactly what becomes
-possible once this is no longer true.
+(eq.~3.3, though it's placed at the start of the paper's Sec.~III — it belongs conceptually right here, as the closing statement of the type classification). While literature frequently states this as an established theorem without proof, its explicit derivation is profoundly illuminating: it reveals the exact algebraic mechanism by which minimal projections build a spatial tensor product.
+
+\begin{keyresult}[: Derivation of the Type I Factorization Theorem]
+\textbf{Theorem:} A von Neumann algebra $\M \subseteq B(\HH)$ is a type I factor if and only if there exists a unitary isomorphism $U: \HH \xrightarrow{\sim} \HH_R \otimes \HH_L$ such that:
+\[
+U \M U^\dagger = B(\HH_R) \otimes \id_L, \qquad U \M' U^\dagger = \id_R \otimes B(\HH_L) .
+\]
+\textbf{Proof ($\implies$):}
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Minimal projection and orthogonal resolution:}
+By definition of type I, $\M$ contains a nonzero minimal projection $P \in \M$. Minimality means that the compressed algebra contains only scalar multiples of $P$:
+\[
+P \M P = \mathbb{C} P .
+\]
+Since $\M$ is a factor, its center is trivial: $\mathcal{Z}(\M) \equiv \M \cap \M' = \mathbb{C}\id$. The central support (the smallest central projection bounding $P$) is therefore $c(P) = \id$. By the comparison theorem for projections in a factor, any two minimal projections are Murray--von Neumann equivalent ($P \sim Q$). By Zorn's lemma, we can choose a maximal family of mutually orthogonal minimal projections $\{P_i\}_{i \in I}$ equivalent to $P$. Maximality and $c(P)=\id$ imply that their sum resolves the identity on $\HH$:
+\[
+\sum_{i \in I} P_i = \id_\HH, \qquad P_i P_j = \delta_{ij} P_i .
+\]
+
+\item \textbf{Equivalence via partial isometries:}
+Fix a base index $0 \in I$ with $P_0 \equiv P$. Since $P_i \sim P$, there exist partial isometries $V_i \in \M$ such that:
+\[
+V_i^\dagger V_i = P, \qquad V_i V_i^\dagger = P_i \qquad (\text{with } V_0 \equiv P).
+\]
+Physically, $V_i$ maps the base subspace $P\HH$ isometrically onto the orthogonal subspace $P_i\HH$.
+
+\item \textbf{Construction of the unitary $U$:}
+Define two constituent Hilbert spaces:
+\[
+\HH_R \equiv \ell^2(I) \quad \text{with orthonormal basis } \{\ket{i}\}_{i \in I}, \qquad \HH_L \equiv P\HH .
+\]
+Define the linear map $U: \HH \to \HH_R \otimes \HH_L$ by its action on any vector $\ket\psi \in \HH$:
+\[
+U \ket\psi \equiv \sum_{i \in I} \ket{i} \otimes \big(V_i^\dagger \ket\psi\big) .
+\]
+Notice that $V_i^\dagger \ket\psi = P V_i^\dagger \ket\psi \in P\HH = \HH_L$, so this is well-defined. We check that $U$ is an isometry:
+\begin{align*}
+\|U\ket\psi\|^2 &= \sum_{i \in I} \|V_i^\dagger \ket\psi\|^2 = \sum_{i \in I} \braket{\psi | V_i V_i^\dagger | \psi} \\
+&= \sum_{i \in I} \braket{\psi | P_i | \psi} = \Braket{\psi \Big| \sum_{i \in I} P_i \Big| \psi} = \braket{\psi|\psi} .
+\end{align*}
+The adjoint map $U^\dagger: \HH_R \otimes \HH_L \to \HH$ acts on elementary basis tensors as:
+\[
+U^\dagger \big(\ket{i} \otimes \ket{\phi_L}\big) = V_i \ket{\phi_L}, \qquad \ket{\phi_L} \in P\HH .
+\]
+Computing $U U^\dagger$ on basis vectors:
+\[
+U U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big) = U \big(V_j \ket{\phi_L}\big) = \sum_{i \in I} \ket{i} \otimes \big(V_i^\dagger V_j \ket{\phi_L}\big) = \ket{j} \otimes \big(P \ket{\phi_L}\big) = \ket{j} \otimes \ket{\phi_L} ,
+\]
+since $V_i^\dagger V_j = V_i^\dagger P_i P_j V_j = \delta_{ij} P$. Hence $U$ is a genuine unitary isomorphism.
+
+\item \textbf{Action on the algebra $\M$:}
+Let $A \in \M$ be an arbitrary element. Compute $U A U^\dagger$ acting on $\ket{j} \otimes \ket{\phi_L}$:
+\[
+U A U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big) = U \big(A V_j \ket{\phi_L}\big) = \sum_{i \in I} \ket{i} \otimes \big(V_i^\dagger A V_j \ket{\phi_L}\big) .
+\]
+Crucially, look at the operator $V_i^\dagger A V_j$:
+\[
+V_i^\dagger A V_j = (P V_i^\dagger) A (V_j P) = P \big(V_i^\dagger A V_j\big) P \in P \M P .
+\]
+Because $P$ is minimal, $P \M P = \mathbb{C} P$. Therefore, $V_i^\dagger A V_j$ is \emph{strictly proportional to $P$}:
+\[
+V_i^\dagger A V_j = a_{ij} P \quad \text{for some scalar } a_{ij} \in \mathbb{C} .
+\]
+Acting on $\ket{\phi_L} \in P\HH$, this yields $V_i^\dagger A V_j \ket{\phi_L} = a_{ij} \ket{\phi_L}$. Thus:
+\[
+U A U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big) = \sum_{i \in I} a_{ij} \ket{i} \otimes \ket{\phi_L} = \left(\sum_{i,j \in I} a_{ij} \ket{i}\bra{j} \otimes \id_L \right) \big(\ket{j} \otimes \ket{\phi_L}\big) .
+\]
+Every operator in $\M$ acts trivially on $\HH_L$ and as an ordinary matrix on $\HH_R$. Conversely, given any rank-one operator $\ket{i}\bra{j} \in B(\HH_R)$, its pre-image under $U$ is simply $V_i V_j^\dagger \in \M$. Thus $U \M U^\dagger = B(\HH_R) \otimes \id_L$.
+
+\item \textbf{The commutant and trace:}
+By von Neumann's double commutant theorem:
+\[
+U \M' U^\dagger = (U \M U^\dagger)' = \big(B(\HH_R) \otimes \id_L\big)' = \id_R \otimes B(\HH_L) .
+\]
+The unique normal semifinite trace $\tr$ on $\M$ corresponds under $U$ to the standard trace $\Tr_{\HH_R}$ on $B(\HH_R)$.
+
+\item \textbf{Proof ($\impliedby$):}
+If $\M \cong B(\HH_R) \otimes \id_L$, take any one-dimensional projection $p = \ket{i}\bra{i}$ on $\HH_R$. Then $P = p \otimes \id_L \in \M$. For any $A = a \otimes \id_L \in \M$:
+\[
+P A P = (p a p) \otimes \id_L = \braket{i|a|i} (p \otimes \id_L) = \mathbb{C} P .
+\]
+Hence $P$ is minimal in $\M$, proving $\M$ is type I. $\blacksquare$
+\end{enumerate}
+\end{keyresult}
+
+So the sentence ``the algebra describing this subsystem is type I'' is the precise, fully general version of the statement ``the ordinary tensor-product picture of Griffiths and Sakurai applies here.'' Every worked example given so far in this companion — the two-qubit examples above — is type I by direct construction. Types II and III, covered next, are exactly what becomes possible once this is no longer true.
 
 \item \textbf{Type II: $\M$ has finite projections but no minimal ones.} This is the genuinely new
 possibility, and it's worth sitting with how strange it sounds the first time: an algebra where every
@@ -908,6 +986,102 @@ reference state genuinely produces an \emph{inequivalent} Hilbert space out of t
 exactly the $N$-Bell-pair and entangled-spin examples running throughout the rest of this section, and,
 eventually, the different asymptotic vacua of quantum gravity itself in Sec.~X.B.
 \end{physconnect}
+
+\begin{workedexamplebox}[: Concrete GNS Construction for Three Physical Systems]
+To make the abstract 6-stage recipe completely mechanical, let us explicitly build the GNS Hilbert space, inner product, null ideal, representation, and cyclic vector for three fundamental physical systems:
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{System 1: Pure State on a Single Qubit ($\Alg = M_2(\mathbb{C})$)}
+\begin{itemize}[leftmargin=*]
+\item \emph{Abstract Algebra:} $\Alg = M_2(\mathbb{C})$, the 4-dimensional vector space spanned by transition matrices $e_{ij} \equiv \ket{i}\bra{j}$ for $i,j \in \{0,1\}$.
+\item \emph{State Functional:} Let $\omega_\uparrow$ be the pure spin-up state: $\omega_\uparrow(A) \equiv \braket{0|A|0} = A_{00}$.
+\item \emph{Pre-Inner Product on $\Alg$:} For any $A, B \in M_2(\mathbb{C})$:
+\[
+\braket{A|B}_\Alg = \omega_\uparrow(A^\dagger B) = (A^\dagger B)_{00} = A_{00}^* B_{00} + A_{10}^* B_{10} .
+\]
+Notice that the second column elements ($A_{01}, A_{11}, B_{01}, B_{11}$) do not appear at all!
+\item \emph{Null Ideal $\mathcal{J}$:} An element $X \in \Alg$ is null if and only if:
+\[
+\braket{X|X}_\Alg = |X_{00}|^2 + |X_{10}|^2 = 0 \iff X_{00} = 0 \quad \text{and} \quad X_{10} = 0 .
+\]
+Thus the null space is the 2-dimensional left ideal:
+\[
+\mathcal{J} = \left\{ \begin{pmatrix} 0 & a \\ 0 & b \end{pmatrix} : a,b \in \mathbb{C} \right\} = \mathrm{span}\{e_{01}, \, e_{11}\} .
+\]
+\item \emph{Quotient Space $\HH_\omega = \Alg/\mathcal{J}$:} Modulo $\mathcal{J}$, every matrix collapses to its first column:
+\[
+[A] = A_{00} [e_{00}] + A_{10} [e_{10}] + \underbrace{A_{01}[e_{01}] + A_{11}[e_{11}]}_{= 0 \text{ in } \Alg/\mathcal{J}} = A_{00}[e_{00}] + A_{10}[e_{10}] .
+\]
+The quotient space is strictly \textbf{2-dimensional}! Define the orthonormal basis:
+\[
+\ket{0} \equiv [e_{00}], \qquad \ket{1} \equiv [e_{10}] .
+\]
+Computing their inner products: $\braket{0|0} = 1$, $\braket{1|1} = 1$, $\braket{0|1} = 0$. Hence $\HH_\omega \cong \mathbb{C}^2$.
+\item \emph{Representation $\pi_\omega$ and Cyclic Vector:} Left multiplication by $A$ gives:
+\[
+\pi_\omega(A)\ket{0} = [A e_{00}] = A_{00}\ket{0} + A_{10}\ket{1}, \qquad \pi_\omega(A)\ket{1} = [A e_{10}] = A_{01}\ket{0} + A_{11}\ket{1} .
+\]
+This is identically ordinary matrix multiplication on $\mathbb{C}^2$!
+The cyclic vector is the class of the identity:
+\[
+\ket\Omega = [\id_2] = [e_{00} + e_{11}] = [e_{00}] = \ket{0} .
+\]
+The GNS construction successfully compressed the 4D matrix algebra into the familiar 2D qubit state space $\mathbb{C}^2$.
+\end{itemize}
+
+\item \textbf{System 2: Mixed / Thermal State on $M_2(\mathbb{C})$ (Emergence of the Thermofield Double)}
+\begin{itemize}[leftmargin=*]
+\item \emph{State Functional:} Let $\omega_\beta(A) \equiv \Tr(\rho_\beta A)$ with full-rank density matrix $\rho_\beta = \begin{pmatrix} p_0 & 0 \\ 0 & p_1 \end{pmatrix}$, where $p_0, p_1 > 0$ and $p_0 + p_1 = 1$.
+\item \emph{Pre-Inner Product on $\Alg$:}
+\[
+\braket{A|B}_\Alg = \Tr(\rho_\beta A^\dagger B) = p_0 (A_{00}^* B_{00} + A_{10}^* B_{10}) + p_1 (A_{01}^* B_{01} + A_{11}^* B_{11}) .
+\]
+\item \emph{Null Ideal $\mathcal{J}$:} Check when $\braket{X|X}_\Alg = 0$:
+\[
+p_0 (|X_{00}|^2 + |X_{10}|^2) + p_1 (|X_{01}|^2 + |X_{11}|^2) = 0 .
+\]
+Because both $p_0 > 0$ and $p_1 > 0$, every single matrix entry must vanish: $X = 0$.
+Therefore, \textbf{the null ideal is trivial}: $\mathcal{J} = \{0\}$!
+\item \emph{The GNS Hilbert Space:}
+\[
+\HH_\omega = \Alg / \{0\} \cong M_2(\mathbb{C}) \cong \mathbb{C}^2 \otimes \mathbb{C}^2 .
+\]
+The Hilbert space has dimension $4$, not $2$! Define the normalized basis vectors:
+\[
+\ket{00} \equiv \frac{1}{\sqrt{p_0}}[e_{00}], \quad \ket{10} \equiv \frac{1}{\sqrt{p_0}}[e_{10}], \quad \ket{01} \equiv \frac{1}{\sqrt{p_1}}[e_{01}], \quad \ket{11} \equiv \frac{1}{\sqrt{p_1}}[e_{11}] .
+\]
+\item \emph{The Emergent Thermofield Double Vector:}
+Now compute the cyclic vector $\ket\Omega \equiv [\id_2] = [e_{00} + e_{11}]$:
+\[
+\ket\Omega = [e_{00}] + [e_{11}] = \sqrt{p_0}\ket{00} + \sqrt{p_1}\ket{11} !
+\]
+\textbf{The GNS reference vector is literally the entangled Thermofield Double (TFD) pure state!}
+When applied to a mixed state, GNS automatically synthesizes the purifying ancilla space $\HH_L$ out of thin air, with $\pi_\omega(\Alg) = M_2(\mathbb{C}) \otimes \id$ and commutant $\pi_\omega(\Alg)' = \id \otimes M_2(\mathbb{C})$.
+\end{itemize}
+
+\item \textbf{System 3: CCR Bosonic Oscillator (Emergence of Fock Space)}
+\begin{itemize}[leftmargin=*]
+\item \emph{Abstract Algebra:} The $*$-algebra of polynomials in ladder operators $\{a, a^\dagger\}$ satisfying $[a, a^\dagger] = \id$.
+\item \emph{State Functional:} The Gaussian vacuum state defined algebraically by $\omega_0(\id) = 1$ and $\omega_0(a^\dagger a) = 0$. Repeated use of $[a, a^\dagger] = \id$ determines all monomials: $\omega_0\big(a^m (a^\dagger)^n\big) = n!\,\delta_{mn}$.
+\item \emph{Null Ideal $\mathcal{J}$:} Any element ending with an annihilation operator belongs to the null ideal: $\mathcal{J} = \Alg a$.
+Modulo $\mathcal{J}$, every operator reduces to a polynomial in $a^\dagger$ alone: $[A] = \sum_n c_n [(a^\dagger)^n]$.
+\item \emph{Inner Product and Orthonormal Basis:}
+\[
+\Braket{[(a^\dagger)^m] \Big| [(a^\dagger)^n]} = \omega_0\big(a^m (a^\dagger)^n\big) = n!\,\delta_{mn} .
+\]
+Normalizing these vectors yields the standard Fock basis:
+\[
+\ket{n} \equiv \frac{1}{\sqrt{n!}}\big[(a^\dagger)^n\big], \qquad \braket{m|n} = \delta_{mn} .
+\]
+\item \emph{Representation Action:}
+\[
+\pi_\omega(a^\dagger)\ket{n} = \sqrt{n+1}\,\ket{n+1}, \qquad \pi_\omega(a)\ket{n} = \sqrt{n}\,\ket{n-1} ,
+\]
+since $[a (a^\dagger)^n] = n [(a^\dagger)^{n-1}] + \underbrace{[(a^\dagger)^n a]}_{= 0 \text{ mod } \mathcal{J}} = n [(a^\dagger)^{n-1}]$.
+Hilbert space completion yields the infinite-dimensional Fock space $\HH_{\text{Fock}} = \ell^2(\mathbb{N})$! $\blacksquare$
+\end{itemize}
+\end{enumerate}
+\end{workedexamplebox}
 
 Finally, the von Neumann algebra associated with all of this is obtained by taking the double commutant of the
 representation, $\M\equiv\pi_\omega(\Alg)''$ (eq.~2.39) — using exactly the double-commutant machinery from

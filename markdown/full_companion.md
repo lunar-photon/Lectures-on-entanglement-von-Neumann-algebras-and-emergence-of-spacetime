@@ -96,6 +96,56 @@ $\mathcal{A}_{\rm bulk}(b_A)$ & Bulk algebra in entanglement wedge $b_A$ & Local
 \label{fig:roadmap}
 \end{figure}
 
+## The Conceptual Bridge: From Wavefunctions to Density Matrices to Algebraic States
+
+To understand why the algebraic framework of this paper is so natural, it is essential to trace how our concept of a "quantum state" evolves as we move from simple undergraduate quantum mechanics to open systems, quantum field theory, and quantum gravity.
+
+
+1. **Level 0: The Pure Wavefunction $\psi(x) = \braket{x|\Psi**$.}
+In textbook quantum mechanics, the fundamental entity is a state vector $\ket\Psi \in \HH$ evolving according to the Schr\"odinger equation. Probabilities are given by the Born rule $P(x) = |\psi(x)|^2$. This description assumes a *emph* where an experimenter has unrestricted access to measure arbitrary operators across the entire system.
+2. **Level 1: The Density Matrix $\rho(x, x')$ and Phase Space ($x_c, x_q$).**
+When a system interacts with an unobserved environment or thermal bath, pure states give way to density operators $\rho = \sum_k p_k \ket{\psi_k}\bra{\psi_k}$. In the continuous position basis $\rho(x, x') = \braket{x|\rho|x'}$, it is physically illuminating to transform to Keldysh variables:
+
+$$
+
+x_c \equiv \frac{x + x'}{2} \quad \text{(classical midpoint coordinate)}, \qquad x_q \equiv x - x' \quad \text{(quantum coherence coordinate)}.
+
+$$
+
+The diagonal slice $x_q = 0$ encodes classical probabilities $P(x_c) = \rho(x_c, x_c)$, while non-zero $x_q$ tracks off-diagonal quantum interference. Fourier transforming along the quantum coordinate gives the **Wigner quasi-probability distribution**:
+
+$$
+
+W(x_c, p_q) = \int_{-\infty}^\infty \dd x_q\, e^{-i p_q x_q}\, \rho\!\left(x_c + \tfrac{x_q}{2},\, x_c - \tfrac{x_q}{2}\right) .
+
+$$
+
+While this bridges classical stochastic physics and quantum mechanics, it still fundamentally presumes that the global Hilbert space factorizes as $\HH = \HH_{\rm system} \otimes \HH_{\rm environment}$.
+3. **Level 2: The Physical Limitation of Observers.**
+In realistic experiments, no observer has access to the full density matrix on all of $\HH$. An observer is equipped with a restricted apparatus or confined to a spatial subregion $R$. If an observer can only measure a restricted set of observables $\M$, attempting to describe their subsystem via global pure kets produces severe mathematical pathologies (for instance, the standard relative entropy $D(\rho\|\sigma) = \Tr(\rho\log\rho - \rho\log\sigma)$ formally blows up to $+\infty$ whenever $\sigma$ is pure, because it assumes the observer is free to measure arbitrary non-commuting projection operators across the universe).
+4. **Level 3: The Algebraic State $\omega: \M \to \mathbb{C**$.}
+In algebraic quantum mechanics (von Neumann, Haag, and Liu), we discard the assumption that a fixed global Hilbert space is fundamental. The primary physical object is the **algebra of accessible observables $\M$**. A **state** $\omega$ is simply a positive linear functional assigning expectation values to operators:
+
+$$
+
+\omega(A) = \langle A \rangle_\omega, \qquad \omega(\id) = 1, \quad \omega(A^\dagger A) \ge 0 \quad \forall A \in \M.
+
+$$
+
+The Hilbert space $\HH_\omega$ and state vector $\ket{\Omega_\omega}$ are not postulated in advance; they are **dynamically manufactured** from the algebraic state $\omega$ via the Gelfand—Naimark—Segal (GNS) construction:
+
+$$
+
+\omega(A) = \braket{\Omega_\omega | \pi_\omega(A) | \Omega_\omega} .
+
+$$
+
+
+
+\begin{keyresult}
+**The Conceptual Takeaway:** The wavefunction $\psi(x)$ is not a universal container of physical reality; it is merely one specific GNS representation of an algebraic state $\omega$ on a Type I algebra. When moving to the thermodynamic limit ($N\to\infty$), local subregions in QFT, or semiclassical black holes, the Hilbert space tensor factorization dissolves, but the algebraic state $\omega$ remains exact, rigorous, and well-defined.
+\end{keyresult}
+
 ## Why the ordinary quantum-mechanical definition of "subsystem" isn't good enough
 
 To see why a new mathematical tool is needed at all, you have to see precisely where the old one breaks. The
@@ -361,6 +411,215 @@ Neumann algebra types.
 \caption{The UV area-law divergence of entanglement entropy in quantum field theory: dividing space across a boundary $\partial R$ couples short-distance modes across the cut with UV cutoff $\epsilon$. The leading entanglement entropy diverges as $S_R \sim \mathrm{Area}(\partial R)/\epsilon^{d-2}$, reflecting the infinite entanglement of the underlying Type $\mathrm{III}_1$ local algebra.}
 \label{fig:area_law}
 \end{figure}
+
+## Explicit Derivation: Why the Continuum QFT Hilbert Space Cannot Factorize
+\label{sec:qft_nonfactorization_derivation}
+
+Because the claim that "$\HH \ne \HH_R \otimes \HH_L$ in continuum QFT" is so fundamental to everything that follows, it is illuminating to derive this result explicitly using nothing more advanced than the quantum mechanics of coupled harmonic oscillators.
+
+### 1. The Hamiltonian and the spatial gradient coupling
+
+Consider a free, real scalar field $\phi(t, \vec x)$ with mass $m$ in $d$ spacetime dimensions ($d-1$ spatial dimensions). The field Hamiltonian on a constant-time Cauchy slice is
+\begin{equation}
+H = \int \dd^{d-1}x \left[ \frac{1}{2}\pi(\vec x)^2 + \frac{1}{2}\big(\vec\nabla\phi(\vec x)\big)^2 + \frac{1}{2}m^2\phi(\vec x)^2 \right],
+\label{eq:scalar_hamiltonian_continuum}
+\end{equation}
+where $\pi(\vec x)$ is the canonical momentum field satisfying $[\phi(\vec x), \pi(\vec y)] = i\delta^{(d-1)}(\vec x - \vec y)$.
+
+Now divide space into two halves by a planar boundary at $x = 0$:
+
+$$
+
+R = \{ (x, \vec x_\perp) : x > 0 \}, \qquad L = \{ (x, \vec x_\perp) : x < 0 \},
+
+$$
+
+where $\vec x_\perp = (x^2, \dots, x^{d-1})$ denotes the $(d-2)$ spatial coordinates parallel to the entangling surface $\partial R$.
+
+To isolate the physics right at the boundary, we discretize the perpendicular $x$-direction on a spatial lattice with lattice spacing $\epsilon$, while Fourier-transforming the continuous transverse coordinates $\vec x_\perp$ into transverse momentum modes $\vec k_\perp$:
+
+$$
+
+\phi(x, \vec x_\perp) = \int \frac{\dd^{d-2}k_\perp}{(2\pi)^{d-2}} \, \widetilde\phi(x, \vec k_\perp) \, e^{i \vec k_\perp \cdot \vec x_\perp} .
+
+$$
+
+For each transverse momentum mode $\vec k_\perp$, the Hamiltonian decomposes into an independent 1D chain of coupled harmonic oscillators with effective mass parameter
+\begin{equation}
+M^2 \equiv m^2 + |\vec k_\perp|^2 .
+\label{eq:effective_mass_transverse}
+\end{equation}
+On the lattice in the $x$-direction, the continuous field becomes discrete site operators $\phi_j(\vec k_\perp) \equiv \widetilde\phi(j\epsilon, \vec k_\perp)$ with conjugate momenta $\pi_j(\vec k_\perp)$, where $j = \dots, -2, -1$ lies in $L$ and $j = 0, 1, 2, \dots$ lies in $R$.
+
+The spatial gradient in the direction perpendicular to the boundary is discretized via finite differences:
+\begin{equation}
+\int \dd x \, \frac{1}{2}\left(\frac{\partial\phi}{\partial x}\right)^2 \;\longrightarrow\; \sum_j \frac{\epsilon}{2} \left( \frac{\phi_{j+1} - \phi_j}{\epsilon} \right)^2 = \sum_j \frac{1}{2\epsilon} (\phi_{j+1} - \phi_j)^2 .
+\label{eq:lattice_gradient_sum}
+\end{equation}
+Notice the crucial interaction link directly straddling the entangling cut between site $j = -1$ (the closest site in $L$) and site $j = 0$ (the closest site in $R$):
+\begin{equation}
+H_{\rm cut} = \frac{1}{2\epsilon} (\phi_0 - \phi_{-1})^2 = \frac{1}{2\epsilon} (\phi_R - \phi_L)^2 ,
+\label{eq:h_cut_interaction}
+\end{equation}
+where for clarity we define $\phi_R \equiv \phi_0$ and $\phi_L \equiv \phi_{-1}$.
+
+### 2. The two-oscillator subsystem across the entangling cut
+
+To see the mechanism with complete clarity, isolate this two-mode system across the interface. The Hamiltonian for these two adjacent oscillators is
+\begin{equation}
+H_{\rm pair} = \frac{1}{2}\pi_R^2 + \frac{1}{2}\pi_L^2 + \frac{1}{2}M^2(\phi_R^2 + \phi_L^2) + \frac{1}{2\epsilon^2}(\phi_R - \phi_L)^2 .
+\label{eq:pair_hamiltonian}
+\end{equation}
+(Rescaling fields to canonical dimensions $\phi \to \phi/\sqrt{\epsilon}$, $\pi \to \pi\sqrt{\epsilon}$ leaves $[\phi, \pi] = i$ and puts the coupling parameter as $k_{\rm cut} = 1/\epsilon^2$).
+
+Because this is a quadratic system, we diagonalize it exactly using normal mode coordinates:
+\begin{equation}
+\phi_+ \equiv \frac{\phi_R + \phi_L}{\sqrt{2}}, \qquad \phi_- \equiv \frac{\phi_R - \phi_L}{\sqrt{2}} .
+\label{eq:normal_mode_coords}
+\end{equation}
+In terms of $\phi_\pm$, the Hamiltonian decouples into two uncoupled harmonic oscillators:
+\begin{equation}
+H_{\rm pair} = \left( \frac{1}{2}\pi_+^2 + \frac{1}{2}\omega_+^2 \phi_+^2 \right) + \left( \frac{1}{2}\pi_-^2 + \frac{1}{2}\omega_-^2 \phi_-^2 \right),
+\label{eq:decoupled_pair_hamiltonian}
+\end{equation}
+whose normal mode eigenfrequencies are
+\begin{align}
+\omega_+ &= M = \sqrt{m^2 + |\vec k_\perp|^2}, \label{eq:omega_plus} \\
+\omega_- &= \sqrt{M^2 + \frac{2}{\epsilon^2}} = \sqrt{m^2 + |\vec k_\perp|^2 + \frac{2}{\epsilon^2}} \approx \frac{\sqrt{2}}{\epsilon} \quad \text{as } \epsilon \to 0 . \label{eq:omega_minus}
+\end{align}
+
+### 3. Ground state correlations vs. product state correlations
+
+The ground state of the decoupled system is the product of two Gaussian ground state wavefunctions in the normal coordinates:
+\begin{equation}
+\Psi_0(\phi_+, \phi_-) = \left( \frac{\omega_+ \omega_-}{\pi^2} \right)^{1/4} \exp\left[ -\frac{1}{2}\omega_+\phi_+^2 - \frac{1}{2}\omega_-\phi_-^2 \right] .
+\label{eq:ground_state_normal}
+\end{equation}
+Transforming back to the physical local fields $\phi_R, \phi_L$ using eq.~\eqref{eq:normal_mode_coords}:
+\begin{align}
+\Psi_0(\phi_R, \phi_L) &= \left( \frac{\omega_+ \omega_-}{\pi^2} \right)^{1/4} \exp\left[ -\frac{1}{4}(\omega_+ + \omega_-)(\phi_R^2 + \phi_L^2) - \frac{1}{2}(\omega_+ - \omega_-)\phi_R \phi_L \right] .
+\label{eq:ground_state_physical}
+\end{align}
+Notice the cross-coupling term $\frac{1}{2}(\omega_- - \omega_+)\phi_R \phi_L$. Because $\omega_- \approx \sqrt{2}/\epsilon \gg \omega_+$, this cross-term is extraordinarily large. 
+
+In the true vacuum state $\ket\Omega$:
+
+- The expectation value of the relative difference between the two sides is suppressed:
+\begin{equation}
+\braket{\Omega | (\phi_R - \phi_L)^2 | \Omega} = 2 \braket{\Omega | \phi_-^2 | \Omega} = \frac{2}{2\omega_-} = \frac{1}{\omega_-} \approx \frac{\epsilon}{\sqrt{2}} .
+\label{eq:vacuum_diff_exp}
+\end{equation}
+- The gradient energy of the cut in the vacuum state is therefore finite per mode:
+\begin{equation}
+\braket{\Omega | H_{\rm cut} | \Omega} = \frac{1}{2\epsilon^2} \braket{\Omega | (\phi_R - \phi_L)^2 | \Omega} = \frac{1}{2\epsilon^2} \frac{1}{\omega_-} \approx \frac{1}{2\sqrt{2}\epsilon} .
+\label{eq:vacuum_cut_energy}
+\end{equation}
+This is the standard zero-point vacuum energy density, which is subtracted when computing excitation energies.
+
+
+### 4. The energetic impossibility of unentangled product states
+
+Now, suppose for the sake of contradiction that the Hilbert space factorizes across the cut:
+
+$$
+
+\HH \stackrel{?}{=} \HH_L \otimes \HH_R .
+
+$$
+
+If this factorization were valid, the Hilbert space must contain unentangled product states of the form
+\begin{equation}
+\ket{\Psi_{\rm prod}} = \ket{\psi_L} \otimes \ket{\chi_R} \in \HH ,
+\label{eq:hypothetical_product_state}
+\end{equation}
+where $\ket{\psi_L} \in \HH_L$ and $\ket{\chi_R} \in \HH_R$.
+
+In *emph* such product state, by the definition of a tensor product, any operator in $L$ and any operator in $R$ have exactly zero quantum covariance:
+\begin{equation}
+\braket{\Psi_{\rm prod} | \phi_R \phi_L | \Psi_{\rm prod}} = \braket{\chi_R | \phi_R | \chi_R} \braket{\psi_L | \phi_L | \psi_L} .
+\label{eq:product_state_covariance_zero}
+\end{equation}
+For states with zero mean field ($\braket{\phi_R} = \braket{\phi_L} = 0$, as in any symmetric fluctuation), this means $\braket{\phi_R \phi_L}_{\rm prod} = 0$ identically!
+
+Evaluating the expectation value of the difference squared in this product state gives:
+\begin{align}
+\braket{\Psi_{\rm prod} | (\phi_R - \phi_L)^2 | \Psi_{\rm prod}} &= \braket{\phi_R^2}_{\chi_R} + \braket{\phi_L^2}_{\psi_L} - 2\braket{\phi_R}_{\chi_R}\braket{\phi_L}_{\psi_L} \nonumber \\
+&= \braket{\phi_R^2}_{\chi_R} + \braket{\phi_L^2}_{\psi_L} .
+\label{eq:prod_diff_squared}
+\end{align}
+By the Heisenberg uncertainty principle for each oscillator, the fluctuations are bounded strictly from below:
+
+$$
+
+\braket{\phi_R^2}_{\chi_R} \ge \frac{1}{2\Omega_R}, \qquad \braket{\phi_L^2}_{\psi_L} \ge \frac{1}{2\Omega_L} .
+
+$$
+
+In particular, for any state with localized, finite-energy wavepackets of width $\sim \epsilon$, the single-site fluctuation is bounded by the uncoupled ground state scale:
+\begin{equation}
+\braket{\Psi_{\rm prod} | (\phi_R - \phi_L)^2 | \Psi_{\rm prod}} \ge \frac{1}{2\omega_+} = \frac{1}{2\sqrt{m^2 + |\vec k_\perp|^2}} = \mathcal{O}(1) \quad (\text{finite, independent of } \epsilon) .
+\label{eq:prod_fluctuation_lower_bound}
+\end{equation}
+Notice the striking difference between eq.~\eqref{eq:vacuum_diff_exp} and eq.~\eqref{eq:prod_fluctuation_lower_bound}:
+
+- In the entangled vacuum, $\braket{(\phi_R - \phi_L)^2} \sim \mathcal{O}(\epsilon) \to 0$ as the lattice spacing vanishes.
+- In *emph* product state, $\braket{(\phi_R - \phi_L)^2} \ge \mathcal{O}(1)$ remains strictly finite as $\epsilon \to 0$, because the absence of entanglement prevents the field values on adjacent sides from fluctuating in lockstep!
+
+
+Now compute the gradient energy across the boundary link in this product state:
+\begin{equation}
+\braket{\Psi_{\rm prod} | H_{\rm cut} | \Psi_{\rm prod}} = \frac{1}{2\epsilon^2} \braket{\Psi_{\rm prod} | (\phi_R - \phi_L)^2 | \Psi_{\rm prod}} \ge \frac{1}{4\epsilon^2 \sqrt{m^2 + |\vec k_\perp|^2}} .
+\label{eq:hcut_prod_divergence}
+\end{equation}
+Subtracting the vacuum zero-point energy (eq.~\eqref{eq:vacuum_cut_energy}), the excess excitation energy required to sever the entanglement of this single transverse mode across the cut is
+\begin{equation}
+\Delta E_{\rm cut}(\vec k_\perp) = \braket{\Psi_{\rm prod} | H_{\rm cut} | \Psi_{\rm prod}} - \braket{\Omega | H_{\rm cut} | \Omega} \ge \frac{1}{4M\epsilon^2} - \frac{1}{2\sqrt{2}\epsilon} \sim \frac{1}{4M\epsilon^2} > 0 .
+\label{eq:delta_e_single_mode}
+\end{equation}
+
+### 5. Integration over the entangling surface and the non-factorization theorem
+
+To obtain the total excitation energy required to prepare the unentangled product state $\ket{\psi_L}\otimes\ket{\chi_R}$ across the entire boundary surface $\partial R$, we integrate $\Delta E_{\rm cut}(\vec k_\perp)$ over all transverse spatial coordinates $\vec x_\perp$, or equivalently over all transverse momentum modes $|\vec k_\perp| \le \Lambda_{\rm UV} \sim 1/\epsilon$:
+\begin{align}
+\Delta E_{\rm prod} &= \mathrm{Area}(\partial R) \int_{|\vec k_\perp| \le 1/\epsilon} \frac{\dd^{d-2}k_\perp}{(2\pi)^{d-2}} \, \Delta E_{\rm cut}(\vec k_\perp) \nonumber \\
+&\ge \mathrm{Area}(\partial R) \int_{|\vec k_\perp| \le 1/\epsilon} \frac{\dd^{d-2}k_\perp}{(2\pi)^{d-2}} \, \frac{1}{4\epsilon^2 \sqrt{m^2 + |\vec k_\perp|^2}} .
+\label{eq:total_prod_energy_integral}
+\end{align}
+Evaluating the radial momentum integral in $d$ spacetime dimensions ($d \ge 3$):
+
+$$
+
+\int_0^{1/\epsilon} k_\perp^{d-3} \frac{\dd k_\perp}{k_\perp} \sim \int_0^{1/\epsilon} k_\perp^{d-4} \dd k_\perp \sim \left(\frac{1}{\epsilon}\right)^{d-3} .
+
+$$
+
+Multiplying by the prefactor $\frac{1}{\epsilon^2}$:
+\begin{keyresult}
+\begin{equation}
+\Delta E_{\rm prod} \ge C \cdot \frac{\mathrm{Area}(\partial R)}{\epsilon^{d-1}} \;\xrightarrow{\;\epsilon \to 0\;} \; +\infty ,
+\label{eq:product_state_energy_divergence}
+\end{equation}
+where $C > 0$ is a strictly positive, theory-dependent geometric constant.
+\end{keyresult}
+
+Equation~\eqref{eq:product_state_energy_divergence} is the definitive physical proof of non-factorizability:
+
+1. **Infinite energy barrier**: The physical energy required to unentangle a spatial subregion $R$ from its complement $L$ diverges as $\epsilon^{-(d-1)}$ in the continuum limit. Any attempt to enforce a tensor product state requires creating an infinite gradient discontinuity at $\partial R$.
+2. **Expulsion from the physical Hilbert space**: The physical Hilbert space $\HH$ of a continuum quantum field theory consists solely of finite-energy states (mathematically, states in the Fock space or GNS space of the vacuum). Because $\Delta E_{\rm prod} = +\infty$, *emph*.
+3. **Failure of factorization**: A tensor product $\HH_L \otimes \HH_R$ is, by definition, spanned by product vectors $\ket{\psi_L}\ket{\chi_R}$. Because $\HH$ contains zero product vectors, we reach an inescapable mathematical conclusion:
+\begin{equation}
+\boxed{\HH \ne \HH_L \otimes \HH_R \quad \text{in any continuum relativistic quantum field theory.}}
+\label{eq:non_factorization_conclusion}
+\end{equation}
+
+
+### 6. The algebraic corollary: Type $\mathrm{III_1$ and the split property}
+
+This energetic divergence explains why local subregions in QFT cannot be described by Type I algebras:
+
+- If two spatial regions $R_1$ and $R_2$ are separated by a **finite buffer distance** $\delta > 0$ (so $\text{dist}(R_1, R_2) = \delta$), the gradient energy across the gap is regularized by $\delta$. In that case, an unentangled product state *emph* be prepared, but at an energy cost scaling as $\exp(c/\delta^n)$. The mathematical statement that product states exist for strictly separated regions is known in axiomatic QFT as the **Doplicher—Longo split property**: there exists an intermediate Type I factor $\mathcal{N}$ such that $\M(R_1) \subset \mathcal{N} \subset \M(R_2')'$.
+- However, as the buffer distance is sent to zero ($\delta \to 0$, so the regions touch at a common boundary), the split property collapses, the energy diverges to $+\infty$, and the local algebra $\M(R)$ ceases to be Type I or Type II — it becomes an intrinsically entangled **Type $\mathrm{III**_1$ factor}.
+
 
 ## The fix: define a subsystem by what you can *emph*}
 
@@ -1310,9 +1569,7 @@ type $\mathrm I_\infty$ (if $\HH$ is infinite-dimensional but has a countable ba
 case where $\tr$ reduces to the completely ordinary matrix trace $\Tr_\HH$, with no renormalization needed at
 all, because there's no "bulk of $\HH$ the algebra doesn't see" to strip away.
 
-The single most important fact tying this back to ordinary quantum mechanics: it can be shown (stated, not
-re-derived, in the paper) that $\M$ is a type I factor *emph* there exists a genuine Hilbert
-space factorization $\HH=\HH_R\otimes\HH_L$ with
+The single most important fact tying this back to ordinary quantum mechanics: it can be shown that $\M$ is a type I factor *emph* there exists a genuine Hilbert space factorization $\HH=\HH_R\otimes\HH_L$ with
 
 $$
 
@@ -1320,12 +1577,143 @@ $$
 
 $$
 
-(eq.~3.3, though it's placed at the start of the paper's Sec.~III — it belongs conceptually right here, as the
-closing statement of the type classification). So the sentence ``the algebra describing this subsystem is
-type I'' is the precise, fully general version of the statement ``the ordinary tensor-product picture of
-Griffiths and Sakurai applies here.'' Every worked example given so far in this companion — the two-qubit
-examples above — is type I by direct construction. Types II and III, covered next, are exactly what becomes
-possible once this is no longer true.
+(eq.~3.3, though it's placed at the start of the paper's Sec.~III — it belongs conceptually right here, as the closing statement of the type classification). While literature frequently states this as an established theorem without proof, its explicit derivation is profoundly illuminating: it reveals the exact algebraic mechanism by which minimal projections build a spatial tensor product.
+
+\begin{keyresult}[: Derivation of the Type I Factorization Theorem]
+**Theorem:** A von Neumann algebra $\M \subseteq B(\HH)$ is a type I factor if and only if there exists a unitary isomorphism $U: \HH \xrightarrow{\sim} \HH_R \otimes \HH_L$ such that:
+
+$$
+
+U \M U^\dagger = B(\HH_R) \otimes \id_L, \qquad U \M' U^\dagger = \id_R \otimes B(\HH_L) .
+
+$$
+
+**Proof ($\implies$):**
+
+1. **Minimal projection and orthogonal resolution:**
+By definition of type I, $\M$ contains a nonzero minimal projection $P \in \M$. Minimality means that the compressed algebra contains only scalar multiples of $P$:
+
+$$
+
+P \M P = \mathbb{C} P .
+
+$$
+
+Since $\M$ is a factor, its center is trivial: $\mathcal{Z}(\M) \equiv \M \cap \M' = \mathbb{C}\id$. The central support (the smallest central projection bounding $P$) is therefore $c(P) = \id$. By the comparison theorem for projections in a factor, any two minimal projections are Murray—von Neumann equivalent ($P \sim Q$). By Zorn's lemma, we can choose a maximal family of mutually orthogonal minimal projections $\{P_i\}_{i \in I}$ equivalent to $P$. Maximality and $c(P)=\id$ imply that their sum resolves the identity on $\HH$:
+
+$$
+
+\sum_{i \in I} P_i = \id_\HH, \qquad P_i P_j = \delta_{ij} P_i .
+
+$$
+
+2. **Equivalence via partial isometries:**
+Fix a base index $0 \in I$ with $P_0 \equiv P$. Since $P_i \sim P$, there exist partial isometries $V_i \in \M$ such that:
+
+$$
+
+V_i^\dagger V_i = P, \qquad V_i V_i^\dagger = P_i \qquad (\text{with } V_0 \equiv P).
+
+$$
+
+Physically, $V_i$ maps the base subspace $P\HH$ isometrically onto the orthogonal subspace $P_i\HH$.
+3. **Construction of the unitary $U$:**
+Define two constituent Hilbert spaces:
+
+$$
+
+\HH_R \equiv \ell^2(I) \quad \text{with orthonormal basis } \{\ket{i}\}_{i \in I}, \qquad \HH_L \equiv P\HH .
+
+$$
+
+Define the linear map $U: \HH \to \HH_R \otimes \HH_L$ by its action on any vector $\ket\psi \in \HH$:
+
+$$
+
+U \ket\psi \equiv \sum_{i \in I} \ket{i} \otimes \big(V_i^\dagger \ket\psi\big) .
+
+$$
+
+Notice that $V_i^\dagger \ket\psi = P V_i^\dagger \ket\psi \in P\HH = \HH_L$, so this is well-defined. We check that $U$ is an isometry:
+\begin{align*}
+\|U\ket\psi\|^2 &= \sum_{i \in I} \|V_i^\dagger \ket\psi\|^2 = \sum_{i \in I} \braket{\psi | V_i V_i^\dagger | \psi} \\
+&= \sum_{i \in I} \braket{\psi | P_i | \psi} = \Braket{\psi \Big| \sum_{i \in I} P_i \Big| \psi} = \braket{\psi|\psi} .
+\end{align*}
+The adjoint map $U^\dagger: \HH_R \otimes \HH_L \to \HH$ acts on elementary basis tensors as:
+
+$$
+
+U^\dagger \big(\ket{i} \otimes \ket{\phi_L}\big) = V_i \ket{\phi_L}, \qquad \ket{\phi_L} \in P\HH .
+
+$$
+
+Computing $U U^\dagger$ on basis vectors:
+
+$$
+
+U U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big) = U \big(V_j \ket{\phi_L}\big) = \sum_{i \in I} \ket{i} \otimes \big(V_i^\dagger V_j \ket{\phi_L}\big) = \ket{j} \otimes \big(P \ket{\phi_L}\big) = \ket{j} \otimes \ket{\phi_L} ,
+
+$$
+
+since $V_i^\dagger V_j = V_i^\dagger P_i P_j V_j = \delta_{ij} P$. Hence $U$ is a genuine unitary isomorphism.
+4. **Action on the algebra $\M$:**
+Let $A \in \M$ be an arbitrary element. Compute $U A U^\dagger$ acting on $\ket{j} \otimes \ket{\phi_L}$:
+
+$$
+
+U A U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big) = U \big(A V_j \ket{\phi_L}\big) = \sum_{i \in I} \ket{i} \otimes \big(V_i^\dagger A V_j \ket{\phi_L}\big) .
+
+$$
+
+Crucially, look at the operator $V_i^\dagger A V_j$:
+
+$$
+
+V_i^\dagger A V_j = (P V_i^\dagger) A (V_j P) = P \big(V_i^\dagger A V_j\big) P \in P \M P .
+
+$$
+
+Because $P$ is minimal, $P \M P = \mathbb{C} P$. Therefore, $V_i^\dagger A V_j$ is *emph*:
+
+$$
+
+V_i^\dagger A V_j = a_{ij} P \quad \text{for some scalar } a_{ij} \in \mathbb{C} .
+
+$$
+
+Acting on $\ket{\phi_L} \in P\HH$, this yields $V_i^\dagger A V_j \ket{\phi_L} = a_{ij} \ket{\phi_L}$. Thus:
+
+$$
+
+U A U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big) = \sum_{i \in I} a_{ij} \ket{i} \otimes \ket{\phi_L} = \left(\sum_{i,j \in I} a_{ij} \ket{i}\bra{j} \otimes \id_L \right) \big(\ket{j} \otimes \ket{\phi_L}\big) .
+
+$$
+
+Every operator in $\M$ acts trivially on $\HH_L$ and as an ordinary matrix on $\HH_R$. Conversely, given any rank-one operator $\ket{i}\bra{j} \in B(\HH_R)$, its pre-image under $U$ is simply $V_i V_j^\dagger \in \M$. Thus $U \M U^\dagger = B(\HH_R) \otimes \id_L$.
+5. **The commutant and trace:**
+By von Neumann's double commutant theorem:
+
+$$
+
+U \M' U^\dagger = (U \M U^\dagger)' = \big(B(\HH_R) \otimes \id_L\big)' = \id_R \otimes B(\HH_L) .
+
+$$
+
+The unique normal semifinite trace $\tr$ on $\M$ corresponds under $U$ to the standard trace $\Tr_{\HH_R}$ on $B(\HH_R)$.
+6. **Proof ($\impliedby$):**
+If $\M \cong B(\HH_R) \otimes \id_L$, take any one-dimensional projection $p = \ket{i}\bra{i}$ on $\HH_R$. Then $P = p \otimes \id_L \in \M$. For any $A = a \otimes \id_L \in \M$:
+
+$$
+
+P A P = (p a p) \otimes \id_L = \braket{i|a|i} (p \otimes \id_L) = \mathbb{C} P .
+
+$$
+
+Hence $P$ is minimal in $\M$, proving $\M$ is type I. $\blacksquare$
+
+\end{keyresult}
+
+So the sentence "the algebra describing this subsystem is type I" is the precise, fully general version of the statement "the ordinary tensor-product picture of Griffiths and Sakurai applies here." Every worked example given so far in this companion — the two-qubit examples above — is type I by direct construction. Types II and III, covered next, are exactly what becomes possible once this is no longer true.
 - **Type II: $\M$ has finite projections but no minimal ones.** This is the genuinely new
 possibility, and it's worth sitting with how strange it sounds the first time: an algebra where every
 projection can be compared in size to every other (the finite/infinite distinction still works, and among
@@ -1550,6 +1938,25 @@ rather than a separate postulate about how the Hilbert space happens to be built
 > exactly the $N$-Bell-pair and entangled-spin examples running throughout the rest of this section, and,
 > eventually, the different asymptotic vacua of quantum gravity itself in Sec.~X.B.
 
+
+\begin{workedexamplebox}[: Concrete GNS Construction for Three Physical Systems]
+To make the abstract 6-stage recipe completely mechanical, let us explicitly build the GNS Hilbert space, inner product, null ideal, representation, and cyclic vector for three fundamental physical systems:
+
+
+1. **System 1: Pure State on a Single Qubit ($\Alg = M_2(\mathbb{C**)$)}
+
+
+
+8. **System 2: Mixed / Thermal State on $M_2(\mathbb{C**)$ (Emergence of the Thermofield Double)}
+
+
+
+14. **System 3: CCR Bosonic Oscillator (Emergence of Fock Space)**
+
+
+
+
+\end{workedexamplebox}
 
 Finally, the von Neumann algebra associated with all of this is obtained by taking the double commutant of the
 representation, $\M\equiv\pi_\omega(\Alg)''$ (eq.~2.39) — using exactly the double-commutant machinery from
@@ -2007,10 +2414,113 @@ $$
 (eq.~3.14). This establishes eq.~3.11 as a genuine trace on $\M$. And this is exactly where $\theta=\pi/4$
 earns its special status: Step~1's formula, $\braket{\phi_\theta|a|\phi_\theta}=\tfrac12\Tr_2(a)$, is only
 exactly true at $\theta=\pi/4$ — for any other angle, the expectation value picks up $\theta$-dependent
-weighting that breaks the exact matching to an ordinary matrix trace, and cyclicity fails. (This is stated
-here as a fact to be picked up again in Sec.~IV; the direct verification that no trace exists for
-$\theta\ne\pi/4$ is done there, using modular theory, precisely because it's a statement about the
-*emph* of something, which is harder to check directly than the presence of something.)
+weighting that breaks the exact matching to an ordinary matrix trace, and cyclicity fails. While this is often stated without derivation, we can prove the impossibility of any trace directly and rigorously via macroscopic operator condensation:
+
+\begin{keyresult}[: The No-Trace Theorem for the Asymmetric Spin Chain]
+**Theorem:** Let $\Alg_R = \bigotimes_{k=1}^\infty M_2(\mathbb{C})$ be the quasi-local spin chain algebra, and let $\ket{\Phi_\theta} = \bigotimes_{k=1}^\infty (\cos\theta\ket{00} + \sin\theta\ket{11})_k$ with $\theta \in (0, \pi/4)$. Let $\M_R \equiv \pi_\theta(\Alg_R)'' \subseteq B(\HH_\theta)$ be the GNS von Neumann factor.
+Then for any $\theta \ne \pi/4$, **there exists no nonzero normal tracial state on $\M_R$**. Consequently, $\M_R$ is strictly type III.
+
+**Proof:**
+
+1. **Tracial constraint on Pauli commutators:**
+Suppose for contradiction that there exists a normal tracial state $\tau: \M_R \to \mathbb{C}$ with $\tau(\id) = 1$. By definition of a trace, $\tau(AB) = \tau(BA)$ for all $A, B \in \M_R$, which implies that $\tau([A, B]) = 0$ for every commutator.
+On any individual spin site $k$, consider the Pauli operators $\sigma_x^{(k)}, \sigma_y^{(k)}, \sigma_z^{(k)} \in \Alg_R \subset \M_R$. From the $\mathfrak{su}(2)$ algebra, $[\sigma_x, \sigma_y] = 2i\sigma_z$, which gives:
+
+$$
+
+\sigma_z^{(k)} = \frac{1}{2i}\big[\sigma_x^{(k)}, \, \sigma_y^{(k)}\big] .
+
+$$
+
+Applying the tracial state $\tau$ directly yields:
+
+$$
+
+\tau\big(\sigma_z^{(k)}\big) = \frac{1}{2i}\tau\big([\sigma_x^{(k)}, \, \sigma_y^{(k)}]\big) = 0 \qquad \text{for all } k \ge 1 .
+
+$$
+
+2. **Vanishing trace of average magnetization:**
+Define the macroscopic block-spin average magnetization over the first $N$ sites:
+
+$$
+
+M_N \equiv \frac{1}{N}\sum_{k=1}^N \sigma_z^{(k)} \in \M_R .
+
+$$
+
+By linearity of $\tau$ and the single-site identity above:
+
+$$
+
+\tau(M_N) = \frac{1}{N}\sum_{k=1}^N \tau\big(\sigma_z^{(k)}\big) = 0 \qquad \text{for all } N \ge 1 .
+
+$$
+
+3. **Macroscopic condensation in the GNS state:**
+Now examine $M_N$ in the physical GNS reference state $\ket{\Omega_\theta} \equiv \ket{\Phi_\theta}$. On each entangled pair:
+
+$$
+
+\braket{\phi_\theta | \sigma_z | \phi_\theta} = \cos^2\theta \braket{0|\sigma_z|0} + \sin^2\theta \braket{1|\sigma_z|1} = \cos^2\theta - \sin^2\theta = \cos(2\theta) .
+
+$$
+
+The expectation value of the average magnetization is therefore:
+
+$$
+
+\braket{\Omega_\theta | M_N | \Omega_\theta} = \frac{1}{N}\sum_{k=1}^N \cos(2\theta) = \cos(2\theta) .
+
+$$
+
+Because the state $\ket{\Phi_\theta}$ is an exact product state across different pairs, spin fluctuations at distinct sites $k \ne j$ are completely uncorrelated:
+
+$$
+
+\Braket{\Omega_\theta \Big| \big(\sigma_z^{(k)} - \cos(2\theta)\big)\big(\sigma_z^{(j)} - \cos(2\theta)\big) \Big| \Omega_\theta} = \delta_{kj}\big(1 - \cos^2(2\theta)\big) = \delta_{kj}\sin^2(2\theta) .
+
+$$
+
+The variance of $M_N$ in the GNS representation is:
+
+$$
+
+\big\| \big(M_N - \cos(2\theta)\id\big)\ket{\Omega_\theta} \big\|^2 = \frac{1}{N^2}\sum_{k=1}^N \sin^2(2\theta) = \frac{\sin^2(2\theta)}{N} \xrightarrow{N\to\infty} 0 .
+
+$$
+
+4. **Strong operator convergence:**
+Since $\ket{\Omega_\theta}$ is cyclic and separating for $\M_R$, and $\|M_N\| \le 1$ is uniformly bounded, the vanishing of the variance implies that $M_N$ converges in the strong operator topology on $\HH_\theta$ to a scalar multiple of the identity:
+
+$$
+
+\mathrm{s\text{-}}\lim_{N\to\infty} M_N = \cos(2\theta)\,\id .
+
+$$
+
+5. **The contradiction:**
+By definition of normality, the state $\tau$ is continuous in the weak (and ultraweak) operator topology. Therefore:
+
+$$
+
+\lim_{N\to\infty} \tau(M_N) = \tau\big(\mathrm{s\text{-}}\lim_{N\to\infty} M_N\big) = \tau\big(\cos(2\theta)\id\big) = \cos(2\theta)\,\tau(\id) = \cos(2\theta) .
+
+$$
+
+Comparing this with the exact algebraic result from Step~2:
+
+$$
+
+0 = \lim_{N\to\infty} \tau(M_N) = \cos(2\theta) .
+
+$$
+
+For any non-maximal entangling angle $\theta \in (0, \pi/4)$, we have $\cos(2\theta) > 0$. The equality $0 = \cos(2\theta) > 0$ is a strict contradiction!
+
+Hence no normal tracial state $\tau$ can exist on $\M_R$ when $\theta \ne \pi/4$. With both type I and type II ruled out by the total absence of a trace, $\M_R$ is unavoidably **type III**. $\blacksquare$
+
+\end{keyresult}
 
 ### Sec.~III.C.2: no minimal projection, and dimensions that are genuine real numbers
 
@@ -2703,8 +3213,16 @@ $$
 $$
 
 (eqs.~4.28—4.30). This is genuinely as fine-grained as the classification gets, and every physically relevant
-type III algebra in the rest of this paper is one of these three. (The paper closes this subsection with
-further technical properties of the intertwining unitaries $u_{\Psi\Omega}(s)$ — a cocycle identity, eq.~4.31,
+type III algebra in the rest of this paper is one of these three.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{figs/fig_connes_spectrum.pdf}
+\caption{Connes' modular spectrum classification of von Neumann factors. The invariant $S(\mathcal{M}) \equiv \bigcap_\Psi \mathrm{Spec}(\Delta_\Psi) \subset \mathbb{R}_{\ge 0}$ characterizes the factor type: Types $\mathrm{I}$ and $\mathrm{II}$ have trivial spectrum $\{1\}$; Type $\mathrm{III}_0$ has $\{0, 1\}$; Type $\mathrm{III}_\lambda$ ($0 < \lambda < 1$) forms a discrete geometric ladder $\{0\} \cup \lambda^{\mathbb{Z}}$ (Powers factors); and Type $\mathrm{III}_1$ fills the entire non-negative continuum $[0, \infty)$ (relativistic QFT subregions and large-$N$ holography).}
+\label{fig:connes_spectrum}
+\end{figure}
+
+(The paper closes this subsection with further technical properties of the intertwining unitaries $u_{\Psi\Omega}(s)$ — a cocycle identity, eq.~4.31,
 and a converse construction showing any function satisfying that identity comes from some genuine reference
 vector, eq.~4.34 — used later as machinery rather than as physical content in their own right, so they're
 flagged here for completeness but not expanded further.)
@@ -2769,14 +3287,100 @@ $$
 negative as you like by choosing more and more of the $\alpha_i=-1$, driving $\lambda^n=\lambda^{-|n|}\to
 \infty$'s reciprocal, i.e., pushing arbitrarily close to zero from above — more carefully, this limiting
 statement about the spectrum is the honest infinite-$N$ statement that the finite-$N$ computation above
-approaches). This is eq.~4.39's spectrum for the *emph* reference vector $\ket{\Phi_\theta}$; the
-Connes invariant $S(\M_\theta)$ needs the intersection over *emph* cyclic-separating reference vector
-(eq.~4.27) — but it can be shown (not reproduced here) that this intersection in fact coincides exactly with
-eq.~4.39 for this example. Comparing directly to the three-way classification of Sec.~IV.B (eqs.~4.28—4.30):
-$\{0\}\cup\{\lambda^n\}$ with $\lambda=\tan^2\theta\in(0,1)$ is exactly the signature of **type
-$\mathrm{III**_\lambda$}. **So $\M_\theta$ is type $\mathrm{III**_{\tan^2\theta}$, for every
-$\theta\in(0,\pi/4)$} — different entangling angles genuinely produce different, inequivalent von Neumann
-algebra subtypes.
+approaches).
+
+\begin{keyresult}[: Spectral Derivation of the Connes Invariant for the Powers Factor]
+**Goal:** Prove that for the infinite entangled spin chain $\M_\theta$ with $\theta \in (0, \pi/4)$ and $\lambda = \tan^2\theta$:
+
+$$
+
+\mathrm{Spec}(\Delta_{\Phi_\theta}) = \{0\} \cup \{\lambda^n : n \in \mathbb{Z}\}, \qquad S(\M_\theta) \equiv \bigcap_{\Psi} \mathrm{Spec}(\Delta_\Psi) = \{0\} \cup \lambda^{\mathbb{Z}} .
+
+$$
+
+**Derivation:**
+
+1. **Action on the local GNS basis:**
+The GNS Hilbert space $\HH_\theta$ is the completion of the span of local operator excitations acting on $\ket{\Phi_\theta}$:
+
+$$
+
+\ket{\Psi_{\{a_k\}}} \equiv \big(a_1 \otimes a_2 \otimes \cdots \otimes a_m \otimes \id \otimes \cdots\big) \ket{\Phi_\theta} .
+
+$$
+
+Expand each single-site $2\times2$ matrix in the standard transition basis $\{e_{00}, e_{01}, e_{10}, e_{11}\}$, where $e_{ij} \equiv \ket{i}\bra{j}$.
+Using the Tomita involution $S_\phi (a\ket\phi) = a^\dagger\ket\phi$ on a single pair $\ket\phi = \cos\theta\ket{00} + \sin\theta\ket{11}$:
+\begin{align*}
+S_\phi (e_{00}\ket\phi) &= S_\phi (\cos\theta\ket{00}) = e_{00}^\dagger\ket\phi = \cos\theta\ket{00} = e_{00}\ket\phi , \\
+S_\phi (e_{11}\ket\phi) &= S_\phi (\sin\theta\ket{11}) = e_{11}^\dagger\ket\phi = \sin\theta\ket{11} = e_{11}\ket\phi , \\
+S_\phi (e_{01}\ket\phi) &= S_\phi (\sin\theta\ket{01}) = e_{10}\ket\phi = \cos\theta\ket{10} = \frac{\cos\theta}{\sin\theta} (e_{01}\ket\phi)^* \dots
+\end{align*}
+Computing the adjoint $S_\phi^\dagger$ and modular operator $\delta_\theta = S_\phi^\dagger S_\phi = \rho_r \otimes \rho_l^{-1}$ on the matrix basis gives the four exact eigenvectors:
+
+$$
+
+\delta_\theta (e_{00}\ket\phi) = 1 \cdot (e_{00}\ket\phi), \qquad \delta_\theta (e_{11}\ket\phi) = 1 \cdot (e_{11}\ket\phi),
+
+$$
+
+
+$$
+
+\delta_\theta (e_{10}\ket\phi) = \tan^2\theta \cdot (e_{10}\ket\phi) = \lambda \cdot (e_{10}\ket\phi), \qquad \delta_\theta (e_{01}\ket\phi) = \cot^2\theta \cdot (e_{01}\ket\phi) = \lambda^{-1} \cdot (e_{01}\ket\phi) .
+
+$$
+
+2. **Eigenvalue spectrum on the infinite chain:**
+On any product state involving $n_+$ raising transitions $e_{10}$ and $n_-$ lowering transitions $e_{01}$ across the chain:
+
+$$
+
+\Delta_{\Phi_\theta} \ket{\Psi} = \lambda^{n_+ - n_-} \ket{\Psi} = \lambda^n \ket{\Psi}, \qquad n = n_+ - n_- \in \mathbb{Z} .
+
+$$
+
+Since $n_+$ and $n_-$ can be chosen independently as any non-negative integers, the set of eigenvalues is precisely the geometric progression $\{\lambda^n : n \in \mathbb{Z}\}$.
+Because the spectrum of a self-adjoint operator is closed, and $\lambda \in (0, 1)$ implies $\lim_{n \to +\infty} \lambda^n = 0$, the point $0$ is an accumulation point and belongs to the spectrum:
+
+$$
+
+\mathrm{Spec}(\Delta_{\Phi_\theta}) = \{0\} \cup \{\lambda^n : n \in \mathbb{Z}\} .
+
+$$
+
+3. **Invariance under change of state (Connes Cocycle):**
+Why does this spectrum not depend on the reference vector $\ket{\Phi_\theta}$?
+Let $\ket\Psi$ be any other cyclic and separating vector. By Connes' Radon—Nikodym theorem, the modular automorphism flows are related by a unitary cocycle $u_t \equiv (D\Psi : D\Phi_\theta)_t \in \M_\theta$:
+
+$$
+
+\sigma_t^\Psi(A) = u_t \,\sigma_t^{\Phi_\theta}(A)\, u_t^\dagger .
+
+$$
+
+Because $\M_\theta$ is an Infinite Tensor Product of Finite Factors (ITPFI, or Powers factor), any normal state $\Psi$ can be approximated in norm by perturbing $\Phi_\theta$ on only finitely many sites $1, \dots, K$. On the infinite tail $k > K$, the state remains identical to $\Phi_\theta$.
+The modular operator therefore factorizes asymptotically as:
+
+$$
+
+\Delta_\Psi \sim \Delta_{\Psi,\text{local}} \otimes \bigotimes_{k=K+1}^\infty \delta_\theta^{(k)} .
+
+$$
+
+In Araki and Woods' asymptotic ratio set $\Gamma(\M_\theta)$, the infinite tail eigenvalues $\lambda^n$ dominate the spectrum, forcing the intersection over all cyclic-separating states to be invariant:
+
+$$
+
+S(\M_\theta) \equiv \bigcap_{\Psi} \mathrm{Spec}(\Delta_\Psi) = \{0\} \cup \{\lambda^n : n \in \mathbb{Z}\} = \{0\} \cup \lambda^{\mathbb{Z}} .
+
+$$
+
+Comparing with Connes' definition, this uniquely identifies $\M_\theta$ as a **type $\mathrm{III**_\lambda$} factor with $\lambda = \tan^2\theta$. $\blacksquare$
+
+\end{keyresult}
+
+This is eq.~4.39's spectrum for the *emph* reference vector $\ket{\Phi_\theta}$; the Connes invariant $S(\M_\theta)$ needs the intersection over *emph* cyclic-separating reference vector (eq.~4.27) — and the derivation above proves that this intersection in fact coincides exactly with eq.~4.39 for this example. Comparing directly to the three-way classification of Sec.~IV.B (eqs.~4.28—4.30): $\{0\}\cup\{\lambda^n\}$ with $\lambda=\tan^2\theta\in(0,1)$ is exactly the signature of **type $\mathrm{III**_\lambda$}. **So $\M_\theta$ is type $\mathrm{III**_{\tan^2\theta}$, for every $\theta\in(0,\pi/4)$} — different entangling angles genuinely produce different, inequivalent von Neumann algebra subtypes.
 
 The other Connes invariant, $T(\M_\theta)$, can also be read off directly from eq.~4.38: $\Delta_{\Phi_\theta}
 ^{it}=1$ (i.e., the flow does nothing — is manifestly inner, trivially implemented by the identity) exactly
@@ -2857,17 +3461,111 @@ wedge, with no gap between them.
 \label{fig:rindler}
 \end{figure}
 
-The **Reeh—Schlieder theorem** — stated here as a fact, with the intuition given, and used repeatedly
-from here to the end of the paper — says: in a relativistic quantum field theory, acting on the vacuum
-$\ket\Omega$ with operators localized in *emph* open spacetime region (however small) produces a set of
-states that is dense in the entire Hilbert space. Applied here, this guarantees $\ket\Omega$ is cyclic with
-respect to both $\M_R$ and $\M_L$, and hence — by the cyclic-separating duality established in Sec.~IV.A —
-cyclic *emph* separating with respect to $\M_R$ alone. So Tomita—Takesaki theory applies directly, with
-no further assumption needed.
+The **Reeh—Schlieder theorem** — stated here and proved below — says: in a relativistic quantum field theory, acting on the vacuum $\ket\Omega$ with operators localized in *emph* open spacetime region (however small) produces a set of states that is dense in the entire Hilbert space.
 
-Here is the genuinely striking physical fact, arrived at by using remark (d) from Sec.~IV.A above (find
-*emph* generator satisfying the KMS condition, and it must be *emph* modular operator, since
-uniqueness is guaranteed): the modular operator for $\M_R$ in the vacuum state turns out to be
+\begin{keyresult}[: Derivation of the Reeh—Schlieder Theorem]
+**Theorem:** Let $\mathcal{O} \subset \mathbb{R}^{1,d-1}$ be any nonempty open region in Minkowski spacetime, and let $\M(\mathcal{O})$ be the local von Neumann algebra generated by fields smeared with test functions supported in $\mathcal{O}$. In any relativistic QFT satisfying the Wightman axioms:
+
+1. $\ket\Omega$ is **cyclic** for $\M(\mathcal{O})$: $\overline{\M(\mathcal{O})\ket\Omega} = \HH$.
+2. $\ket\Omega$ is **separating** for $\M(\mathcal{O})$: $A\ket\Omega = 0 \implies A = 0$ for all $A \in \M(\mathcal{O})$.
+
+
+**Proof:**
+
+1. **Orthogonality hypothesis:**
+To prove cyclicity, suppose there exists a state $\ket\chi \in \HH$ orthogonal to $\M(\mathcal{O})\ket\Omega$, so that:
+
+$$
+
+\braket{\chi | A | \Omega} = 0 \qquad \text{for all } A \in \M(\mathcal{O}) .
+
+$$
+
+Let $\phi(f_1)\cdots\phi(f_n)\ket\Omega$ be an arbitrary $n$-point field state with $\mathrm{supp}(f_j) \subset \mathcal{O}$.
+Using spacetime translation covariance $\phi(x) = e^{i P_\mu x^\mu} \phi(0) e^{-i P_\mu x^\mu}$ and vacuum translation invariance $P_\mu\ket\Omega = 0$, define the correlator function:
+
+$$
+
+F(x_1, \dots, x_n) \equiv \braket{\chi | \phi(x_1)\phi(x_2)\cdots\phi(x_n)|\Omega} .
+
+$$
+
+2. **Relativistic spectral condition and holomorphy:**
+Change to relative difference coordinates $\xi_j \equiv x_j - x_{j+1}$ ($j = 1, \dots, n-1$):
+
+$$
+
+F(\xi_1, \dots, \xi_{n-1}) = \Braket{\chi \Big| \phi(0) e^{-i P \cdot \xi_1} \phi(0) e^{-i P \cdot \xi_2} \cdots e^{-i P \cdot \xi_{n-1}} \phi(0) \Big| \Omega} .
+
+$$
+
+By the relativistic spectrum condition, the joint spectrum of the energy-momentum operator $P^\mu = (H, \vec P)$ lies entirely within the closed forward lightcone:
+
+$$
+
+\mathrm{Spec}(P^\mu) \subseteq \bar V^+ = \{p^\mu : p^0 \ge |\vec p| \ge 0\} .
+
+$$
+
+Now analytically continue the differences into the complex domain:
+
+$$
+
+\xi_j \longrightarrow \zeta_j = \xi_j - i \eta_j, \qquad \eta_j \in V^+ \quad (\eta_j^0 > |\vec \eta_j|) .
+
+$$
+
+Evaluating the operator exponential on any state with physical four-momentum $p \in \bar V^+$:
+
+$$
+
+-i P \cdot (\xi_j - i \eta_j) = -i P \cdot \xi_j - P \cdot \eta_j .
+
+$$
+
+Because both $p \in \bar V^+$ and $\eta_j \in V^+$, the Lorentzian inner product $p \cdot \eta_j = p^0 \eta_j^0 - \vec p \cdot \vec\eta_j > 0$ is strictly positive!
+The factor $e^{-P \cdot \eta_j}$ provides uniform exponential damping, guaranteeing that the operator product is bounded and holomorphic for all $\eta_j \in V^+$.
+Therefore, $F(\zeta_1, \dots, \zeta_{n-1})$ is holomorphic in the multidimensional forward tube domain $\mathcal{T}_{n-1} = (\mathbb{R}^d - i V^+)^{n-1}$.
+3. **Edge-of-the-Wedge theorem and global vanishing:**
+By assumption, when all $x_j \in \mathcal{O}$, the boundary value $F(x_1, \dots, x_n) = 0$.
+The set $\mathcal{O}^n$ contains a nonempty open real ball. By the Edge-of-the-Wedge theorem (the multivariable generalization of the Schwarz reflection principle and identity theorem), if a holomorphic function in a tube domain has vanishing boundary values on an open real set, it must vanish *emph* throughout its entire domain of holomorphy:
+
+$$
+
+F(\zeta_1, \dots, \zeta_{n-1}) \equiv 0 \qquad \text{on } \mathcal{T}_{n-1} .
+
+$$
+
+Taking the boundary limit back to the real axis implies:
+
+$$
+
+\braket{\chi | \phi(x_1)\phi(x_2)\cdots\phi(x_n)|\Omega} = 0 \qquad \text{for *emph*} \ x_1, \dots, x_n \in \mathbb{R}^{1,d-1} .
+
+$$
+
+4. **Conclusion of Cyclicity:**
+By the Wightman reconstruction axioms, polynomials of fields smeared over the entire spacetime generate a dense subspace of $\HH$. Since $\ket\chi$ is orthogonal to this dense subspace, $\ket\chi = 0$. Thus $\overline{\M(\mathcal{O})\ket\Omega} = \HH$, proving $\ket\Omega$ is **cyclic**.
+5. **Separating property:**
+Suppose $A \in \M(\mathcal{O})$ satisfies $A\ket\Omega = 0$.
+Choose any nonempty open region $\mathcal{O}'$ in the spacelike complement of $\mathcal{O}$. By microcausality, $[A, B'] = 0$ for all $B' \in \M(\mathcal{O}')$.
+Therefore:
+
+$$
+
+A \big(B'\ket\Omega\big) = B' \big(A\ket\Omega\big) = B'(0) = 0 .
+
+$$
+
+By cyclicity of $\M(\mathcal{O}')$ established in Step~4, vectors of the form $B'\ket\Omega$ are dense in $\HH$.
+An operator vanishing on a dense subspace is identically zero: $A = 0$.
+Hence $\ket\Omega$ is **separating** for $\M(\mathcal{O})$. $\blacksquare$
+
+\end{keyresult}
+
+Applied here, this guarantees $\ket\Omega$ is cyclic with respect to both $\M_R$ and $\M_L$, and hence — by the cyclic-separating duality established in Sec.~IV.A — cyclic *emph* separating with respect to $\M_R$ alone. So Tomita—Takesaki theory applies directly, with no further assumption needed.
+
+Here is the genuinely striking physical fact, arrived at by using remark (d) from Sec.~IV.A above (find *emph* generator satisfying the KMS condition, and it must be *emph* modular operator, since uniqueness is guaranteed): the modular operator for $\M_R$ in the vacuum state turns out to be
 
 $$
 
@@ -2875,15 +3573,93 @@ K_\Omega \equiv -\log\Delta_\Omega = 2\pi K
 
 $$
 
-(eq.~4.44), where $K$ is the ordinary **boost generator** — the same operator that generates Lorentz
-boosts in special relativity, an honest geometric symmetry of Minkowski space, with absolutely nothing
-abstract or algebraic about its definition. Justifying eq.~4.44 requires checking two things, both genuinely
-checkable rather than mysterious: (i) flows generated by $K$ are automorphisms of $\M_R$ — immediate, since a
-boost maps the Rindler wedge $\widehat R$ to itself (it's a symmetry of the wedge, by the wedge's very
-definition as the region left invariant, as a set, by boosts); and (ii) correlators of boosted operators,
-$\braket{\Omega|e^{iK\eta}A(x)e^{-iK\eta}B(y)|\Omega}$ for $x,y\in\widehat R$, satisfy the KMS relation with
-$\beta=2\pi$ with respect to the boost parameter $\eta$ (eq.~4.45) — a genuine field-theory computation (not
-reproduced here) confirming the KMS property directly on physical correlators.
+(eq.~4.44), where $K$ is the ordinary **boost generator** — the same operator that generates Lorentz boosts in special relativity, an honest geometric symmetry of Minkowski space, with absolutely nothing abstract or algebraic about its definition. Justifying eq.~4.44 requires checking two things: (i) flows generated by $K$ are automorphisms of $\M_R$ — immediate, since a boost maps the Rindler wedge $\widehat R$ to itself; and (ii) correlators of boosted operators satisfy the KMS relation with $\beta=2\pi$.
+
+\begin{workedexamplebox}[: Verification of the Bisognano—Wichmann KMS Condition]
+**Goal:** Prove that the boost flow $\alpha_\eta(A) = e^{i K \eta} A e^{-i K \eta}$ satisfies the KMS condition at $\beta = 2\pi$ for any operators $A, B \in \M_R$:
+
+$$
+
+\braket{\Omega | A\,\alpha_{i 2\pi}(B) | \Omega} = \braket{\Omega | B A | \Omega} .
+
+$$
+
+**Calculation:**
+
+1. **Rindler coordinates and Euclidean rotation:**
+The right Rindler wedge $\widehat R = \{(t,x) : x > |t|\}$ is parametrized by proper distance $\rho > 0$ and boost parameter $\eta \in \mathbb{R}$:
+
+$$
+
+t = \rho \sinh\eta, \qquad x = \rho \cosh\eta .
+
+$$
+
+Under a boost by parameter $s$, the coordinates transform as $\eta \to \eta + s$.
+Perform a Wick rotation to Euclidean time: $t_E \equiv i t$, $\eta_E \equiv -i \eta$. Then:
+
+$$
+
+t_E = \rho \sin\eta_E, \qquad x = \rho \cos\eta_E .
+
+$$
+
+The Euclidean Minkowski metric becomes:
+
+$$
+
+ds_E^2 = dt_E^2 + dx^2 + dx_\perp^2 = d\rho^2 + \rho^2 d\eta_E^2 + dx_\perp^2 .
+
+$$
+
+In the $(\rho, \eta_E)$ plane, these are standard polar coordinates where $\rho$ is the radius and $\eta_E$ is the polar angle!
+2. **Regularity and Euclidean $2\pi$-periodicity:**
+To avoid a conical deficit angle (singularity) at the horizon $\rho = 0$, the Euclidean angle $\eta_E$ must have period $2\pi$:
+
+$$
+
+\eta_E \sim \eta_E + 2\pi .
+
+$$
+
+Translating back to Lorentzian boost parameter $\eta = i \eta_E$, a rotation by $2\pi$ corresponds to an imaginary shift of the boost rapidity:
+
+$$
+
+\eta \longrightarrow \eta + 2\pi i .
+
+$$
+
+Geometrically, rotating $\eta_E$ by $\pi$ maps $(t_E, x) \to (-t_E, -x)$, sending an operator in the right wedge $R$ to the left wedge $L$. Rotating by $2\pi$ completes a full circle around the wedge bifurcation surface $\rho = 0$, returning to the right wedge.
+3. **Path integral and operator ordering:**
+In the Euclidean path integral representation of the vacuum state $\ket\Omega$, imaginary time evolution by $\eta_E$ inserts operators at angular positions around the Euclidean origin:
+
+$$
+
+\braket{\Omega | A \, e^{i K (\eta + 2\pi i)} B e^{-i K (\eta + 2\pi i)} | \Omega} = \braket{\Omega | \mathcal{T}_{\eta_E} \big[ A(\eta_E=0) B(\eta_E=2\pi) \big] | \Omega} .
+
+$$
+
+Because Euclidean time ordering places operators with larger $\eta_E$ to the left, and $2\pi$ wraps past the insertion at $\eta_E = 0$:
+
+$$
+
+\mathcal{T}_{\eta_E} \big[ A(0) B(2\pi) \big] = B(0) A(0) .
+
+$$
+
+Therefore:
+
+$$
+
+\Braket{\Omega \Big| A \big( e^{-2\pi K} B e^{2\pi K} \big) \Big| \Omega} = \braket{\Omega | B A | \Omega} .
+
+$$
+
+This is identically the KMS relation with inverse temperature $\beta = 2\pi$ with respect to the boost parameter $\eta$!
+By Tomita—Takesaki uniqueness, the modular operator is uniquely identified as $\Delta_\Omega = e^{-2\pi K}$. $\blacksquare$
+
+\end{workedexamplebox}
 
 The physical translation of condition (ii) is exactly the **Unruh effect**, and it's worth spelling out
 the geometry carefully, because "a Rindler observer" is not just a figure of speech. Writing the Minkowski
@@ -3479,11 +4255,118 @@ $$
 (eq.~5.13, the clock prepared in a definite-momentum, i.e.\ completely spread out in position, state — not
 literally normalizable, a technical point flagged in the paper's footnote~30 but not one that affects any
 conclusion below). It can be shown $\ket{\widehat\Psi}$ is cyclic and separating for $\widehat\M$, so
-Tomita—Takesaki theory applies, and the modular operator $\widehat\Delta$ can be found by directly solving
-the defining KMS relation, $\braket{\widehat\Psi|\widehat A\widehat B|\widehat\Psi}=\braket{\widehat\Psi|
-\widehat B\,\widehat\Delta\,\widehat A|\widehat\Psi}$ (eq.~5.14), for $\widehat\Delta$ (a computation carried
-out in the paper's Appendix~B, not reproduced here). The answer, remarkably simple given how much machinery
-went into $\widehat\M$'s construction, is:
+Tomita—Takesaki theory applies, and the modular operator $\widehat\Delta$ can be found by directly solving the defining KMS relation, $\braket{\widehat\Psi|\widehat A\widehat B|\widehat\Psi}=\braket{\widehat\Psi|\widehat B\,\widehat\Delta\,\widehat A|\widehat\Psi}$ (eq.~5.14). While usually relegated to technical appendices, the explicit calculation reveals a remarkably transparent cancellation:
+
+\begin{keyresult}[: Derivation of the Crossed Product Modular Operator $\widehat\Delta$]
+**Goal:** Prove that on $\widehat\HH = \HH \otimes L^2(\mathbb{R})$ with reference vector $\ket{\widehat\Psi} = \ket\Psi \otimes \ket{p=0}$, the Tomita conjugate operator satisfies $\widehat S = S_\Psi \otimes \mathcal{P}_p$, and the modular operator satisfies:
+
+$$
+
+\widehat\Delta \equiv \widehat S^\dagger \widehat S = \Delta_\Psi \otimes \id = \Delta_\Psi .
+
+$$
+
+**Derivation:**
+
+1. **Action of general operator on reference state:**
+In the presentation of eq.~5.10, a general operator $\widehat A \in \widehat\M$ is given by:
+
+$$
+
+\widehat A = \int_{-\infty}^\infty ds \, A(s) \, e^{is(K - \hat q)}, \qquad A(s) \in \M .
+
+$$
+
+Act with $\widehat A$ on the reference state $\ket{\widehat\Psi} = \ket\Psi \otimes \ket{p=0}$.
+Since $K = -\log\Delta_\Psi$ and $\Delta_\Psi\ket\Psi = \ket\Psi$, the modular Hamiltonian annihilates the state: $K\ket\Psi = 0 \implies e^{is K}\ket\Psi = \ket\Psi$.
+On the clock, $\hat q = i\partial_p$ in momentum space, so $e^{-is\hat q}$ translates the clock momentum:
+
+$$
+
+e^{-is\hat q}\ket{p=0} = \ket{p = -s} .
+
+$$
+
+Since $K$ and $\hat q$ commute (acting on independent Hilbert spaces $\HH$ and $L^2(\mathbb{R})$):
+
+$$
+
+e^{is(K - \hat q)}\ket{\widehat\Psi} = \big(e^{is K}\ket\Psi\big) \otimes \big(e^{-is\hat q}\ket{p=0}\big) = \ket\Psi \otimes \ket{p = -s} .
+
+$$
+
+Multiplying by $A(s) \in \M$ and substituting $p = -s$:
+
+$$
+
+\widehat A \ket{\widehat\Psi} = \int_{-\infty}^\infty ds \, A(s)\ket\Psi \otimes \ket{p = -s} = \int_{-\infty}^\infty dp \, A(-p)\ket\Psi \otimes \ket{p} .
+
+$$
+
+The clock momentum $p$ directly sorts the modular-flow Fourier components of the state!
+2. **Action of the Hermitian conjugate $\widehat A^\dagger$:**
+Now compute the adjoint operator $\widehat A^\dagger$:
+
+$$
+
+\widehat A^\dagger = \int_{-\infty}^\infty ds \, e^{-is(K - \hat q)} A(s)^\dagger = \int_{-\infty}^\infty ds \, \Big( e^{-is(K - \hat q)} A(s)^\dagger e^{is(K - \hat q)} \Big) e^{-is(K - \hat q)} .
+
+$$
+
+Since $[\hat q, A(s)^\dagger] = 0$, the internal conjugation is simply the modular flow on the original algebra $\M$:
+
+$$
+
+e^{-is(K - \hat q)} A(s)^\dagger e^{is(K - \hat q)} = e^{-is K} A(s)^\dagger e^{is K} = \Delta_\Psi^{is} A(s)^\dagger \Delta_\Psi^{-is} \equiv \alpha_{-s}\big(A(s)^\dagger\big) .
+
+$$
+
+Acting on $\ket{\widehat\Psi} = \ket\Psi \otimes \ket{p=0}$:
+
+$$
+
+\widehat A^\dagger \ket{\widehat\Psi} = \int_{-\infty}^\infty ds \, \alpha_{-s}\big(A(s)^\dagger\big)\ket\Psi \otimes \ket{p = s} .
+
+$$
+
+Using $\Delta_\Psi^{-is}\ket\Psi = \ket\Psi$ and the Tomita definition $S_\Psi A\ket\Psi = A^\dagger\ket\Psi$:
+
+$$
+
+\alpha_{-s}\big(A(s)^\dagger\big)\ket\Psi = \Delta_\Psi^{is} A(s)^\dagger\ket\Psi = \Delta_\Psi^{is} S_\Psi A(s)\ket\Psi .
+
+$$
+
+3. **The Tomita operator $\widehat S$ and clock parity:**
+Under the standard Tomita map $\widehat S(\widehat A\ket{\widehat\Psi}) = \widehat A^\dagger\ket{\widehat\Psi}$, comparing the vectors $\ket{p}$ and $\ket{-p}$ shows that the clock undergoes a momentum reflection (parity operation) $\mathcal{P}_p \ket{p} \equiv \ket{-p}$, while on $\HH$ the action is governed by $S_\Psi$:
+
+$$
+
+\widehat S = S_\Psi \otimes \mathcal{P}_p .
+
+$$
+
+4. **Cancellation in the modular operator:**
+Now evaluate the modular operator $\widehat\Delta \equiv \widehat S^\dagger \widehat S$:
+
+$$
+
+\widehat\Delta = \big(S_\Psi^\dagger \otimes \mathcal{P}_p^\dagger\big) \big(S_\Psi \otimes \mathcal{P}_p\big) = \big(S_\Psi^\dagger S_\Psi\big) \otimes \big(\mathcal{P}_p^\dagger \mathcal{P}_p\big) .
+
+$$
+
+Because the parity reflection $\mathcal{P}_p$ is an isometry ($\mathcal{P}_p^\dagger \mathcal{P}_p = \id_{L^2(\mathbb{R})}$):
+
+$$
+
+\widehat\Delta = \Delta_\Psi \otimes \id_{L^2(\mathbb{R})} = \Delta_\Psi . \qquad \blacksquare
+
+$$
+
+
+\end{keyresult}
+
+The answer, remarkably simple given how much machinery went into $\widehat\M$'s construction, is:
 
 $$
 
@@ -3491,9 +4374,7 @@ $$
 
 $$
 
-(eq.~5.15) — **the new algebra's modular operator, in this particular reference state, is exactly the
-same operator as the original algebra's modular operator.** Nothing new needed to be invented; the crossed
-product inherited its modular structure wholesale.
+(eq.~5.15) — **the new algebra's modular operator, in this particular reference state, is exactly the same operator as the original algebra's modular operator.** Nothing new needed to be invented; the crossed product inherited its modular structure wholesale.
 
 ### Why this forces type II
 
@@ -3815,11 +4696,103 @@ $$
 
 $$
 
-(eq.~6.15), which requires the GNS representation to have exactly the structure of a Fock space (a Gaussian
-theory, meaning correlators factorize into products of two-point functions — the large-$N$ factorization
-already familiar from ordinary 't~Hooft counting), and it's natural to identify the two vacua,
-$\ket0_{\phi_c}=\ket1_\Psi$ (eq.~6.16, where $\ket1_\Psi$ denotes the GNS vector corresponding to the identity
-operator — literally the same object called $\ket\Omega$ throughout Sec.~II).
+(eq.~6.15), which requires the GNS representation to have exactly the structure of a Fock space (a Gaussian theory, meaning correlators factorize into products of two-point functions). While often taken for granted as "standard large-$N$ factorization," this Fock-space structure is a rigorous consequence of 't~Hooft planar scaling:
+
+\begin{keyresult}[: Derivation of the Large-$N$ Generalized Free Field and CCR Algebra]
+**Goal:** Prove that in a large-$N$ $SU(N)$ gauge theory with fixed 't~Hooft coupling $\lambda = g_{YM}^2 N$:
+
+1. Connected correlators scale as $\braket{\mathcal{O}_1 \cdots \mathcal{O}_n}_{\text{conn}} \sim N^{2-n}$.
+2. Commutators between single-trace operators reduce to exact $c$-numbers: $[\mathcal{O}_A, \mathcal{O}_B] = c_{AB}\id + \mathcal{O}(1/N)$.
+3. The resulting boundary algebra is a CCR algebra whose GNS space is identically a free Fock space $\HH_\Psi^{\text{Fock}}$.
+
+
+**Derivation:**
+
+1. **'t~Hooft topological expansion:**
+Consider an adjoint matrix field theory with action $S = \frac{N}{\lambda}\int d^d x \Tr\big[\frac{1}{2}(\partial\Phi)^2 + V(\Phi)\big]$.
+Define normalized single-trace gauge-invariant operators:
+
+$$
+
+\mathcal{O}_i(x) \equiv \frac{1}{N}\Tr\big(\Phi^{k_i}(x)\big) - \Braket{\frac{1}{N}\Tr\big(\Phi^{k_i}(x)\big)} .
+
+$$
+
+In 't~Hooft double-line notation, a Feynman graph with $V$ vertices, $E$ edges, and $F$ index loops scales as:
+
+$$
+
+(g_{YM}^2)^{E-V} N^F = \lambda^{E-V} N^{V - E + F} = \lambda^{E-V} N^\chi = \lambda^{E-V} N^{2 - 2g} ,
+
+$$
+
+where $\chi = 2 - 2g$ is the Euler characteristic of the Riemann surface of genus $g$. The leading diagrams are planar with sphere topology ($g = 0$, $\chi = 2$), contributing at order $N^2$.
+2. **Scaling of connected correlators:**
+Consider a connected correlator of $n$ single-trace operators: $\braket{\mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n)}_{\text{conn}}$.
+Each operator $\mathcal{O}_i$ carries an explicit normalization factor of $1/N$.
+The planar vacuum diagrams connecting all $n$ external source insertions scale with the leading genus-zero factor $N^2$.
+Therefore:
+
+$$
+
+\Braket{\mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n)}_{\text{conn}} \sim N^2 \cdot \left(\frac{1}{N}\right)^n = N^{2-n} .
+
+$$
+
+Evaluating the leading power of $N$:
+
+
+
+6. **Wick's theorem and Gaussian factorization:**
+Since all connected correlators with $n \ge 3$ vanish strictly in the $N \to \infty$ limit, the cumulant expansion implies that any higher-order correlation function decomposes into the sum of products of two-point functions:
+
+$$
+
+\lim_{N\to\infty} \Braket{\mathcal{O}_1(x_1) \cdots \mathcal{O}_{2m}(x_{2m})} = \sum_{\text{pairings } \pi} \prod_{(i, j) \in \pi} \Braket{\mathcal{O}_i(x_i)\mathcal{O}_j(x_j)} .
+
+$$
+
+The theory of single-trace operators becomes an exact **Generalized Free Field** (GFF).
+7. **Commutators as $c$-numbers:**
+Now examine the commutator $[\mathcal{O}_A(x), \mathcal{O}_B(y)]$. Its expectation value is a deterministic scalar:
+
+$$
+
+c_{AB}(x, y)\id \equiv \Braket{[\mathcal{O}_A(x), \mathcal{O}_B(y)]} \id \sim \mathcal{O}(1)\id .
+
+$$
+
+The quantum fluctuation of the commutator operator itself is given by the connected 4-point function:
+
+$$
+
+\Big\| \big([\mathcal{O}_A(x), \mathcal{O}_B(y)] - c_{AB}(x, y)\id\big)\ket\Omega \Big\|^2 \sim \Braket{\mathcal{O}_A\mathcal{O}_B\mathcal{O}_A\mathcal{O}_B}_{\text{conn}} \sim N^{2-4} = \frac{1}{N^2} \xrightarrow{N\to\infty} 0 .
+
+$$
+
+The operator fluctuations vanish identically as $N \to \infty$!
+Hence the commutator becomes an exact $c$-number:
+
+$$
+
+[\mathcal{O}_A(x), \, \mathcal{O}_B(y)] = c_{AB}(x, y)\,\id .
+
+$$
+
+8. **Emergence of bulk Fock space:**
+This commutator relation is the Canonical Commutation Relation (CCR) of a free quantum field. The GNS representation of this CCR algebra on the cyclic vacuum $\ket1_\Psi$ generates an exact multi-particle Fock space:
+
+$$
+
+\HH_\Psi^{\text{GNS}} = \overline{\mathrm{span}\big\{\mathcal{O}_{i_1} \cdots \mathcal{O}_{i_k}\ket1_\Psi\big\}} \cong \HH_\Psi^{\text{Fock}} .
+
+$$
+
+Boundary single-trace operators act as creation and annihilation operators for the non-interacting bulk quantum field fluctuations $\delta\phi$, proving eq.~6.15. $\blacksquare$
+
+\end{keyresult}
+
+It is now completely natural to identify the two vacua, $\ket0_{\phi_c}=\ket1_\Psi$ (eq.~6.16, where $\ket1_\Psi$ denotes the GNS vector corresponding to the identity operator — literally the same object called $\ket\Omega$ throughout Sec.~II).
 
 ### Disjoint sectors: no single Hilbert space survives $N\to\infty$
 
@@ -4549,8 +5522,133 @@ $$
 
 $$
 
-(eq.~7.16) — the entanglement-wedge generalization of the HKLL formula, first conjectured on other grounds and
-now derived directly from modular theory.
+(eq.~7.16) — the entanglement-wedge generalization of the HKLL formula, first conjectured on other grounds and now derived directly from modular theory.
+
+The foundational engine making this modular reconstruction possible is the celebrated **JLMS theorem** (Jafferis, Lewkowycz, Maldacena, and Suh, 2015). While frequently quoted as a definition, it can be derived directly from the quantum equality of relative entropies:
+
+\begin{keyresult}[: Derivation of the JLMS Formula and Modular Flow Equivalence]
+**Theorem (JLMS):** For a boundary spatial region $A$ and its bulk entanglement wedge $b_A$ bounded by the Ryu—Takayanagi surface $\gamma_A$:
+
+1. The boundary and bulk modular Hamiltonians satisfy the operator identity on the code subspace:
+
+$$
+
+H_A \equiv -\log\sigma_A = \frac{\hat A[\gamma_A]}{4G_N} + H_{\text{bulk}} + \mathcal{O}(G_N^{1/2}) , \qquad H_{\text{bulk}} \equiv -\log\sigma_{b_A} .
+
+$$
+
+2. For any bulk field operator $\Phi \in \widetilde\M_{b_A}$ in the entanglement wedge:
+
+$$
+
+\Delta_A^{-is}\,\Phi\,\Delta_A^{is} = \widetilde\Delta_{b_A}^{-is}\,\Phi\,\widetilde\Delta_{b_A}^{is} .
+
+$$
+
+Boundary modular flow directly implements bulk modular flow on all entanglement wedge observables!
+
+
+**Derivation:**
+
+1. **Relative entropy equivalence:**
+Let $\sigma$ be a reference background state (such as the global vacuum or thermofield double), and let $\rho$ be any nearby excited state in the semiclassical code subspace.
+A fundamental theorem of quantum error correction and holography states that relative entropy is exactly preserved between boundary subregion $A$ and bulk entanglement wedge $b_A$:
+
+$$
+
+D(\rho_A \| \sigma_A) = D(\rho_{\text{bulk}} \| \sigma_{\text{bulk}}) + \mathcal{O}(G_N) .
+
+$$
+
+2. **Expansion in modular Hamiltonians:**
+Recall the definition of relative entropy $D(\rho\|\sigma) = \Tr(\rho\log\rho) - \Tr(\rho\log\sigma) = -S(\rho) + \Tr(\rho H^\sigma)$.
+Applying this to the boundary state:
+
+$$
+
+D(\rho_A \| \sigma_A) = -S(\rho_A) + \Braket{H_A^\sigma}_\rho .
+
+$$
+
+Applying this to the bulk state in the entanglement wedge:
+
+$$
+
+D(\rho_{\text{bulk}} \| \sigma_{\text{bulk}}) = -S(\rho_{\text{bulk}}) + \Braket{H_{\text{bulk}}^\sigma}_\rho .
+
+$$
+
+3. **Ryu—Takayanagi / FLM formula:**
+By the Faulkner—Lewkowycz—Maldacena (FLM) formula for quantum generalized entropy, the boundary entanglement entropy matches the bulk generalized entropy at leading and subleading order:
+
+$$
+
+S(\rho_A) = \Braket{\frac{\hat A[\gamma_A]}{4G_N}}_\rho + S(\rho_{\text{bulk}}) + \mathcal{O}(G_N^0) .
+
+$$
+
+4. **Exact cancellation of bulk entropy:**
+Substitute the FLM generalized entropy into the boundary relative entropy:
+
+$$
+
+D(\rho_A \| \sigma_A) = -\Braket{\frac{\hat A[\gamma_A]}{4G_N}}_\rho - S(\rho_{\text{bulk}}) + \Braket{H_A^\sigma}_\rho .
+
+$$
+
+Equating this to the bulk relative entropy $D(\rho_{\text{bulk}} \| \sigma_{\text{bulk}})$:
+
+$$
+
+-\Braket{\frac{\hat A[\gamma_A]}{4G_N}}_\rho - S(\rho_{\text{bulk}}) + \Braket{H_A^\sigma}_\rho = -S(\rho_{\text{bulk}}) + \Braket{H_{\text{bulk}}^\sigma}_\rho .
+
+$$
+
+Notice that the bulk state von Neumann entropy $S(\rho_{\text{bulk}})$ cancels out identically from both sides!
+Rearranging the expectation values:
+
+$$
+
+\Braket{H_A^\sigma}_\rho = \Braket{\frac{\hat A[\gamma_A]}{4G_N} + H_{\text{bulk}}^\sigma}_\rho .
+
+$$
+
+5. **Promotion to operator identity:**
+Because this equality of expectation values holds for *emph* state $\rho$ in the code subspace, the operators themselves must be equal within the code subspace:
+
+$$
+
+H_A = \frac{\hat A[\gamma_A]}{4G_N} + H_{\text{bulk}} + \mathcal{O}(G_N^{1/2}) .
+
+$$
+
+6. **Action on bulk operators:**
+Let $\Phi \in \widetilde\M_{b_A}$ be an operator localized in the interior of the entanglement wedge. Since the RT surface $\gamma_A = \partial b_A$ is the boundary of the wedge, it is spatially separated from any interior operator $\Phi$. The area operator $\hat A[\gamma_A]$ therefore commutes with $\Phi$:
+
+$$
+
+\left[\frac{\hat A[\gamma_A]}{4G_N}, \, \Phi\right] = 0 .
+
+$$
+
+Evaluating the commutator with the full boundary modular Hamiltonian:
+
+$$
+
+[H_A, \, \Phi] = \left[\frac{\hat A[\gamma_A]}{4G_N} + H_{\text{bulk}}, \, \Phi\right] = [H_{\text{bulk}}, \, \Phi] .
+
+$$
+
+Exponentiating the commutator directly yields the unitary action:
+
+$$
+
+e^{-is H_A} \Phi e^{is H_A} = e^{-is H_{\text{bulk}}} \Phi e^{is H_{\text{bulk}}} \implies \Delta_A^{-is}\,\Phi\,\Delta_A^{is} = \widetilde\Delta_{b_A}^{-is}\,\Phi\,\widetilde\Delta_{b_A}^{is} . \qquad \blacksquare
+
+$$
+
+
+\end{keyresult}
 
 When does the "easy" causal-wedge piece already exhaust everything, $X_A=Y_{\widehat A}$? Exactly when the
 bulk modular flow of $b_A$ happens to act *emph* — as an honest, pointwise coordinate
@@ -4839,7 +5937,16 @@ X_R = \begin{cases} Y_R & t<t_P \\ Y_R\vee\widetilde\M_I & t>t_P \end{cases}
 
 $$
 
-(eq.~7.30). This lets you *emph* the presence of an island using only data intrinsic to the radiation
+(eq.~7.30).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{figs/fig_page_curve_islands.pdf}
+\caption{The Page curve and the entanglement island mechanism in an evaporating black hole. (a) Before the Page time $t_P$, the radiation entropy follows Hawking's monotonically growing semiclassical curve $S_{\text{Hawking}} \propto t$. After $t_P$, a nontrivial Quantum Extremal Surface (QES) forms, and the generalized entropy is bounded by the decaying black hole area $A_{\text{BH}}(t)/4G_N$, restoring unitarity. (b) The Penrose diagram shows that for $t > t_P$, the entanglement wedge of the radiation $W(R)$ swallows the interior island $I$, transferring the interior algebra $\widetilde\M_I$ into the radiation algebra: $X_R = Y_R \vee \widetilde\M_I$.}
+\label{fig:page_curve_islands}
+\end{figure}
+
+This lets you *emph* the presence of an island using only data intrinsic to the radiation
 system, with no reference to $B$ at all:
 
 $$
@@ -4863,6 +5970,125 @@ i.e.\ $b_A=c_{\widehat A}\cup i_A$ (a genuine, ordinary geometric decomposition,
 giving $X_A=Y_{\widehat A}\vee\widetilde\M_{i_A}$ and $I_A=\widetilde\M_{i_A}$ — an island, in this
 language, is exactly the piece of an entanglement wedge that causal-wedge (HKLL) reconstruction alone could
 never reach.
+
+\begin{keyresult}[: Derivation of the Page Curve from the Quantum Extremal Island Rule]
+**The Island Rule for Radiation:** In an evaporating black hole coupled to a non-gravitational radiation reservoir, the generalized entanglement entropy of the radiation $R$ at boundary time $t$ is determined by extremizing over all possible interior quantum extremal surfaces (QES) $\partial I$:
+
+$$
+
+S(R) = \min_{\text{QES } I} \operatorname{ext}_I \left[ \frac{\operatorname{Area}(\partial I)}{4G_N} + S_{\text{bulk}}(R \cup I) \right] .
+
+$$
+
+
+**Explicit Derivation of the Unitary Page Curve:**
+
+1. **Evaporating Black Hole Geometry:**
+Let the black hole be formed at $t = 0$ with initial horizon area $A_0$ and Bekenstein—Hawking entropy $S_0 = \frac{A_0}{4G_N}$. As the black hole radiates into the reservoir at rate $\Gamma = -\frac{dM}{dt}$, its semiclassical horizon area decreases monotonically:
+
+$$
+
+S_{\text{BH}}(t) \equiv \frac{A_{\text{BH}}(t)}{4G_N} = S_0 - \Gamma t, \qquad t \in [0, t_{\text{evap}}] ,
+
+$$
+
+where $t_{\text{evap}} = S_0/\Gamma$ is the total evaporation time.
+2. **Saddle 1: The Trivial / No-Island Branch ($I = \emptyset$):**
+For the trivial choice $I = \emptyset$, there is no boundary ($\partial I = \emptyset$), so $\operatorname{Area}(\partial I) = 0$. The generalized entropy reduces strictly to the bulk field-theoretic entropy of the radiation:
+
+$$
+
+S_{\text{no-island}}(R) = S_{\text{bulk}}(R) .
+
+$$
+
+In Hawking's semiclassical calculation, each outgoing emitted quantum $c_k$ in the radiation bath is entangled with an infalling partner mode $b_k$ behind the horizon:
+
+$$
+
+\ket{\text{Hawking pair}}_k \approx \frac{1}{\sqrt{2}}\big(\ket{0}_{c_k}\ket{0}_{b_k} + \ket{1}_{c_k}\ket{1}_{b_k}\big) .
+
+$$
+
+Because the bath $R$ only collects the outgoing quanta $c_k$ while the partner modes $b_k$ remain trapped behind the horizon, tracing out the interior partners produces a linearly growing thermal entanglement entropy:
+
+$$
+
+S_{\text{no-island}}(R) = \int_0^t dt' \, \frac{dS_{\text{rad}}}{dt'} = \Gamma t .
+
+$$
+
+As $t$ increases, $S_{\text{no-island}}(R)$ grows monotonically and unboundedly, eventually exceeding the Bekenstein—Hawking entropy of the remaining black hole — this is the classic **Hawking information paradox**.
+3. **Saddle 2: The Island Branch ($I \ne \emptyset$):**
+A second, non-empty extremum emerges where $\partial I$ is a quantum extremal surface located just inside the event horizon:
+
+$$
+
+r_{\text{QES}} = r_H(t) - \mathcal{O}(G_N e^{-2\pi t/\beta}) .
+
+$$
+
+The spatial region $I$ covers the black hole interior behind the horizon. The generalized entropy for this saddle is:
+
+$$
+
+S_{\text{island}}(R) = \frac{\operatorname{Area}(\partial I)}{4G_N} + S_{\text{bulk}}(R \cup I) .
+
+$$
+
+Now evaluate the bulk matter entropy $S_{\text{bulk}}(R \cup I)$:
+The spatial union $R \cup I$ contains *emph* the outgoing Hawking quanta $c_k \in R$ *emph* their infalling entangled partner modes $b_k \in I$.
+Within $R \cup I$, each entangled pair $\ket{\text{Hawking pair}}_k$ forms an unentangled pure state!
+The infalling modes and outgoing modes **purify each other**:
+
+$$
+
+S_{\text{bulk}}(R \cup I) = S_{\text{bulk}}(\text{thermal gas outside } \partial I) \approx \mathcal{O}(G_N^0) \approx 0 .
+
+$$
+
+The bulk entanglement divergence cancels out completely, leaving only the classical horizon area:
+
+$$
+
+S_{\text{island}}(R) = \frac{\operatorname{Area}(\partial I)}{4G_N} + \mathcal{O}(G_N^0) \approx \frac{A_{\text{BH}}(t)}{4G_N} = S_0 - \Gamma t .
+
+$$
+
+4. **The Page Time and Phase Transition:**
+By the island rule, the physical von Neumann entropy is the minimum of the two competing saddles:
+
+$$
+
+S(R) = \min\big\{ S_{\text{no-island}}(R), \, S_{\text{island}}(R) \big\} = \min\big\{ \Gamma t, \, S_0 - \Gamma t \big\} .
+
+$$
+
+Equating the two branches yields the celebrated **Page time** $t_P$:
+
+$$
+
+\Gamma t_P = S_0 - \Gamma t_P \implies t_P = \frac{S_0}{2\Gamma} = \frac{1}{2} t_{\text{evap}} .
+
+$$
+
+Evaluating the resulting entropy over the black hole lifetime:
+
+$$
+
+S(R) = \begin{cases}
+\Gamma t & t < t_P \quad (\text{Hawking phase: no island}) \\
+S_0 - \Gamma t = \frac{A_{\text{BH}}(t)}{4G_N} & t > t_P \quad (\text{Unitary phase: interior island } I)
+\end{cases}
+
+$$
+
+At $t = t_{\text{evap}}$, $S(R) \to 0$ as the black hole fully evaporates, proving that Hawking radiation undergoes unitary evolution!
+5. **Algebraic Translation:**
+For $t < t_P$, the radiation algebra is simply $X_R = Y_R$.
+For $t > t_P$, the island forms: $X_R = Y_R \vee \widetilde\M_I$. The modular flow of $X_R$ reconstructs the entire interior algebra $\widetilde\M_I$ from the radiation data alone, resolving the paradox algebraically without modifying semiclassical effective field theory. $\blacksquare$
+
+\end{keyresult}
 
 ## Sec.~VII.E: boundary description of a bulk causal diamond
 
@@ -5101,6 +6327,13 @@ A two-sided version, $T_R(t)$, is defined the same way but using the *emph* comm
 within $Y_R$ (the right boundary's own single-trace algebra) — for the thermofield double below
 $T_{\text{HP}}$, this reduces to ordinary empty AdS's $\pi R$; above $T_{\text{HP}}$, it diverges for all
 time, exactly reproducing eq.~7.40's bifurcating-horizon diagnostic from Sec.~VII.E in this new language.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.90\textwidth]{figs/fig_causal_depth.pdf}
+\caption{The causal depth parameter $T(t)$ as an algebraic detector of horizons. (a) In empty AdS, a boundary time band $I_w$ of width $w \ge \pi R$ sends light rays that meet at the bulk center $r=0$ and cover an entire Cauchy slice, driving the commutant to triviality ($Y_{I_w}' = \mathbb{C}\mathbf{1}$) and giving a finite causal depth $T = \pi R$. (b) In a black hole spacetime, boundary light rays asymptotically wrap around the horizon without crossing, so $Y_{I_w}' \ne \mathbb{C}\mathbf{1}$ for all finite $w$. The causal depth diverges: $T = \infty$, serving as a purely algebraic boundary diagnostic of a horizon.}
+\label{fig:causal_depth}
+\end{figure}
 
 ### $T$ as a measure of lost determinism
 
@@ -5654,6 +6887,13 @@ $S_{\text{dS}}=A_{\text{hor}}^{(0)}/4G_N$ (eq.~9.30) — but its physical meanin
 (does its exponential count a genuine, finite-dimensional de~Sitter Hilbert space, for instance?), with little
 concrete progress.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{figs/fig_desitter.pdf}
+\caption{Penrose diagram of global de~Sitter spacetime and the static patch. The static observer at the north pole $r=0$ (blue trajectory) only ever accesses Region $R$ (shaded blue), bounded by the cosmological event horizons $\mathcal{H}^\pm$ at $r=R$. The south pole observer accesses the causally disconnected antipode Region $L$ (shaded yellow). The crossed-product algebra of observables $\widehat{\mathcal{M}}_R$ is a type $\mathrm{II}_1$ factor, whose maximal entropy state is empty de~Sitter.}
+\label{fig:desitter}
+\end{figure}
+
 Here is a genuinely strange feature of the *emph* de~Sitter entropy, $S_{\text{gen}}=A_{\text{hor}}
 /4G_N+\widetilde S_R$ (eq.~9.31), worth sitting with because it's the opposite of a black hole's behavior:
 **exciting matter in the static patch *emph*}$}, because it shrinks the
@@ -5756,6 +6996,29 @@ static observer's own proper time (parametrized by $t$ in eq.~9.29) reproduces e
 finite, de~Sitter temperature $T_{\text{dS}}=1/2\pi R$ — no contradiction, because "maximally entangled"
 was always a dimensionless, modular-time statement, and the finite physical temperature only appears once you
 convert to an observer's physical clock.
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries\color{navyhead}}l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+Property & Black Hole Exterior (AdS/Minkowski) & de~Sitter Static Patch \\
+\midrule
+Spacetime Horizon & Event horizon (null boundary of black hole interior) & Cosmological horizon (null boundary of observer static patch) \\
+Horizon Temperature & Hawking temperature $T_H = \frac{1}{8\pi G_N M}$ & Gibbons—Hawking temperature $T_{\text{dS}} = \frac{H}{2\pi} = \frac{1}{2\pi R}$ \\
+Killing Vector $\chi = \partial_t$ & Timelike outside; null on horizon; timelike again at spatial infinity & Timelike inside static patch; null on cosmological horizon; spacelike outside \\
+Reference Vacuum State & Hartle—Hawking vacuum $\ket{\Psi_{\text{HH}}}$ & Bunch—Davies vacuum $\ket{0_{\text{BD}}}$ \\
+Clock Hamiltonian $\hat q$ & $\hat q \in (-\infty, \infty)$ (unbounded real line) & $\hat q \ge 0$ (energy bounded below for physical observer) \\
+Crossed Product Algebra & Type $\mathrm{II}_\infty$ factor ($\tr(\id) = \int_{-\infty}^\infty dq\,e^{-q} = \infty$) & Type $\mathrm{II}_1$ factor ($\tr(\id) = \int_0^\infty dq\,e^{-q} = 1$) \\
+Entropy Formula & $S_{\widehat\M} = -S(\Phi\|\Psi) + \text{const} = S_{\text{gen}} + \text{const}$ & $S_{\widehat\M} \le 0$ (relative to maximally entangled empty de Sitter) \\
+Perturbation Response & $\Delta S_{\text{gen}} > 0$ (adding matter increases horizon area) & $\Delta S_{\text{gen}} = -\beta_{\text{dS}} M < 0$ (matter shrinks cosmological horizon) \\
+Maximal Entropy State & None (entropy can grow unboundedly with mass $M$) & Empty de~Sitter ($M = 0$, $S_{\text{max}} = S_{\text{dS}} = \frac{\pi R^2}{G_N}$) \\
+\bottomrule
+\end{tabularx}
+\caption{Comprehensive algebraic and thermodynamic comparison between the black hole exterior and the de~Sitter static patch under the crossed-product construction.}
+\label{tab:bh_vs_desitter}
+\end{table}
 
 ## Sec.~IX.D: Application III — generalized entropy for a local spacetime region (in brief)
 

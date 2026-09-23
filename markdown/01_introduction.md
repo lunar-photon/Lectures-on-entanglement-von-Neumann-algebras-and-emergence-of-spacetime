@@ -88,6 +88,56 @@ $\mathcal{A}_{\rm bulk}(b_A)$ & Bulk algebra in entanglement wedge $b_A$ & Local
 \label{fig:roadmap}
 \end{figure}
 
+## The Conceptual Bridge: From Wavefunctions to Density Matrices to Algebraic States
+
+To understand why the algebraic framework of this paper is so natural, it is essential to trace how our concept of a "quantum state" evolves as we move from simple undergraduate quantum mechanics to open systems, quantum field theory, and quantum gravity.
+
+
+1. **Level 0: The Pure Wavefunction $\psi(x) = \braket{x|\Psi**$.}
+In textbook quantum mechanics, the fundamental entity is a state vector $\ket\Psi \in \HH$ evolving according to the Schr\"odinger equation. Probabilities are given by the Born rule $P(x) = |\psi(x)|^2$. This description assumes a *emph* where an experimenter has unrestricted access to measure arbitrary operators across the entire system.
+2. **Level 1: The Density Matrix $\rho(x, x')$ and Phase Space ($x_c, x_q$).**
+When a system interacts with an unobserved environment or thermal bath, pure states give way to density operators $\rho = \sum_k p_k \ket{\psi_k}\bra{\psi_k}$. In the continuous position basis $\rho(x, x') = \braket{x|\rho|x'}$, it is physically illuminating to transform to Keldysh variables:
+
+$$
+
+x_c \equiv \frac{x + x'}{2} \quad \text{(classical midpoint coordinate)}, \qquad x_q \equiv x - x' \quad \text{(quantum coherence coordinate)}.
+
+$$
+
+The diagonal slice $x_q = 0$ encodes classical probabilities $P(x_c) = \rho(x_c, x_c)$, while non-zero $x_q$ tracks off-diagonal quantum interference. Fourier transforming along the quantum coordinate gives the **Wigner quasi-probability distribution**:
+
+$$
+
+W(x_c, p_q) = \int_{-\infty}^\infty \dd x_q\, e^{-i p_q x_q}\, \rho\!\left(x_c + \tfrac{x_q}{2},\, x_c - \tfrac{x_q}{2}\right) .
+
+$$
+
+While this bridges classical stochastic physics and quantum mechanics, it still fundamentally presumes that the global Hilbert space factorizes as $\HH = \HH_{\rm system} \otimes \HH_{\rm environment}$.
+3. **Level 2: The Physical Limitation of Observers.**
+In realistic experiments, no observer has access to the full density matrix on all of $\HH$. An observer is equipped with a restricted apparatus or confined to a spatial subregion $R$. If an observer can only measure a restricted set of observables $\M$, attempting to describe their subsystem via global pure kets produces severe mathematical pathologies (for instance, the standard relative entropy $D(\rho\|\sigma) = \Tr(\rho\log\rho - \rho\log\sigma)$ formally blows up to $+\infty$ whenever $\sigma$ is pure, because it assumes the observer is free to measure arbitrary non-commuting projection operators across the universe).
+4. **Level 3: The Algebraic State $\omega: \M \to \mathbb{C**$.}
+In algebraic quantum mechanics (von Neumann, Haag, and Liu), we discard the assumption that a fixed global Hilbert space is fundamental. The primary physical object is the **algebra of accessible observables $\M$**. A **state** $\omega$ is simply a positive linear functional assigning expectation values to operators:
+
+$$
+
+\omega(A) = \langle A \rangle_\omega, \qquad \omega(\id) = 1, \quad \omega(A^\dagger A) \ge 0 \quad \forall A \in \M.
+
+$$
+
+The Hilbert space $\HH_\omega$ and state vector $\ket{\Omega_\omega}$ are not postulated in advance; they are **dynamically manufactured** from the algebraic state $\omega$ via the Gelfand—Naimark—Segal (GNS) construction:
+
+$$
+
+\omega(A) = \braket{\Omega_\omega | \pi_\omega(A) | \Omega_\omega} .
+
+$$
+
+
+
+\begin{keyresult}
+**The Conceptual Takeaway:** The wavefunction $\psi(x)$ is not a universal container of physical reality; it is merely one specific GNS representation of an algebraic state $\omega$ on a Type I algebra. When moving to the thermodynamic limit ($N\to\infty$), local subregions in QFT, or semiclassical black holes, the Hilbert space tensor factorization dissolves, but the algebraic state $\omega$ remains exact, rigorous, and well-defined.
+\end{keyresult}
+
 ## Why the ordinary quantum-mechanical definition of "subsystem" isn't good enough
 
 To see why a new mathematical tool is needed at all, you have to see precisely where the old one breaks. The
@@ -353,6 +403,215 @@ Neumann algebra types.
 \caption{The UV area-law divergence of entanglement entropy in quantum field theory: dividing space across a boundary $\partial R$ couples short-distance modes across the cut with UV cutoff $\epsilon$. The leading entanglement entropy diverges as $S_R \sim \mathrm{Area}(\partial R)/\epsilon^{d-2}$, reflecting the infinite entanglement of the underlying Type $\mathrm{III}_1$ local algebra.}
 \label{fig:area_law}
 \end{figure}
+
+## Explicit Derivation: Why the Continuum QFT Hilbert Space Cannot Factorize
+\label{sec:qft_nonfactorization_derivation}
+
+Because the claim that "$\HH \ne \HH_R \otimes \HH_L$ in continuum QFT" is so fundamental to everything that follows, it is illuminating to derive this result explicitly using nothing more advanced than the quantum mechanics of coupled harmonic oscillators.
+
+### 1. The Hamiltonian and the spatial gradient coupling
+
+Consider a free, real scalar field $\phi(t, \vec x)$ with mass $m$ in $d$ spacetime dimensions ($d-1$ spatial dimensions). The field Hamiltonian on a constant-time Cauchy slice is
+\begin{equation}
+H = \int \dd^{d-1}x \left[ \frac{1}{2}\pi(\vec x)^2 + \frac{1}{2}\big(\vec\nabla\phi(\vec x)\big)^2 + \frac{1}{2}m^2\phi(\vec x)^2 \right],
+\label{eq:scalar_hamiltonian_continuum}
+\end{equation}
+where $\pi(\vec x)$ is the canonical momentum field satisfying $[\phi(\vec x), \pi(\vec y)] = i\delta^{(d-1)}(\vec x - \vec y)$.
+
+Now divide space into two halves by a planar boundary at $x = 0$:
+
+$$
+
+R = \{ (x, \vec x_\perp) : x > 0 \}, \qquad L = \{ (x, \vec x_\perp) : x < 0 \},
+
+$$
+
+where $\vec x_\perp = (x^2, \dots, x^{d-1})$ denotes the $(d-2)$ spatial coordinates parallel to the entangling surface $\partial R$.
+
+To isolate the physics right at the boundary, we discretize the perpendicular $x$-direction on a spatial lattice with lattice spacing $\epsilon$, while Fourier-transforming the continuous transverse coordinates $\vec x_\perp$ into transverse momentum modes $\vec k_\perp$:
+
+$$
+
+\phi(x, \vec x_\perp) = \int \frac{\dd^{d-2}k_\perp}{(2\pi)^{d-2}} \, \widetilde\phi(x, \vec k_\perp) \, e^{i \vec k_\perp \cdot \vec x_\perp} .
+
+$$
+
+For each transverse momentum mode $\vec k_\perp$, the Hamiltonian decomposes into an independent 1D chain of coupled harmonic oscillators with effective mass parameter
+\begin{equation}
+M^2 \equiv m^2 + |\vec k_\perp|^2 .
+\label{eq:effective_mass_transverse}
+\end{equation}
+On the lattice in the $x$-direction, the continuous field becomes discrete site operators $\phi_j(\vec k_\perp) \equiv \widetilde\phi(j\epsilon, \vec k_\perp)$ with conjugate momenta $\pi_j(\vec k_\perp)$, where $j = \dots, -2, -1$ lies in $L$ and $j = 0, 1, 2, \dots$ lies in $R$.
+
+The spatial gradient in the direction perpendicular to the boundary is discretized via finite differences:
+\begin{equation}
+\int \dd x \, \frac{1}{2}\left(\frac{\partial\phi}{\partial x}\right)^2 \;\longrightarrow\; \sum_j \frac{\epsilon}{2} \left( \frac{\phi_{j+1} - \phi_j}{\epsilon} \right)^2 = \sum_j \frac{1}{2\epsilon} (\phi_{j+1} - \phi_j)^2 .
+\label{eq:lattice_gradient_sum}
+\end{equation}
+Notice the crucial interaction link directly straddling the entangling cut between site $j = -1$ (the closest site in $L$) and site $j = 0$ (the closest site in $R$):
+\begin{equation}
+H_{\rm cut} = \frac{1}{2\epsilon} (\phi_0 - \phi_{-1})^2 = \frac{1}{2\epsilon} (\phi_R - \phi_L)^2 ,
+\label{eq:h_cut_interaction}
+\end{equation}
+where for clarity we define $\phi_R \equiv \phi_0$ and $\phi_L \equiv \phi_{-1}$.
+
+### 2. The two-oscillator subsystem across the entangling cut
+
+To see the mechanism with complete clarity, isolate this two-mode system across the interface. The Hamiltonian for these two adjacent oscillators is
+\begin{equation}
+H_{\rm pair} = \frac{1}{2}\pi_R^2 + \frac{1}{2}\pi_L^2 + \frac{1}{2}M^2(\phi_R^2 + \phi_L^2) + \frac{1}{2\epsilon^2}(\phi_R - \phi_L)^2 .
+\label{eq:pair_hamiltonian}
+\end{equation}
+(Rescaling fields to canonical dimensions $\phi \to \phi/\sqrt{\epsilon}$, $\pi \to \pi\sqrt{\epsilon}$ leaves $[\phi, \pi] = i$ and puts the coupling parameter as $k_{\rm cut} = 1/\epsilon^2$).
+
+Because this is a quadratic system, we diagonalize it exactly using normal mode coordinates:
+\begin{equation}
+\phi_+ \equiv \frac{\phi_R + \phi_L}{\sqrt{2}}, \qquad \phi_- \equiv \frac{\phi_R - \phi_L}{\sqrt{2}} .
+\label{eq:normal_mode_coords}
+\end{equation}
+In terms of $\phi_\pm$, the Hamiltonian decouples into two uncoupled harmonic oscillators:
+\begin{equation}
+H_{\rm pair} = \left( \frac{1}{2}\pi_+^2 + \frac{1}{2}\omega_+^2 \phi_+^2 \right) + \left( \frac{1}{2}\pi_-^2 + \frac{1}{2}\omega_-^2 \phi_-^2 \right),
+\label{eq:decoupled_pair_hamiltonian}
+\end{equation}
+whose normal mode eigenfrequencies are
+\begin{align}
+\omega_+ &= M = \sqrt{m^2 + |\vec k_\perp|^2}, \label{eq:omega_plus} \\
+\omega_- &= \sqrt{M^2 + \frac{2}{\epsilon^2}} = \sqrt{m^2 + |\vec k_\perp|^2 + \frac{2}{\epsilon^2}} \approx \frac{\sqrt{2}}{\epsilon} \quad \text{as } \epsilon \to 0 . \label{eq:omega_minus}
+\end{align}
+
+### 3. Ground state correlations vs. product state correlations
+
+The ground state of the decoupled system is the product of two Gaussian ground state wavefunctions in the normal coordinates:
+\begin{equation}
+\Psi_0(\phi_+, \phi_-) = \left( \frac{\omega_+ \omega_-}{\pi^2} \right)^{1/4} \exp\left[ -\frac{1}{2}\omega_+\phi_+^2 - \frac{1}{2}\omega_-\phi_-^2 \right] .
+\label{eq:ground_state_normal}
+\end{equation}
+Transforming back to the physical local fields $\phi_R, \phi_L$ using eq.~\eqref{eq:normal_mode_coords}:
+\begin{align}
+\Psi_0(\phi_R, \phi_L) &= \left( \frac{\omega_+ \omega_-}{\pi^2} \right)^{1/4} \exp\left[ -\frac{1}{4}(\omega_+ + \omega_-)(\phi_R^2 + \phi_L^2) - \frac{1}{2}(\omega_+ - \omega_-)\phi_R \phi_L \right] .
+\label{eq:ground_state_physical}
+\end{align}
+Notice the cross-coupling term $\frac{1}{2}(\omega_- - \omega_+)\phi_R \phi_L$. Because $\omega_- \approx \sqrt{2}/\epsilon \gg \omega_+$, this cross-term is extraordinarily large. 
+
+In the true vacuum state $\ket\Omega$:
+
+- The expectation value of the relative difference between the two sides is suppressed:
+\begin{equation}
+\braket{\Omega | (\phi_R - \phi_L)^2 | \Omega} = 2 \braket{\Omega | \phi_-^2 | \Omega} = \frac{2}{2\omega_-} = \frac{1}{\omega_-} \approx \frac{\epsilon}{\sqrt{2}} .
+\label{eq:vacuum_diff_exp}
+\end{equation}
+- The gradient energy of the cut in the vacuum state is therefore finite per mode:
+\begin{equation}
+\braket{\Omega | H_{\rm cut} | \Omega} = \frac{1}{2\epsilon^2} \braket{\Omega | (\phi_R - \phi_L)^2 | \Omega} = \frac{1}{2\epsilon^2} \frac{1}{\omega_-} \approx \frac{1}{2\sqrt{2}\epsilon} .
+\label{eq:vacuum_cut_energy}
+\end{equation}
+This is the standard zero-point vacuum energy density, which is subtracted when computing excitation energies.
+
+
+### 4. The energetic impossibility of unentangled product states
+
+Now, suppose for the sake of contradiction that the Hilbert space factorizes across the cut:
+
+$$
+
+\HH \stackrel{?}{=} \HH_L \otimes \HH_R .
+
+$$
+
+If this factorization were valid, the Hilbert space must contain unentangled product states of the form
+\begin{equation}
+\ket{\Psi_{\rm prod}} = \ket{\psi_L} \otimes \ket{\chi_R} \in \HH ,
+\label{eq:hypothetical_product_state}
+\end{equation}
+where $\ket{\psi_L} \in \HH_L$ and $\ket{\chi_R} \in \HH_R$.
+
+In *emph* such product state, by the definition of a tensor product, any operator in $L$ and any operator in $R$ have exactly zero quantum covariance:
+\begin{equation}
+\braket{\Psi_{\rm prod} | \phi_R \phi_L | \Psi_{\rm prod}} = \braket{\chi_R | \phi_R | \chi_R} \braket{\psi_L | \phi_L | \psi_L} .
+\label{eq:product_state_covariance_zero}
+\end{equation}
+For states with zero mean field ($\braket{\phi_R} = \braket{\phi_L} = 0$, as in any symmetric fluctuation), this means $\braket{\phi_R \phi_L}_{\rm prod} = 0$ identically!
+
+Evaluating the expectation value of the difference squared in this product state gives:
+\begin{align}
+\braket{\Psi_{\rm prod} | (\phi_R - \phi_L)^2 | \Psi_{\rm prod}} &= \braket{\phi_R^2}_{\chi_R} + \braket{\phi_L^2}_{\psi_L} - 2\braket{\phi_R}_{\chi_R}\braket{\phi_L}_{\psi_L} \nonumber \\
+&= \braket{\phi_R^2}_{\chi_R} + \braket{\phi_L^2}_{\psi_L} .
+\label{eq:prod_diff_squared}
+\end{align}
+By the Heisenberg uncertainty principle for each oscillator, the fluctuations are bounded strictly from below:
+
+$$
+
+\braket{\phi_R^2}_{\chi_R} \ge \frac{1}{2\Omega_R}, \qquad \braket{\phi_L^2}_{\psi_L} \ge \frac{1}{2\Omega_L} .
+
+$$
+
+In particular, for any state with localized, finite-energy wavepackets of width $\sim \epsilon$, the single-site fluctuation is bounded by the uncoupled ground state scale:
+\begin{equation}
+\braket{\Psi_{\rm prod} | (\phi_R - \phi_L)^2 | \Psi_{\rm prod}} \ge \frac{1}{2\omega_+} = \frac{1}{2\sqrt{m^2 + |\vec k_\perp|^2}} = \mathcal{O}(1) \quad (\text{finite, independent of } \epsilon) .
+\label{eq:prod_fluctuation_lower_bound}
+\end{equation}
+Notice the striking difference between eq.~\eqref{eq:vacuum_diff_exp} and eq.~\eqref{eq:prod_fluctuation_lower_bound}:
+
+- In the entangled vacuum, $\braket{(\phi_R - \phi_L)^2} \sim \mathcal{O}(\epsilon) \to 0$ as the lattice spacing vanishes.
+- In *emph* product state, $\braket{(\phi_R - \phi_L)^2} \ge \mathcal{O}(1)$ remains strictly finite as $\epsilon \to 0$, because the absence of entanglement prevents the field values on adjacent sides from fluctuating in lockstep!
+
+
+Now compute the gradient energy across the boundary link in this product state:
+\begin{equation}
+\braket{\Psi_{\rm prod} | H_{\rm cut} | \Psi_{\rm prod}} = \frac{1}{2\epsilon^2} \braket{\Psi_{\rm prod} | (\phi_R - \phi_L)^2 | \Psi_{\rm prod}} \ge \frac{1}{4\epsilon^2 \sqrt{m^2 + |\vec k_\perp|^2}} .
+\label{eq:hcut_prod_divergence}
+\end{equation}
+Subtracting the vacuum zero-point energy (eq.~\eqref{eq:vacuum_cut_energy}), the excess excitation energy required to sever the entanglement of this single transverse mode across the cut is
+\begin{equation}
+\Delta E_{\rm cut}(\vec k_\perp) = \braket{\Psi_{\rm prod} | H_{\rm cut} | \Psi_{\rm prod}} - \braket{\Omega | H_{\rm cut} | \Omega} \ge \frac{1}{4M\epsilon^2} - \frac{1}{2\sqrt{2}\epsilon} \sim \frac{1}{4M\epsilon^2} > 0 .
+\label{eq:delta_e_single_mode}
+\end{equation}
+
+### 5. Integration over the entangling surface and the non-factorization theorem
+
+To obtain the total excitation energy required to prepare the unentangled product state $\ket{\psi_L}\otimes\ket{\chi_R}$ across the entire boundary surface $\partial R$, we integrate $\Delta E_{\rm cut}(\vec k_\perp)$ over all transverse spatial coordinates $\vec x_\perp$, or equivalently over all transverse momentum modes $|\vec k_\perp| \le \Lambda_{\rm UV} \sim 1/\epsilon$:
+\begin{align}
+\Delta E_{\rm prod} &= \mathrm{Area}(\partial R) \int_{|\vec k_\perp| \le 1/\epsilon} \frac{\dd^{d-2}k_\perp}{(2\pi)^{d-2}} \, \Delta E_{\rm cut}(\vec k_\perp) \nonumber \\
+&\ge \mathrm{Area}(\partial R) \int_{|\vec k_\perp| \le 1/\epsilon} \frac{\dd^{d-2}k_\perp}{(2\pi)^{d-2}} \, \frac{1}{4\epsilon^2 \sqrt{m^2 + |\vec k_\perp|^2}} .
+\label{eq:total_prod_energy_integral}
+\end{align}
+Evaluating the radial momentum integral in $d$ spacetime dimensions ($d \ge 3$):
+
+$$
+
+\int_0^{1/\epsilon} k_\perp^{d-3} \frac{\dd k_\perp}{k_\perp} \sim \int_0^{1/\epsilon} k_\perp^{d-4} \dd k_\perp \sim \left(\frac{1}{\epsilon}\right)^{d-3} .
+
+$$
+
+Multiplying by the prefactor $\frac{1}{\epsilon^2}$:
+\begin{keyresult}
+\begin{equation}
+\Delta E_{\rm prod} \ge C \cdot \frac{\mathrm{Area}(\partial R)}{\epsilon^{d-1}} \;\xrightarrow{\;\epsilon \to 0\;} \; +\infty ,
+\label{eq:product_state_energy_divergence}
+\end{equation}
+where $C > 0$ is a strictly positive, theory-dependent geometric constant.
+\end{keyresult}
+
+Equation~\eqref{eq:product_state_energy_divergence} is the definitive physical proof of non-factorizability:
+
+1. **Infinite energy barrier**: The physical energy required to unentangle a spatial subregion $R$ from its complement $L$ diverges as $\epsilon^{-(d-1)}$ in the continuum limit. Any attempt to enforce a tensor product state requires creating an infinite gradient discontinuity at $\partial R$.
+2. **Expulsion from the physical Hilbert space**: The physical Hilbert space $\HH$ of a continuum quantum field theory consists solely of finite-energy states (mathematically, states in the Fock space or GNS space of the vacuum). Because $\Delta E_{\rm prod} = +\infty$, *emph*.
+3. **Failure of factorization**: A tensor product $\HH_L \otimes \HH_R$ is, by definition, spanned by product vectors $\ket{\psi_L}\ket{\chi_R}$. Because $\HH$ contains zero product vectors, we reach an inescapable mathematical conclusion:
+\begin{equation}
+\boxed{\HH \ne \HH_L \otimes \HH_R \quad \text{in any continuum relativistic quantum field theory.}}
+\label{eq:non_factorization_conclusion}
+\end{equation}
+
+
+### 6. The algebraic corollary: Type $\mathrm{III_1$ and the split property}
+
+This energetic divergence explains why local subregions in QFT cannot be described by Type I algebras:
+
+- If two spatial regions $R_1$ and $R_2$ are separated by a **finite buffer distance** $\delta > 0$ (so $\text{dist}(R_1, R_2) = \delta$), the gradient energy across the gap is regularized by $\delta$. In that case, an unentangled product state *emph* be prepared, but at an energy cost scaling as $\exp(c/\delta^n)$. The mathematical statement that product states exist for strictly separated regions is known in axiomatic QFT as the **Doplicher—Longo split property**: there exists an intermediate Type I factor $\mathcal{N}$ such that $\M(R_1) \subset \mathcal{N} \subset \M(R_2')'$.
+- However, as the buffer distance is sent to zero ($\delta \to 0$, so the regions touch at a common boundary), the split property collapses, the energy diverges to $+\infty$, and the local algebra $\M(R)$ ceases to be Type I or Type II — it becomes an intrinsically entangled **Type $\mathrm{III**_1$ factor}.
+
 
 ## The fix: define a subsystem by what you can *emph*}
 

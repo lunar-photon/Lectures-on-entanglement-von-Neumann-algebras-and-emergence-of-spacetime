@@ -170,6 +170,13 @@ $S_{\text{dS}}=A_{\text{hor}}^{(0)}/4G_N$ (eq.~9.30) — but its physical meanin
 (does its exponential count a genuine, finite-dimensional de~Sitter Hilbert space, for instance?), with little
 concrete progress.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{figs/fig_desitter.pdf}
+\caption{Penrose diagram of global de~Sitter spacetime and the static patch. The static observer at the north pole $r=0$ (blue trajectory) only ever accesses Region $R$ (shaded blue), bounded by the cosmological event horizons $\mathcal{H}^\pm$ at $r=R$. The south pole observer accesses the causally disconnected antipode Region $L$ (shaded yellow). The crossed-product algebra of observables $\widehat{\mathcal{M}}_R$ is a type $\mathrm{II}_1$ factor, whose maximal entropy state is empty de~Sitter.}
+\label{fig:desitter}
+\end{figure}
+
 Here is a genuinely strange feature of the \emph{generalized} de~Sitter entropy, $S_{\text{gen}}=A_{\text{hor}}
 /4G_N+\widetilde S_R$ (eq.~9.31), worth sitting with because it's the opposite of a black hole's behavior:
 \textbf{exciting matter in the static patch \emph{decreases} $S_{\text{gen}}$}, because it shrinks the
@@ -252,6 +259,29 @@ static observer's own proper time (parametrized by $t$ in eq.~9.29) reproduces e
 finite, de~Sitter temperature $T_{\text{dS}}=1/2\pi R$ — no contradiction, because ``maximally entangled''
 was always a dimensionless, modular-time statement, and the finite physical temperature only appears once you
 convert to an observer's physical clock.
+
+\begin{table}[htbp]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{>{\bfseries\color{navyhead}}l >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+\toprule
+Property & Black Hole Exterior (AdS/Minkowski) & de~Sitter Static Patch \\
+\midrule
+Spacetime Horizon & Event horizon (null boundary of black hole interior) & Cosmological horizon (null boundary of observer static patch) \\
+Horizon Temperature & Hawking temperature $T_H = \frac{1}{8\pi G_N M}$ & Gibbons--Hawking temperature $T_{\text{dS}} = \frac{H}{2\pi} = \frac{1}{2\pi R}$ \\
+Killing Vector $\chi = \partial_t$ & Timelike outside; null on horizon; timelike again at spatial infinity & Timelike inside static patch; null on cosmological horizon; spacelike outside \\
+Reference Vacuum State & Hartle--Hawking vacuum $\ket{\Psi_{\text{HH}}}$ & Bunch--Davies vacuum $\ket{0_{\text{BD}}}$ \\
+Clock Hamiltonian $\hat q$ & $\hat q \in (-\infty, \infty)$ (unbounded real line) & $\hat q \ge 0$ (energy bounded below for physical observer) \\
+Crossed Product Algebra & Type $\mathrm{II}_\infty$ factor ($\tr(\id) = \int_{-\infty}^\infty dq\,e^{-q} = \infty$) & Type $\mathrm{II}_1$ factor ($\tr(\id) = \int_0^\infty dq\,e^{-q} = 1$) \\
+Entropy Formula & $S_{\widehat\M} = -S(\Phi\|\Psi) + \text{const} = S_{\text{gen}} + \text{const}$ & $S_{\widehat\M} \le 0$ (relative to maximally entangled empty de Sitter) \\
+Perturbation Response & $\Delta S_{\text{gen}} > 0$ (adding matter increases horizon area) & $\Delta S_{\text{gen}} = -\beta_{\text{dS}} M < 0$ (matter shrinks cosmological horizon) \\
+Maximal Entropy State & None (entropy can grow unboundedly with mass $M$) & Empty de~Sitter ($M = 0$, $S_{\text{max}} = S_{\text{dS}} = \frac{\pi R^2}{G_N}$) \\
+\bottomrule
+\end{tabularx}
+\caption{Comprehensive algebraic and thermodynamic comparison between the black hole exterior and the de~Sitter static patch under the crossed-product construction.}
+\label{tab:bh_vs_desitter}
+\end{table}
 
 \subsection{Sec.~IX.D: Application III — generalized entropy for a local spacetime region (in brief)}
 

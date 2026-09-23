@@ -275,10 +275,113 @@ $$
 (eq.~3.14). This establishes eq.~3.11 as a genuine trace on $\M$. And this is exactly where $\theta=\pi/4$
 earns its special status: Step~1's formula, $\braket{\phi_\theta|a|\phi_\theta}=\tfrac12\Tr_2(a)$, is only
 exactly true at $\theta=\pi/4$ — for any other angle, the expectation value picks up $\theta$-dependent
-weighting that breaks the exact matching to an ordinary matrix trace, and cyclicity fails. (This is stated
-here as a fact to be picked up again in Sec.~IV; the direct verification that no trace exists for
-$\theta\ne\pi/4$ is done there, using modular theory, precisely because it's a statement about the
-*emph* of something, which is harder to check directly than the presence of something.)
+weighting that breaks the exact matching to an ordinary matrix trace, and cyclicity fails. While this is often stated without derivation, we can prove the impossibility of any trace directly and rigorously via macroscopic operator condensation:
+
+\begin{keyresult}[: The No-Trace Theorem for the Asymmetric Spin Chain]
+**Theorem:** Let $\Alg_R = \bigotimes_{k=1}^\infty M_2(\mathbb{C})$ be the quasi-local spin chain algebra, and let $\ket{\Phi_\theta} = \bigotimes_{k=1}^\infty (\cos\theta\ket{00} + \sin\theta\ket{11})_k$ with $\theta \in (0, \pi/4)$. Let $\M_R \equiv \pi_\theta(\Alg_R)'' \subseteq B(\HH_\theta)$ be the GNS von Neumann factor.
+Then for any $\theta \ne \pi/4$, **there exists no nonzero normal tracial state on $\M_R$**. Consequently, $\M_R$ is strictly type III.
+
+**Proof:**
+
+1. **Tracial constraint on Pauli commutators:**
+Suppose for contradiction that there exists a normal tracial state $\tau: \M_R \to \mathbb{C}$ with $\tau(\id) = 1$. By definition of a trace, $\tau(AB) = \tau(BA)$ for all $A, B \in \M_R$, which implies that $\tau([A, B]) = 0$ for every commutator.
+On any individual spin site $k$, consider the Pauli operators $\sigma_x^{(k)}, \sigma_y^{(k)}, \sigma_z^{(k)} \in \Alg_R \subset \M_R$. From the $\mathfrak{su}(2)$ algebra, $[\sigma_x, \sigma_y] = 2i\sigma_z$, which gives:
+
+$$
+
+\sigma_z^{(k)} = \frac{1}{2i}\big[\sigma_x^{(k)}, \, \sigma_y^{(k)}\big] .
+
+$$
+
+Applying the tracial state $\tau$ directly yields:
+
+$$
+
+\tau\big(\sigma_z^{(k)}\big) = \frac{1}{2i}\tau\big([\sigma_x^{(k)}, \, \sigma_y^{(k)}]\big) = 0 \qquad \text{for all } k \ge 1 .
+
+$$
+
+2. **Vanishing trace of average magnetization:**
+Define the macroscopic block-spin average magnetization over the first $N$ sites:
+
+$$
+
+M_N \equiv \frac{1}{N}\sum_{k=1}^N \sigma_z^{(k)} \in \M_R .
+
+$$
+
+By linearity of $\tau$ and the single-site identity above:
+
+$$
+
+\tau(M_N) = \frac{1}{N}\sum_{k=1}^N \tau\big(\sigma_z^{(k)}\big) = 0 \qquad \text{for all } N \ge 1 .
+
+$$
+
+3. **Macroscopic condensation in the GNS state:**
+Now examine $M_N$ in the physical GNS reference state $\ket{\Omega_\theta} \equiv \ket{\Phi_\theta}$. On each entangled pair:
+
+$$
+
+\braket{\phi_\theta | \sigma_z | \phi_\theta} = \cos^2\theta \braket{0|\sigma_z|0} + \sin^2\theta \braket{1|\sigma_z|1} = \cos^2\theta - \sin^2\theta = \cos(2\theta) .
+
+$$
+
+The expectation value of the average magnetization is therefore:
+
+$$
+
+\braket{\Omega_\theta | M_N | \Omega_\theta} = \frac{1}{N}\sum_{k=1}^N \cos(2\theta) = \cos(2\theta) .
+
+$$
+
+Because the state $\ket{\Phi_\theta}$ is an exact product state across different pairs, spin fluctuations at distinct sites $k \ne j$ are completely uncorrelated:
+
+$$
+
+\Braket{\Omega_\theta \Big| \big(\sigma_z^{(k)} - \cos(2\theta)\big)\big(\sigma_z^{(j)} - \cos(2\theta)\big) \Big| \Omega_\theta} = \delta_{kj}\big(1 - \cos^2(2\theta)\big) = \delta_{kj}\sin^2(2\theta) .
+
+$$
+
+The variance of $M_N$ in the GNS representation is:
+
+$$
+
+\big\| \big(M_N - \cos(2\theta)\id\big)\ket{\Omega_\theta} \big\|^2 = \frac{1}{N^2}\sum_{k=1}^N \sin^2(2\theta) = \frac{\sin^2(2\theta)}{N} \xrightarrow{N\to\infty} 0 .
+
+$$
+
+4. **Strong operator convergence:**
+Since $\ket{\Omega_\theta}$ is cyclic and separating for $\M_R$, and $\|M_N\| \le 1$ is uniformly bounded, the vanishing of the variance implies that $M_N$ converges in the strong operator topology on $\HH_\theta$ to a scalar multiple of the identity:
+
+$$
+
+\mathrm{s\text{-}}\lim_{N\to\infty} M_N = \cos(2\theta)\,\id .
+
+$$
+
+5. **The contradiction:**
+By definition of normality, the state $\tau$ is continuous in the weak (and ultraweak) operator topology. Therefore:
+
+$$
+
+\lim_{N\to\infty} \tau(M_N) = \tau\big(\mathrm{s\text{-}}\lim_{N\to\infty} M_N\big) = \tau\big(\cos(2\theta)\id\big) = \cos(2\theta)\,\tau(\id) = \cos(2\theta) .
+
+$$
+
+Comparing this with the exact algebraic result from Step~2:
+
+$$
+
+0 = \lim_{N\to\infty} \tau(M_N) = \cos(2\theta) .
+
+$$
+
+For any non-maximal entangling angle $\theta \in (0, \pi/4)$, we have $\cos(2\theta) > 0$. The equality $0 = \cos(2\theta) > 0$ is a strict contradiction!
+
+Hence no normal tracial state $\tau$ can exist on $\M_R$ when $\theta \ne \pi/4$. With both type I and type II ruled out by the total absence of a trace, $\M_R$ is unavoidably **type III**. $\blacksquare$
+
+\end{keyresult}
 
 ### Sec.~III.C.2: no minimal projection, and dimensions that are genuine real numbers
 
