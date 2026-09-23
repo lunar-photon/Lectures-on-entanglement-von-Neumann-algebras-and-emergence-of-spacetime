@@ -58,6 +58,44 @@ mathematics — von Neumann algebras — that was originally developed for a com
 ordinary quantum mechanics on a rigorous footing), and has only recently been recognized as exactly the right
 language for this question.
 
+\begin{table}[t]
+\centering
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}l p{4.8cm} X@{}}
+\toprule
+**Symbol / Structure** & **Mathematical Definition** & **Physical Interpretation / Role** \\
+\midrule
+$\HH$ & Global Hilbert space of states & Total state space of the universe / system \\
+$B(\HH)$ & Bounded linear operators on $\HH$ & All bounded operations and observables \\
+$\M \subset B(\HH)$ & von Neumann algebra ($\M = \M''$) & Observables accessible to a local subregion / observer \\
+$\M'$ & Commutant: $\{B : [B,A]=0\ \forall A \in \M\}$ & Observables of the causal complement / independent subsystem \\
+$\mathcal{Z}(\M) = \M \cap \M'$ & Center of the algebra & Classical superselection sectors (trivial $\mathbb{C}\id$ for factors) \\
+$\omega: \M \to \mathbb{C}$ & State (positive linear functional, $\omega(\id)=1$) & Expectation value functional $\omega(A) = \langle A \rangle$ \\
+$(\pi_\omega, \HH_\omega, \ket{\Omega_\omega})$ & GNS representation & Hilbert space manufactured directly from state $\omega$ \\
+$\ket\Psi \in \HH$ & Cyclic \& separating vector & Entangled vacuum / state with no local annihilators \\
+$S_\Psi$ & Tomita antilinear operator: $S_\Psi A\ket\Psi = A^\dagger\ket\Psi$ & State-dependent modular involution \\
+$J_\Psi$ & Modular conjugation ($J_\Psi \M J_\Psi = \M'$) & Antilinear reflection mapping algebra to its commutant (e.g. CPT) \\
+$\Delta_\Psi = S_\Psi^\dagger S_\Psi$ & Modular operator ($\Delta_\Psi > 0$, self-adjoint) & Relative entanglement density / asymmetry operator \\
+$h_\Psi \equiv -\log\Delta_\Psi$ & Modular Hamiltonian & Generator of intrinsic subsystem time flow (e.g. Rindler boost) \\
+$\sigma_t^\Psi(A) = \Delta_\Psi^{it} A \Delta_\Psi^{-it}$ & Modular flow ($1$-parameter automorphism) & Thermal time evolution satisfying the KMS condition \\
+$\widehat\M = \M \rtimes_\sigma \mathbb{R}$ & Crossed product algebra with clock $L^2(\mathbb{R})$ & Gravitationally dressed algebra including observer energy/clock \\
+$\tau$ & Semifinite trace on $\widehat\M$ ($\tau(AB)=\tau(BA)$) & Renormalized trace yielding well-defined density matrices \\
+$S_{\rm gen}$ & Generalized entropy: $\frac{\langle \hat A\rangle}{4G_N} + S_{\rm bulk}$ & Finite gravitational entropy in semiclassical gravity \\
+$\mathcal{A}_{\rm CFT}$ & Boundary single-trace algebra ($N\to\infty$) & Generalized free fields on the holographic boundary \\
+$\mathcal{A}_{\rm bulk}(b_A)$ & Bulk algebra in entanglement wedge $b_A$ & Local semiclassical bulk quantum fields dual to boundary region \\
+\bottomrule
+\end{tabularx}
+\caption{Summary of core notation, algebraic structures, and physical interpretations used throughout this companion.}
+\label{tab:notation_summary}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figs/fig_roadmap.pdf}
+\caption{The foundational paradigm shift: Standard Hilbert space quantum mechanics (left, where subsystems are defined by tensor factors $\HH = \HH_R \otimes \HH_L$) generalizes to Algebraic Quantum Mechanics (right, where subsystems are defined by operator subalgebras $\M \subset B(\HH)$). Type I algebras represent the familiar special case where a tensor product factorization exists.}
+\label{fig:roadmap}
+\end{figure}
+
 ## Why the ordinary quantum-mechanical definition of "subsystem" isn't good enough
 
 To see why a new mathematical tool is needed at all, you have to see precisely where the old one breaks. The
@@ -265,6 +303,13 @@ There is nothing hidden in this table — every entry is just $N\log2$, computed
 entropy grow without bound while the dimension of $\HH_R^{(N)}$ explodes is the concrete picture behind the
 abstract statement "$\HH_{\Phi_\theta}$ is not separable."
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{figs/fig_qubit_entropy.pdf}
+\caption{The single-pair entanglement entropy $s_1(\theta) = -\cos^2\theta\log(\cos^2\theta) - \sin^2\theta\log(\sin^2\theta)$ as a function of the mixing angle $\theta \in (0, \pi/4]$. The entropy peaks at the maximally entangled Bell state $\theta = \pi/4$ ($s_1 = \log 2 \approx 0.693$) and vanishes smoothly as $\theta \to 0$. For $N$ pairs, the total entropy scales as $S_R^{(N)} = N s_1(\theta) \to \infty$ as $N \to \infty$.}
+\label{fig:qubit_entropy}
+\end{figure}
+
 ## The other two examples, more briefly
 
 The paper gives two more examples (Liu's Ex.~1 and Ex.~3, Sec.~II.A), and it's worth knowing what they are
@@ -309,6 +354,13 @@ up in essentially every explicit calculation, from free fields to interacting on
 that it is the direct field-theoretic shadow of exactly the same Hilbert-space-non-factorization phenomenon
 as the spin-pair example above — made completely precise later, in Sec.~IV.D, using the language of von
 Neumann algebra types.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{figs/fig_area_law.pdf}
+\caption{The UV area-law divergence of entanglement entropy in quantum field theory: dividing space across a boundary $\partial R$ couples short-distance modes across the cut with UV cutoff $\epsilon$. The leading entanglement entropy diverges as $S_R \sim \mathrm{Area}(\partial R)/\epsilon^{d-2}$, reflecting the infinite entanglement of the underlying Type $\mathrm{III}_1$ local algebra.}
+\label{fig:area_law}
+\end{figure}
 
 ## The fix: define a subsystem by what you can *emph*}
 
@@ -1691,6 +1743,33 @@ here, because both still have a trace, so a density operator and an entropy can 
 generalization of the formulas you already know. Type III — where no trace exists at all — needs an entirely
 different tool, and is deferred to Sec.~IV.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{figs/fig_type_chart.pdf}
+\caption{The taxonomy of von Neumann algebra factors: classified by Murray and von Neumann according to the range of their projection dimension function $d(\mathcal{P}(\M))$ and the existence of a tracial state $\tau$. Type I possesses minimal projections (rank-one rays); Type II has no minimal projections but supports a trace (finite for $\mathrm{II}_1$, semifinite for $\mathrm{II}_\infty$); Type III has neither minimal projections nor a trace, exhibiting purely infinite projection dimensions.}
+\label{fig:type_chart}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}l p{2.2cm} l p{2.6cm} X l@{}}
+\toprule
+**Factor** & **Proj. Dim. $d(\mathcal{P**)$} & **Trace $\tau$** & **Density Matrix $\rho_\M$** & **Physical System** & **Entropy Status** \\
+\midrule
+$\mathrm{I}_n$ & $\{0, 1, \dots, n\}$ & Yes (finite) & $\rho_R = \Tr_L\ket\Psi\bra\Psi$ & $n$-level system / qubits & $S \ge 0$ \\
+$\mathrm{I}_\infty$ & $\{0, 1, 2, \dots, \infty\}$ & Yes (semifinite) & Fock space $\rho$ & Harmonic oscillator & Well-defined \\
+$\mathrm{II}_1$ & $[0, 1]$ (continuous) & $\tau(\id)=1$ & $\rho_\M \in \M$ & $\infty$ Bell pairs ($\theta=\frac{\pi}{4}$) & $S \le 0$ (vs max-mixed) \\
+$\mathrm{II}_\infty$ & $[0, \infty]$ (continuous) & Semifinite & $\rho_\M = e^{-K_\Psi - p}$ & Crossed product $\M \rtimes \mathbb{R}$ & $S_{\rm gen} = \frac{\langle\hat A\rangle}{4G_N} + S_{\rm bulk}$ \\
+$\mathrm{III}_0$ & $\{0, \infty\}$ & None & No density matrix & Non-ergodic flows & Ill-defined \\
+$\mathrm{III}_\lambda$ & $\{0, \infty\}$ & None & No density matrix & Spin chain ($\tan^2\theta = \lambda$) & Relative $S(\rho\|\sigma)$ only \\
+$\mathrm{III}_1$ & $\{0, \infty\}$ & None & No density matrix & QFT subregion / Rindler & Relative only / crossed \\
+\bottomrule
+\end{tabularx}
+\caption{Complete classification of von Neumann algebra factors and their physical, operational, and thermodynamic properties.}
+\label{tab:factor_taxonomy}
+\end{table}
+
 ## Sec.~III.A: density operators for type I and II algebras
 
 Here is the key new formula, and it deserves to be read as slowly as the definition of $\M$ itself was.
@@ -1985,6 +2064,13 @@ is no smallest possible "one unit" of measurement, only an ever-refinable contin
 $\M=\M_R$ is a type $\mathrm{II}_1$ factor — the first genuinely new object encountered so far in this
 companion, and it was built using nothing beyond ordinary spin-$\tfrac12$ qubits and an infinite chain of
 them.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{figs/fig_spin_chain_typeIII.pdf}
+\caption{The emergence of non-Type I factor structures from an infinite spin chain: as the number of entangled qubit pairs $N \to \infty$, the discrete eigenvalues of the reduced state merge into a continuous spectrum. At $\theta = \pi/4$, the algebra becomes the hyperfinite Type $\mathrm{II}_1$ factor where projections span a continuous dimension range $d(P) \in [0,1]$. For generic $\theta \in (0, \pi/4)$, the modular operator spectrum spans geometric powers $\lambda^k = (\tan^2\theta)^k$, forming a Type $\mathrm{III}_\lambda$ factor.}
+\label{fig:spin_chain_typeIII}
+\end{figure}
 
 ### Interpreting $\rho_\M$ and $S_\M$: an entropy that can be negative
 
@@ -2764,6 +2850,13 @@ that data on the initial slice $x>0$ completely determines, both to its future a
 $\M_R' = \M_L = \M_{\widehat L}$ — the commutant is exactly the algebra of the causally complementary (left)
 wedge, with no gap between them.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{figs/fig_rindler.pdf}
+\caption{The spacetime geometry of the Rindler wedge: Minkowski spacetime split into the Right wedge $R$ ($x > |t|$), Left wedge $L$ ($x < -|t|$), Future $F$, and Past $P$. The boost hyperbolae $x^2 - t^2 = \rho^2$ represent trajectories of uniformly accelerated observers with proper acceleration $a = 1/\rho$, whose proper time $\tau = \rho \eta$ is governed by the boost parameter $\eta$.}
+\label{fig:rindler}
+\end{figure}
+
 The **Reeh—Schlieder theorem** — stated here as a fact, with the intuition given, and used repeatedly
 from here to the end of the paper — says: in a relativistic quantum field theory, acting on the vacuum
 $\ket\Omega$ with operators localized in *emph* open spacetime region (however small) produces a set of
@@ -2811,6 +2904,13 @@ This is Unruh's 1976 result, arrived at here as a direct, unavoidable consequenc
 applied to the vacuum of a relativistic field, with the specific factor of $2\pi$ in eq.~4.44 being exactly
 what converts the universal, dimensionless modular temperature $\beta=1$ into this specific, physical
 temperature once $\eta$ is converted to the accelerated observer's own proper time $\tau$.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{figs/fig_unruh.pdf}
+\caption{The Bisognano—Wichmann theorem and the Unruh effect: the modular flow $\sigma_t^\Omega(A) = \Delta_\Omega^{it} A \Delta_\Omega^{-it}$ acting on the right Rindler wedge $\M_R$ is geometrically equivalent to a Lorentz boost with parameter $\eta = 2\pi t$. Accelerated observers perceive the Minkowski vacuum as a thermal KMS state with local Unruh temperature $T(x) = \hbar c / (2\pi k_B x)$.}
+\label{fig:unruh}
+\end{figure}
 
 The boost generator $K$ has purely continuous spectrum, all of $(-\infty,\infty)$ (it's the generator of an
 honest noncompact symmetry — there's no smallest nonzero boost, and boosts of arbitrarily large rapidity all
@@ -3269,6 +3369,13 @@ only on the algebra $\M$, not on which reference state $\ket\Psi$ was used to bu
 crossed it — so this is really a construction *emph* to $\M$, not an artifact of an arbitrary
 choice. This is also, as flagged already back in Sec.~I, exactly the mechanism used in Sec.~IX to explain
 black-hole and de~Sitter entropy: there, $\hat q$ below will literally be a physical observer's clock Hamiltonian.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{figs/fig_crossed.pdf}
+\caption{The crossed product construction: crossing a Type $\mathrm{III}_1$ algebra $\M$ (which has no trace) with its modular automorphism group $\sigma_s = \Delta_\Psi^{-is} \cdot \Delta_\Psi^{is}$ via an auxiliary quantum observer clock $L^2(\mathbb{R})$ generates a Type $\mathrm{II}_\infty$ factor $\widehat\M = \M \rtimes_\sigma \mathbb{R}$. The resulting algebra supports a well-defined trace $\tau$, density matrices, and finite generalized entropy $S_{\rm gen}$.}
+\label{fig:crossed_product}
+\end{figure}
 
 ## Sec.~V.A: construction of $\widehat\M$
 
@@ -4022,6 +4129,13 @@ with the bulk exterior algebras $\widetilde\M_R,\widetilde\M_L$ (eq.~6.49) — t
 $\mathrm{III}_1$ simply because they're the algebras of subregions of an ordinary continuum quantum field
 theory, exactly Sec.~IV.D's local-algebra story.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.72\textwidth]{figs/fig_penrose.pdf}
+\caption{Penrose diagram of the two-sided eternal AdS black hole dual to the Thermofield Double state $\ket{\Psi_\beta}$. The right ($R$) and left ($L$) exterior wedges are causally disconnected and bounded by the event horizons (dashed red lines), connected in the interior by an Einstein—Rosen bridge (wormhole) between the past ($P$) and future ($F$) curvature singularities (zigzag lines).}
+\label{fig:penrose}
+\end{figure}
+
 ### Two puzzles, and how algebra resolves the first of them
 
 Before this algebraic reformulation existed, the identification of the $T>T_{\text{HP}}$ phase with an eternal
@@ -4343,6 +4457,13 @@ $$
 where $X_A\subset B(\HH_\Psi^{\text{GNS}})$ denotes the boundary algebra dual to $A$'s entanglement wedge —
 this restates the ordinary entanglement-wedge-reconstruction statement (physics inside $\widehat b_A$ is fully
 recoverable from $A$ alone) as a literal algebra identity.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.82\textwidth]{figs/fig_rt.pdf}
+\caption{Subregion—subalgebra duality in AdS/CFT: for a boundary subregion $A$, the Ryu—Takayanagi minimal surface $\gamma_A$ bounds the bulk entanglement wedge $b_A$. The boundary algebra $X_A$ is isomorphic to the bulk von Neumann algebra $\widetilde\M_{b_A}$. The holographic entanglement entropy is given by $S(A) = \frac{\mathrm{Area}(\gamma_A)}{4G_N} + S_{\rm bulk}(b_A) = S_{\rm gen}(b_A)$.}
+\label{fig:rt_entanglement_wedge}
+\end{figure}
 
 Constructing $X_A$ precisely takes a little care, and it's worth seeing exactly how, since the construction
 recurs constantly. At finite $N$, there's an ordinary von Neumann algebra $B_A^{(N)}$ of operators localized in

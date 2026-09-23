@@ -1,0 +1,50 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{braket}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,decorations.pathreplacing,calc,positioning}
+
+\definecolor{cobalt}{HTML}{2b4c7e}
+\definecolor{boxblue}{HTML}{eef3fa}
+\definecolor{boxgold}{HTML}{fbf3e3}
+\definecolor{boxred}{HTML}{fbecec}
+\definecolor{boxgreen}{HTML}{eaf6f0}
+\definecolor{ruleblue}{HTML}{2b6cb0}
+\definecolor{rulegold}{HTML}{b7791f}
+\definecolor{rulered}{HTML}{c0392b}
+\definecolor{rulegreen}{HTML}{1f8a5f}
+
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\ii}{\mathrm{i}}
+\begin{document}
+\begin{tikzpicture}[
+  box/.style={draw, rounded corners=4pt, align=left, inner sep=8pt, font=\small},
+  every node/.style={font=\small}
+]
+\node[box, fill=boxblue, draw=ruleblue, text width=6.1cm] (left) at (0,0) {
+  \textbf{Standard QM} \,(Griffiths, Sakurai)\\[4pt]
+  $\HH=\HH_R\otimes\HH_L$\\[2pt]
+  $\ket\Psi=\sum_n c_n\ket{n}_R\ket{n}_L$\\[2pt]
+  $\rho_R=\Tr_L\ket\Psi\!\bra\Psi$\\[2pt]
+  $S_R=-\Tr\rho_R\log\rho_R$\\[6pt]
+  subsystem $\equiv$ tensor factor
+};
+\node[box, fill=boxgold, draw=rulegold, text width=6.1cm] (right) at (9.0,0) {
+  \textbf{Algebraic QM} \,(von Neumann, Liu)\\[4pt]
+  $\M\subset B(\HH)$, a weakly closed $*$-algebra\\[2pt]
+  $\M'=\{B: [B,A]=0\ \forall A\in\M\}$\\[2pt]
+  type I/II: $\rho_\M$ via $\tr(A\rho_\M)=\braket{\Psi|A|\Psi}$\\[2pt]
+  type III: modular operator $\Delta_\Psi=e^{-K_\Psi}$\\[6pt]
+  subsystem $\equiv$ operator subalgebra
+};
+\draw[-{Latex[length=3mm]}, ruleblue, thick] (left.east) .. controls +(1.2,0.9) and +(-1.2,0.9) .. (right.west)
+  node[midway, above, font=\footnotesize, text width=3.4cm, align=center, yshift=2pt]{generalizes};
+\draw[-{Latex[length=3mm]}, rulegreen, thick] (right.south) .. controls +(-1.2,-1.1) and +(1.2,-1.1) .. (left.south)
+  node[midway, below, font=\footnotesize, text width=4.4cm, align=center, yshift=-2pt]{special case: $\M$ is type I $\iff$ $\HH=\HH_R\otimes\HH_L$ exists};
+\end{tikzpicture}
+
+\end{document}

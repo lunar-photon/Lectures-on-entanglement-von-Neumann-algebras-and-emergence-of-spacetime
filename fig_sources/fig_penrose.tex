@@ -1,0 +1,60 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{braket}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,decorations.pathreplacing,calc,positioning}
+
+\definecolor{cobalt}{HTML}{2b4c7e}
+\definecolor{boxblue}{HTML}{eef3fa}
+\definecolor{boxgold}{HTML}{fbf3e3}
+\definecolor{boxred}{HTML}{fbecec}
+\definecolor{boxgreen}{HTML}{eaf6f0}
+\definecolor{ruleblue}{HTML}{2b6cb0}
+\definecolor{rulegold}{HTML}{b7791f}
+\definecolor{rulered}{HTML}{c0392b}
+\definecolor{rulegreen}{HTML}{1f8a5f}
+
+\newcommand{\HH}{\mathcal{H}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\ii}{\mathrm{i}}
+\begin{document}
+\begin{tikzpicture}[scale=0.95, >=Latex]
+  % square corners
+  \coordinate (tl) at (-2.2,2.2);
+  \coordinate (tr) at (2.2,2.2);
+  \coordinate (br) at (2.2,-2.2);
+  \coordinate (bl) at (-2.2,-2.2);
+  \coordinate (o)  at (0,0);
+  % shade the four regions R, L, F, P
+  \fill[boxblue,  opacity=0.65] (o) -- (tr) -- (br) -- cycle; % R
+  \fill[boxgold,  opacity=0.65] (o) -- (tl) -- (bl) -- cycle; % L
+  \fill[boxgreen, opacity=0.55] (o) -- (tl) -- (tr) -- cycle; % F
+  \fill[gray!18]                (o) -- (bl) -- (br) -- cycle; % P
+  % horizons (diagonals through the bifurcation point)
+  \draw[dashed, rulered, thick] (tl) -- (br);
+  \draw[dashed, rulered, thick] (bl) -- (tr);
+  % singularities: zigzag top and bottom edges
+  \draw[decorate, decoration={zigzag, segment length=5pt, amplitude=2pt}, ultra thick, black] (tl) -- (tr);
+  \draw[decorate, decoration={zigzag, segment length=5pt, amplitude=2pt}, ultra thick, black] (bl) -- (br);
+  % boundaries: solid vertical edges left and right
+  \draw[very thick, rulegold] (tl) -- (bl);
+  \draw[very thick, ruleblue] (tr) -- (br);
+  % region labels
+  \node[font=\bfseries] at (1.15,0) {$R$};
+  \node[font=\bfseries] at (-1.15,0) {$L$};
+  \node[font=\bfseries] at (0,1.15) {$F$};
+  \node[font=\bfseries, gray!60!black] at (0,-1.15) {$P$};
+  \node[font=\footnotesize, above] at (0,2.28) {future singularity};
+  \node[font=\footnotesize, below] at (0,-2.28) {past singularity};
+  \node[font=\footnotesize, ruleblue, right] at (2.28,0) {CFT$_R$ boundary};
+  \node[font=\footnotesize, rulegold, left]  at (-2.28,0) {CFT$_L$ boundary};
+  \node[font=\footnotesize, rulered] at (1.75,1.5) {horizon};
+  % bifurcation surface
+  \fill (0,0) circle (1.6pt);
+  \node[font=\scriptsize, below right] at (0.06,-0.05) {bifurcation};
+\end{tikzpicture}
+
+\end{document}

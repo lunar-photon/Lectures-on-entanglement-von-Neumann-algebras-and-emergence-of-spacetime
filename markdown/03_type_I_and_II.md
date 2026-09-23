@@ -11,6 +11,33 @@ here, because both still have a trace, so a density operator and an entropy can 
 generalization of the formulas you already know. Type III — where no trace exists at all — needs an entirely
 different tool, and is deferred to Sec.~IV.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{figs/fig_type_chart.pdf}
+\caption{The taxonomy of von Neumann algebra factors: classified by Murray and von Neumann according to the range of their projection dimension function $d(\mathcal{P}(\M))$ and the existence of a tracial state $\tau$. Type I possesses minimal projections (rank-one rays); Type II has no minimal projections but supports a trace (finite for $\mathrm{II}_1$, semifinite for $\mathrm{II}_\infty$); Type III has neither minimal projections nor a trace, exhibiting purely infinite projection dimensions.}
+\label{fig:type_chart}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}l p{2.2cm} l p{2.6cm} X l@{}}
+\toprule
+**Factor** & **Proj. Dim. $d(\mathcal{P**)$} & **Trace $\tau$** & **Density Matrix $\rho_\M$** & **Physical System** & **Entropy Status** \\
+\midrule
+$\mathrm{I}_n$ & $\{0, 1, \dots, n\}$ & Yes (finite) & $\rho_R = \Tr_L\ket\Psi\bra\Psi$ & $n$-level system / qubits & $S \ge 0$ \\
+$\mathrm{I}_\infty$ & $\{0, 1, 2, \dots, \infty\}$ & Yes (semifinite) & Fock space $\rho$ & Harmonic oscillator & Well-defined \\
+$\mathrm{II}_1$ & $[0, 1]$ (continuous) & $\tau(\id)=1$ & $\rho_\M \in \M$ & $\infty$ Bell pairs ($\theta=\frac{\pi}{4}$) & $S \le 0$ (vs max-mixed) \\
+$\mathrm{II}_\infty$ & $[0, \infty]$ (continuous) & Semifinite & $\rho_\M = e^{-K_\Psi - p}$ & Crossed product $\M \rtimes \mathbb{R}$ & $S_{\rm gen} = \frac{\langle\hat A\rangle}{4G_N} + S_{\rm bulk}$ \\
+$\mathrm{III}_0$ & $\{0, \infty\}$ & None & No density matrix & Non-ergodic flows & Ill-defined \\
+$\mathrm{III}_\lambda$ & $\{0, \infty\}$ & None & No density matrix & Spin chain ($\tan^2\theta = \lambda$) & Relative $S(\rho\|\sigma)$ only \\
+$\mathrm{III}_1$ & $\{0, \infty\}$ & None & No density matrix & QFT subregion / Rindler & Relative only / crossed \\
+\bottomrule
+\end{tabularx}
+\caption{Complete classification of von Neumann algebra factors and their physical, operational, and thermodynamic properties.}
+\label{tab:factor_taxonomy}
+\end{table}
+
 ## Sec.~III.A: density operators for type I and II algebras
 
 Here is the key new formula, and it deserves to be read as slowly as the definition of $\M$ itself was.
@@ -305,6 +332,13 @@ is no smallest possible "one unit" of measurement, only an ever-refinable contin
 $\M=\M_R$ is a type $\mathrm{II}_1$ factor — the first genuinely new object encountered so far in this
 companion, and it was built using nothing beyond ordinary spin-$\tfrac12$ qubits and an infinite chain of
 them.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.78\textwidth]{figs/fig_spin_chain_typeIII.pdf}
+\caption{The emergence of non-Type I factor structures from an infinite spin chain: as the number of entangled qubit pairs $N \to \infty$, the discrete eigenvalues of the reduced state merge into a continuous spectrum. At $\theta = \pi/4$, the algebra becomes the hyperfinite Type $\mathrm{II}_1$ factor where projections span a continuous dimension range $d(P) \in [0,1]$. For generic $\theta \in (0, \pi/4)$, the modular operator spectrum spans geometric powers $\lambda^k = (\tan^2\theta)^k$, forming a Type $\mathrm{III}_\lambda$ factor.}
+\label{fig:spin_chain_typeIII}
+\end{figure}
 
 ### Interpreting $\rho_\M$ and $S_\M$: an entropy that can be negative
 

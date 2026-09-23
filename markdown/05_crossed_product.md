@@ -37,6 +37,13 @@ crossed it — so this is really a construction *emph* to $\M$, not an artifact 
 choice. This is also, as flagged already back in Sec.~I, exactly the mechanism used in Sec.~IX to explain
 black-hole and de~Sitter entropy: there, $\hat q$ below will literally be a physical observer's clock Hamiltonian.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.88\textwidth]{figs/fig_crossed.pdf}
+\caption{The crossed product construction: crossing a Type $\mathrm{III}_1$ algebra $\M$ (which has no trace) with its modular automorphism group $\sigma_s = \Delta_\Psi^{-is} \cdot \Delta_\Psi^{is}$ via an auxiliary quantum observer clock $L^2(\mathbb{R})$ generates a Type $\mathrm{II}_\infty$ factor $\widehat\M = \M \rtimes_\sigma \mathbb{R}$. The resulting algebra supports a well-defined trace $\tau$, density matrices, and finite generalized entropy $S_{\rm gen}$.}
+\label{fig:crossed_product}
+\end{figure}
+
 ## Sec.~V.A: construction of $\widehat\M$
 
 Attach a genuine one-dimensional quantum system — a particle on a line, with position $\hat q$ and momentum

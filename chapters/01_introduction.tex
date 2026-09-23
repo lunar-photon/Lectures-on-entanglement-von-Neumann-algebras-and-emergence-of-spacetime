@@ -50,6 +50,44 @@ mathematics — von Neumann algebras — that was originally developed for a com
 ordinary quantum mechanics on a rigorous footing), and has only recently been recognized as exactly the right
 language for this question.
 
+\begin{table}[t]
+\centering
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}l p{4.8cm} X@{}}
+\toprule
+\textbf{Symbol / Structure} & \textbf{Mathematical Definition} & \textbf{Physical Interpretation / Role} \\
+\midrule
+$\HH$ & Global Hilbert space of states & Total state space of the universe / system \\
+$B(\HH)$ & Bounded linear operators on $\HH$ & All bounded operations and observables \\
+$\M \subset B(\HH)$ & von Neumann algebra ($\M = \M''$) & Observables accessible to a local subregion / observer \\
+$\M'$ & Commutant: $\{B : [B,A]=0\ \forall A \in \M\}$ & Observables of the causal complement / independent subsystem \\
+$\mathcal{Z}(\M) = \M \cap \M'$ & Center of the algebra & Classical superselection sectors (trivial $\mathbb{C}\id$ for factors) \\
+$\omega: \M \to \mathbb{C}$ & State (positive linear functional, $\omega(\id)=1$) & Expectation value functional $\omega(A) = \langle A \rangle$ \\
+$(\pi_\omega, \HH_\omega, \ket{\Omega_\omega})$ & GNS representation & Hilbert space manufactured directly from state $\omega$ \\
+$\ket\Psi \in \HH$ & Cyclic \& separating vector & Entangled vacuum / state with no local annihilators \\
+$S_\Psi$ & Tomita antilinear operator: $S_\Psi A\ket\Psi = A^\dagger\ket\Psi$ & State-dependent modular involution \\
+$J_\Psi$ & Modular conjugation ($J_\Psi \M J_\Psi = \M'$) & Antilinear reflection mapping algebra to its commutant (e.g. CPT) \\
+$\Delta_\Psi = S_\Psi^\dagger S_\Psi$ & Modular operator ($\Delta_\Psi > 0$, self-adjoint) & Relative entanglement density / asymmetry operator \\
+$h_\Psi \equiv -\log\Delta_\Psi$ & Modular Hamiltonian & Generator of intrinsic subsystem time flow (e.g. Rindler boost) \\
+$\sigma_t^\Psi(A) = \Delta_\Psi^{it} A \Delta_\Psi^{-it}$ & Modular flow ($1$-parameter automorphism) & Thermal time evolution satisfying the KMS condition \\
+$\widehat\M = \M \rtimes_\sigma \mathbb{R}$ & Crossed product algebra with clock $L^2(\mathbb{R})$ & Gravitationally dressed algebra including observer energy/clock \\
+$\tau$ & Semifinite trace on $\widehat\M$ ($\tau(AB)=\tau(BA)$) & Renormalized trace yielding well-defined density matrices \\
+$S_{\rm gen}$ & Generalized entropy: $\frac{\langle \hat A\rangle}{4G_N} + S_{\rm bulk}$ & Finite gravitational entropy in semiclassical gravity \\
+$\mathcal{A}_{\rm CFT}$ & Boundary single-trace algebra ($N\to\infty$) & Generalized free fields on the holographic boundary \\
+$\mathcal{A}_{\rm bulk}(b_A)$ & Bulk algebra in entanglement wedge $b_A$ & Local semiclassical bulk quantum fields dual to boundary region \\
+\bottomrule
+\end{tabularx}
+\caption{Summary of core notation, algebraic structures, and physical interpretations used throughout this companion.}
+\label{tab:notation_summary}
+\end{table}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{figs/fig_roadmap.pdf}
+\caption{The foundational paradigm shift: Standard Hilbert space quantum mechanics (left, where subsystems are defined by tensor factors $\HH = \HH_R \otimes \HH_L$) generalizes to Algebraic Quantum Mechanics (right, where subsystems are defined by operator subalgebras $\M \subset B(\HH)$). Type I algebras represent the familiar special case where a tensor product factorization exists.}
+\label{fig:roadmap}
+\end{figure}
+
 \subsection{Why the ordinary quantum-mechanical definition of ``subsystem'' isn't good enough}
 
 To see why a new mathematical tool is needed at all, you have to see precisely where the old one breaks. The
@@ -222,6 +260,13 @@ There is nothing hidden in this table — every entry is just $N\log2$, computed
 entropy grow without bound while the dimension of $\HH_R^{(N)}$ explodes is the concrete picture behind the
 abstract statement ``$\HH_{\Phi_\theta}$ is not separable.''
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{figs/fig_qubit_entropy.pdf}
+\caption{The single-pair entanglement entropy $s_1(\theta) = -\cos^2\theta\log(\cos^2\theta) - \sin^2\theta\log(\sin^2\theta)$ as a function of the mixing angle $\theta \in (0, \pi/4]$. The entropy peaks at the maximally entangled Bell state $\theta = \pi/4$ ($s_1 = \log 2 \approx 0.693$) and vanishes smoothly as $\theta \to 0$. For $N$ pairs, the total entropy scales as $S_R^{(N)} = N s_1(\theta) \to \infty$ as $N \to \infty$.}
+\label{fig:qubit_entropy}
+\end{figure}
+
 \subsection{The other two examples, more briefly}
 
 The paper gives two more examples (Liu's Ex.~1 and Ex.~3, Sec.~II.A), and it's worth knowing what they are
@@ -262,6 +307,13 @@ up in essentially every explicit calculation, from free fields to interacting on
 that it is the direct field-theoretic shadow of exactly the same Hilbert-space-non-factorization phenomenon
 as the spin-pair example above — made completely precise later, in Sec.~IV.D, using the language of von
 Neumann algebra types.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.75\textwidth]{figs/fig_area_law.pdf}
+\caption{The UV area-law divergence of entanglement entropy in quantum field theory: dividing space across a boundary $\partial R$ couples short-distance modes across the cut with UV cutoff $\epsilon$. The leading entanglement entropy diverges as $S_R \sim \mathrm{Area}(\partial R)/\epsilon^{d-2}$, reflecting the infinite entanglement of the underlying Type $\mathrm{III}_1$ local algebra.}
+\label{fig:area_law}
+\end{figure}
 
 \subsection{The fix: define a subsystem by what you can \emph{do}, not by how you'd \emph{split the Hilbert
 space}}

@@ -413,6 +413,13 @@ with the bulk exterior algebras $\widetilde\M_R,\widetilde\M_L$ (eq.~6.49) — t
 $\mathrm{III}_1$ simply because they're the algebras of subregions of an ordinary continuum quantum field
 theory, exactly Sec.~IV.D's local-algebra story.
 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.72\textwidth]{figs/fig_penrose.pdf}
+\caption{Penrose diagram of the two-sided eternal AdS black hole dual to the Thermofield Double state $\ket{\Psi_\beta}$. The right ($R$) and left ($L$) exterior wedges are causally disconnected and bounded by the event horizons (dashed red lines), connected in the interior by an Einstein—Rosen bridge (wormhole) between the past ($P$) and future ($F$) curvature singularities (zigzag lines).}
+\label{fig:penrose}
+\end{figure}
+
 ### Two puzzles, and how algebra resolves the first of them
 
 Before this algebraic reformulation existed, the identification of the $T>T_{\text{HP}}$ phase with an eternal
