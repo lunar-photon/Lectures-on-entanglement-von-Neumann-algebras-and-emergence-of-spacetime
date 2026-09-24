@@ -1,65 +1,68 @@
-\documentclass[tikz,border=6pt]{standalone}
-\usepackage{amsmath,amssymb,mathtools}
+% Connes invariant S(M) for each factor type, drawn on the half-line R_{>=0}.
+% Linear scale; the III_lambda ladder uses lambda = 1/2 and is computed as
+% lambda^n for n = -2..12 (points below ~1e-3 merge into the accumulation at 0).
+% Included at 0.95\textwidth (6.18in); drawn at ~1:1.
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
 \usepackage{xcolor}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,calc,positioning}
+\usetikzlibrary{arrows.meta}
 
-\definecolor{cobalt}{HTML}{2b4c7e}
-\definecolor{navyhead}{HTML}{1a365d}
-\definecolor{boxblue}{HTML}{eef3fa}
 \definecolor{ruleblue}{HTML}{2b6cb0}
 \definecolor{rulegold}{HTML}{b7791f}
 \definecolor{rulered}{HTML}{c0392b}
 \definecolor{rulegreen}{HTML}{1f8a5f}
+\definecolor{axisgray}{HTML}{8a8f98}
 
 \begin{document}
-\begin{tikzpicture}[>=Latex, font=\small]
+\begin{tikzpicture}[>=Latex, font=\normalsize]
+  \def\u{2.55}      % cm per unit of the spectrum axis
+  \def\xmax{4.75}   % axis runs 0 .. xmax
+  \def\dy{1.05}     % row spacing
+  \def\r{2.4pt}     % dot radius
 
-  % Title / Header
-  \node[font=\bfseries\normalsize\color{navyhead}, align=center] at (5.5, 4.3) 
-    {Connes Classification of von Neumann Factors via the Modular Spectrum $S(\mathcal{M})$};
+  % faint guides at 0 and 1 across all rows
+  \foreach \v in {0,1}
+    \draw[axisgray!45, densely dashed, line width=0.4pt]
+      ({\v*\u}, 0.35) -- ({\v*\u}, {-3*\dy-0.18});
 
-  % Type I & II
-  \draw[->, thick, color=gray!70] (0, 3.2) -- (11.0, 3.2) node[right, font=\footnotesize] {$\mathbb{R}_{\ge 0}$};
-  \node[anchor=east, font=\bfseries\color{ruleblue}] at (-0.3, 3.2) {Types I \& II:};
-  \draw[thick] (1.0, 3.1) -- (1.0, 3.3) node[below=3pt, font=\scriptsize] {$0$};
-  \fill[ruleblue] (3.5, 3.2) circle (3pt) node[above=4pt, font=\footnotesize\bfseries] {$\{1\}$} node[below=3pt, font=\scriptsize] {$1$};
-  \node[right, font=\scriptsize\color{black!70}] at (4.5, 3.2) {Trivial modular spectrum; modular flow is purely inner ($\Delta^{it} \in \mathcal{M}$).};
+  % row axes
+  \foreach \k in {0,1,2,3}
+    \draw[->, axisgray, line width=0.5pt] (-0.25, {-\k*\dy}) -- ({\xmax*\u}, {-\k*\dy});
 
-  % Type III_0
-  \draw[->, thick, color=gray!70] (0, 2.1) -- (11.0, 2.1) node[right, font=\footnotesize] {$\mathbb{R}_{\ge 0}$};
-  \node[anchor=east, font=\bfseries\color{rulegold}] at (-0.3, 2.1) {Type $\mathrm{III}_0$:};
-  \fill[rulegold] (1.0, 2.1) circle (3pt) node[below=3pt, font=\scriptsize] {$0$};
-  \fill[rulegold] (3.5, 2.1) circle (3pt) node[above=4pt, font=\footnotesize\bfseries] {$\{0, 1\}$} node[below=3pt, font=\scriptsize] {$1$};
-  \node[right, font=\scriptsize\color{black!70}] at (4.5, 2.1) {Krieger factors; modular flow acts non-ergodically on center of crossed product.};
+  % row labels
+  \node[anchor=east, ruleblue]  at (-0.45, 0)        {I,\,II};
+  \node[anchor=east, rulegold]  at (-0.45, -\dy)     {III$_0$};
+  \node[anchor=east, rulered]   at (-0.45, {-2*\dy}) {III$_\lambda$};
+  \node[anchor=east, rulegreen] at (-0.45, {-3*\dy}) {III$_1$};
 
-  % Type III_lambda
-  \draw[->, thick, color=gray!70] (0, 1.0) -- (11.0, 1.0) node[right, font=\footnotesize] {$\mathbb{R}_{\ge 0}$};
-  \node[anchor=east, font=\bfseries\color{rulered}] at (-0.3, 1.0) {Type $\mathrm{III}_\lambda$ ($0 < \lambda < 1$):};
-  \fill[rulered] (1.0, 1.0) circle (3pt) node[below=3pt, font=\scriptsize] {$0$};
-  \fill[rulered] (1.5, 1.0) circle (2pt) node[above=2pt, font=\tiny] {$\lambda^3$};
-  \fill[rulered] (2.0, 1.0) circle (2.2pt) node[above=2pt, font=\tiny] {$\lambda^2$};
-  \fill[rulered] (2.6, 1.0) circle (2.5pt) node[above=2pt, font=\scriptsize] {$\lambda$};
-  \fill[rulered] (3.5, 1.0) circle (3pt) node[above=2pt, font=\scriptsize\bfseries] {$1$} node[below=3pt, font=\scriptsize] {$1$};
-  \fill[rulered] (4.9, 1.0) circle (2.5pt) node[above=2pt, font=\scriptsize] {$\lambda^{-1}$};
-  \fill[rulered] (7.0, 1.0) circle (2.2pt) node[above=2pt, font=\tiny] {$\lambda^{-2}$};
-  \fill[rulered] (9.6, 1.0) circle (2pt) node[above=2pt, font=\tiny] {$\lambda^{-3}$};
-  \node[below=5pt, font=\footnotesize\color{rulered}] at (5.5, 0.9) 
-    {$S(\mathcal{M}) = \{0\} \cup \lambda^{\mathbb{Z}} = \{0\} \cup \{\dots, \lambda^2, \lambda, 1, \lambda^{-1}, \lambda^{-2}, \dots\}$ (Powers factors, spin chain)};
+  % Types I and II: {1}
+  \fill[ruleblue] (\u, 0) circle (\r);
 
-  % Type III_1
-  \draw[->, thick, color=gray!70] (0, -0.4) -- (11.0, -0.4) node[right, font=\footnotesize] {$\mathbb{R}_{\ge 0}$};
-  \node[anchor=east, font=\bfseries\color{rulegreen}] at (-0.3, -0.4) {Type $\mathrm{III}_1$:};
-  \draw[thick] (1.0, -0.5) -- (1.0, -0.3) node[below=3pt, font=\scriptsize] {$0$};
-  % Continuous filled bar
-  \fill[rulegreen!35] (1.0, -0.5) rectangle (10.6, -0.3);
-  \draw[rulegreen, very thick] (1.0, -0.4) -- (10.6, -0.4);
-  \fill[rulegreen] (1.0, -0.4) circle (3pt);
-  \fill[rulegreen] (3.5, -0.4) circle (2pt) node[below=3pt, font=\scriptsize] {$1$};
-  \node[above=3pt, font=\footnotesize\bfseries\color{rulegreen}] at (5.5, -0.3) 
-    {$S(\mathcal{M}) = [0, \infty)$ (Full half-line, strictly continuous spectrum)};
-  \node[below=14pt, font=\scriptsize\color{black!80}] at (5.5, -0.4) 
-    {\textbf{Generic physical regime}: Continuum relativistic QFT subregions (Haag--Araki) and large-$N$ AdS/CFT boundary algebras.};
+  % Type III_0: {0, 1}
+  \fill[rulegold] (0, -\dy) circle (\r);
+  \fill[rulegold] (\u, -\dy) circle (\r);
 
+  % Type III_lambda: {0} u lambda^Z, lambda = 1/2
+  \begin{scope}[shift={(0,{-2*\dy})}]
+    \foreach \n in {-2,...,12} {
+      \pgfmathsetmacro{\v}{0.5^\n}
+      \fill[rulered] ({\v*\u}, 0) circle (\r);
+    }
+    \fill[rulered] (0, 0) circle (\r);
+    \node[rulered, above=2pt, font=\small] at ({0.5*\u}, 0) {$\lambda$};
+    \node[rulered, above=2pt, font=\small] at ({2*\u}, 0) {$\lambda^{-1}$};
+    \node[rulered, above=2pt, font=\small] at ({4*\u}, 0) {$\lambda^{-2}$};
+  \end{scope}
+
+  % Type III_1: the whole half-line
+  \draw[rulegreen, line width=3.2pt] (0, {-3*\dy}) -- ({(\xmax-0.12)*\u}, {-3*\dy});
+  \fill[rulegreen] (0, {-3*\dy}) circle (\r);
+
+  % shared tick labels
+  \node[below=4pt] at (0, {-3*\dy}) {$0$};
+  \node[below=4pt] at (\u, {-3*\dy}) {$1$};
+  \node[anchor=west] at ({\xmax*\u+0.05}, {-3*\dy}) {$\mathbb{R}_{\ge 0}$};
 \end{tikzpicture}
 \end{document}

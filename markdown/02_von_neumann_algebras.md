@@ -1,80 +1,79 @@
-# Sec. II: Introduction to von Neumann Algebras
+# Chapter 2: Von Neumann Algebras
 
-# Sec.~II: Introduction to von Neumann algebras
+# Introduction to von Neumann algebras
 
-Sec.~I ended with a proposal: define a subsystem not by splitting the Hilbert space, but by naming the
-collection of operators an observer confined to that subsystem has access to. This section makes that
-proposal completely precise. By the end of it you will know exactly what mathematical object $\M$ is required
-to be, exactly how such objects are classified into types, and exactly how a Hilbert space can be
-*emph* from an algebra and a state, rather than assumed as a starting point. Every definition
-below is followed by a worked example with actual numbers — matrices you could multiply out by hand — because
-the definitions are genuinely abstract on first reading and the only way to make them feel concrete is to
-watch them act on something small.
+Chapter~1 ended with a proposal. A subsystem should be defined not by splitting the Hilbert space, but by
+the collection of operators that an observer confined to the subsystem can use. This chapter makes that
+proposal precise. By the end of it you will know what kind of mathematical object $\M$ must be, how such
+objects are sorted into types, and how a Hilbert space can be *emph* from an algebra and a state
+instead of being assumed at the start. Most definitions below come with a worked example that uses actual
+numbers, often small matrices you can multiply out by hand. The definitions are abstract on first reading,
+and watching them act on something small is the quickest way to make them concrete.
 
-## Sec.~II.A: systems with an infinite amount of entanglement (recap)
+## Systems with an infinite amount of entanglement (recap)
 
-This subsection of the paper is the one worked through in full in Sec.~I of this companion (the $N$-Bell-pair
-chain, the lattice gauge theory example, and the quantum field theory cut in half). Nothing new needs to be
-added here — if anything in that discussion felt unclear, it's worth going back to it now, since everything
-from here on assumes it's solid ground. The one thing worth restating, because the entire rest of this
-section builds on it: the moral of Sec.~I was that a subsystem should be defined by *emph*, not by how the Hilbert space happens to split. Sec.~II.B now makes that idea into an
-actual mathematical definition.
+Chapter~1 gave three examples: the chain of $N$ Bell pairs, lattice gauge theory, and a quantum field theory
+cut in half. They motivate everything in this chapter. The lesson drawn from them was this: a subsystem
+should be defined by *emph*, not by how the Hilbert space happens
+to split. This chapter turns that idea into a mathematical definition.
 
-## Sec.~II.B.1: von Neumann algebras as subsystems
+## Von Neumann algebras as subsystems
 
 ### Setting the stage: what a Hilbert space and an operator are, restated carefully
 
-Before the new definition, it's worth being completely explicit about the ingredients, because the new
-definition is going to be a statement *emph* them, and vague pictures of "vectors" and "operators"
-won't be precise enough to support what comes next.
+The new definition is a statement *emph* Hilbert spaces and operators. So we first state exactly what
+those are. Vague pictures of "vectors" and "operators" are not precise enough for what follows.
 
-A Hilbert space $\HH$ is a vector space over the complex numbers, equipped with an inner product
-$\braket{\cdot|\cdot}$ (a rule assigning a complex number $\braket{\xi|\eta}$ to any pair of vectors, linear
-in the second argument, conjugate-linear in the first, with $\braket{\xi|\xi}\ge0$ and equal to zero only for
-the zero vector), and complete in the sense that any sequence of vectors that "ought to" converge (a Cauchy
-sequence, one whose terms get arbitrarily close to each other) actually does converge to some vector in
-$\HH$. For a spin-$\tfrac12$ particle, $\HH=\mathbb C^2$: vectors are pairs of complex numbers
-$(c_1,c_2)$, usually written $c_1\ket0+c_2\ket1$, and the inner product is the ordinary dot product with
-complex conjugation, $\braket{\xi|\eta}=\xi_1^*\eta_1+\xi_2^*\eta_2$. Nothing about a von Neumann algebra
-requires anything more exotic than this — the infinite-dimensional case (a quantum field, say) uses the exact
-same definitions, just with infinitely many components instead of two.
+A Hilbert space $\HH$ is a vector space over the complex numbers with two extra properties. First, it has an
+inner product $\braket{\cdot|\cdot}$. This is a rule that assigns a complex number $\braket{\xi|\eta}$ to each
+pair of vectors. It is linear in the second argument and conjugate-linear in the first, and it satisfies
+$\braket{\xi|\xi}\ge0$, with equality only for the zero vector. Second, it is complete. A *emph* is a sequence of vectors whose terms get arbitrarily close to each other, so that it "ought to"
+converge. Completeness says that every Cauchy sequence really does converge to some vector in $\HH$. For a
+spin-$\tfrac12$ particle, $\HH=\mathbb C^2$. Its vectors are pairs of complex numbers $(c_1,c_2)$, usually
+written $c_1\ket0+c_2\ket1$. The inner product is the dot product with complex conjugation,
+$\braket{\xi|\eta}=\xi_1^*\eta_1+\xi_2^*\eta_2$. A von Neumann algebra needs nothing more exotic than this.
+The infinite-dimensional case (a quantum field, say) uses exactly the same definitions, with infinitely many
+components instead of two.
 
 An operator $A$ on $\HH$ is a rule that turns vectors into vectors, $A:\HH\to\HH$, and is linear:
 $A(c_1\ket{\xi_1}+c_2\ket{\xi_2})=c_1 A\ket{\xi_1}+c_2A\ket{\xi_2}$. On $\mathbb C^2$, every linear operator is
-just a $2\times2$ matrix, and $A\ket\xi$ is ordinary matrix-vector multiplication. The **Hermitian
-conjugate** (or adjoint) $A^\dagger$ of $A$ is the unique operator satisfying
-$\braket{\xi|A\eta}=\braket{A^\dagger\xi|\eta}$ for all $\xi,\eta$ — on a finite matrix, this is exactly the
-familiar "transpose and complex-conjugate every entry" operation. $A$ is **self-adjoint** (or
-Hermitian) if $A=A^\dagger$; these are exactly the operators that can represent physical observables, because
-their eigenvalues are automatically real numbers — the kind of number a measurement can actually return.
-$B(\HH)$ denotes the set of *emph* bounded operators on $\HH$ (bounded was defined in Sec.~I.B above —
-informally, operators that don't stretch any vector's length by more than some fixed factor).
+a $2\times2$ matrix, and $A\ket\xi$ is ordinary matrix-vector multiplication. The **Hermitian
+conjugate** (or adjoint) $A^\dagger$ of $A$ is the unique operator with
+$\braket{\xi|A\eta}=\braket{A^\dagger\xi|\eta}$ for all $\xi,\eta$. For a finite matrix, this is the familiar
+rule "transpose and complex-conjugate every entry." $A$ is **self-adjoint** (or Hermitian) if
+$A=A^\dagger$. Self-adjoint operators are the ones that represent physical observables, because their
+eigenvalues are real numbers, the kind of number a measurement can return. $B(\HH)$ denotes the set of
+*emph* bounded operators on $\HH$. Boundedness was defined in Chapter~1. Informally, a bounded operator
+does not stretch the length of any vector by more than some fixed factor.
 
 ### The new definition of subsystem
 
-Here is Liu's definition, restated with every piece spelled out. Suppose you have access to only some subset
-of operators, $\M\subset B(\HH)$ — not everything, just the things your particular apparatus, in your
-particular location, with your particular capabilities, can measure or apply. Given some state $\ket\Psi\in
-\HH$ of the full system, two things are available to you using only $\M$: you can compute expectation values
-$\braket{\Psi|A|\Psi}$ for $A\in\M$ (predict what a measurement of $A$ would read, on average, over many
-repetitions), and you can act on the state, producing $B\ket\Psi$ for $B\in\M$ (actually change the system by
-applying an operation you have access to). Whatever set $\M$ happens to be, it should be closed under three
-operations, because each one corresponds to something an observer with access to $\M$ can obviously already
-do: if you can measure/apply $A$ and $B$, you can measure/apply $A+B$ (do both, add the results) and $AB$ (do
-one after the other); and if $A$ is something you can measure, so is $A^\dagger$ (for a self-adjoint $A$ this
-is trivial, $A^\dagger=A$; more generally it just says your toolkit is closed under the basic operation of
-taking an adjoint). A set closed under these three operations — sums, products, and adjoints — is called a
-**$*$-subalgebra** of $B(\HH)$ (the $*$ refers to the adjoint operation, often written $A^*$ in pure math
-texts instead of $A^\dagger$).
+Here is the definition, with every piece spelled out. Suppose you have access to only some subset of
+operators, $\M\subset B(\HH)$. This is not everything. It is only what your apparatus, in your location, with
+your capabilities, can measure or apply. Let $\ket\Psi\in\HH$ be a state of the full system. Using only $\M$,
+you can do two things:
 
-That alone isn't quite enough. You also want $\M$ to be *emph*, in the sense that if you can
-approximate some operator arbitrarily well using things in $\M$, that operator should count as being in $\M$
-too — otherwise "the set of things you have access to" would have artificial, arbitrary gaps in it. This is
-where the story gets genuinely subtle, because — and this is the crux of the entire next subsection — there
-turn out to be two different, inequivalent ways to make "approximate arbitrarily well" precise, and the
-choice between them changes everything.
+- compute expectation values $\braket{\Psi|A|\Psi}$ for $A\in\M$, which predict the average reading of a
+measurement of $A$ over many repetitions;
+- act on the state, producing $B\ket\Psi$ for $B\in\M$, which changes the system by an operation you have
+access to.
 
-With this notion of subsystem in hand, the **complement** of $\M$ is defined as its commutant,
+Whatever $\M$ is, it should be closed under three operations, because an observer with access to $\M$ can
+already do each of them. If you can measure or apply $A$ and $B$, you can measure or apply $A+B$ (do both and
+add the results) and $AB$ (do one after the other). You can also multiply by complex numbers. And if $A$ is
+available, so is $A^\dagger$. For a self-adjoint $A$ this is automatic, since $A^\dagger=A$. In general it
+says that your toolkit is closed under taking adjoints. A set closed under sums, products, and adjoints is
+called a **$*$-subalgebra** of $B(\HH)$. The $*$ refers to the adjoint, which mathematics texts often
+write as $A^*$ instead of $A^\dagger$. In these notes every $*$-subalgebra is also taken to contain the identity
+operator $\id$, which is the operation "do nothing."
+
+This alone is not quite enough. We also want $\M$ to be *emph*: if some operator can be approximated
+arbitrarily well by elements of $\M$, it should count as an element of $\M$ too. Otherwise the set of things
+you have access to would have artificial gaps. Here the story becomes subtle. There are two different,
+inequivalent ways to make "approximated arbitrarily well" precise, and the choice between them matters a
+great deal. The next section explains both.
+
+With this notion of subsystem in hand, the **complement** of $\M$ is defined to be its commutant,
 
 $$
 
@@ -82,90 +81,102 @@ $$
 
 $$
 
-Read this slowly, because the single most common way to misread it is dangerous enough to be worth flagging
-immediately: $\M'$ is *emph* the set of operators that all commute *emph*. It is the set
-of operators that *emph* commute with *emph*. Two different
-operators sitting inside $\M'$ can perfectly well fail to commute with each other — in fact, whenever $\M'$ is
-itself a rich enough algebra (which it usually is), it absolutely does contain non-commuting pairs, the same
-way $\M$ does. The only promise $\M'$ makes is directional: act with anything in $\M'$, and it produces zero
-interference with any measurement made using $\M$. That is the entire operational content of ``complement of
-a subsystem'' here — not "the other half of a tensor factorization you could point to," but ``everything
-guaranteed, as a matter of algebra, not to disturb what $\M$ can measure.'' If you want to see this worked out
-with the full functional-analysis machinery spelled out in more detail than this paper includes, Walter
-Thirring's *emph* is a standard place to look — but nothing beyond what's given
-here is needed to follow the rest of this paper.
+One misreading of this definition is common enough to address right away. $\M'$ is *emph* the set of
+operators that commute *emph*. It is the set of operators that *emph* commute with
+*emph* element of $\M$. Two operators inside $\M'$ can fail to commute with each other. In fact, when
+$\M'$ is a rich enough algebra (the usual case), it contains non-commuting pairs, just as $\M$ does. What
+$\M'$ guarantees is only this: acting with anything in $\M'$ produces no interference with any measurement
+made using $\M$. That is the operational meaning of "complement of a subsystem" here. It is not ``the other
+half of a tensor factorization you could point to.'' It is ``everything that, as a matter of algebra, cannot
+disturb what $\M$ measures.'' A fuller treatment, with the functional-analysis machinery spelled out, is given
+in W.~Thirring's *emph*. Nothing beyond what is given here is needed for the rest
+of these notes.
 
 
 > [!NOTE] **Physics Connection: Spacelike Commutativity**
-> You already know one instance of this idea from ordinary relativistic field theory, and it's worth making the
-> connection completely explicit, because it's the cleanest possible bridge from this abstract definition to
-> something you can compute. For a free scalar field $\phi$, the commutator of the field at two spacetime points
-> is a fixed, state-independent function (not an operator at all — a genuine $c$-number, since for a free field
-> $[\phi(x),\phi(y)]$ works out to be proportional to the identity),
+> You already know one instance of this idea from relativistic field theory. It is the cleanest bridge from
+> the abstract definition to something you can compute. For a free scalar field $\phi$, the commutator of the
+> field at two spacetime points is a fixed function times the identity operator, so it does not depend on the
+> state:
 > 
 $$
 
-> [\phi(x),\phi(y)] = i\Delta(x-y) ,
+> [\phi(x),\phi(y)] = i\Delta(x-y) .
 > 
 $$
 
-> where $\Delta$ (the Pauli—Jordan function) is built from an integral over the field's on-shell momenta. The
-> textbook fact — provable directly from this integral representation, using nothing but Lorentz invariance —
-> is that $\Delta(x-y)=0$ identically whenever $x-y$ is spacelike. The one-line reason it *emph* to vanish
-> there: $\Delta$ depends on $x-y$ only through Lorentz-invariant combinations, but for a spacelike separation
-> there's no Lorentz-invariant way to say "$x$ is later than $y$" or vice versa — a boost can flip which one
-> comes first. Since the commutator is manifestly antisymmetric, $[\phi(x),\phi(y)]=-[\phi(y),\phi(x)]$, and yet
-> Lorentz invariance forbids it from depending on an ordering that isn't even well-defined, the only
-> Lorentz-invariant, antisymmetric quantity available is zero. This is exactly why microcausality — the
-> requirement that spacelike-separated field operators commute — comes out automatically from the free-field
-> construction, rather than needing to be imposed as an extra axiom.
+> Here $\Delta$, the Pauli—Jordan function, is given by an integral over the on-shell momenta of the field. A
+> standard textbook fact is that $\Delta(x-y)=0$ whenever $x-y$ is spacelike. The reason uses two properties of
+> $\Delta$. First, $\Delta$ is Lorentz invariant: $\Delta(\Lambda z)=\Delta(z)$ for every proper orthochronous
+> Lorentz transformation $\Lambda$. Second, $\Delta$ is odd, $\Delta(-z)=-\Delta(z)$, because the commutator is
+> antisymmetric, $[\phi(x),\phi(y)]=-[\phi(y),\phi(x)]$. Now let $z$ be a spacelike vector in $3+1$ dimensions.
+> Then there is a proper orthochronous Lorentz transformation with $\Lambda z=-z$. (Boost to a frame in which
+> $z$ has no time component, rotate by $180^\circ$ about an axis perpendicular to $z$, and boost back.) Hence
+> $\Delta(z)=\Delta(-z)=-\Delta(z)$, so $\Delta(z)=0$. For a timelike $z$ no such $\Lambda$ exists, because these
+> transformations never exchange past and future. This is why microcausality, the statement that field
+> operators at spacelike separation commute, comes out of the free-field construction automatically instead
+> of being imposed as an extra axiom.
 > 
-> Now translate this into the language of this section. Let $\M(O)$ be the algebra generated by field operators
-> smeared over a spacetime region $O$, and $O'$ its causal complement (spacelike-separated from all of $O$).
-> The vanishing of $\Delta$ for spacelike separation says exactly $\M(O')\subseteq\M(O)'$ — this is precisely
-> the "locality" axiom already stated abstractly, without proof, back in Sec.~IV.D.3 (eq.~4.57) of this
-> companion. **So the commutant $\M(O)'$ isn't just *emph* What the
-> abstract definition of $\M'$ in this section adds on top of that familiar fact is the observation, flagged
-> explicitly above, that $\M(O)'$ can be *emph* than $\M(O')$ — it can contain operators that
-> are timelike separated from $O$ but still happen to commute with everything in it, for reasons that have
-> nothing to do with relativistic causality and everything to do with the specific state and representation.
-> Nothing about the free-field commutator changes; what's new is only the recognition that ``commutes with
-> $\M$'' is a strictly more general, purely algebraic notion than "is spacelike separated from $\M$" — and
-> it's exactly this extra room that Sec.~VIII.A puts to work, reading genuine bulk causal structure off of a
-> richer boundary commutant than boundary causality alone would ever require.
+> Now translate this into the language of this chapter. Let $\M(O)$ be the algebra generated by field
+> operators smeared over a spacetime region $O$. Let $O'$ be its causal complement, the set of points
+> spacelike separated from all of $O$. The vanishing of $\Delta$ at spacelike separation says exactly that
+> $\M(O')\subseteq\M(O)'$. This is the *emph* axiom for the local algebras of a relativistic field
+> theory, stated in general in Chapter~4. So in a relativistic field theory, every operator localized
+> spacelike to $O$ lies in the commutant $\M(O)'$.
+> 
+> The abstract definition of $\M'$ adds one thing to this familiar fact. The commutant is defined by a purely
+> algebraic condition, "commutes with everything in $\M$," which never mentions spacetime. Nothing in the
+> definition forces every such operator to be localized in $O'$. In general, $\M(O)'$ can be strictly larger
+> than $\M(O')$. When the two are equal, the theory is said to satisfy *emph* for the region $O$
+> (Chapter~4). Haag duality holds in many standard cases but not in all, and whether it holds depends on the
+> theory, the region, and the representation. So "commutes with $\M$" is a more general notion than ``is
+> spacelike separated from $O$.'' Chapter~8 uses exactly this extra room: there, bulk causal structure is read
+> off from boundary commutants that are larger than boundary causality alone would require.
 
 
-## Sec.~II.B.2: basic properties, $C^*$ vs.\ von Neumann algebras, and the double commutant theorem
+## Basic properties: $C^*$ vs.\ von Neumann algebras, and the double commutant theorem
 
 ### Two notions of "the limit of a sequence of operators"
 
-Take a sequence of operators $A_1,A_2,A_3,\dots$ in $\M$, and ask: does it converge to some operator $A$? For
-ordinary numbers, "converges" has one obvious meaning. For operators, there are (at least) two natural, and
-genuinely different, notions.
+Take a sequence of operators $A_1,A_2,A_3,\dots$ in $\M$, and ask whether it converges to some operator $A$.
+For ordinary numbers, "converges" has one obvious meaning. For operators there are several natural
+meanings, and they are genuinely different.
 
-**Norm convergence.** Every bounded operator has a norm, $\|A\|$ — the smallest number such that
-$\|A\ket\psi\|\le\|A\|\,\|\ket\psi\|$ for every vector $\ket\psi$ (the "maximum stretch factor" from
-Sec.~I.B). It satisfies the identity $\|A^\dagger A\|=\|A\|^2$ (Liu's eq.~2.8) — worth checking on a simple
-case: for $A=\begin{psmallmatrix}0&1\\0&0\end{psmallmatrix}$ acting on $\mathbb C^2$, direct computation gives
-$A^\dagger A = \begin{psmallmatrix}0&0\\0&1\end{psmallmatrix}$, whose largest eigenvalue is $1$, so
-$\|A^\dagger A\|=1$; and $\|A\|$ itself (the largest singular value of $A$) is also $1$, so
-$\|A^\dagger A\|=1=1^2=\|A\|^2$, consistent. A sequence $A_n$ is **norm convergent** to $A$ if
-$\|A_n-A\|\to0$: the maximum possible discrepancy between $A_n\ket\psi$ and $A\ket\psi$, over *emph*
-unit vector $\ket\psi$ simultaneously, shrinks to zero. This is a strong, uniform statement.
+**Norm convergence.** Every bounded operator has a norm, $\|A\|$. It is the smallest number such that
+$\|A\ket\psi\|\le\|A\|\,\|\ket\psi\|$ for every vector $\ket\psi$: the "maximum stretch factor" of
+Chapter~1. The norm satisfies the identity
+\begin{equation}
+\|A^\dagger A\|=\|A\|^2 .
+\label{eq:Cstar-identity}
+\end{equation}
+It is easy to check on a simple case. Take $A=\begin{psmallmatrix}0&1\\0&0\end{psmallmatrix}$ acting on
+$\mathbb C^2$. Then $A^\dagger A = \begin{psmallmatrix}0&0\\0&1\end{psmallmatrix}$, whose largest eigenvalue
+is $1$, so $\|A^\dagger A\|=1$. The norm $\|A\|$ is the largest singular value of $A$, which is also $1$. So
+$\|A^\dagger A\|=1=1^2=\|A\|^2$, as the identity requires. A sequence $A_n$ **converges in norm** to $A$
+if $\|A_n-A\|\to0$. This says that the largest possible discrepancy between $A_n\ket\psi$ and $A\ket\psi$,
+taken over *emph* unit vectors $\ket\psi$ at once, shrinks to zero. It is a strong, uniform statement.
 
-**Weak convergence.** $A_n$ is **weakly convergent** to $A$ if $\braket{\xi|A_n|\eta}\to
-\braket{\xi|A|\eta}$ for every *emph* of vectors $\ket\xi,\ket\eta$. This only asks that individual
-matrix elements converge, one pair of vectors at a time — a much weaker demand, because it doesn't require the
-convergence rate to be uniform across all vectors at once.
+**Strong convergence.** $A_n$ **converges strongly** to $A$ if $\|(A_n-A)\ket\psi\|\to0$ for each
+fixed vector $\ket\psi$. Each vector is tested separately, so the rate of convergence may differ from one
+vector to another.
 
-In finite dimensions the two notions turn out to coincide for the specific sequences you'd usually write down
-by hand — which is exactly why this distinction never comes up in an ordinary quantum mechanics course — but
-they are genuinely different notions in general, and the gap between them is precisely where infinite-dimensional
-phenomena (quantum field theory, the $N\to\infty$ limit) live.
+**Weak convergence.** $A_n$ **converges weakly** to $A$ if $\braket{\xi|A_n|\eta}\to
+\braket{\xi|A|\eta}$ for every fixed pair of vectors $\ket\xi,\ket\eta$. This asks only that individual
+matrix elements converge, one pair of vectors at a time. It is the weakest of the three demands.
+
+Each notion implies the next one. If $\|A_n-A\|\to0$, then $\|(A_n-A)\ket\psi\|\le\|A_n-A\|\,\|\ket\psi\|\to0$,
+so norm convergence implies strong convergence. And $|\braket{\xi|(A_n-A)|\eta}|\le\|\ket\xi\|\,
+\|(A_n-A)\ket\eta\|$ by the Cauchy—Schwarz inequality, so strong convergence implies weak convergence. In
+finite dimensions the three notions coincide completely. This is why the distinction never comes up in an
+ordinary quantum mechanics course. In infinite dimensions they differ, and the gap between them is where
+infinite-dimensional phenomena (quantum field theory, the $N\to\infty$ limit) live. The next example shows
+the difference.
 
 
 > [!EXAMPLE] **Worked Example:**
-> Let $\HH = \ell^2(\mathbb N)$ be the infinite-dimensional Hilbert space of square-summable sequences, with standard orthonormal basis $\{\ket 1, \ket 2, \ket 3, \dots\}$. Consider the sequence of rank-1 projection operators
+> Let
+> $\HH = \ell^2(\mathbb N)$ be the infinite-dimensional Hilbert space of square-summable sequences, with
+> standard orthonormal basis $\{\ket 1, \ket 2, \ket 3, \dots\}$. Consider the sequence of rank-one projections
 > 
 $$
 
@@ -173,9 +184,11 @@ $$
 > 
 $$
 
-> Let us test the convergence of $P_n$ under all three topologies as $n\to\infty$:
+> We test the convergence of $P_n$ as $n\to\infty$ in each of the three senses.
 > 
-1. **Weak convergence ($P_n \to 0$ weakly):** Take any two vectors $\ket\xi = \sum_{k=1}^\infty c_k\ket k$ and $\ket\eta = \sum_{k=1}^\infty d_k\ket k$ with $\sum |c_k|^2 < \infty$ and $\sum |d_k|^2 < \infty$. The matrix element is
+1. **Weak convergence: $P_n \to 0$ weakly.** Take any two vectors
+> $\ket\xi = \sum_{k=1}^\infty c_k\ket k$ and $\ket\eta = \sum_{k=1}^\infty d_k\ket k$, with
+> $\sum |c_k|^2 < \infty$ and $\sum |d_k|^2 < \infty$. The matrix element is
 > 
 $$
 
@@ -183,10 +196,14 @@ $$
 > 
 $$
 
-> By the Cauchy—Schwarz inequality for series, $\sum_{n=1}^\infty |c_n d_n| \le \sqrt{\sum |c_n|^2}\sqrt{\sum |d_n|^2} < \infty$, so the sequence of terms must converge to zero: $\lim_{n\to\infty} c_n^* d_n = 0$. Thus $\braket{\xi|P_n|\eta} \to 0$ for *emph* pair of states. The sequence converges weakly to the zero operator: $P_n \xrightarrow{\text{weak}} 0$.
+> The Cauchy—Schwarz inequality for series gives
+> $\sum_{n=1}^\infty |c_n d_n| \le \sqrt{\sum |c_n|^2}\sqrt{\sum |d_n|^2} < \infty$. The terms of a convergent
+> series tend to zero, so $c_n^* d_n\to0$. Hence $\braket{\xi|P_n|\eta} \to 0$ for *emph* pair of vectors,
+> and $P_n$ converges weakly to the zero operator.
 > 
 >
-2. **Strong convergence ($P_n \to 0$ strongly):** The strong operator topology requires $\|P_n\ket\psi\| \to 0$ for every fixed vector $\ket\psi = \sum c_k\ket k$. We compute the norm:
+2. **Strong convergence: $P_n \to 0$ strongly.** For a fixed vector $\ket\psi = \sum c_k\ket k$ we
+> compute
 > 
 $$
 
@@ -194,10 +211,12 @@ $$
 > 
 $$
 
-> Thus $P_n \xrightarrow{\text{strong}} 0$.
+> The limit is zero because $|c_n|^2$ are the terms of the convergent series $\sum_k|c_k|^2$. Hence $P_n$
+> converges strongly to $0$.
 > 
 >
-3. **Norm convergence ($P_n \not\to 0$ in norm):** The operator norm measures the maximum stretch over *emph* normalized vectors simultaneously:
+3. **Norm convergence: $P_n$ does not converge in norm.** The operator norm takes the largest stretch
+> over all unit vectors at once. The largest stretch is reached at $\ket\psi=\ket n$:
 > 
 $$
 
@@ -205,44 +224,48 @@ $$
 > 
 $$
 
-> For every single $n$, $\|P_n - 0\| = 1$. It never shrinks! Hence $P_n$ does *emph* converge in norm to 0: $P_n \xrightarrow{\text{norm}} \text{does not exist}$.
+> So $\|P_n - 0\| = 1$ for every $n$, and this never shrinks. Hence $P_n$ does *emph* converge to $0$ in
+> norm. It does not converge in norm to anything else either. For $n\ne m$ the operator $P_n-P_m$ has
+> eigenvalues $+1$ and $-1$, so $\|P_n-P_m\|=1$, and the sequence is not even a Cauchy sequence in norm.
 >
 
-> This is the archetypal example: matrix elements settle down to zero, but the operator as a whole never gets small in norm.
+> This is the standard example to keep in mind. Every matrix element settles down to zero, but the operator as
+> a whole never becomes small in norm.
 
 
-A $*$-subalgebra $\M$ complete under norm convergence (every norm-convergent sequence in $\M$ has its limit
-back in $\M$) is called a **$C^*$-algebra**. A $*$-subalgebra complete under the weaker, weak
-convergence is called a **von Neumann algebra**. Since norm convergence automatically implies weak
-convergence (a uniformly-shrinking discrepancy certainly implies each individual matrix element settles down),
-every sequence that's norm-Cauchy is also weakly Cauchy, and so every von Neumann algebra is automatically
-also a $C^*$-algebra — von Neumann algebras are the strictly more complete, more restrictive notion.
+A $*$-subalgebra $\M$ that is complete under norm convergence is called a **$C^*$-algebra**. Here
+"complete" means that every norm-convergent sequence in $\M$ has its limit back in $\M$. A $*$-subalgebra
+that is complete under weak convergence is called a **von Neumann algebra**. (Strictly speaking, the
+weak closure is defined with nets rather than sequences. Sequences give the right intuition, and nothing in
+these notes depends on the difference.) Every von Neumann algebra is automatically a $C^*$-algebra. To see
+this, suppose $A_n\in\M$ and $A_n\to A$ in norm. Then $A_n\to A$ weakly as well, so if $\M$ is weakly closed,
+$A\in\M$. Weak closure is the stronger requirement, because it asks $\M$ to contain the limits of more
+sequences. So von Neumann algebras are the more complete, more restrictive notion.
 
-Which one is the physically correct notion of "subsystem"? Weak convergence, and it's worth being clear
-about why: what you actually measure in a laboratory is a matrix element, $\braket{\xi|A|\eta}$ — an
-expectation value, or more generally a transition amplitude. Weak convergence is exactly the statement that
-every one of these directly measurable quantities settles down. So von Neumann algebras, not the more
-restrictive $C^*$-algebras, are the objects that correctly capture ``the set of operators whose physical
-predictions are under control,'' and that's why they, not $C^*$-algebras, are the workhorse of the rest of
-this paper.
+Which notion is the right one for a physical subsystem? Weak convergence, for a simple reason. What a
+laboratory measures is a matrix element $\braket{\xi|A|\eta}$: an expectation value, or more generally a
+transition amplitude. Weak convergence says exactly that each of these measurable numbers settles down. So
+von Neumann algebras, and not the less complete $C^*$-algebras, capture ``the set of operators whose physical
+predictions are under control.'' That is why they are the main tool in the rest of these notes.
 
-One more asymmetry between the two, flagged already in Sec.~I.B.2's companion discussion but worth repeating
-here at the point where it starts to matter: a $C^*$-algebra can be defined completely abstractly, with no
-Hilbert space anywhere — just a vector space with a product, an adjoint, and a norm satisfying $\|A^\dagger
-A\|=\|A\|^2$, complete in that norm. You could specify one purely by its multiplication table and norm, the
-way you'd specify a finite group by its multiplication table, with no reference to any particular set of
-vectors it acts on. A von Neumann algebra cannot be defined this way, because its defining completeness
-condition — weak convergence — is stated directly in terms of vectors $\ket\xi,\ket\eta$ living in some
-specific $\HH$. This asymmetry is not a minor technicality; it is precisely the gap that the GNS construction
-(Sec.~II.D, worked through in full below) exists to close: starting from nothing but an abstract $C^*$-algebra
-and a state on it, GNS manufactures the missing Hilbert space, and only then can you ask whether the algebra,
-represented on that Hilbert space, happens to also be weakly closed (a von Neumann algebra) or not.
+There is one more difference between the two notions, and it matters for everything that follows. A
+$C^*$-algebra can be defined abstractly, with no Hilbert space anywhere. It is a vector space with a product,
+an adjoint, and a norm that satisfies the identity~\eqref{eq:Cstar-identity}, and it is complete in that
+norm. You could specify one by its multiplication table and its norm, much as you specify a finite group by
+its multiplication table, without saying what vectors it acts on. The definition of a von Neumann algebra
+given above cannot be stated this way. Its completeness condition, weak convergence, is phrased in terms of
+vectors $\ket\xi,\ket\eta$ in a specific $\HH$. (Mathematicians do have an abstract characterization of von
+Neumann algebras, due to Sakai, but it is less direct and is not needed here.) This gap is exactly what the
+GNS construction, worked through later in this chapter, is designed to close. Starting from nothing but an
+abstract $C^*$-algebra and a state on it, GNS builds the missing Hilbert space. Only then can you ask whether
+the algebra, represented on that Hilbert space, is also weakly closed.
 
 ### The double commutant theorem
 
-Checking weak-convergence completeness directly — verifying that *emph* weakly convergent sequence in
-$\M$ has its limit back in $\M$ — sounds like it could require checking infinitely many sequences. Von
-Neumann's double commutant theorem turns this topological chore into a two-line algebraic check:
+Checking weak closure directly means verifying that *emph* weakly convergent sequence in $\M$ has its
+limit in $\M$. That sounds like infinitely many checks. Von Neumann's double commutant theorem replaces this
+topological chore with an algebraic check. For a $*$-subalgebra $\M\subset B(\HH)$ that contains the
+identity,
 
 $$
 
@@ -250,17 +273,16 @@ $$
 
 $$
 
-Here $\M''\equiv(\M')'$, the commutant of the commutant. Read the logic carefully: you take the complement of
-your subsystem ($\M'$, everything guaranteed not to disturb $\M$), and then take the complement of
-*emph* ($\M''$, everything guaranteed not to disturb anything in $\M'$). The theorem says this process,
-applied twice, lands you exactly back where you started — but only if $\M$ was already a legitimate von
-Neumann algebra to begin with; if $\M$ was merely a $*$-subalgebra (closed under sums, products, adjoints, but
-not yet weakly closed), $\M''$ is in general strictly bigger than $\M$ — it's the *emph* von Neumann
-algebra containing $\M$, i.e., $\M$ together with every operator you can approximate using $\M$ in the weak
-sense. This is a genuinely remarkable fact (not an obvious one — it's a real theorem, with a real proof
-involving the structure of Hilbert space geometry) precisely because it means a purely algebraic operation
-(take the commutant, twice) automatically performs a topological completion (weak closure) for you, with no
-limiting procedure required in the definition at all.
+Here $\M''\equiv(\M')'$ is the commutant of the commutant. Read the logic slowly. You take the complement of
+your subsystem, $\M'$: everything that cannot disturb $\M$. Then you take the complement of *emph*,
+$\M''$: everything that cannot disturb anything in $\M'$. The theorem says that doing this twice brings you
+back exactly to where you started, provided $\M$ was already a von Neumann algebra. If $\M$ is only a
+$*$-subalgebra (closed under sums, products, and adjoints, but not weakly closed), then $\M''$ is in general
+strictly larger than $\M$. It is the *emph* von Neumann algebra containing $\M$: $\M$ together with
+every operator that can be approximated weakly by elements of $\M$. This is not an obvious fact. It is a real
+theorem, and its proof uses the geometry of Hilbert space. Its value is that a purely algebraic operation
+(take the commutant twice) carries out a topological completion (weak closure) for you, with no limits in
+the definition at all.
 
 
 > [!EXAMPLE] **Worked Example:**
@@ -285,7 +307,9 @@ $$
 > \end{psmallmatrix}$ and matching coefficients gives $c_0=\tfrac{a+d}2$, $c_3=\tfrac{a-d}2$,
 > $c_1=\tfrac{b+c}2$, $c_2=\tfrac{b-c}{2i}$, which always has a solution).
 > 
-> To find $\M'$: you need every $4\times4$ matrix $X$, written in the basis $\ket{00},\ket{01},\ket{10},\ket{11}$ (first digit is $R$, second is $L$), satisfying $[\sigma_i\otimes\id_L,\,X]=0$ for all $\sigma_i$. Rather than treating $X$ as an opaque $16\times16$ system, we can solve it by writing $X$ as four $2\times2$ blocks:
+> To find $\M'$, look for every $4\times4$ matrix $X$ that commutes with all the $\sigma_i\otimes\id_L$. Use the
+> basis $\ket{00},\ket{01},\ket{10},\ket{11}$, where the first digit belongs to $R$ and the second to $L$. Rather
+> than solving sixteen equations one by one, write $X$ as four $2\times2$ blocks:
 > 
 $$
 
@@ -293,31 +317,35 @@ $$
 > 
 $$
 
-> Now evaluate the commutator with each generator of $\M$:
+> In this basis $\sigma_z\otimes\id_L=\begin{psmallmatrix}\id_2&0\\0&-\id_2\end{psmallmatrix}$ and
+> $\sigma_x\otimes\id_L=\begin{psmallmatrix}0&\id_2\\\id_2&0\end{psmallmatrix}$. Since $\sigma_x$ and $\sigma_z$
+> generate all $2\times2$ matrices (their product is $\sigma_x\sigma_z=-i\sigma_y$), it is enough to commute $X$
+> with these two. First,
+> \begin{align}
+> [\sigma_z\otimes\id_L,\, X]
+> &\eqstep{1} \begin{pmatrix} X_{11} & X_{12} \\ -X_{21} & -X_{22} \end{pmatrix}
+> - \begin{pmatrix} X_{11} & -X_{12} \\ X_{21} & -X_{22} \end{pmatrix}
+> \eqstep{2} \begin{pmatrix} 0 & 2X_{12} \\ -2X_{21} & 0 \end{pmatrix} .
+> \notag
+> \end{align}
+> **(1)** multiplying by $\sigma_z\otimes\id_L$ on the left flips the sign of the bottom row of blocks;
+> multiplying on the right flips the sign of the right column of blocks.\quad
+> **(2)** subtract block by block.
 > 
-1. Commutator with $\sigma_z \otimes \id_L = \begin{pmatrix} \id_2 & 0 \\ 0 & -\id_2 \end{pmatrix}$:
+> Setting this to zero forces $X_{12}=X_{21}=0$, so $X$ is block-diagonal. Next, for block-diagonal $X$,
+> \begin{align}
+> [\sigma_x\otimes\id_L,\, X]
+> &\eqstep{1} \begin{pmatrix} 0 & X_{22} \\ X_{11} & 0 \end{pmatrix}
+> - \begin{pmatrix} 0 & X_{11} \\ X_{22} & 0 \end{pmatrix}
+> \eqstep{2} \begin{pmatrix} 0 & X_{22}-X_{11} \\ X_{11}-X_{22} & 0 \end{pmatrix} .
+> \notag
+> \end{align}
+> **(1)** multiplying by $\sigma_x\otimes\id_L$ on the left swaps the two rows of blocks; multiplying on
+> the right swaps the two columns of blocks.\quad
+> **(2)** subtract block by block.
 > 
-$$
-
-> [\sigma_z\otimes\id_L, \, X] = \begin{pmatrix} \id_2 & 0 \\ 0 & -\id_2 \end{pmatrix} \begin{pmatrix} X_{11} & X_{12} \\ X_{21} & X_{22} \end{pmatrix} - \begin{pmatrix} X_{11} & X_{12} \\ X_{21} & X_{22} \end{pmatrix} \begin{pmatrix} \id_2 & 0 \\ 0 & -\id_2 \end{pmatrix} = \begin{pmatrix} 0 & 2X_{12} \\ -2X_{21} & 0 \end{pmatrix} = 0 .
-> 
-$$
-
-> This forces the off-diagonal blocks to vanish identically: $X_{12} = 0$ and $X_{21} = 0$. So $X = \begin{pmatrix} X_{11} & 0 \\ 0 & X_{22} \end{pmatrix}$ must be block-diagonal.
-> 
->
-2. Commutator with $\sigma_x \otimes \id_L = \begin{pmatrix} 0 & \id_2 \\ \id_2 & 0 \end{pmatrix}$:
-> 
-$$
-
-> [\sigma_x\otimes\id_L, \, X] = \begin{pmatrix} 0 & \id_2 \\ \id_2 & 0 \end{pmatrix} \begin{pmatrix} X_{11} & 0 \\ 0 & X_{22} \end{pmatrix} - \begin{pmatrix} X_{11} & 0 \\ 0 & X_{22} \end{pmatrix} \begin{pmatrix} 0 & \id_2 \\ \id_2 & 0 \end{pmatrix} = \begin{pmatrix} 0 & X_{22} - X_{11} \\ X_{11} - X_{22} & 0 \end{pmatrix} = 0 .
-> 
-$$
-
-> This forces the two diagonal blocks to be identical: $X_{22} = X_{11} \equiv B$.
->
-
-> Therefore, any commuting matrix $X$ must have the exact form:
+> Setting this to zero forces $X_{22}=X_{11}$. Call this common block $B$. Every $X$ that commutes with $\M$
+> therefore has the form
 > 
 $$
 
@@ -325,238 +353,279 @@ $$
 > 
 $$
 
-> Since $B$ is an arbitrary $2\times2$ matrix on subsystem $L$, this proves directly that $\M' = \id_R \otimes B(\HH_L)$!
+> Since $B$ is an arbitrary $2\times2$ matrix, $\M' = \id_R \otimes B(\HH_L)$. The commutant of ``everything
+> $R$ can do'' is "everything $L$ can do".
 > 
-> Now compute the second commutant $\M'' = (\M')'$: an operator $Y = \begin{pmatrix} Y_{11} & Y_{12} \\ Y_{21} & Y_{22} \end{pmatrix}$ in $\M''$ must commute with every $\id_R \otimes B = \begin{pmatrix} B & 0 \\ 0 & B \end{pmatrix}$. This requires $[Y_{ij}, B] = 0$ for *emph* $2\times2$ matrix $B$. By Schur's lemma, the only $2\times2$ matrices commuting with all of $M_2(\mathbb C)$ are scalar multiples of the identity: $Y_{ij} = a_{ij} \id_2$. Thus
+> Now compute the second commutant $\M''=(\M')'$. An operator
+> $Y=\begin{psmallmatrix} Y_{11} & Y_{12} \\ Y_{21} & Y_{22} \end{psmallmatrix}$ in $\M''$ must commute with
+> every $\id_R\otimes B=\begin{psmallmatrix} B & 0 \\ 0 & B \end{psmallmatrix}$. Multiplying out, this says
+> $Y_{ij}B=BY_{ij}$ for each block and for every $2\times2$ matrix $B$. The only $2\times2$ matrices that commute
+> with every $2\times2$ matrix are multiples of the identity. (Commuting with
+> $\begin{psmallmatrix}1&0\\0&0\end{psmallmatrix}$ removes the off-diagonal entries, and commuting with
+> $\begin{psmallmatrix}0&1\\0&0\end{psmallmatrix}$ makes the two diagonal entries equal.) So
+> $Y_{ij}=a_{ij}\id_2$, and
 > 
 $$
 
-> Y = \begin{pmatrix} a_{11}\id_2 & a_{12}\id_2 \\ a_{21}\id_2 & a_{22}\id_2 \end{pmatrix} = \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix} \otimes \id_L = A \otimes \id_L = \M .
+> Y = \begin{pmatrix} a_{11}\id_2 & a_{12}\id_2 \\ a_{21}\id_2 & a_{22}\id_2 \end{pmatrix}
+> = \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix} \otimes \id_L \in \M .
 > 
 $$
 
-> So, checked directly and analytically step-by-step: $\dim\M=4$, $\dim\M'=4$, $\dim\M''=4$, and $\M''=\M$. This is the double commutant theorem, verified by hand on the smallest non-trivial subsystem!
+> Every such $Y$ lies in $\M$, and every element of $\M$ has this form, so $\M''=\M$. All three algebras are
+> 4-dimensional, and the double commutant theorem holds here by direct calculation.
 > 
-> A second example is worth doing too, because it shows what happens when $\M$ is *emph* simply ``all
-> operators on one tensor factor,'' and it previews something important for later (the notion of a
-> *emph*, coming up two subsections from now). Take the same $\HH=\mathbb C^4$, but now forget any
-> tensor-product structure and let $\M$ be spanned by just two matrices, $P_1=\mathrm{diag}(1,1,0,0)$ and
-> $P_2=\mathrm{diag}(0,0,1,1)$ — the algebra available to an observer who can only tell whether the system is
-> in "block one" or "block two," nothing finer. Solving the same kind of linear system: $\M'$ turns out to
-> be 8-dimensional (every operator that acts as an arbitrary $2\times2$ block within each of the two sectors
-> separately, without mixing them — an 8-real-dimensional space, i.e., two independent $2\times2$ complex
-> matrices), and $\M''$ comes back out to be exactly $\M$ again, 2-dimensional. Notice something new here that
-> didn't happen in the first example: $\M\subset\M'$ — both $P_1$ and $P_2$ individually commute with
-> *emph* in the block-diagonal algebra $\M'$, including with each other and with themselves (trivially
-> true for any operator, but here it's also true relative to the much bigger algebra $\M'$). Whenever
-> $\M\subset\M'$ like this — an algebra small enough that it commutes with its own complement, and hence with
-> itself in this stronger sense — you're looking at an algebra with a genuinely nontrivial *emph*, and
-> that turns out to signal something physically important: $\M$ is not describing one indivisible subsystem, but
-> a classical label (which block you're in) sitting on top of possibly-further subsystems within each block.
-> This comes back explicitly in the discussion of "general type I" algebras below.
+> A second example shows what happens when $\M$ is *emph* simply "all operators on one tensor factor."
+> It also previews the notion of a *emph*, defined just below. Take the same $\HH=\mathbb C^4$, but now
+> ignore any tensor-product structure. Let $\M$ be spanned by the two matrices $P_1=\mathrm{diag}(1,1,0,0)$ and
+> $P_2=\mathrm{diag}(0,0,1,1)$. This is the algebra of an observer who can only tell whether the system is in
+> "block one" or "block two," and nothing finer. Solving the same kind of linear system shows that $\M'$ is
+> 8-dimensional. It consists of every operator that acts as an arbitrary $2\times2$ block within each of the
+> two sectors, without mixing them: two independent $2\times2$ complex matrices, so $4+4=8$ complex
+> parameters. The second commutant $\M''$ comes out to be exactly $\M$ again, which is 2-dimensional. Something
+> happens here that did not happen in the first example: $\M\subset\M'$. Both $P_1$ and $P_2$ commute with
+> *emph* in the block-diagonal algebra $\M'$. So $\M$ is small enough to commute with its own
+> complement. Whenever this happens, $\M$ has a nontrivial *emph*, and that has a physical meaning. $\M$
+> does not describe one indivisible subsystem. It describes a classical label (which block you are in),
+> possibly with further subsystems inside each block. The discussion of the center below comes back to this
+> example.
 
 
 \begin{quote}
 **Where the entangled subsystem lives.** Putting the last two subsections together: a subsystem is a von
-Neumann algebra $\M\subset B(\HH)$; its complement is the commutant $\M'$; and bipartite entanglement, once
-this framework is adopted, becomes a statement about the pair $(\M,\M')$, not about a tensor factorization.
-When $\HH=\HH_R\otimes\HH_L$ genuinely exists, choosing $\M=B(\HH_R)\otimes\id_L$ recovers exactly the
-familiar story — that's precisely the first worked example above, and it's the special case that Sec.~III.B
-calls a *emph*.
+Neumann algebra $\M\subset B(\HH)$, and its complement is the commutant $\M'$. In this framework, bipartite
+entanglement is a statement about the pair $(\M,\M')$, not about a tensor factorization. When a factorization
+$\HH=\HH_R\otimes\HH_L$ does exist, the choice $\M=B(\HH_R)\otimes\id_L$ gives back exactly the familiar
+story. That is the first worked example above. Chapter~3 calls this special case a *emph*.
 \end{quote}
 
-A handful of further algebraic facts about commutants, stated in the paper without much comment (its
-eqs.~2.12—2.16), are worth having explicitly on hand, because they get used freely later with no further
-explanation: for any $*$-subalgebra $\Alg$ (not yet necessarily weakly closed), $\Alg'=\Alg'''$ (its commutant
-is automatically already a full von Neumann algebra, since a short argument shows $\Alg'=(\Alg')''$ directly);
-$\M\equiv\Alg''$ is the smallest von Neumann algebra containing $\Alg$, and it has the same commutant as
-$\Alg$ does, $\M'=\Alg'$. Given two von Neumann algebras $\M_1,\M_2$, their **join** $\M_1\vee\M_2\equiv
-(\M_1\cup\M_2)''$ is the smallest von Neumann algebra containing both, and their **meet** $\M_1\wedge
-\M_2\equiv\M_1\cap\M_2$ is simply their intersection (already automatically a von Neumann algebra, so no
-double-commutant is needed on that side); and these satisfy a De~Morgan-style duality,
-$(\M_1\vee\M_2)'=\M_1'\wedge\M_2'$ — joining two algebras and then taking the complement gives the same
-answer as taking each complement first and then intersecting them.
+Several further facts about commutants are used freely later, so we collect them here. Let $\Alg$ be any
+$*$-subalgebra, not necessarily weakly closed.
 
-The **center** of $\M$ is $Z(\M)\equiv\M\cap\M'$: operators that commute with everything in $\M$
-*emph* everything in $\M'$ simultaneously — the second worked example above, with $Z(\M)=\M$ itself
-(since $\M\subset\M'$ there), is exactly a case where the center is as large as it could possibly be. $\M$ is
-called a **factor** (or is said to be **primary**) if its center is as small as it can possibly be
-instead, $Z(\M)=\mathbb C\,\id$ — only multiples of the identity, nothing else. The first worked example above,
-$\M=B(\HH_R)\otimes\id_L$, is a factor: the only operator of the form $A\otimes\id_L$ that is simultaneously
-of the form $\id_R\otimes B$ is a multiple of the identity (immediate from comparing the two forms directly).
-A general von Neumann algebra can always be decomposed into a direct sum (or, more generally, a direct
-integral) of factors, so from here on — and for essentially the whole rest of the paper — attention is
-restricted to factors, since the classification of general von Neumann algebras reduces to classifying
-factors plus bookkeeping the classical (center) labels on top.
+- $\Alg'=\Alg'''$. The commutant of $\Alg$ is already a von Neumann algebra: a short argument shows
+$\Alg'=(\Alg')''$ directly.
+- $\M\equiv\Alg''$ is the smallest von Neumann algebra containing $\Alg$, and it has the same commutant
+as $\Alg$: $\M'=\Alg'''=\Alg'$.
+- For two von Neumann algebras $\M_1,\M_2$, the **join** $\M_1\vee\M_2\equiv(\M_1\cup\M_2)''$ is the
+smallest von Neumann algebra containing both. The **meet** $\M_1\wedge\M_2\equiv\M_1\cap\M_2$ is their
+intersection. The intersection is already a von Neumann algebra, so no double commutant is needed on that
+side.
+- These satisfy a De~Morgan-type duality, $(\M_1\vee\M_2)'=\M_1'\wedge\M_2'$. Joining two algebras and
+then taking the complement gives the same result as taking each complement first and then intersecting. (The
+left side is $(\M_1\cup\M_2)'''=(\M_1\cup\M_2)'$, and an operator commutes with everything in
+$\M_1\cup\M_2$ exactly when it commutes with $\M_1$ and with $\M_2$.)
 
-## Sec.~II.B.3: weights and states
+
+The **center** of $\M$ is $Z(\M)\equiv\M\cap\M'$. It consists of the operators that commute with
+everything in $\M$ *emph* with everything in $\M'$. In the second worked example above, $\M\subset\M'$,
+so $Z(\M)=\M$: the center is as large as it can possibly be. At the other extreme, $\M$ is called a
+**factor** (or is said to be **primary**) if its center is as small as possible,
+$Z(\M)=\mathbb C\,\id$, containing only multiples of the identity. The first worked example,
+$\M=B(\HH_R)\otimes\id_L$, is a factor. Indeed, an operator that has both the form $A\otimes\id_L$ and the
+form $\id_R\otimes B$ must be a multiple of the identity, as a direct comparison of the two forms shows. A
+general von Neumann algebra can always be decomposed into a direct sum, or more generally a direct integral,
+of factors. So the classification of von Neumann algebras reduces to classifying factors, plus bookkeeping
+for the classical labels carried by the center. For this reason, from here on and for almost all of the
+notes, we restrict attention to factors.
+
+## Weights and states
 
 ### The definitions
 
-A **linear functional** $\omega$ on $\M$ is simply a rule assigning a complex number $\omega(A)$ to
-every $A\in\M$, respecting addition and scalar multiplication: $\omega(aA+bB)=a\,\omega(A)+b\,\omega(B)$, and
-compatible with the adjoint, $\omega(A^\dagger)=\omega(A)^*$ (Liu's eq.~2.17). It is a **weight** if it's
-also positive, $\omega(A^\dagger A)\ge0$ for every $A$ (eq.~2.18) — the natural requirement that
-"$A^\dagger A$" (which plays the role of $|A|^2$ for operators — it's always a non-negative operator, the
-operator analogue of a squared magnitude) should never get assigned a negative number. It is a **state**
-if, further, it's normalized, $\omega(\id)=1$ (eq.~2.21). It is a **trace** if it satisfies
-$\omega(AB)=\omega(BA)$ (eq.~2.20) — the same cyclic property the ordinary matrix trace has, $\Tr(AB)=\Tr(BA)$.
-Combining positivity with linearity gives a useful inequality for free (Liu's eq.~2.19, a direct analogue of
-the ordinary Cauchy—Schwarz inequality you already know from vector inner products):
-$|\omega(A^\dagger B)|^2\le\omega(A^\dagger A)\,\omega(B^\dagger B)$.
+A **linear functional** $\omega$ on $\M$ is a rule that assigns a complex number $\omega(A)$ to every
+$A\in\M$ and respects addition and multiplication by numbers: $\omega(aA+bB)=a\,\omega(A)+b\,\omega(B)$. It is
+**positive** if $\omega(A^\dagger A)\ge0$ for every $A$. This is a natural requirement. The operator
+$A^\dagger A$ plays the role of $|A|^2$: it is always a non-negative operator, the operator analogue of a
+squared magnitude, so it should never be assigned a negative number. A positive functional is automatically
+compatible with the adjoint, $\omega(A^\dagger)=\omega(A)^*$. (This follows from positivity applied to
+$(\id+A)^\dagger(\id+A)$ and $(\id+iA)^\dagger(\id+iA)$.) We use this property freely. In these notes a positive
+linear functional is called a **weight**. (In the mathematical literature a weight is also allowed to
+take the value $+\infty$ on some positive elements, as the ordinary trace does on $B(\HH)$ when $\HH$ is
+infinite-dimensional. Traces of this kind appear in Chapter~3.) A weight is a **state** if it is also
+normalized, $\omega(\id)=1$. It is a **trace** if $\omega(AB)=\omega(BA)$. This is the cyclic property of
+the ordinary matrix trace, $\Tr(AB)=\Tr(BA)$. Positivity and linearity together give a useful inequality for
+free. It is the direct analogue of the Cauchy—Schwarz inequality you know from vector inner products:
+\begin{equation}
+|\omega(A^\dagger B)|^2\le\omega(A^\dagger A)\,\omega(B^\dagger B) .
+\label{eq:CS-omega}
+\end{equation}
 
-$\omega$ is one rule doing one thing: it assigns a single number, $\omega(A)$, to each $A\in\M$. What that
-number means depends only on which operator you feed it, not on any change to $\omega$ itself. Feed it a
-general observable $A$, and $\omega(A)$ is its expectation value. Feed it a projection $P_I$ instead — the
-spectral projection onto some range of possible outcomes, Sec.~II.B.5 — and $\omega(P_I)$ is the probability
-of that outcome, because positivity and normalization already force $0\le\omega(P_I)\le1$, with
-$\omega(P_{I_1})+\omega(P_{I_2})=\omega(P_{I_1\cup I_2})$ for disjoint ranges. Same formula, same $\omega$; the
-two readings — expectation value, probability — come entirely from what sits inside the parentheses.
+A state $\omega$ is one rule doing one thing: it assigns a single number, $\omega(A)$, to each $A\in\M$. What
+that number means depends only on which operator you feed it, not on any change to $\omega$ itself. Feed it
+a general observable $A$, and $\omega(A)$ is the expectation value of $A$. Feed it a projection $P_I$
+instead, and $\omega(P_I)$ is a probability. Here $P_I$ is the spectral projection onto some range $I$ of
+possible outcomes, defined later in this chapter. Positivity and normalization already force
+$0\le\omega(P_I)\le1$, because both $P_I=P_I^\dagger P_I$ and $\id-P_I=(\id-P_I)^\dagger(\id-P_I)$ are of the
+form $X^\dagger X$. Linearity gives $\omega(P_{I_1})+\omega(P_{I_2})=\omega(P_{I_1\cup I_2})$ for disjoint
+ranges. It is the same formula and the same $\omega$ in both cases. The two readings, expectation value and
+probability, come entirely from what sits inside the parentheses.
 
-Crucially — and this is the entire point of introducing weights and states this way rather than immediately
-reaching for a density matrix — none of these definitions mention a Hilbert space, a vector, or a density
-operator. $\omega$ is defined purely as a number assigned to every element of the algebra $\M$, full stop.
-(It *emph* be shown, and is stated as a fact in the paper without proof, that every physically sensible —
-"normal," meaning weakly-continuous — state $\omega$ on $\M\subset B(\HH)$ does secretly correspond to an
-ordinary density operator $\rho$ on $\HH$, via $\omega(A)=\Tr(\rho A)$, eq.~2.23; but the definition of
-$\omega$ itself never needed to assume this in advance — it's a consequence, not an input.) $\omega$ is
-**faithful** if $\omega(A^\dagger A)=0$ forces $A=0$ (nothing nonzero is invisible to it), and it is
-**pure** if it cannot be written as a nontrivial mixture $\omega=\lambda\omega_1+(1-\lambda)\omega_2$ of
-two different states for some $0<\lambda<1$ (eq.~2.24) — if it *emph*, $\omega$ is said to **dominate**
-$\omega_1$ and $\omega_2$.
+None of these definitions mentions a Hilbert space, a vector, or a density operator. This is the reason for
+introducing weights and states this way, rather than going straight to a density matrix. $\omega$ is defined
+only as a number assigned to each element of the algebra $\M$. A standard result, stated here without proof,
+connects this back to density matrices. Call a state *emph* if it is continuous in a suitable weak
+sense; these are the physically sensible states. Every normal state $\omega$ on $\M\subset B(\HH)$ can be
+written as $\omega(A)=\Tr(\rho A)$ for some density operator $\rho$ on $\HH$. This $\rho$ acts on all of
+$\HH$. It need not belong to $\M$, and in general it is not unique. So the density operator is a consequence
+of the definition of $\omega$, not an input to it. $\omega$ is **faithful** if $\omega(A^\dagger A)=0$
+forces $A=0$: nothing nonzero is invisible to it. $\omega$ is **pure** if it cannot be written as a
+nontrivial mixture $\omega=\lambda\omega_1+(1-\lambda)\omega_2$ of two different states, with $0<\lambda<1$. If
+it can, $\omega$ is said to **dominate** $\lambda\omega_1$ and $(1-\lambda)\omega_2$, since
+$\omega-\lambda\omega_1$ and $\omega-(1-\lambda)\omega_2$ are still positive.
 
 ### What happens to the wavefunction once the algebra is taken as primary
 
-The paper states this section's definitions in one dense paragraph and moves on, but they deserve to be
-slowed down and unpacked completely, because they are exactly what demotes the wavefunction from a
-fundamental object to a derived one.
+These definitions look innocent. But they demote the wavefunction from a fundamental object to a derived
+one, so we unpack them slowly.
 
-An ordinary quantum-mechanical state is a vector $\ket\psi$ (or, more generally, a density matrix $\rho$).
-Both of those are objects that live *emph* or *emph* a Hilbert space — you cannot even write down
-$\ket\psi$ without first having $\HH$ in hand. The definition of $\omega$ just given requires none of that: it
-is a number assigned to each algebra element, and the algebra $\M$ can, as already discussed, be specified
-completely abstractly (as a $C^*$-algebra), with no Hilbert space anywhere in the definition. This is not a
-cosmetic reformulation — it is a genuine change in which object is treated as fundamental. In the ordinary
-picture, you start with $\HH$, then pick a vector $\ket\psi\in\HH$, then compute $\braket\psi{A}\psi$ for
-whatever operators you like. In this picture, you start with the algebra $\M$ (the measurable/doable things)
-and a state $\omega$ on it (an assignment of an expected outcome to every element of $\M$), and *emph*, if you want one, do you construct a Hilbert space and a vector that reproduce $\omega$ — this
-construction is the GNS construction, covered in full two subsections from now. The vector you get out of
-that construction is not fundamental data; it's a derived bookkeeping device, specific to the particular state
-$\omega$ you started with, and a different choice of state can produce an entirely different, physically
-inequivalent Hilbert space.
+An ordinary quantum-mechanical state is a vector $\ket\psi$ or, more generally, a density matrix $\rho$.
+Both of these live in, or act on, a Hilbert space. You cannot even write down $\ket\psi$ without first having
+$\HH$. The definition of $\omega$ needs none of that. It is a number assigned to each algebra element, and
+the algebra $\M$ can be specified abstractly, as a $C^*$-algebra, with no Hilbert space in the definition.
+This is more than a cosmetic change. It changes which object is treated as fundamental. In the ordinary
+picture, you start with $\HH$, pick a vector $\ket\psi\in\HH$, and compute $\braket{\psi|A|\psi}$ for
+whatever operators you like. In the algebraic picture, you start with the algebra $\M$ (what can be measured
+or done) and a state $\omega$ on it (an expected outcome for every element of $\M$). Only afterward, if you
+want one, do you build a Hilbert space and a vector that reproduce $\omega$. That construction is the GNS
+construction, covered in full later in this chapter. The vector it produces is not fundamental data. It is a
+derived bookkeeping device, specific to the state $\omega$ you started with. A different state can produce a
+different Hilbert space that is physically inequivalent to the first.
 
-Notice also that $\omega$ is required to be *emph*: $\omega(A+B)=\omega(A)+\omega(B)$. This is already
-telling you that $\omega$ describes an *emph* over many repetitions, not a single measurement outcome
-on one system. A single measurement of "$A+B$" on one particular system doesn't obviously split into ``the
-result you'd have gotten for $A$'' plus "the result you'd have gotten for $B$" — you generally can't even
-measure $A$ and $B$ together unless they happen to commute. But the *emph*, over a large ensemble of
-identically prepared systems, of $A+B$ does split that way automatically, just from linearity of averaging.
-So $\omega$ (equivalently the density matrix $\rho$, equivalently in the pure case the vector $\ket\psi$) was
-never describing one individual system to begin with — it was already, by the very shape of its definition, a
-statement about an ensemble.
+The linearity of $\omega$, $\omega(A+B)=\omega(A)+\omega(B)$, also tells you something. It says that $\omega$
+describes an *emph* over many repetitions, not a single outcome on one system. A single measurement
+of $A+B$ on one system does not obviously split into "the result you would have got for $A$" plus ``the
+result you would have got for $B$.'' In general you cannot even measure $A$ and $B$ together unless they
+commute. But the *emph* of $A+B$ over a large ensemble of identically prepared systems does split
+this way, simply because averaging is linear. So $\omega$ (equivalently the density matrix $\rho$, or in the
+pure case the vector $\ket\psi$) is best read as a statement about an ensemble, not about one individual
+system.
 
-Slavnov's paper (in your Resources folder) makes this completely explicit by going one level deeper than Liu
-does here, and it's worth walking through, because it answers ``then what *emph* describe one individual
-system'' directly. Slavnov starts from something more primitive than $\omega$: a functional $\varphi(\hat A)$,
-defined not on the whole algebra linearly, but only on one maximal set of *emph*
-(jointly measurable, i.e.\ commuting) observables at a time, that returns the actual number a single
-measurement of $\hat A$, on this one specific system, right now, would read out. There's no averaging in this
-definition at all — $\varphi$ is a record of one concrete measurement outcome. The catch, and it's the
-important part: because measuring one observable can disturb your ability to also measure something that
-doesn't commute with it, no experiment can ever pin down $\varphi$ completely. All any experiment can tell you
-is that $\varphi$ belongs to some *emph* of functionals that all agree with your data on the
-one compatible set of observables $\{Q\}$ you actually chose to measure. Slavnov's proposal, argued in detail
-in his Sec.~3, is that **this equivalence class — not $\varphi$ itself — is what a conventional
-"quantum state" $\Psi_Q$ actually is.** It's not a container of hidden, definite properties; it is a precise
-bookkeeping of exactly how much you could possibly know, given that measuring one thing costs you the ability
-to have measured something incompatible with it.
+The statistical algebraic approach of Slavnov~[Slavnov2001] takes this one level deeper. It also
+addresses the obvious next question: what, then, describes one individual system? Slavnov starts from
+something more primitive than $\omega$. It is a functional $\varphi(\hat A)$ that returns the number a single
+measurement of $\hat A$, on this particular system, would read out. It is not defined linearly on the whole
+algebra. It is defined on one maximal set of *emph* observables at a time, that is,
+observables that commute and so can be measured jointly. There is no averaging in this definition: $\varphi$
+is a record of one concrete measurement outcome. The key point is this. Measuring one observable can disturb
+your ability to measure another one that does not commute with it. So no experiment can pin down $\varphi$
+completely. An experiment can only tell you that $\varphi$ belongs to an *emph* of
+functionals that all agree with your data on the compatible set of observables $\{Q\}$ you chose to measure.
+Slavnov proposes that this equivalence class, and not $\varphi$ itself, is what a conventional ``quantum
+state'' $\Psi_Q$ is. On this view a quantum state is not a container of hidden, definite properties. It is a
+precise record of how much you could possibly know, given that measuring one thing costs you the ability to
+measure something incompatible with it.
 
-This single idea explains, without needing any further postulate, several things that otherwise look like
-separate mysteries:
+On this view, one idea accounts for several facts that otherwise look like separate puzzles:
 
 
-- **Why quantum probability isn't "we just don't know the hidden variable yet."** The very same
-individual $\varphi$ can belong to a different equivalence class, $\Psi_P=\{\varphi\}_P$ instead of
-$\Psi_Q=\{\varphi\}_Q$, depending on which compatible set — $\{Q\}$ or $\{P\}$ — an experimenter chooses to
-measure. *emph* "quantum state" your system is assigned to depends on an experimental choice made
-after the system was prepared. Slavnov identifies this directly as the root of the Einstein—Podolsky—Rosen
-puzzle (his Sec.~4) — not a separate, additional weirdness of quantum mechanics, but the same fact wearing a
-different hat.
+- **Why quantum probability is not "we just don't know the hidden variable yet."** The same
+individual $\varphi$ can belong to the class $\Psi_Q=\{\varphi\}_Q$ or to a different class
+$\Psi_P=\{\varphi\}_P$. Which one depends on which compatible set, $\{Q\}$ or $\{P\}$, the experimenter chooses
+to measure. So the "quantum state" assigned to the system depends on an experimental choice made after the
+system was prepared. Slavnov identifies this as the root of the Einstein—Podolsky—Rosen puzzle. On his
+account, the EPR puzzle is not an additional strange feature of quantum mechanics. It is the same fact seen
+from another angle.
 - **Why $\rho$, not $\ket\psi$, is what enters every physical prediction.** $\rho$ (equivalently
-$\omega$) was already, by construction, one level of ensemble-averaging removed from an individual $\varphi$.
-Sakurai's own move — replacing $\ket\psi$ with $\rho=\ket\psi\bra\psi$ as the truly fundamental object, so
-that both pure and mixed states are handled uniformly — is the first half of exactly this demotion; the
-algebraic framework in this paper carries it the rest of the way, replacing $\rho$ (which needs a Hilbert
-space to be written down as a matrix) with $\omega$ (which doesn't).
-- **Why the Hilbert space shows up at all, and in what sense it's "second stage."** Slavnov states
-this outright, and it's worth quoting the idea directly: *emph* The primary elements are the algebra of
-observables and the state (in either Slavnov's individual-measurement sense $\varphi$, or Liu's
-ensemble-average sense $\omega$) directly tied to experiment. The Hilbert space, the vectors, the operators
-acting on them — every bit of that is manufactured afterward, mechanically, by the GNS construction, from
-whichever of these two more primitive objects you start with.
+$\omega$) is, by construction, one step of ensemble averaging removed from an individual $\varphi$. Textbooks
+such as Sakurai's replace $\ket\psi$ by $\rho=\ket\psi\bra\psi$ as the basic object, so that pure and mixed
+states are handled in the same way. That is the first half of this demotion. The algebraic framework of these
+notes completes it: it replaces $\rho$, which needs a Hilbert space to be written as a matrix, with $\omega$,
+which does not.
+- **Why a Hilbert space appears at all, and in what sense it comes second.** Slavnov states this
+directly: *emph* The primary elements are the algebra of observables and the state, both tied directly to
+experiment. The state can be taken in Slavnov's individual sense $\varphi$, or in the ensemble sense $\omega$
+used throughout these notes. The Hilbert space, its vectors, and the operators acting on them are all built
+afterward, mechanically, by the GNS construction applied to $\omega$.
 
 
-So, to state the answer plainly, in one place: the wavefunction is not a physical entity that stores values
-the way a hard drive stores bits. It is the name for an equivalence class of individually-indistinguishable,
-in-principle-definite measurement outcomes, indistinguishable precisely because no experiment could have told
-them apart given what was actually chosen to be measured. The algebra — what's actually measurable, and how
-those measurements combine — is the observer-independent, primary structure. The wavefunction is downstream
-of a choice of what you decided to look at.
+To state the conclusion of this viewpoint plainly, in one place: the wavefunction is not a physical entity
+that stores values the way a hard drive stores bits. It is the name for an equivalence class of individual
+measurement records. The records in one class cannot be told apart, because no experiment could distinguish
+them, given what was actually chosen to be measured. The algebra, which says what is measurable and how
+measurements combine, is the primary, observer-independent structure. The wavefunction depends on a choice
+of what you decided to look at. This is an interpretation, not a theorem, and the mathematics in the rest of
+the notes do not depend on adopting it. What the rest of the notes do use is the weaker statement: the
+algebra and the state come first, and the Hilbert space is built from them.
 
-## Sec.~II.B.4: $C^*$ and von Neumann algebras generated by a single operator
+## $C^*$ and von Neumann algebras generated by a single operator
 
-This subsection is short, and mostly self-contained once you have the two definitions from Sec.~II.B.2 in
-hand, but it's worth doing carefully because it's the concrete reason projections (the subject of the very
-next subsection) have to live in the von Neumann algebra and generally cannot live in the smaller
-$C^*$-algebra.
+This section is short. Given the two definitions ($C^*$-algebra and von Neumann algebra) from earlier in this
+chapter, it is self-contained. It gives the concrete reason why projections, the subject of the next
+section, live in von Neumann algebras and generally not in the smaller $C^*$-algebras.
 
-Take one bounded, self-adjoint operator $\mathcal O$, and ask: what's the smallest $C^*$-algebra containing
-it, $\Alg(\mathcal O)$, and the smallest von Neumann algebra containing it, $\M(\mathcal O)$? Both certainly
-contain every polynomial in $\mathcal O$ (sums of $c_n\mathcal O^n$), since polynomials are automatically
-generated by repeated multiplication and addition — but each also needs to be completed, in its own notion of
-limit, to actually be a full $C^*$- or von Neumann algebra.
+Take one bounded, self-adjoint operator $\mathcal O$. What is the smallest $C^*$-algebra containing it,
+$\Alg(\mathcal O)$, and the smallest von Neumann algebra containing it, $\M(\mathcal O)$? Both contain every
+polynomial $\sum_n c_n\mathcal O^n$ in $\mathcal O$, since polynomials are made by repeated multiplication and
+addition. Each must then be completed, in its own sense of limit, to become a full $C^*$-algebra or von
+Neumann algebra.
 
 The **spectrum** $\sigma(\mathcal O)$ of $\mathcal O$ is the set of numbers $\kappa$ for which
-$\mathcal O-\kappa\id$ fails to be invertible — for a finite Hermitian matrix, this is exactly the set of its
-eigenvalues, the numbers a measurement of $\mathcal O$ could actually return. It's a fact (stated without
-proof in the paper, footnote~10, citing a standard functional-analysis reference) that $\Alg(\mathcal O)$ is
-isomorphic to the algebra of *emph* functions on $\sigma(\mathcal O)$: every element of
-$\Alg(\mathcal O)$ can be written as $f(\mathcal O)$ for some continuous function $f$, and vice versa. This is
-a reasonable thing to believe on a simple example: for a finite Hermitian matrix with distinct eigenvalues
-$\kappa_1,\dots,\kappa_n$, any polynomial (or any continuous function, defined via its Taylor series or via
-uniform approximation by polynomials) applied to $\mathcal O$ just means applying that function to each
-eigenvalue separately, leaving the eigenvectors alone — so specifying $f(\mathcal O)$ really is the same data
-as specifying a continuous function on the finite set $\{\kappa_1,\dots,\kappa_n\}$ (on a finite set every
-function is automatically continuous, so this example doesn't yet show the distinction that's about to
-matter — but it correctly shows the general shape of the isomorphism).
+$\mathcal O-\kappa\id$ is not invertible. For a finite Hermitian matrix, the spectrum is its set of
+eigenvalues: the numbers a measurement of $\mathcal O$ can return. A standard fact of functional analysis
+(stated here without proof) is that $\Alg(\mathcal O)$ is isomorphic to the algebra of *emph*
+functions on $\sigma(\mathcal O)$. Every element of $\Alg(\mathcal O)$ can be written as $f(\mathcal O)$ for a
+continuous function $f$, and every such $f(\mathcal O)$ lies in $\Alg(\mathcal O)$. A simple example makes
+this plausible. Let $\mathcal O$ be a finite Hermitian matrix with distinct eigenvalues
+$\kappa_1,\dots,\kappa_n$. Applying a polynomial, or any function, to $\mathcal O$ means applying it to each
+eigenvalue and leaving the eigenvectors alone. So specifying $f(\mathcal O)$ is the same as specifying the $n$
+numbers $f(\kappa_1),\dots,f(\kappa_n)$, that is, a function on the finite set $\{\kappa_1,\dots,\kappa_n\}$.
+On a finite set every function is continuous, so this example cannot yet show the distinction that matters
+below. It does show the general shape of the isomorphism.
 
 
 > [!NOTE] **Physics Connection: Eigenvalues vs.\ Eigenvectors**
-> The definition of $\sigma(\mathcal O)$ just given never mentions an eigenvector or a Hilbert space: $\lambda\in
-> \sigma(\mathcal O)$ purely because $\mathcal O-\lambda\id$ has no inverse inside $\Alg$. So eigenvalues do not
-> need demoting the way $\ket\Omega$ did in Sec.~II.D — they were already an algebra-level notion, fixed before
-> any state or representation is chosen. What does get demoted is the eigen*emph*: that object lives in
-> whatever Hilbert space GNS happens to build for a given $\omega$, so it only appears once $\omega$ is chosen.
+> The definition of $\sigma(\mathcal O)$ never mentions an eigenvector or a Hilbert space. A number $\lambda$
+> lies in $\sigma(\mathcal O)$ because $\mathcal O-\lambda\id$ has no inverse inside the algebra. So eigenvalues
+> do not need to be demoted, as the vacuum vector $\ket\Omega$ will be in the GNS construction later in this
+> chapter. They are already an algebra-level notion, fixed before any state or representation is chosen. What
+> is demoted is the eigen*emph*. An eigenvector lives in whatever Hilbert space GNS builds for a given
+> $\omega$, so it appears only once $\omega$ is chosen.
 > 
-> Check this on the number operator $N=a^\dagger a$ from the oscillator algebra. Its spectrum is fixed by
-> $[a,a^\dagger]=1$ alone, with no Hilbert space in the argument. Suppose $Nv=\lambda v$ for some nonzero $v$
-> (in whichever representation you like). From $[N,a]=-a$: $N(av)=(\lambda-1)(av)$, so $av$ is zero or an
-> eigenvector at $\lambda-1$. From $[N,a^\dagger]=a^\dagger$: $a^\dagger v$ is an eigenvector at $\lambda+1$, and
-> it is never zero ($a^\dagger v=0$ would force $Nv=(aa^\dagger-1)v=-v$, i.e.\ $\lambda=-1$, contradicting
-> $\lambda=\omega(N)\ge0$ from positivity). Lowering by $1$ repeatedly can never go below $0$, so the chain must
-> terminate exactly there — forcing $\lambda\in\{0,1,2,\dots\}$, the oscillator's quantized levels, derived from
-> the algebra's multiplication table before any Hilbert space, wavefunction, or eigenvector enters. Choosing a
-> state $\omega$ and running GNS only decides which eigenvector shows up, and with what weight; it never
-> changes the spectrum itself.
+> Check this on the number operator $N=a^\dagger a$ of the harmonic oscillator. (Strictly, $N$ is unbounded, so
+> it is not an element of a $C^*$-algebra. The argument below uses only the commutation relation and
+> positivity, so this does not matter.) We show that the possible eigenvalues of $N$ are fixed by
+> $[a,a^\dagger]=1$ together with positivity, in every representation at once. Suppose $Nv=\lambda v$ for some
+> nonzero vector $v$, in any representation of the algebra on a Hilbert space. First, $\lambda\ge0$:
+> \begin{align}
+> \lambda\,\|v\|^2
+> &\eqstep{1} \braket{v|Nv} \notag\\
+> &\eqstep{2} \braket{av|av} = \|av\|^2 \ \ge\ 0 . \notag
+> \end{align}
+> **(1)** $Nv=\lambda v$ by hypothesis.\quad
+> **(2)** $N=a^\dagger a$ and the definition of the adjoint.
+> 
+> Next, lower with $a$:
+> \begin{align}
+> N(av)
+> &\eqstep{1} \big(aN+[N,a]\big)v \notag\\
+> &\eqstep{2} a(\lambda v) + (-a)v \notag\\
+> &\eqstep{3} (\lambda-1)(av) . \notag
+> \end{align}
+> **(1)** $Na=aN+[N,a]$, the definition of the commutator.\quad
+> **(2)** $Nv=\lambda v$ by hypothesis, and $[N,a]=[a^\dagger a,a]=[a^\dagger,a]\,a=-a$ from $[a,a^\dagger]=1$.\quad
+> **(3)** collect the two terms, both proportional to $av$.
+> 
+> So $av$ is either zero or an eigenvector with eigenvalue $\lambda-1$. Repeating, $a^kv$ is either zero or an
+> eigenvector with eigenvalue $\lambda-k$. Every eigenvalue is $\ge0$, so the vectors $a^kv$ cannot all be
+> nonzero. Let $k$ be the last index with $a^kv\ne0$. Then $a(a^kv)=0$, so $N(a^kv)=a^\dagger a(a^kv)=0$, and
+> the eigenvalue $\lambda-k$ must be $0$. Hence $\lambda=k\in\{0,1,2,\dots\}$. The same computation with
+> $[N,a^\dagger]=a^\dagger$ gives $N(a^\dagger v)=(\lambda+1)(a^\dagger v)$. Here $a^\dagger v$ is never zero:
+> $a^\dagger v=0$ would give $aa^\dagger v=(N+1)v=0$, so $\lambda=-1$, which contradicts $\lambda\ge0$. So once
+> one eigenvalue occurs, all of $0,1,2,\dots$ occur. These are the quantized levels of the oscillator. They
+> follow from the multiplication table of the algebra and positivity, whichever Hilbert space the operators
+> act on. Choosing a state $\omega$ and running GNS only decides which eigenvectors appear, and with what
+> weights. It never changes the spectrum itself.
 
 
-$\M(\mathcal O)$, in contrast, is isomorphic to the algebra of *emph* (not necessarily continuous)
-functions on $\sigma(\mathcal O)$. Since every continuous function on a compact set is automatically bounded,
-$\Alg(\mathcal O)\subset\M(\mathcal O)$ — consistent with von Neumann algebras being the more complete,
-larger objects. The difference becomes concrete, and important, once $\sigma(\mathcal O)$ is not just a finite
-set of isolated points but a continuum (an interval of real numbers, as happens once $\mathcal O$ has a
-continuous spectrum — exactly the generic case in field theory or in the $N\to\infty$ limit this paper cares
-about). On a continuum, the **indicator function** of a subset $I\subset\sigma(\mathcal O)$,
+$\M(\mathcal O)$, by contrast, is isomorphic to an algebra of *emph* functions on $\sigma(\mathcal O)$
+that need not be continuous. (Precisely: bounded measurable functions, where two functions count as equal if
+they differ only on a set that the spectral measure of $\mathcal O$ does not see.) Every continuous function
+on the compact set $\sigma(\mathcal O)$ is bounded, so $\Alg(\mathcal O)\subset\M(\mathcal O)$. This fits with
+von Neumann algebras being the larger, more complete objects. The difference becomes concrete and important
+when $\sigma(\mathcal O)$ is a continuum, such as an interval of real numbers, rather than a finite set of
+isolated points. This happens when $\mathcal O$ has continuous spectrum, which is the generic case in field
+theory and in the $N\to\infty$ limits these notes are about. On a continuum, the **indicator function** of a
+subset $I\subset\sigma(\mathcal O)$,
 
 $$
 
@@ -564,230 +633,237 @@ f_I(\kappa) = \begin{cases} 1 & \kappa\in I \\ 0 & \kappa\notin I \end{cases} ,
 
 $$
 
-is bounded (it only ever takes the values $0$ or $1$) but is discontinuous wherever $I$ has a boundary inside
-the continuum. The operator $P_I\equiv f_I(\mathcal O)$ this corresponds to is exactly a **spectral
-projection** — the projector onto the part of $\mathcal O$'s eigenspace with eigenvalue in $I$, the operator
-that answers the yes/no question "does a measurement of $\mathcal O$ land in the range $I$?" Because
-indicator functions are essentially never continuous, spectral projections generically live in $\M(\mathcal
-O)$ but not in $\Alg(\mathcal O)$. This is the concrete, checkable reason von Neumann algebras — not merely
-$C^*$-algebras — are the right home for the entire classification that follows in the next two subsections:
-that classification is built entirely out of projections, and $C^*$-algebras are, in general, too
-norm-continuous to even contain the sharp yes/no measurement operators the classification needs.
+is bounded, since it only takes the values $0$ and $1$. But it is discontinuous wherever $I$ has an edge
+inside the continuum. The corresponding operator $P_I\equiv f_I(\mathcal O)$ is a **spectral
+projection**. For a matrix, it projects onto the span of the eigenvectors whose eigenvalues lie in $I$. In
+general, it is the operator that answers the yes/no question ``does a measurement of $\mathcal O$ give a value
+in the range $I$?'' Indicator functions are generically discontinuous on a continuum, so spectral projections
+generically lie in $\M(\mathcal O)$ but not in $\Alg(\mathcal O)$. This is the concrete, checkable reason why
+von Neumann algebras, and not merely $C^*$-algebras, are the right setting for the classification in the next
+two sections. That classification is built entirely out of projections, and a $C^*$-algebra generally does
+not contain the sharp yes/no measurement operators it needs.
 
-## Sec.~II.B.5: projections
+## Projections
 
 ### Definitions, and what they mean physically
 
-A **projection** is a self-adjoint operator $P$ with $P^2=P$ (applying it twice does nothing more than
-applying it once — the algebraic signature of "select a subspace and discard everything orthogonal to it,"
-which is exactly what a sharp yes/no measurement does). Because the spectral theorem lets you write any
-self-adjoint operator as a combination of its own spectral projections (as just discussed in Sec.~II.B.4
-above), a von Neumann algebra is entirely spanned by its projections — this is why the whole classification
-that follows can be phrased purely in terms of them, with no loss of generality.
+A **projection** is a self-adjoint operator $P$ with $P^2=P$. Applying it twice does nothing more than
+applying it once. This is the algebraic signature of ``select a subspace and discard everything orthogonal to
+it,'' which is what a sharp yes/no measurement does. The spectral theorem writes any self-adjoint operator in
+terms of its spectral projections, as discussed in the previous section. As a result, every element of a von
+Neumann algebra is a norm limit of finite linear combinations of projections in the algebra. This is why the
+classification that follows can be phrased entirely in terms of projections, with nothing lost.
 
 
 > [!NOTE] **Physics Connection: Probabilities from Projections**
-> Sec.~II.B.3 already made the point that $\omega(P_I)$ reads as a probability exactly because $P_I$ is a
-> projection. It's worth tracing that fact to where it comes from: Sec.~II.B.4 fixed the possible outcomes of
-> measuring $\mathcal O$ as its spectrum $\sigma(\mathcal O)$ — an algebra-intrinsic fact, decided before any
-> state is chosen — and for a range $I\subset\sigma(\mathcal O)$, the spectral projection $P_I$ built from
-> $\mathcal O$ (Sec.~II.B.4's indicator-function construction) is itself an element of $\Alg$. This is exactly
-> Postulate~3 from Sec.~I (the Born rule, $\braket{\psi|P_I|\psi}$) with $\ket\psi$ replaced by $\omega$: the
-> probability of an outcome is not a second thing $\omega$ supplies on top of expectation values — it is
-> $\omega$ evaluated at one particular algebra element, the spectral projection for that outcome, using the same
-> rule $\omega$ uses for everything else.
+> The section on weights and states noted that $\omega(P_I)$ reads as a probability because $P_I$ is a
+> projection. Here is where that fact comes from. The previous section fixed the possible outcomes of measuring
+> $\mathcal O$ as its spectrum $\sigma(\mathcal O)$. This is an algebra-level fact, decided before any state is
+> chosen. For a range $I\subset\sigma(\mathcal O)$, the spectral projection $P_I$, built from $\mathcal O$ by
+> the indicator-function construction, is itself an element of the von Neumann algebra. The Born rule of
+> ordinary quantum mechanics gives the probability of an outcome in $I$ as $\braket{\psi|P_I|\psi}$. The
+> algebraic version replaces $\ket\psi$ by $\omega$, so the probability is $\omega(P_I)$. The probability of an
+> outcome is therefore not a second thing that $\omega$ supplies on top of expectation values. It is $\omega$
+> evaluated on one particular algebra element, the spectral projection for that outcome, by the same rule
+> $\omega$ uses for everything else.
 
 
 
 > [!EXAMPLE] **Worked Example:**
-> Let $A = \sigma_x + \sigma_z = \begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix}$ be an observable on $\mathbb C^2$. Let us construct its spectral projections explicitly:
+> Let
+> $A = \sigma_x + \sigma_z = \begin{psmallmatrix} 1 & 1 \\ 1 & -1 \end{psmallmatrix}$, an observable on
+> $\mathbb C^2$. We construct its spectral projections explicitly and use them to compute probabilities.
 > 
-1. **Eigenvalues:** The characteristic equation is $\det(A - \lambda\id) = \lambda^2 - 2 = 0$, giving eigenvalues $\lambda_\pm = \pm\sqrt{2}$.
+1. **Eigenvalues.** The characteristic equation is $\det(A - \lambda\id) = \lambda^2 - 2 = 0$, so
+> the eigenvalues are $\lambda_\pm = \pm\sqrt{2}$.
 >
-2. **Spectral projections via Lagrange interpolation:** For any $2\times2$ matrix with distinct eigenvalues $\lambda_1, \lambda_2$, the projection onto the eigenspace of $\lambda_1$ is $P_1 = \frac{A - \lambda_2\id}{\lambda_1 - \lambda_2}$. Thus:
-> 
-$$
-
-> P_+ = \frac{A - (-\sqrt2)\id}{\sqrt2 - (-\sqrt2)} = \frac{1}{2\sqrt2}\begin{pmatrix} 1+\sqrt2 & 1 \\ 1 & -1+\sqrt2 \end{pmatrix} ,
-> 
-$$
-
-> 
-$$
-
-> P_- = \frac{A - (\sqrt2)\id}{-\sqrt2 - \sqrt2} = \frac{1}{2\sqrt2}\begin{pmatrix} \sqrt2-1 & -1 \\ -1 & \sqrt2+1 \end{pmatrix} .
-> 
-$$
-
+2. **Spectral projections by Lagrange interpolation.** Let a $2\times2$ Hermitian matrix $A$ have
+> distinct eigenvalues $\lambda_1, \lambda_2$. The projection onto the eigenspace of $\lambda_1$ is
+> $P_1 = (A - \lambda_2\id)/(\lambda_1 - \lambda_2)$. The reason is that the polynomial
+> $f(x)=(x-\lambda_2)/(\lambda_1-\lambda_2)$ equals $1$ at $\lambda_1$ and $0$ at $\lambda_2$, so $f(A)$ is the
+> indicator function of $\{\lambda_1\}$ applied to $A$. For our $A$ this gives
+> \begin{align}
+> P_+ &= \frac{A + \sqrt2\,\id}{\sqrt2 + \sqrt2}
+> = \frac{1}{2\sqrt2}\begin{pmatrix} 1+\sqrt2 & 1 \\ 1 & \sqrt2-1 \end{pmatrix} , \notag\\
+> P_- &= \frac{A - \sqrt2\,\id}{-\sqrt2 - \sqrt2}
+> = \frac{1}{2\sqrt2}\begin{pmatrix} \sqrt2-1 & -1 \\ -1 & \sqrt2+1 \end{pmatrix} . \notag
+> \end{align}
 >
-3. **Verification of projector axioms:**
+3. **Checking the projection properties.**
 > 
 
-
->
-8. **Born rule probabilities:** Suppose the system is in the state $\ket\psi = \ket0 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$. The probability of measuring eigenvalue $+\sqrt2$ is:
-> 
-$$
-
-> \operatorname{Prob}(+\sqrt2) = \braket{0|P_+|0} = \frac{1+\sqrt2}{2\sqrt2} = \frac12 + \frac{1}{2\sqrt2} \approx 0.853553 .
-> 
-$$
-
-> The probability of measuring $-\sqrt2$ is:
-> 
-$$
-
-> \operatorname{Prob}(-\sqrt2) = \braket{0|P_-|0} = \frac{\sqrt2-1}{2\sqrt2} = \frac12 - \frac{1}{2\sqrt2} \approx 0.146447 .
-> 
-$$
-
-> Their sum is $0.853553 + 0.146447 = 1.000000$, and the expectation value is:
-> 
-$$
-
-> \braket{A} = (+\sqrt2)(0.853553) + (-\sqrt2)(0.146447) = \sqrt2(0.707106) = 1.000000 = \braket{0|\sigma_x+\sigma_z|0} .
-> 
-$$
 
 >
+8. **Born-rule probabilities.** Suppose the system is in the state
+> $\ket\psi = \ket0 = \begin{psmallmatrix} 1 \\ 0 \end{psmallmatrix}$. The probabilities of the two outcomes are
+> \begin{align}
+> \operatorname{Prob}(+\sqrt2) &= \braket{0|P_+|0} = \frac{1+\sqrt2}{2\sqrt2}
+> = \frac12 + \frac{1}{2\sqrt2} \approx 0.853553 , \notag\\
+> \operatorname{Prob}(-\sqrt2) &= \braket{0|P_-|0} = \frac{\sqrt2-1}{2\sqrt2}
+> = \frac12 - \frac{1}{2\sqrt2} \approx 0.146447 . \notag
+> \end{align}
+> They add up to exactly $1$, as they must, since $P_++P_-=\id$. The expectation value is
+> \begin{align}
+> \braket{A}
+> &\eqstep{1} (+\sqrt2)\operatorname{Prob}(+\sqrt2) + (-\sqrt2)\operatorname{Prob}(-\sqrt2) \notag\\
+> &\eqstep{2} \sqrt2\Big(\frac12 + \frac{1}{2\sqrt2}\Big) - \sqrt2\Big(\frac12 - \frac{1}{2\sqrt2}\Big) \notag\\
+> &\eqstep{3} 2\cdot\frac{\sqrt2}{2\sqrt2} = 1 \notag\\
+> &\eqstep{4} \braket{0|\sigma_x+\sigma_z|0} . \notag
+> \end{align}
+> **(1)** take $\braket{0|\cdot|0}$ of the spectral decomposition $A=\sqrt2\,P_+-\sqrt2\,P_-$.\quad
+> **(2)** insert the two probabilities just computed.\quad
+> **(3)** the two $\sqrt2\cdot\tfrac12$ terms cancel, and the two remaining terms are equal.\quad
+> **(4)** $\braket{0|\sigma_x|0}=0$ and $\braket{0|\sigma_z|0}=1$.
+> 
+> Numerically, $\sqrt2\,(0.853553-0.146447)=\sqrt2\,(0.707107)=1.000000$.
+>
 
-> This demonstrates how spectral projections decompose observables into exact, orthogonal yes/no propositions.
+> The example shows how spectral projections break an observable into exact, mutually orthogonal yes/no
+> questions. Each question has a probability, here $\braket{0|P|0}$, and the expectation value is recovered by
+> weighting each outcome by its probability.
 
 
-There is an exact correspondence between projections in $B(\HH)$ and closed subspaces of $\HH$: a projection
-$P$ picks out the subspace $P\HH$ (everything you get by applying $P$ to every vector in $\HH$), and
-conversely any closed subspace has a unique projection onto it. If $P\in\M$, the subspace $P\HH$ is said to
-"belong to $\M$" — physically, it's a subspace an observer with access to $\M$ can single out by measurement.
-The largest possible projection is the identity $\id$ (the whole space); projections are partially ordered by
-$P\le Q$ meaning $PQ=P$ (equivalently, $P\HH\subseteq Q\HH$ — the subspace of $P$ sits entirely inside the
-subspace of $Q$).
+There is an exact correspondence between projections in $B(\HH)$ and closed subspaces of $\HH$. A projection
+$P$ picks out the subspace $P\HH$, which consists of everything you get by applying $P$ to vectors in $\HH$.
+Conversely, every closed subspace has a unique projection onto it. If $P\in\M$, the subspace $P\HH$ is said to
+"belong to $\M$." Physically, it is a subspace that an observer with access to $\M$ can single out by a
+measurement. The largest projection is the identity $\id$ (the whole space). Projections are partially
+ordered: $P\le Q$ means $PQ=P$, or equivalently $P\HH\subseteq Q\HH$, so the subspace of $P$ sits entirely
+inside the subspace of $Q$.
 
-Two projections $P,Q\in\M$ are called **Murray—von Neumann equivalent** (written $P\sim Q$) if there is
-a **partial isometry** $V\in\M$ — an operator that maps its input subspace to its output subspace
-without stretching or shrinking lengths — with $P=V^\dagger V$ and $Q=VV^\dagger$ (eq.~2.28). This says $V$
-maps the subspace $P\HH$ isometrically (length-preservingly) onto the subspace $Q\HH$, and crucially, using
-only an operator $V$ that is itself available inside $\M$. This is the algebra-relative version of ``these
-two subspaces have the same size'' — not the ordinary linear-algebra notion of dimension (which only cares
-about the subspace itself, not what operators are available to compare it to other subspaces), but a notion
-tied specifically to what the observer with access to $\M$ can actually do.
+Two projections $P,Q\in\M$ are called **Murray—von Neumann equivalent**, written $P\sim Q$, if there is
+a **partial isometry** $V\in\M$ with $P=V^\dagger V$ and $Q=VV^\dagger$. A partial isometry is an operator
+that maps its input subspace onto its output subspace without stretching or shrinking lengths. So the
+condition says that $V$ maps the subspace $P\HH$ isometrically (preserving lengths) onto the subspace
+$Q\HH$, and that $V$ itself is available inside $\M$. This is the algebra-relative version of ``these two
+subspaces have the same size.'' It is not the ordinary linear-algebra notion of dimension, which looks only
+at the subspace itself. It is tied to what an observer with access to $\M$ can actually do to compare one
+subspace with another.
 
 
 > [!EXAMPLE] **Worked Example:**
 > Return to $\M=B(\HH_R)\otimes\id_L$ on $\HH=\mathbb C^2\otimes\mathbb C^2$ from the
-> double-commutant example above. Let $P=\ket0_R\!\bra0_R\otimes\id_L$ and $Q=\ket1_R\!\bra1_R\otimes\id_L$ —
-> each is a rank-2 projection on the full 4-dimensional $\HH$ (it picks out a 2-dimensional subspace: fix the
-> $R$-qubit to $\ket0$ or $\ket1$ respectively, and allow the $L$-qubit to be anything). The operator
-> $V=\ket1_R\!\bra0_R\otimes\id_L$ is manifestly in $\M$ (it has exactly the form $A\otimes\id_L$, with
-> $A=\ket1\bra0$), and direct matrix multiplication gives $V^\dagger V=\ket0_R\!\bra0_R\otimes\id_L=P$ and
-> $VV^\dagger=\ket1_R\!\bra1_R\otimes\id_L=Q$. So $P\sim Q$: they're equivalent, using an isometry that lives
-> entirely inside $\M$ — exactly capturing the intuitive fact that "the $R$-qubit is $\ket0$" and ``the
-> $R$-qubit is $\ket1$'' are subspaces of the same size, related by a flip an $R$-observer can actually perform.
+> double-commutant example above. Let $P=\ket0_R\!\bra0_R\otimes\id_L$ and $Q=\ket1_R\!\bra1_R\otimes\id_L$.
+> Each is a rank-2 projection on the full 4-dimensional $\HH$. It picks out a 2-dimensional subspace: the
+> $R$-qubit is fixed to $\ket0$ or to $\ket1$, and the $L$-qubit can be anything. The operator
+> $V=\ket1_R\!\bra0_R\otimes\id_L$ is in $\M$, since it has the form $A\otimes\id_L$ with $A=\ket1\bra0$.
+> Direct matrix multiplication gives $V^\dagger V=\ket0_R\!\bra0_R\otimes\id_L=P$ and
+> $VV^\dagger=\ket1_R\!\bra1_R\otimes\id_L=Q$. So $P\sim Q$, through a partial isometry that lies entirely
+> inside $\M$. This captures the intuitive fact that "the $R$-qubit is $\ket0$" and ``the $R$-qubit is
+> $\ket1$'' are subspaces of the same size, related by a flip that an $R$-observer can actually perform.
 
 
-A nonzero projection $P$ is called **finite** if it is *emph* equivalent (in the sense just defined)
-to any strictly smaller projection $Q<P$ inside $\M$; it is called **infinite** if such a smaller-but-
-equivalent $Q$ does exist. This definition takes some getting used to, because it explicitly does *emph*
-match the ordinary linear-algebra notion of finite-dimensional. Liu's own example (eq.~2.27) makes this vivid,
-and the accompanying margin note in one copy of the paper — ``looks like smallest, something to do with
-irrep? looks like it maps onto some copy of irrep'' — is worth taking seriously and sharpening into something
-precise, because it's most of the way to the right idea.
+A nonzero projection $P\in\M$ is called **finite** if it is *emph* equivalent to any strictly smaller
+projection $Q<P$ in $\M$. It is called **infinite** if it is equivalent to some strictly smaller
+projection $Q<P$ in $\M$. This definition takes some getting used to, because it does *emph* match the
+linear-algebra notion of "finite-dimensional." The following example shows the difference. The useful
+intuition turns out to be that the smallest projections pick out one copy of an irreducible representation.
 
-Take $\M=B(\HH_1)\otimes\id_2$ on $\HH=\HH_1\otimes\HH_2$, with $\HH_2$ *emph*-dimensional, and let
-$P=\ket\psi\rangle\langle\psi|\otimes\id_2$ for a single unit vector $\ket\psi\in\HH_1$. As a subspace of the
-full (infinite-dimensional) $\HH$, $P\HH$ is itself infinite-dimensional — it's a whole copy of the
-infinite-dimensional $\HH_2$. And yet $P$ is a *emph* projection of the algebra $\M$: there is no
-strictly smaller, $\M$-equivalent projection below it, because within $\M\cong B(\HH_1)$, $P$ already
-corresponds to the smallest possible nonzero rank — rank one, a single basis vector's worth, within
-$\HH_1$ — and nothing smaller than "a single basis direction" exists to equate it with. Here is the precise
-version of the margin note's instinct: forgetting the specific Hilbert space it happens to act on, $\M$ as an
-*emph* is isomorphic to $B(\HH_1)$ — a single copy of the algebra of all operators on
-$\HH_1$, i.e., a single irreducible representation of "what an observer with access to $\HH_1$ can do." The
-factor $\HH_2$ in $\HH=\HH_1\otimes\HH_2$ is doing nothing but counting *emph* of that one
-irrep sit side by side inside the big Hilbert space (one copy for every basis vector of $\HH_2$). The
-projection $P=\ket\psi\rangle\langle\psi|\otimes\id_2$ picks out one basis direction *emph* of the irrep, while touching every one of the (infinitely many) copies simultaneously — which is
-precisely why it's "as small as $\M$ can make something" (finite, in fact minimal, within the algebra)
-while still being infinite-dimensional as a raw subspace of $\HH$. **Finiteness, in this algebra-relative
-sense, is a statement about the irrep, not about the raw dimension of the ambient Hilbert space** — and
-internalizing that distinction now is what makes the type classification in the next subsection make sense at
-all, rather than looking like a strange abuse of the word "finite."
+Take $\M=B(\HH_1)\otimes\id_2$ on $\HH=\HH_1\otimes\HH_2$, where $\HH_2$ is *emph*-dimensional. Let
+$P=\ket\psi\bra\psi\otimes\id_2$ for a single unit vector $\ket\psi\in\HH_1$. As a subspace of the full
+Hilbert space, $P\HH$ is infinite-dimensional: it is a whole copy of $\HH_2$. Yet $P$ is a *emph*
+projection of the algebra $\M$. There is no strictly smaller projection in $\M$ equivalent to it, because
+$\M$ contains no nonzero projection strictly below $P$ at all. Inside $\M\cong B(\HH_1)$, the projection $P$
+corresponds to a rank-one projection on $\HH_1$, the smallest nonzero rank there is. Here is the precise form
+of the irreducible-representation intuition. As an *emph*, forgetting the Hilbert space it
+acts on, $\M$ is isomorphic to $B(\HH_1)$. That is a single copy of the algebra of all operators on $\HH_1$,
+and it acts irreducibly on $\HH_1$. The factor $\HH_2$ in $\HH=\HH_1\otimes\HH_2$ only counts *emph* of this irreducible representation sit side by side in the big Hilbert space: one copy for each basis
+vector of $\HH_2$. The projection $P=\ket\psi\bra\psi\otimes\id_2$ picks out one direction *emph* the
+irreducible representation, and it does so in every one of the infinitely many copies at once. That is why
+$P$ is as small as $\M$ can make anything (finite, and in fact minimal, in the algebra) while being
+infinite-dimensional as a subspace of $\HH$. Finiteness in this algebra-relative sense is a statement about
+the irreducible representation, not about the dimension of the ambient Hilbert space. Keeping this
+distinction in mind is what makes the type classification in the next section make sense, rather than look
+like a strange use of the word "finite."
 
 A projection $P$ is called **minimal** in $\M$ if it is nonzero and $\M$ contains no nonzero projection
-strictly smaller than $P$ — the algebra-relative notion of ``as small as a measurement outcome can possibly
-be.'' Every minimal projection is automatically finite (there's nothing smaller to be equivalent to), but as
-the example above shows, a projection can be finite without being minimal, and (this becomes the entire
-substance of the classification two subsections from now) an algebra can fail to have *emph* minimal
-projections at all, while still having plenty of finite ones.
+strictly smaller than $P$. This is the algebra-relative notion of ``as small as a measurement outcome can
+be.'' Every minimal projection is finite, since there is nothing smaller for it to be equivalent to. The
+converse fails: a projection can be finite without being minimal. For example, in $\M=B(\mathbb C^3)$ every
+projection is finite, because equivalent projections have equal rank. But $\mathrm{diag}(1,1,0)$ is not
+minimal, since $\mathrm{diag}(1,0,0)$ lies strictly below it. More strikingly, an algebra can have no minimal
+projections at all while still having plenty of finite ones. This possibility is the heart of the
+classification in the next section.
 
-For a von Neumann *emph* $\M$ specifically, the identity operator $\id$ itself is either finite or
-infinite (by the definitions just given, applied to $P=\id$), and this single fact — is the biggest possible
-projection, $\id$, finite or infinite? — is used to name a coarse dichotomy: if $\id$ is finite, every
-projection in $\M$ must also be finite (this can be shown from the definitions, though the proof is not given
-in the paper), and $\M$ is called a **finite von Neumann factor**; if $\id$ is infinite, $\M$ is called an
-**infinite von Neumann factor**, and in that case it turns out (also stated without proof) that any two
-infinite projections in $\M$ are automatically equivalent to each other, and in particular every infinite
-projection is equivalent to the identity itself.
+Now apply these definitions to the largest projection, $P=\id$. For a von Neumann *emph* $\M$, the
+identity is either finite or infinite, and this one question sorts factors into two coarse classes. If $\id$
+is finite, then every projection in $\M$ is also finite (this can be shown from the definitions; we omit the
+proof), and $\M$ is called a **finite von Neumann factor**. If $\id$ is infinite, $\M$ is called an
+**infinite von Neumann factor**. In that case, when $\HH$ is separable, any two infinite projections in
+$\M$ are equivalent to each other, so in particular every infinite projection is equivalent to the identity
+itself (also stated without proof).
 
-## Sec.~II.C: classification of von Neumann factors
+## Classification of von Neumann factors
 
 ### Building a dimension function out of nothing but $\sim$ and $\le$
 
-Here is the payoff of the last two subsections. Given the equivalence relation $P\sim Q$ and the ordering
-$P\le Q$, it is a genuine theorem (not proved in the paper, but stated as fact) that for any von Neumann
-*emph* $\M$, there exists a **dimension function** $d(P)\ge0$, defined for every projection
-$P\in\M$, satisfying two properties that pin it down (up to an overall constant you're free to rescale):
-$d(P)<d(Q)$ whenever $P<Q$ strictly, and $d(P)=d(Q)$ whenever $P\sim Q$. In words: $d$ assigns a number to
-each projection that respects both the ordering (bigger subspace, bigger number) and the equivalence relation
-(algebra-equivalent subspaces get exactly the same number) — exactly the two properties you'd want out of
-anything worthy of being called a "size." This $d$ can equally be packaged as a **trace**
-$\tr(P)\equiv d(P)$, extended from projections to all of $\M$ by linearity (using that every self-adjoint
-operator is built from its spectral projections, as in Sec.~II.B.4) — and this $\tr$ is exactly the object
-that plays the role of the ordinary matrix trace, generalized to make sense on an abstract algebra with no
-particular Hilbert space singled out.
+Here is the payoff of the last two sections. Using only the equivalence relation $P\sim Q$ and the ordering
+$P\le Q$, one can prove the following theorem (a standard result, stated here without proof). Every von
+Neumann factor $\M$ has a **dimension function** $d$. It assigns a number $d(P)\in[0,\infty]$ to each
+projection $P\in\M$, and it has three properties:
 
-It's worth being explicit about *emph* the ordinary formula "dimension $=\Tr P$" (using the honest
-Hilbert-space trace $\Tr$, summing diagonal entries) fails to be the right notion here, since this is exactly
-what motivates needing a new, algebra-relative $d(P)$ at all. Take again $P=\ket\psi\rangle\langle\psi|
-\otimes\id_2$ on $\HH_1\otimes\HH_2$ with $\HH_2$ infinite-dimensional (the same example as above): the
-honest Hilbert-space trace $\Tr P$ is infinite, because $P\HH$ is an infinite-dimensional subspace of $\HH$.
-But from the point of view of the algebra $\M\cong B(\HH_1)$, $P$ is the smallest possible nonzero thing —
-rank one, within $\HH_1$. The ordinary trace $\Tr$ sees the ambient Hilbert space's raw size and gets it
-completely wrong for the purposes of describing what $\M$ can distinguish; the algebra-relative $d(P)$
-(normalized so $d(P)=1$ for this minimal $P$) is what correctly reports ``this is the smallest measurable
-unit $\M$ has access to,'' regardless of how large a raw subspace it happens to correspond to in $\HH$. This
-is the concrete sense in which $\tr$ is a *emph* trace: it strips away the (physically
-irrelevant, algebra-dependent) bulk of $\HH$ that $\M$ never actually had access to in the first place, and
-reports only the size that $\M$ itself can distinguish.
+- $d(P)=d(Q)$ if and only if $P\sim Q$;
+- $d(P+Q)=d(P)+d(Q)$ whenever $P$ and $Q$ are orthogonal, $PQ=0$;
+- $d(P)<\infty$ if and only if $P$ is finite.
+
+These properties fix $d$ up to an overall constant that you are free to rescale. In words: equivalent
+subspaces get the same size, sizes add, and finite projections get finite sizes. Additivity also makes $d$
+respect the ordering. If $P\le Q$, then $Q-P$ is a projection orthogonal to $P$, so
+$d(Q)=d(P)+d(Q-P)\ge d(P)$. The inequality is strict when $P<Q$ and $P$ is finite, because $d(Q-P)>0$ for the
+nonzero projection $Q-P$. These are exactly the properties you would want from anything worth calling a
+"size." The function $d$ can also be packaged as a **trace**, $\tr(P)\equiv d(P)$, extended from
+projections to other elements of $\M$ by linearity, using the fact that every self-adjoint operator is built
+from its spectral projections. When $d(\id)=\infty$, this $\tr$ is finite only on part of $\M$, just as the
+ordinary trace on an infinite-dimensional Hilbert space is finite only for trace-class operators. This $\tr$
+plays the role of the ordinary matrix trace, generalized to an abstract algebra with no particular Hilbert
+space singled out.
+
+Why is the ordinary formula "dimension $=\Tr P$" not the right notion here? Here $\Tr$ is the ordinary
+Hilbert-space trace, the sum of diagonal entries. The answer shows why an algebra-relative $d(P)$ is needed
+at all. Take again $P=\ket\psi\bra\psi\otimes\id_2$ on $\HH_1\otimes\HH_2$ with $\HH_2$ infinite-dimensional,
+the same example as above. The Hilbert-space trace $\Tr P$ is infinite, because $P\HH$ is an
+infinite-dimensional subspace of $\HH$. But from the point of view of the algebra $\M\cong B(\HH_1)$, the
+projection $P$ is the smallest nonzero thing there is: rank one, within $\HH_1$. The ordinary trace $\Tr$
+sees the raw size of the ambient Hilbert space, and for describing what $\M$ can distinguish it gives the
+wrong answer. The algebra-relative $d(P)$, normalized so that $d(P)=1$ for this minimal $P$, correctly reports
+"this is the smallest measurable unit $\M$ has access to," however large the corresponding subspace of $\HH$
+is. This is the concrete sense in which $\tr$ is a *emph* trace. It strips away the part of $\HH$
+that $\M$ never had access to, and it reports only the size that $\M$ itself can distinguish.
 
 ### The three types
 
-The entire classification now follows from asking one question: what range of values can $d(P)$ actually take,
-as $P$ ranges over all the projections in $\M$?
+The whole classification now follows from one question: what values can $d(P)$ take, as $P$ ranges over all
+the projections in $\M$?
 
 
-- **Type I: $\M$ has minimal projections.** Normalize $d$ so that a minimal projection gets $d=1$
-(you're always free to rescale $d$ by an overall constant, so this is just a choice of units, exactly like
-choosing what counts as "one unit of length"). Every projection is then built from superpositions of
-minimal ones, and it can be shown that $d(P)$ comes out to be a nonnegative integer for every $P$ — the
-ordinary, familiar notion of dimension, just re-derived from the algebra rather than assumed. If the identity
-has finite dimension $n=d(\id)$, $\M$ is called type $\mathrm I_n$; if $d(\id)=\infty$ (there's no upper bound
-on how many independent minimal projections you can find), it's type $\mathrm I_\infty$. $B(\HH)$ itself, for
-an ordinary, separable Hilbert space $\HH$, is trivially type $\mathrm I_n$ (if $\HH$ is $n$-dimensional) or
-type $\mathrm I_\infty$ (if $\HH$ is infinite-dimensional but has a countable basis) — this is exactly the
-case where $\tr$ reduces to the completely ordinary matrix trace $\Tr_\HH$, with no renormalization needed at
-all, because there's no "bulk of $\HH$ the algebra doesn't see" to strip away.
+- **Type I: $\M$ has minimal projections.** Normalize $d$ so that a minimal projection has $d=1$.
+You are always free to rescale $d$ by an overall constant, so this is only a choice of units, like choosing
+what counts as one unit of length. Every projection is then a sum of mutually orthogonal minimal
+projections, and it can be shown that $d(P)$ is a nonnegative integer or $\infty$ for every $P$. This is the
+familiar notion of dimension, now derived from the algebra instead of assumed. If $n=d(\id)$ is finite, $\M$
+is called type $\mathrm I_n$. If $d(\id)=\infty$, so that there is no upper bound on the number of mutually
+orthogonal minimal projections, $\M$ is type $\mathrm I_\infty$. For an ordinary separable Hilbert space
+$\HH$, the algebra $B(\HH)$ itself is type $\mathrm I_n$ if $\HH$ is $n$-dimensional, and type
+$\mathrm I_\infty$ if $\HH$ is infinite-dimensional with a countable basis. In this case $\tr$ is the ordinary
+matrix trace $\Tr_\HH$, with no renormalization needed, because there is no part of $\HH$ that the algebra
+fails to see.
 
-The single most important fact tying this back to ordinary quantum mechanics: it can be shown that $\M$ is a type I factor *emph* there exists a genuine Hilbert space factorization $\HH=\HH_R\otimes\HH_L$ with
-
-$$
-
-\M=B(\HH_R)\otimes\id_L, \qquad \tr=\Tr_{\HH_R}, \qquad \M'=\id_R\otimes B(\HH_L)
+The most important fact tying this back to ordinary quantum mechanics is the following. $\M$ is a type I
+factor *emph* there is a Hilbert space factorization $\HH=\HH_R\otimes\HH_L$ with
 
 $$
 
-(eq.~3.3, though it's placed at the start of the paper's Sec.~III — it belongs conceptually right here, as the closing statement of the type classification). While literature frequently states this as an established theorem without proof, its explicit derivation is profoundly illuminating: it reveals the exact algebraic mechanism by which minimal projections build a spatial tensor product.
+\M=B(\HH_R)\otimes\id_L, \qquad \tr=\Tr_{\HH_R}, \qquad \M'=\id_R\otimes B(\HH_L) .
+
+$$
+
+This result closes the type classification, and Chapter~3 uses it constantly. Many books state it without
+proof. The proof is short enough to give here, and it shows exactly how minimal projections build a tensor
+product.
 
 \begin{keyresult}[: Derivation of the Type I Factorization Theorem]
-**Theorem:** A von Neumann algebra $\M \subseteq B(\HH)$ is a type I factor if and only if there exists a unitary isomorphism $U: \HH \xrightarrow{\sim} \HH_R \otimes \HH_L$ such that:
+**Theorem:** A von Neumann algebra $\M \subseteq B(\HH)$ is a type I factor if and only if there exists a
+unitary isomorphism $U: \HH \xrightarrow{\sim} \HH_R \otimes \HH_L$ such that
 
 $$
 
@@ -797,8 +873,9 @@ $$
 
 **Proof ($\implies$):**
 
-1. **Minimal projection and orthogonal resolution:**
-By definition of type I, $\M$ contains a nonzero minimal projection $P \in \M$. Minimality means that the compressed algebra contains only scalar multiples of $P$:
+1. **Minimal projection and orthogonal resolution.**
+By the definition of type I, $\M$ contains a minimal projection $P \in \M$. Because $P$ is minimal, the
+compressed algebra $P\M P$ contains only multiples of $P$:
 
 $$
 
@@ -806,7 +883,13 @@ P \M P = \mathbb{C} P .
 
 $$
 
-Since $\M$ is a factor, its center is trivial: $\mathcal{Z}(\M) \equiv \M \cap \M' = \mathbb{C}\id$. The central support (the smallest central projection bounding $P$) is therefore $c(P) = \id$. By the comparison theorem for projections in a factor, any two minimal projections are Murray—von Neumann equivalent ($P \sim Q$). By Zorn's lemma, we can choose a maximal family of mutually orthogonal minimal projections $\{P_i\}_{i \in I}$ equivalent to $P$. Maximality and $c(P)=\id$ imply that their sum resolves the identity on $\HH$:
+(The reason: $P\M P$ is a von Neumann algebra on $P\HH$ whose only projections are $0$ and $P$, and a von
+Neumann algebra is generated by its projections.) Since $\M$ is a factor, its center is trivial,
+$\mathcal{Z}(\M) \equiv \M \cap \M' = \mathbb{C}\id$. So the central support of $P$ (the smallest central
+projection above $P$) is $c(P) = \id$. By the comparison theorem for projections in a factor, any two minimal
+projections are Murray—von Neumann equivalent. By Zorn's lemma, we can choose a maximal family
+$\{P_i\}_{i \in I}$ of mutually orthogonal minimal projections, each equivalent to $P$. Maximality together
+with $c(P)=\id$ implies that their sum is the identity on $\HH$:
 
 $$
 
@@ -814,8 +897,9 @@ $$
 
 $$
 
-2. **Equivalence via partial isometries:**
-Fix a base index $0 \in I$ with $P_0 \equiv P$. Since $P_i \sim P$, there exist partial isometries $V_i \in \M$ such that:
+2. **Equivalence through partial isometries.**
+Fix a base index $0 \in I$ with $P_0 \equiv P$. Since $P_i \sim P$, there are partial isometries $V_i \in \M$
+with
 
 $$
 
@@ -823,9 +907,9 @@ V_i^\dagger V_i = P, \qquad V_i V_i^\dagger = P_i \qquad (\text{with } V_0 \equi
 
 $$
 
-Physically, $V_i$ maps the base subspace $P\HH$ isometrically onto the orthogonal subspace $P_i\HH$.
-3. **Construction of the unitary $U$:**
-Define two constituent Hilbert spaces:
+So $V_i$ maps the base subspace $P\HH$ isometrically onto the orthogonal subspace $P_i\HH$.
+3. **Construction of the unitary $U$.**
+Define two Hilbert spaces:
 
 $$
 
@@ -841,12 +925,21 @@ U \ket\psi \equiv \sum_{i \in I} \ket{i} \otimes \big(V_i^\dagger \ket\psi\big) 
 
 $$
 
-Notice that $V_i^\dagger \ket\psi = P V_i^\dagger \ket\psi \in P\HH = \HH_L$, so this is well-defined. We check that $U$ is an isometry:
-\begin{align*}
-\|U\ket\psi\|^2 &= \sum_{i \in I} \|V_i^\dagger \ket\psi\|^2 = \sum_{i \in I} \braket{\psi | V_i V_i^\dagger | \psi} \\
-&= \sum_{i \in I} \braket{\psi | P_i | \psi} = \Braket{\psi \Big| \sum_{i \in I} P_i \Big| \psi} = \braket{\psi|\psi} .
-\end{align*}
-The adjoint map $U^\dagger: \HH_R \otimes \HH_L \to \HH$ acts on elementary basis tensors as:
+Each $V_i^\dagger \ket\psi = P V_i^\dagger \ket\psi$ lies in $P\HH = \HH_L$, so this is well defined. We check
+that $U$ is an isometry:
+\begin{align}
+\|U\ket\psi\|^2 = \sum_{i \in I} \|V_i^\dagger \ket\psi\|^2
+&\eqstep{1} \sum_{i \in I} \braket{\psi | V_i V_i^\dagger | \psi} \notag\\
+&\eqstep{2} \sum_{i \in I} \braket{\psi | P_i | \psi}
+\ \eqstep{3}\ \Braket{\psi \Big| \sum_{i \in I} P_i \Big| \psi}
+\ \eqstep{4}\ \braket{\psi|\psi} . \notag
+\end{align}
+**(1)** $\|v\|^2=\braket{v|v}$ applied to $v=V_i^\dagger\ket\psi$, using $(V_i^\dagger)^\dagger=V_i$.\quad
+**(2)** the partial isometry relation $V_iV_i^\dagger=P_i$ from Step~2 above.\quad
+**(3)** linearity of the inner product, pulling the sum through $\braket{\psi|\cdot|\psi}$.\quad
+**(4)** the resolution of the identity, $\sum_i P_i=\id_\HH$, established in Step~1.
+
+The adjoint map $U^\dagger: \HH_R \otimes \HH_L \to \HH$ acts on elementary basis tensors as
 
 $$
 
@@ -855,24 +948,29 @@ U^\dagger \big(\ket{i} \otimes \ket{\phi_L}\big) = V_i \ket{\phi_L}, \qquad \ket
 $$
 
 Computing $U U^\dagger$ on basis vectors:
+\begin{align}
+U U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big)
+&\eqstep{1} U \big(V_j \ket{\phi_L}\big) \notag\\
+&\eqstep{2} \sum_{i \in I} \ket{i} \otimes \big(V_i^\dagger V_j \ket{\phi_L}\big)
+\ \eqstep{3}\ \ket{j} \otimes \big(P \ket{\phi_L}\big) = \ket{j} \otimes \ket{\phi_L} . \notag
+\end{align}
+**(1)** the definition of $U^\dagger$ on the basis tensor $\ket j\otimes\ket{\phi_L}$.\quad
+**(2)** the definition of $U$ applied to the vector $V_j\ket{\phi_L}$.\quad
+**(3)** $V_i^\dagger V_j = V_i^\dagger P_i P_j V_j = \delta_{ij} P$, so only the $i=j$ term in the sum
+survives, and $P\ket{\phi_L}=\ket{\phi_L}$ since $\ket{\phi_L}\in P\HH$.
 
-$$
+So $U$ is an isometry with $UU^\dagger=\id$, which means $U$ is unitary.
+4. **Action on the algebra $\M$.**
+Let $A \in \M$ be any element. Compute $U A U^\dagger$ on $\ket{j} \otimes \ket{\phi_L}$:
+\begin{align}
+U A U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big)
+&\eqstep{1} U \big(A V_j \ket{\phi_L}\big) \notag\\
+&\eqstep{2} \sum_{i \in I} \ket{i} \otimes \big(V_i^\dagger A V_j \ket{\phi_L}\big) . \notag
+\end{align}
+**(1)** the definition of $U^\dagger$ on basis tensors, then applying $A$.\quad
+**(2)** the definition of $U$ applied to the vector $AV_j\ket{\phi_L}$.
 
-U U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big) = U \big(V_j \ket{\phi_L}\big) = \sum_{i \in I} \ket{i} \otimes \big(V_i^\dagger V_j \ket{\phi_L}\big) = \ket{j} \otimes \big(P \ket{\phi_L}\big) = \ket{j} \otimes \ket{\phi_L} ,
-
-$$
-
-since $V_i^\dagger V_j = V_i^\dagger P_i P_j V_j = \delta_{ij} P$. Hence $U$ is a genuine unitary isomorphism.
-4. **Action on the algebra $\M$:**
-Let $A \in \M$ be an arbitrary element. Compute $U A U^\dagger$ acting on $\ket{j} \otimes \ket{\phi_L}$:
-
-$$
-
-U A U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big) = U \big(A V_j \ket{\phi_L}\big) = \sum_{i \in I} \ket{i} \otimes \big(V_i^\dagger A V_j \ket{\phi_L}\big) .
-
-$$
-
-Crucially, look at the operator $V_i^\dagger A V_j$:
+The key object is the operator $V_i^\dagger A V_j$. It lies in $P\M P$:
 
 $$
 
@@ -880,106 +978,122 @@ V_i^\dagger A V_j = (P V_i^\dagger) A (V_j P) = P \big(V_i^\dagger A V_j\big) P 
 
 $$
 
-Because $P$ is minimal, $P \M P = \mathbb{C} P$. Therefore, $V_i^\dagger A V_j$ is *emph*:
+Because $P$ is minimal, $P \M P = \mathbb{C} P$. Therefore $V_i^\dagger A V_j$ is a multiple of $P$:
 
 $$
 
-V_i^\dagger A V_j = a_{ij} P \quad \text{for some scalar } a_{ij} \in \mathbb{C} .
+V_i^\dagger A V_j = a_{ij} P \quad \text{for some number } a_{ij} \in \mathbb{C} .
 
 $$
 
-Acting on $\ket{\phi_L} \in P\HH$, this yields $V_i^\dagger A V_j \ket{\phi_L} = a_{ij} \ket{\phi_L}$. Thus:
+Acting on $\ket{\phi_L} \in P\HH$, this gives $V_i^\dagger A V_j \ket{\phi_L} = a_{ij} \ket{\phi_L}$. Thus
+\begin{align}
+U A U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big)
+&\eqstep{1} \sum_{i \in I} a_{ij} \ket{i} \otimes \ket{\phi_L} \notag\\
+&\eqstep{2} \Big(\sum_{i,k \in I} a_{ik} \ket{i}\bra{k} \otimes \id_L \Big) \big(\ket{j} \otimes \ket{\phi_L}\big) . \notag
+\end{align}
+**(1)** $V_i^\dagger AV_j\ket{\phi_L}=a_{ij}\ket{\phi_L}$, just shown.\quad
+**(2)** $\braket{k|j}=\delta_{kj}$ picks out exactly the $k=j$ column of the matrix $(a_{ik})$.
 
-$$
+So every operator in $\M$ acts trivially on $\HH_L$ and as a matrix on $\HH_R$. Conversely, every rank-one
+operator $\ket{i}\bra{j}\otimes\id_L$ comes from an element of $\M$: a computation like the one above gives
+$U V_i V_j^\dagger U^\dagger = \ket{i}\bra{j}\otimes\id_L$, and $V_iV_j^\dagger\in\M$. Linear combinations of
+these operators are weakly dense in $B(\HH_R)\otimes\id_L$, and $\M$ is weakly closed. Thus
+$U \M U^\dagger = B(\HH_R) \otimes \id_L$.
+5. **The commutant and the trace.**
+Conjugating by the unitary $U$ and using the previous step:
+\begin{align}
+U \M' U^\dagger
+&\eqstep{1} (U \M U^\dagger)' \notag\\
+&\eqstep{2} \big(B(\HH_R) \otimes \id_L\big)'
+\ \eqstep{3}\ \id_R \otimes B(\HH_L) . \notag
+\end{align}
+**(1)** $B$ commutes with every element of $\M$ exactly when $UBU^\dagger$ commutes with every element of
+$U\M U^\dagger$, since $U^\dagger U=\id$.\quad
+**(2)** $U\M U^\dagger=B(\HH_R)\otimes\id_L$ from Step~4.\quad
+**(3)** the commutant of "all operators on one tensor factor" is "all operators on the other," as
+in the first double-commutant example earlier in this chapter.
 
-U A U^\dagger \big(\ket{j} \otimes \ket{\phi_L}\big) = \sum_{i \in I} a_{ij} \ket{i} \otimes \ket{\phi_L} = \left(\sum_{i,j \in I} a_{ij} \ket{i}\bra{j} \otimes \id_L \right) \big(\ket{j} \otimes \ket{\phi_L}\big) .
+The trace $\tr$ on $\M$, normalized so that minimal projections have trace $1$, corresponds under $U$ to the
+standard trace $\Tr_{\HH_R}$ on $B(\HH_R)$.
+6. **Proof ($\impliedby$).**
+Suppose $\M \cong B(\HH_R) \otimes \id_L$. Its center is $\mathbb C\id$ (as in the first double-commutant
+example), so $\M$ is a factor. Take any one-dimensional projection $p = \ket{i}\bra{i}$ on $\HH_R$. Then
+$P = p \otimes \id_L \in \M$. For any $A = a \otimes \id_L \in \M$:
+\begin{align}
+P A P
+&\eqstep{1} (p a p) \otimes \id_L \notag\\
+&\eqstep{2} \braket{i|a|i}\, (p \otimes \id_L)
+\ \eqstep{3}\ \braket{i|a|i}\, P \ \in\ \mathbb{C} P . \notag
+\end{align}
+**(1)** multiplying tensor products factor by factor, with $\id_L^3=\id_L$.\quad
+**(2)** $pap=\ket i\braket{i|a|i}\bra i=\braket{i|a|i}\,p$.\quad
+**(3)** the definition $P=p\otimes\id_L$.
 
-$$
-
-Every operator in $\M$ acts trivially on $\HH_L$ and as an ordinary matrix on $\HH_R$. Conversely, given any rank-one operator $\ket{i}\bra{j} \in B(\HH_R)$, its pre-image under $U$ is simply $V_i V_j^\dagger \in \M$. Thus $U \M U^\dagger = B(\HH_R) \otimes \id_L$.
-5. **The commutant and trace:**
-By von Neumann's double commutant theorem:
-
-$$
-
-U \M' U^\dagger = (U \M U^\dagger)' = \big(B(\HH_R) \otimes \id_L\big)' = \id_R \otimes B(\HH_L) .
-
-$$
-
-The unique normal semifinite trace $\tr$ on $\M$ corresponds under $U$ to the standard trace $\Tr_{\HH_R}$ on $B(\HH_R)$.
-6. **Proof ($\impliedby$):**
-If $\M \cong B(\HH_R) \otimes \id_L$, take any one-dimensional projection $p = \ket{i}\bra{i}$ on $\HH_R$. Then $P = p \otimes \id_L \in \M$. For any $A = a \otimes \id_L \in \M$:
-
-$$
-
-P A P = (p a p) \otimes \id_L = \braket{i|a|i} (p \otimes \id_L) = \mathbb{C} P .
-
-$$
-
-Hence $P$ is minimal in $\M$, proving $\M$ is type I. $\blacksquare$
+So every projection in $\M$ below $P$ is a multiple of $P$, hence $0$ or $P$. This means $P$ is minimal in
+$\M$, and $\M$ is a type I factor. $\blacksquare$
 
 \end{keyresult}
 
-So the sentence "the algebra describing this subsystem is type I" is the precise, fully general version of the statement "the ordinary tensor-product picture of Griffiths and Sakurai applies here." Every worked example given so far in this companion — the two-qubit examples above — is type I by direct construction. Types II and III, covered next, are exactly what becomes possible once this is no longer true.
-- **Type II: $\M$ has finite projections but no minimal ones.** This is the genuinely new
-possibility, and it's worth sitting with how strange it sounds the first time: an algebra where every
-projection can be compared in size to every other (the finite/infinite distinction still works, and among
-finite projections the ordering $d(P)<d(Q)$ is meaningful), but where there is no smallest nonzero size at
-all — you can always find a strictly smaller nonzero projection than any given one. Concretely, once minimal
-projections are ruled out, the constraint that $d$ respects strict inequalities ($P<Q\Rightarrow d(P)<d(Q)$),
-applied to an infinite descending chain of ever-smaller projections (which must exist, precisely because
-there's no smallest one to stop the chain), forces $d(P)$ to take a *emph* range of values,
-starting arbitrarily close to zero. This is worth pausing on: it means a von Neumann algebra can assign a
-*emph*, not just an integer, as the "dimension" of a subspace — something with no counterpart
-at all in ordinary finite-dimensional linear algebra, where dimension is always a whole number you get by
-counting basis vectors. Depending on whether $d(\id)$ is finite or not, you get two subtypes: $\mathrm{II}_1$
-(identity has finite dimension; normalize so $d(\id)=\tr(\id)=1$, giving $d(P)\in(0,1]$ for every nonzero
-projection — a trace normalized exactly like a probability), or $\mathrm{II}_\infty$ ($d(\id)$ unbounded, so
-$d(P)\in(0,\infty]$, with no natural normalization available). Section~III of this companion will construct
-an explicit type $\mathrm{II}_1$ factor by hand, out of the $N\to\infty$ Bell-pair chain from Sec.~I, so the
-strangeness of "real-valued dimension" stops being abstract and becomes something you can watch happen to a
-specific, concrete family of projections.
-- **Type III: every nonzero projection is infinite.** The most extreme case: not even the
-finite/infinite distinction has any nontrivial content, because *emph* is finite except zero itself.
-Formally $d(P)=\infty$ for every nonzero $P$ — which means no meaningful dimension function, and hence no
-trace at all, exists on $\M$. This sounds like it should be a mathematical dead end (what could you possibly
-say about entanglement in an algebra with no density matrix, since density matrices are defined using a
-trace?), and reaching that exact impasse, then resolving it with an entirely different tool
-(Tomita—Takesaki modular theory), is the entire content of Sec.~IV — the technical heart of the whole paper.
-It is also, as flagged repeatedly already, the type that turns out to be the physically generic one: local
-regions of a relativistic quantum field theory, and holographic boundary subalgebras in the strict
-large-$N$ limit, are both type III (specifically, as you'll see, type $\mathrm{III}_1$) — not some exotic
-corner case, but the everyday situation once you leave the world of finitely many qubits.
+So the statement "the algebra describing this subsystem is type I" is the precise, general form of the
+statement "the ordinary tensor-product picture of textbooks such as Griffiths and Sakurai applies here."
+Every worked example given so far in this chapter, including the two-qubit examples above, is type I by
+construction. Types II and III, described next, are what becomes possible when this is no longer true.
+- **Type II: $\M$ has finite projections but no minimal ones.** This is a genuinely new possibility,
+and it sounds strange at first. The finite/infinite distinction still works, and finite projections can be
+compared in size using $d$. But there is no smallest nonzero size: below any nonzero projection there is
+always a strictly smaller nonzero one. The values of $d$ are then forced to fill out a continuous range. Here
+is the idea. In a type II factor, any finite projection $P$ can be split into two orthogonal pieces that are
+equivalent to each other, $P=P_1+P_2$ with $P_1\sim P_2$ (stated without proof). Additivity then gives
+$d(P_1)=d(P_2)=\tfrac12d(P)$. Repeating the split gives projections with $d=2^{-k}d(P)$ for every $k$, so $d$
+takes arbitrarily small positive values. Adding such pieces gives every dyadic fraction of $d(P)$, and one can
+show that every value in between is reached as well. So a von Neumann algebra can assign a *emph*, not only an integer, as the "dimension" of a subspace. Nothing like this happens in ordinary
+finite-dimensional linear algebra, where dimension is a whole number obtained by counting basis vectors.
+There are two subtypes, depending on whether $d(\id)$ is finite. In type $\mathrm{II}_1$ the identity has
+finite dimension. We normalize $d(\id)=\tr(\id)=1$, so that $d(P)\in(0,1]$ for every nonzero projection: the
+trace is normalized exactly like a probability. In type $\mathrm{II}_\infty$ we have $d(\id)=\infty$, so
+$d(P)\in(0,\infty]$, and there is no natural normalization. Chapter~3 constructs a type $\mathrm{II}_1$ factor
+by hand, from the $N\to\infty$ Bell-pair chain of Chapter~1. There, "real-valued dimension" stops being
+abstract and can be watched in a specific family of projections.
+- **Type III: every nonzero projection is infinite.** This is the most extreme case. The
+finite/infinite distinction has no content, because no projection except zero is finite. Formally,
+$d(P)=\infty$ for every nonzero $P$. So there is no useful dimension function, and hence no (normal,
+semifinite) trace on $\M$ at all. This looks like a mathematical dead end. How could one talk about
+entanglement in an algebra with no density matrix, when density matrices are defined using a trace?
+Chapter~4 meets exactly this obstacle and overcomes it with a different tool, Tomita—Takesaki modular
+theory; that chapter is the technical heart of the notes. Type III is also the type that is physically
+generic. The algebras of local regions in relativistic quantum field theory, and the boundary subalgebras of
+holography in the strict large-$N$ limit, are both type III (in fact type $\mathrm{III}_1$, as later chapters
+explain). This is not an exotic corner case. It is the everyday situation once you leave the world of
+finitely many qubits.
 
 
-Types II and III can sound, on first exposure, like unphysical mathematical curiosities. They aren't — the
-entangled-spin-chain example from Sec.~I already produces both, explicitly and by direct construction, and
-that construction is worked through completely in Sec.~III of this companion.
+Types II and III can sound, on first exposure, like unphysical mathematical curiosities. They are not. The
+entangled spin chain of Chapter~1 already produces both, explicitly and by direct construction, and
+Chapter~3 works through that construction completely.
 
-## Sec.~II.D: "emergent" Hilbert space and von Neumann algebra — the GNS construction
+## "Emergent" Hilbert space and von Neumann algebra: the GNS construction
 
 ### Why this construction is needed
 
-Here is the gap, restated one more time now that every piece needed to close it is in hand. A von Neumann
-algebra's defining completeness condition (weak convergence) is stated directly in terms of matrix elements
-$\braket{\xi|A_n|\eta}$ — it presupposes a Hilbert space already exists. A $C^*$-algebra's defining
-completeness condition (norm convergence) does not — it only needs an abstract norm satisfying $\|A^\dagger
-A\|=\|A\|^2$. So you can specify a $C^*$-algebra $\Alg$ completely abstractly, with no Hilbert space anywhere,
-and then ask: given also a state $\omega$ on $\Alg$ (in the sense of Sec.~II.B.3 — a positive, normalized
-linear functional, requiring nothing beyond the algebra itself to define), can a Hilbert space be
-*emph*, rather than assumed, such that $\omega$ turns out to be represented by an ordinary vector in it?
-The Gelfand—Naimark—Segal (GNS) construction answers yes, unconditionally, and does it by an explicit,
-completely mechanical recipe.
+Here is the gap again, now that every piece needed to close it is in hand. The completeness condition of a
+von Neumann algebra (weak convergence) is stated in terms of matrix elements $\braket{\xi|A_n|\eta}$, so it
+assumes that a Hilbert space already exists. The completeness condition of a $C^*$-algebra (norm
+convergence) does not. It needs only an abstract norm with $\|A^\dagger A\|=\|A\|^2$. So you can specify a
+$C^*$-algebra $\Alg$ abstractly, with no Hilbert space anywhere. Suppose you are also given a state $\omega$
+on $\Alg$, in the sense defined earlier in this chapter: a positive, normalized linear functional, which needs
+nothing beyond the algebra itself to define. Can a Hilbert space be *emph*, rather than assumed, in
+which $\omega$ is represented by an ordinary vector? The Gelfand—Naimark—Segal (GNS) construction says yes,
+always. It does so by an explicit, mechanical recipe.
 
 ### The construction, built up in stages
 
-**Stage 1: treat algebra elements themselves as candidate vectors.** This is the conceptual leap, so it's
-worth stating plainly before the formulas: an element $C\in\Alg$ is reinterpreted as standing for ``the state
-you'd get by applying the operation $C$ to some fixed reference configuration.'' Different elements $C_1,C_2$
-should count as representing the *emph* physical state if no measurement, using $\omega$, could ever
-tell them apart.
+**Stage 1: treat algebra elements as candidate vectors.** This is the conceptual leap, so here it is in
+words before the formulas. An element $C\in\Alg$ is reinterpreted as standing for ``the state you would get
+by applying the operation $C$ to a fixed reference configuration.'' Two elements $C_1,C_2$ should count as
+the *emph* state if no measurement, computed with $\omega$, could ever tell them apart.
 
-**Stage 2: use $\omega$ to build an inner product on $\Alg$ itself.** Define, for any $A,B\in\Alg$,
+**Stage 2: use $\omega$ to build an inner product on $\Alg$ itself.** For any $A,B\in\Alg$, define
 
 $$
 
@@ -987,39 +1101,51 @@ $$
 
 $$
 
-Check that this deserves to be called an inner product: it's positive, $\braket{A|A}=\omega(A^\dagger A)\ge0$,
-directly from $\omega$ being a weight (Sec.~II.B.3); and it has the correct conjugate-symmetry,
-$\braket{B|A}=\omega(B^\dagger A)=\omega\big((A^\dagger B)^\dagger\big)=\omega(A^\dagger B)^*=\braket{A|B}^*$,
-using $\omega(X^\dagger)=\omega(X)^*$ from the very definition of a linear functional. Both required
-properties of an inner product hold, using nothing but the definition of $\omega$ already given.
+Check that this deserves to be called an inner product. It is positive, $\braket{A|A}=\omega(A^\dagger A)\ge0$,
+directly from the positivity of $\omega$. And it has the correct conjugate symmetry:
+\begin{align}
+\braket{B|A}=\omega(B^\dagger A)
+&\eqstep{1} \omega\big((A^\dagger B)^\dagger\big) \notag\\
+&\eqstep{2} \omega(A^\dagger B)^*
+\ \eqstep{3}\ \braket{A|B}^* . \notag
+\end{align}
+**(1)** $(A^\dagger B)^\dagger=B^\dagger A$.\quad
+**(2)** $\omega(X^\dagger)=\omega(X)^*$, which holds for every positive functional (see the definitions
+of weights and states).\quad
+**(3)** the definition $\braket{A|B}\equiv\omega(A^\dagger B)$.
 
-**Stage 3: handle the possibility of "zero-length" elements.** There might be nonzero $X\in\Alg$ with
-$\omega(X^\dagger X)=0$ — algebra elements that $\omega$ is completely blind to. Call the set of all such $X$
-the null space $\mathcal J$. It's worth checking (the paper does this explicitly, its eqs.~2.41—2.42, as a
-short but genuinely instructive computation) that $\mathcal J$ is well-behaved: if $X\in\mathcal J$ and
-$A\in\Alg$ is any element, then $AX\in\mathcal J$ too. The proof is a direct application of the
-Cauchy—Schwarz-like inequality from Sec.~II.B.3:
+Both required properties hold, using nothing but the definition of $\omega$.
 
-$$
+**Stage 3: handle "zero-length" elements.** There may be nonzero $X\in\Alg$ with
+$\omega(X^\dagger X)=0$. These are algebra elements that $\omega$ cannot see at all. Call the set of all such
+$X$ the null space $\mathcal J$. The Cauchy—Schwarz inequality~\eqref{eq:CS-omega} shows that $\mathcal J$
+is a linear subspace. A short computation shows more: if $X\in\mathcal J$ and $A\in\Alg$ is any element, then
+$AX\in\mathcal J$ too. The proof is again an application of the Cauchy—Schwarz inequality:
+\begin{align}
+0 \ \le\ \omega\big((AX)^\dagger(AX)\big)
+&\eqstep{1} \omega(X^\dagger A^\dagger AX) \notag \\
+&\leqstep{2} \omega(X^\dagger X)^{1/2}\,\omega\big((A^\dagger AX)^\dagger A^\dagger AX\big)^{1/2}
+\ \eqstep{3}\ 0 . \notag
+\end{align}
+**(1)** regroup $(AX)^\dagger(AX)=X^\dagger A^\dagger AX$.\quad
+**(2)** the Cauchy—Schwarz inequality for states,
+$|\omega(A^\dagger B)|^2\le\omega(A^\dagger A)\,\omega(B^\dagger B)$, with $A$ replaced by $X$ and $B$
+replaced by $A^\dagger AX$. This is the only inequality in the chain.\quad
+**(3)** $\omega(X^\dagger X)=0$ because $X\in\mathcal J$, so the upper bound is exactly $0$ whatever the
+second factor is.
 
-0 \le \omega\big((AX)^\dagger(AX)\big) = \omega(X^\dagger A^\dagger AX)
-\le \omega(X^\dagger X)^{1/2}\,\omega\big((A^\dagger AX)^\dagger A^\dagger AX\big)^{1/2} = 0 ,
+So $\omega\big((AX)^\dagger(AX)\big)=0$, which means $AX\in\mathcal J$. In the language of algebra,
+$\mathcal J$ is a *emph*. This computation does real work. It guarantees that quotienting out the
+null elements in Stage~4 is consistent: multiplying by $A$ never turns a zero-length vector into a vector of
+nonzero length.
 
-$$
-
-where the middle step is Cauchy—Schwarz applied to $(X, A^\dagger AX)$, and the right-hand side vanishes
-because $\omega(X^\dagger X)=0$, since $X\in\mathcal J$. So
-$\omega\big((AX)^\dagger(AX)\big)=0$ too, meaning $AX\in\mathcal J$ as claimed. This one computation is doing
-real work: it guarantees that the "null" elements form a well-behaved ideal, so that quotienting them out
-(Stage 4) produces something consistent — multiplying by $A$ never accidentally creates a nonzero-length
-vector out of a zero-length one.
-
-**Stage 4: quotient and complete.** Define an equivalence relation $A\sim A+X$ for any $X\in\mathcal J$
-(algebra elements differing only by something $\omega$ can't see count as the same vector), and let $[A]$
-denote the equivalence class of $A$. On the quotient space $\Alg/\mathcal J$, the inner product from Stage 2
-is now genuinely positive-definite (no more zero-length nonzero vectors, by construction), and completing this
-space — filling in the limits of Cauchy sequences, exactly the way you'd complete the rational numbers to get
-the real numbers — produces an honest Hilbert space, called $\HH_\omega$.
+**Stage 4: quotient and complete.** Declare $A$ and $A+X$ equivalent whenever $X\in\mathcal J$: algebra
+elements that differ only by something $\omega$ cannot see count as the same vector. Let $[A]$ denote the
+equivalence class of $A$. The inner product of Stage~2 does not depend on the choice of representative,
+because $|\omega(X^\dagger B)|^2\le\omega(X^\dagger X)\,\omega(B^\dagger B)=0$ for $X\in\mathcal J$. On the
+quotient space $\Alg/\mathcal J$ the inner product is positive definite: by construction, no nonzero vector
+has zero length. Completing this space, by filling in the limits of Cauchy sequences just as the rational
+numbers are completed to the real numbers, gives a Hilbert space, called $\HH_\omega$.
 
 **Stage 5: define the representation.** The algebra acts on $\HH_\omega$ by left multiplication:
 
@@ -1029,13 +1155,15 @@ $$
 
 $$
 
-This is well-defined (doesn't depend on which representative $C$ you picked from its equivalence class,
-thanks to Stage 3), and it automatically respects the algebra's multiplication, $\pi_\omega(A)\pi_\omega(B)=
-\pi_\omega(AB)$ (immediate from the definition: applying $\pi_\omega(A)$ then $\pi_\omega(B)$ to $[C]$ gives
-$[A(BC)]=[(AB)C]$, which is exactly $\pi_\omega(AB)$ applied to $[C]$).
+This is well defined. If $C$ is replaced by $C+X$ with $X\in\mathcal J$, then $AC$ changes by $AX$, which is
+also in $\mathcal J$ by Stage~3. It respects the multiplication of the algebra,
+$\pi_\omega(A)\pi_\omega(B)=\pi_\omega(AB)$. Indeed, applying $\pi_\omega(B)$ and then $\pi_\omega(A)$ to $[C]$
+gives $[A(BC)]=[(AB)C]$, which is $\pi_\omega(AB)$ applied to $[C]$. For a $C^*$-algebra, one also has
+$\|\pi_\omega(A)[C]\|\le\|A\|\,\|[C]\|$, so each $\pi_\omega(A)$ is bounded and extends to the completion
+$\HH_\omega$.
 
-**Stage 6: identify the special vector.** The equivalence class of the identity element, $[\id]$, is
-given its own name, $\ket\Omega\equiv\ket{[\id]}$. Two facts follow immediately from the definitions above:
+**Stage 6: identify the special vector.** The equivalence class of the identity element, $[\id]$, gets
+its own name, $\ket\Omega\equiv\ket{[\id]}$. Two facts follow at once from the definitions above:
 
 $$
 
@@ -1044,162 +1172,229 @@ $$
 
 $$
 
-(The second follows from the first together with the definition of the inner product: $\braket{\Omega|
-\pi_\omega(A)|\Omega} = \braket{[\id]|[A]} = \omega(\id^\dagger A)=\omega(A)$.) So $\ket\Omega$, in the
-Hilbert space you just built, reproduces the abstract state $\omega$ exactly, via the completely ordinary
-formula $\braket{\Omega|A|\Omega}$ you already know from undergraduate quantum mechanics. This is the entire
-point of the construction: you handed it an abstract algebra and a number-valued rule $\omega$, and it handed
-back a genuine Hilbert space and a genuine vector inside it, with the ordinary quantum-mechanical formula for
-expectation values holding by construction, not by assumption.
+The second follows from the first together with the definition of the inner product:
+$\braket{\Omega|\pi_\omega(A)|\Omega} = \braket{[\id]|[A]} = \omega(\id^\dagger A)=\omega(A)$. So in the Hilbert
+space just built, the vector $\ket\Omega$ reproduces the abstract state $\omega$ exactly, through the ordinary
+formula $\braket{\Omega|A|\Omega}$ from undergraduate quantum mechanics. This is the purpose of the
+construction. You gave it an abstract algebra and a number-valued rule $\omega$. It gave back a Hilbert space
+and a vector inside it, and the usual formula for expectation values holds by construction, not by
+assumption.
 
 
 > [!NOTE] **Physics Connection: Origin of the Vacuum $\ket0$**
 > $\ket\Omega$ is not found somewhere outside this construction. It *emph* the identity element of the
 > algebra, $\id\in\Alg$, renamed once the inner product has been put on $\Alg$ in Stage~2. A vector and the
-> Hilbert space it lives in are made in the same step, from the same two ingredients ($\Alg$ and $\omega$).
+> Hilbert space it lives in are made in the same step, from the same two ingredients, $\Alg$ and $\omega$.
 > Neither exists before the other.
 > 
-> The construction also explains, mechanically, why $a$ annihilates $\ket\Omega$ for the oscillator state
-> $\omega(X)=\braket{0|X|0}$ — without needing $\ket0$ as an input to say what $\omega$ is. Start from one
-> algebraic condition, $\omega(a^\dagger a)=0$, plus positivity, $\omega(A^\dagger A)\ge0$ for every $A\in\Alg$
-> (Sec.~II.B.3). Cauchy—Schwarz (eq.~2.19) turns the first into $\omega(a)=\omega(a^\dagger)=0$ directly:
-> $|\omega(1^\dagger a)|^2\le\omega(1)\,\omega(a^\dagger a)=0$. Every other value $\omega\big((a^\dagger)^ma^n
-> \big)$ then follows by moving each $a$ in a monomial past every $a^\dagger$ using $[a,a^\dagger]=1$, until it
-> either meets another $a$ (giving zero) or reaches the identity (giving $1$, by normalization). This is the
-> same bookkeeping already used to check $\braket{0|a^n(a^\dagger)^n|0}=n!$ — only now read as *emph*
-> $\omega$ from the algebra's multiplication table, not as evaluating a bra-ket that already existed.
+> The construction also explains why $a$ annihilates $\ket\Omega$ for the oscillator ground state, without
+> using $\ket0$ as an input to define $\omega$. Start from one algebraic condition, $\omega(a^\dagger a)=0$,
+> together with positivity, $\omega(A^\dagger A)\ge0$ for every $A\in\Alg$, and normalization,
+> $\omega(\id)=1$. For any element $Y$, the Cauchy—Schwarz inequality~\eqref{eq:CS-omega} gives
+> $|\omega(Ya)|^2\le\omega(YY^\dagger)\,\omega(a^\dagger a)=0$. So $\omega(Ya)=0$ for every $Y$, and taking
+> adjoints, $\omega(a^\dagger Y)=\omega(Y^\dagger a)^*=0$ as well. In particular $\omega(a)=\omega(a^\dagger)=0$.
+> Using $[a,a^\dagger]=1$, every monomial in $a$ and $a^\dagger$ can be rewritten as a combination of
+> normal-ordered monomials $(a^\dagger)^ma^n$. Those with $m+n>0$ either end in $a$ or begin with $a^\dagger$,
+> so $\omega$ gives them zero. Only the constant term survives, and $\omega(\id)=1$ fixes its value. So the one
+> condition $\omega(a^\dagger a)=0$ determines $\omega$ completely. The oscillator box below uses the same
+> bookkeeping to show $\braket{0|a^n(a^\dagger)^n|0}=n!$. Here it is read as *emph* $\omega$ from the
+> multiplication table of the algebra, not as evaluating a bra-ket that already existed.
 > 
-> Now apply Stage~3 (Sec.~II.D) to this $\omega$. The null ideal is $\mathcal J=\{X:\omega(X^\dagger X)=0\}$,
-> and $a\in\mathcal J$, because $\omega(a^\dagger a)=0$. Stage~4 quotients by exactly this $\mathcal J$: every
+> Now apply Stage~3 to this $\omega$. The null ideal is $\mathcal J=\{X:\omega(X^\dagger X)=0\}$, and
+> $a\in\mathcal J$, because $\omega(a^\dagger a)=0$. Stage~4 quotients by exactly this $\mathcal J$, so every
 > element of $\mathcal J$ becomes the zero vector. So $[a]=0$, and $\pi_\omega(a)\ket\Omega=\ket{[a]}=0$. The
-> vacuum being annihilated by $a$ is not a separate fact about the world that $\omega$ happened to match — it
-> is what $[a]=0$ means, once $\mathcal J$ is fixed by the one number $\omega(a^\dagger a)$.
+> vacuum being annihilated by $a$ is not a separate fact about the world that $\omega$ happened to match. It is
+> what $[a]=0$ means, once $\mathcal J$ is fixed by the one number $\omega(a^\dagger a)$.
 > 
-> This is the general answer to how the earlier question was phrased: the vector space is not searched for
-> among candidates that already satisfy $\omega$; it *emph* $\Alg/\mathcal J$, completed. Its points are
-> defined to be exactly as fine as $\omega$ can distinguish, no finer — two algebra elements become the same
-> vector exactly when $\omega$ assigns their difference zero length. Quotienting throws out the redundancy;
-> completing (filling in limits of Cauchy sequences) is what turns this inner-product space into a genuine
-> Hilbert space, matching the definition of Hilbert space from Sec.~I.B.
+> This is the general answer to where the vacuum and its Hilbert space come from. The vector space is not
+> searched for among candidates that already reproduce $\omega$. It *emph* $\Alg/\mathcal J$, completed. Its
+> points are exactly as fine as $\omega$ can distinguish, and no finer: two algebra elements become the same
+> vector exactly when $\omega$ assigns their difference zero length. Quotienting throws out the redundancy.
+> Completing, by filling in the limits of Cauchy sequences, turns this inner-product space into a Hilbert space
+> in the sense of Chapter~1.
 > 
-> In an actual field theory, $\omega$ is fixed the same way, only more concretely: a Euclidean path integral,
-> 
-$$
-
-> \omega\big(O(x_1)\cdots O(x_n)\big) = \frac1Z\int\mathcal D\phi\;O(x_1)\cdots O(x_n)\,e^{-S[\phi]} ,
+> In a field theory, $\omega$ is fixed in the same way, only more concretely, by a Euclidean path integral:
 > 
 $$
 
-> computes every correlator directly, with no Hilbert space, vector, or bra-ket anywhere in the formula
-> (Sec.~VI.B's CFT vacuum and the JT-gravity states $\ket\beta$ of Sec.~IX.F are both built this way). Canonical
-> quantization, with its $\ket0$ and its Fock space, is the GNS representation built afterward from that already
-> complete data. This is also the resolution offered at the end of this companion (Sec.~X.B): different
-> asymptotic vacua of string theory are different states $\omega$ on one shared, background-independent algebra
-> $\Alg_{\text{IIB}}$, each with its own path-integral (or
-> correlator) definition requiring no Hilbert space to state — and each one's "$\ket0$" is simply $[\id]$
-> inside *emph* $\omega$'s own GNS space, never a single object shared across backgrounds. That
-> is precisely why the resulting Hilbert spaces can come out — and do come out — mutually inequivalent.
+> \omega\big(O(x_1)\cdots O(x_n)\big) = \frac1Z\int\mathcal D\phi\;O(x_1)\cdots O(x_n)\,e^{-S[\phi]} .
+> 
+$$
+
+> This formula computes every Euclidean correlator directly (Lorentzian correlators follow by analytic
+> continuation), and no Hilbert space, vector, or bra-ket appears in it. The CFT vacuum of Chapter~6 and the
+> JT-gravity states $\ket\beta$ of Chapter~9 are both defined this way. Canonical quantization, with its $\ket0$
+> and its Fock space, is the GNS representation built afterward from these correlators. Chapter~10 applies the
+> same idea to string theory. There, different asymptotic vacua are proposed to be different states $\omega$ on
+> one shared, background-independent algebra $\Alg_{\text{IIB}}$. Each has its own path-integral (or
+> correlator) definition that needs no Hilbert space. Each one's "$\ket0$" is simply $[\id]$ inside the GNS
+> space of *emph* $\omega$. It is never a single object shared across backgrounds. This is why
+> the resulting Hilbert spaces can be mutually inequivalent.
 
 
-The set $\{\pi_\omega(A)\ket\Omega : A\in\Alg\}$ is automatically dense in $\HH_\omega$ (every vector in
-$\HH_\omega$ is, by the very construction of $\HH_\omega$ as a completion of $\{[A]\}$, arbitrarily well
-approximated by some $\pi_\omega(A)\ket\Omega$). A vector with this property is called **cyclic** — every
-state reachable from $\ket\Omega$ using only the algebra, and this is precisely the same structure as the
-familiar construction of a harmonic-oscillator Hilbert space by repeatedly acting on the vacuum $\ket0$ with
-creation operators; the only difference is that here it is a theorem, derived from the algebra and the state,
-rather than a separate postulate about how the Hilbert space happens to be built.
+The set $\{\pi_\omega(A)\ket\Omega : A\in\Alg\}$ is dense in $\HH_\omega$. This is automatic, because
+$\HH_\omega$ was built as the completion of the set of classes $[A]=\pi_\omega(A)\ket\Omega$, so every vector
+in $\HH_\omega$ can be approximated arbitrarily well by some $\pi_\omega(A)\ket\Omega$. A vector with this
+property is called **cyclic**: every state can be reached from $\ket\Omega$ using only the algebra. This
+is the same structure as the familiar construction of the harmonic-oscillator Hilbert space, by acting
+repeatedly on the vacuum $\ket0$ with creation operators. The only difference is that here it is a theorem,
+derived from the algebra and the state, rather than a separate postulate about how the Hilbert space is
+built.
 
 
 > [!NOTE] **Physics Connection: GNS and Oscillator Fock Space**
-> This is worth checking is not just an analogy but literally the same calculation, run through the GNS recipe
-> step by step. Let $\Alg$ be the $*$-algebra generated by $1,a,a^\dagger$ with the usual $[a,a^\dagger]=1$
-> (polynomials in $a,a^\dagger$ — forget for a moment that you already know this algebra has a Fock-space
-> representation; treat it exactly as abstractly as Sec.~II.D asks). Take the state $\omega(X)\equiv\braket{0|X|0}$
-> built from the number operator's ground state, $a\ket0=0$ (this is a legitimate abstract state on $\Alg$ in
-> the Sec.~II.B.3 sense — positive and normalized — with no Hilbert space assumed yet on the left-hand side;
-> you could equally well have specified $\omega$ by giving its value on every monomial $\omega\big((a^\dagger)^m
-> a^n\big)$ directly).
+> The oscillator shows that GNS is the same calculation as the Fock-space construction you already know, run
+> in the opposite direction. We compute the same quantities in two ways and compare the answers.
 > 
-> Follow the recipe. Stage 2's inner product on $\Alg$ itself: $\braket{(a^\dagger)^n\,|\,(a^\dagger)^m}\equiv
-> \omega\big(a^n(a^\dagger)^m\big)=\braket{0|a^n(a^\dagger)^m|0}$. This is exactly the standard oscillator-algebra
-> computation you already know how to do by repeatedly commuting $a$'s past $a^\dagger$'s: it vanishes unless
-> $n=m$, and $\braket{0|a^n(a^\dagger)^n|0}=n!$ (check $n=1$: $\braket{0|aa^\dagger|0}=\braket{0|a^\dagger a+1|0}=
-> 1=1!$; $n=2$ gives $2!=2$, and so on by induction). So the equivalence classes $\ket{[(a^\dagger)^n]}$ are
-> already orthogonal, with norm-squared $n!$ — completing and normalizing gives exactly
-> $\ket n\equiv\ket{[(a^\dagger)^n]}/\sqrt{n!}$, the ordinary number-eigenstate basis. The representation
-> $\pi_\omega(a^\dagger)\ket{[(a^\dagger)^n]}=\ket{[(a^\dagger)^{n+1}]}$ becomes, after the same normalization,
-> exactly $\pi_\omega(a^\dagger)\ket n=\sqrt{n+1}\,\ket{n+1}$ — the ordinary raising-operator matrix element, not
-> an approximation to it. The cyclic vector $\ket\Omega=\ket{[1]}$ is exactly the oscillator ground state
-> $\ket0$.
+> **The ordinary way.** Start with a Hilbert space spanned by orthonormal vectors
+> $\ket0,\ket1,\ket2,\dots$, and define two operators by $a^\dagger\ket n=\sqrt{n+1}\,\ket{n+1}$ and
+> $a\ket n=\sqrt n\,\ket{n-1}$. Then $[a,a^\dagger]=1$, $a\ket0=0$, and $(a^\dagger)^m\ket0=\sqrt{m!}\,\ket m$.
+> Consequently
 > 
-> **Nothing here is new physics — this is the identical Fock-space construction from your first course
-> on the harmonic oscillator, run backward.** What's genuinely different in outlook, not in content, is which
-> direction the logic runs: ordinarily you're handed $\HH=L^2(\mathbb R)$ (or an abstract countable basis)
-> first, and $a,a^\dagger$ are defined as operators on it. Here, the algebra generated by the commutation
-> relation $[a,a^\dagger]=1$ and the state $\omega$ (equivalently, "the vacuum is annihilated by $a$") were
-> the only inputs, and the entire Fock space — every $\ket n$, every matrix element — was manufactured as an
-> output. This is exactly the sense in which Sec.~II.B.3 said the Hilbert space is derived, not fundamental: for
-> the harmonic oscillator specifically, nothing about the physics changes, because $\omega$ here happens to
-> produce a completely ordinary, unique Fock space. The interesting cases — where a different choice of
-> reference state genuinely produces an *emph* Hilbert space out of the very same algebra — are
-> exactly the $N$-Bell-pair and entangled-spin examples running throughout the rest of this section, and,
-> eventually, the different asymptotic vacua of quantum gravity itself in Sec.~X.B.
+$$
+
+> \braket{0|a^n(a^\dagger)^m|0}=\sqrt{n!\,m!}\,\braket{n|m}=n!\,\delta_{nm} .
+> 
+$$
+
+> Here the Hilbert space comes first, and the operators are defined on it.
+> 
+> **The GNS way.** Now forget the Hilbert space. Let $\Alg$ be the $*$-algebra generated by $1,a,a^\dagger$
+> with only the relation $[a,a^\dagger]=1$. Its elements are polynomials in $a$ and $a^\dagger$. Let $\omega$
+> be the state fixed by the single condition $\omega(a^\dagger a)=0$, as in the previous box. Since $a$ and
+> $a^\dagger$ are unbounded, $\Alg$ is a $*$-algebra but not a $C^*$-algebra. The GNS steps still go through,
+> with $\pi_\omega(a)$ and $\pi_\omega(a^\dagger)$ defined on the dense subspace of finite combinations of the
+> classes $[(a^\dagger)^n]$. Follow the recipe.
+> 
+> The Stage~2 inner product on $\Alg$ is $\braket{(a^\dagger)^n\,|\,(a^\dagger)^m}\equiv
+> \omega\big(a^n(a^\dagger)^m\big)$. First, it vanishes for $n\ne m$. Write $N=a^\dagger a$. The previous box
+> showed $\omega(a^\dagger Y)=0$ and $\omega(Ya)=0$ for every $Y$, so $\omega(NX)=\omega(XN)=0$ for every $X$.
+> Also $[N,a^n(a^\dagger)^m]=(m-n)\,a^n(a^\dagger)^m$, because $[N,a]=-a$ and $[N,a^\dagger]=a^\dagger$. Hence
+> 
+$$
+
+> (m-n)\,\omega\big(a^n(a^\dagger)^m\big)=\omega(Na^n(a^\dagger)^m)-\omega(a^n(a^\dagger)^mN)=0 ,
+> 
+$$
+
+> so $\omega\big(a^n(a^\dagger)^m\big)=0$ unless $n=m$. For $n=m$, write $\omega(X)$ as $\braket{0|X|0}$, as the
+> ordinary way would; the computation uses only the algebra and $\omega(Ya)=0$. It is one recursive step:
+> \begin{align}
+> \braket{0|a^n(a^\dagger)^n|0}
+> &\eqstep{1} \braket{0|a^{n-1}\big[a,(a^\dagger)^n\big]|0} + \braket{0|a^{n-1}(a^\dagger)^na|0} \notag\\
+> &\eqstep{2} n\,\braket{0|a^{n-1}(a^\dagger)^{n-1}|0} + 0 . \notag
+> \end{align}
+> **(1)** split $a\,(a^\dagger)^n=[a,(a^\dagger)^n]+(a^\dagger)^n a$ and distribute.\quad
+> **(2)** the oscillator identity $[a,(a^\dagger)^n]=n(a^\dagger)^{n-1}$; the second term has the form
+> $\omega(Ya)$, which is zero.
+> 
+> This is a recursion, $\braket{0|a^n(a^\dagger)^n|0}=n\,\braket{0|a^{n-1}(a^\dagger)^{n-1}|0}$, with base case
+> $\omega(\id)=1$ at $n=0$. Its solution is $n!$. (For example, $n=1$ gives $1\cdot1=1=1!$ and $n=2$ gives
+> $2\cdot1=2=2!$.) So the classes $[(a^\dagger)^n]$ are orthogonal, with squared norm $n!$. Normalizing gives
+> $\ket n\equiv[(a^\dagger)^n]/\sqrt{n!}$. The representation acts by $\pi_\omega(a^\dagger)[(a^\dagger)^n]=
+> [(a^\dagger)^{n+1}]$, which after normalization is $\pi_\omega(a^\dagger)\ket n=\sqrt{n+1}\,\ket{n+1}$. Also
+> $\pi_\omega(a)[(a^\dagger)^n]=[a(a^\dagger)^n]=n\,[(a^\dagger)^{n-1}]$ (System~3 of the next box shows this),
+> which after normalization is $\pi_\omega(a)\ket n=\sqrt n\,\ket{n-1}$. The cyclic vector $\ket\Omega=[\id]$ is
+> $\ket0$, and $\pi_\omega(a)\ket\Omega=[a]=0$.
+> 
+> **Comparison.** The two computations give the same answers:
+> 
+> \small
+> \begin{tabular}{@{}lll@{}}
+> \toprule
+> & The ordinary way & The GNS way \\
+> \midrule
+> Inner products & $\braket{0|a^n(a^\dagger)^m|0}=n!\,\delta_{nm}$ & $\omega\big(a^n(a^\dagger)^m\big)=n!\,\delta_{nm}$ \\
+> Basis & $\ket n=(a^\dagger)^n\ket0/\sqrt{n!}$ & $\ket n=[(a^\dagger)^n]/\sqrt{n!}$ \\
+> Raising & $a^\dagger\ket n=\sqrt{n+1}\,\ket{n+1}$ & $\pi_\omega(a^\dagger)\ket n=\sqrt{n+1}\,\ket{n+1}$ \\
+> Lowering & $a\ket n=\sqrt n\,\ket{n-1}$ & $\pi_\omega(a)\ket n=\sqrt n\,\ket{n-1}$ \\
+> Ground state & $a\ket0=0$ & $\pi_\omega(a)\ket\Omega=[a]=0$ \\
+> \bottomrule
+> \end{tabular}
+> 
+> The map $\ket n\mapsto[(a^\dagger)^n]/\sqrt{n!}$ is a unitary between the two Hilbert spaces, and it carries
+> $a$ and $a^\dagger$ of the ordinary way to $\pi_\omega(a)$ and $\pi_\omega(a^\dagger)$. So the two routes give
+> the same Hilbert space, the same basis, the same matrix elements, and the same ground state. These are exact
+> equalities, not approximations.
+> 
+> Nothing here is new physics. It is the Fock-space construction from a first course on the harmonic
+> oscillator, run backward. What differs is only the direction of the logic. In the ordinary way you are handed
+> $\HH=L^2(\mathbb R)$ (or an abstract countable basis) first, and $a,a^\dagger$ are defined as operators on
+> it. In the GNS way the only inputs are the relation $[a,a^\dagger]=1$ and the state $\omega$ (equivalently,
+> "the vacuum is annihilated by $a$"). The whole Fock space, every $\ket n$ and every matrix element, is an
+> output. This is the sense in which the section on weights and states called the Hilbert space derived rather
+> than fundamental. For the oscillator nothing about the physics changes, because this $\omega$ produces the
+> usual Fock space. (For one degree of freedom this is no accident: by the Stone—von Neumann theorem, the
+> usual representation is, up to unitary equivalence, the only well-behaved irreducible one.) The cases that matter later
+> are those in which a different state produces an *emph* Hilbert space from the same
+> algebra. Examples are the $N$-Bell-pair chain, treated at the end of this chapter and in Chapters~3 and~4,
+> and the different asymptotic vacua of quantum gravity in Chapter~10.
 
 
 \begin{workedexamplebox}[: Concrete GNS Construction for Three Physical Systems]
-To make the abstract 6-stage recipe completely mechanical, let us explicitly build the GNS Hilbert space, inner product, null ideal, representation, and cyclic vector for three fundamental physical systems:
+To make the six-stage recipe fully mechanical, we now build the GNS Hilbert space, inner product, null ideal,
+representation, and cyclic vector explicitly for three basic physical systems. In each case we also compare
+the result with the answer ordinary quantum mechanics gives.
 
 
-1. **System 1: Pure State on a Single Qubit ($\Alg = M_2(\mathbb{C**)$)}
-
-
-
-8. **System 2: Mixed / Thermal State on $M_2(\mathbb{C**)$ (Emergence of the Thermofield Double)}
+1. **System 1: a pure state of a single qubit ($\Alg = M_2(\mathbb{C**)$).}
 
 
 
-14. **System 3: CCR Bosonic Oscillator (Emergence of Fock Space)**
+9. **System 2: a mixed (thermal) state on $M_2(\mathbb{C**)$, and the thermofield double.}
+
+
+
+16. **System 3: the bosonic oscillator (canonical commutation relation) and Fock space.**
 
 
 
 
 \end{workedexamplebox}
 
-Finally, the von Neumann algebra associated with all of this is obtained by taking the double commutant of the
-representation, $\M\equiv\pi_\omega(\Alg)''$ (eq.~2.39) — using exactly the double-commutant machinery from
-Sec.~II.B.2 to promote the $C^*$-algebra $\pi_\omega(\Alg)$ (norm-complete, but not yet necessarily
-weakly-complete) up to the full von Neumann algebra it generates.
+Finally, the von Neumann algebra associated with all of this is the double commutant of the
+representation,
+\begin{equation}
+\M\equiv\pi_\omega(\Alg)'' .
+\label{eq:GNS-vN}
+\end{equation}
+This uses the double-commutant machinery from earlier in this chapter to promote the $C^*$-algebra
+$\pi_\omega(\Alg)$, which is norm-closed but not necessarily weakly closed, to the von Neumann algebra it
+generates.
 
 ### Two structural facts, and what they mean
 
-The GNS triple $(\HH_\omega,\pi_\omega,\ket\Omega)$ is unique up to unitary equivalence (any two constructions
-starting from the same $\omega$ give the "same" Hilbert space, just possibly described in a different
-basis) — a fact stated without proof, but a reassuring one, since it means the construction isn't accidentally
-sensitive to some arbitrary choice made along the way.
+The GNS triple $(\HH_\omega,\pi_\omega,\ket\Omega)$ is unique up to unitary equivalence. Any two
+constructions that start from the same $\omega$ give the "same" Hilbert space, possibly described in a
+different basis. We state this without proof. It is reassuring, because it means the construction does not
+depend on any arbitrary choice made along the way.
 
-Two further properties of $\omega$ translate directly into properties of the representation you get out:
-
-
-- $\pi_\omega$ is **irreducible** (meaning $B(\HH_\omega)=\pi_\omega(\Alg)''$ — the representation
-already generates *emph* bounded operator on $\HH_\omega$, leaving nothing outside its reach) if and
-only if $\omega$ is a **pure** state.
-- $\ket\Omega$ is **separating** for $\pi_\omega(\Alg)$ (meaning $A\ket\Omega=0$ forces $A=0$ — no
-nonzero operator in the algebra can annihilate the reference vector) if and only if $\omega$ is
-**faithful**.
+Two further properties of $\omega$ translate directly into properties of the representation it produces:
 
 
-The combination *emph* is worth flagging now, even though its full importance only
-becomes visible in Sec.~IV: cyclic says the algebra can reach everywhere starting from $\ket\Omega$;
-separating says different elements of the algebra act differently on $\ket\Omega$ (nothing nonzero is wasted).
-Together, and by the symmetric statement applied to the commutant $\M'$, these turn out to be exactly the
-conditions under which $\ket\Omega$ genuinely encodes entanglement between $\M$ and $\M'$ — the load-bearing
-property behind Tomita—Takesaki modular theory, the subject of the next major section of the paper.
+- $\pi_\omega$ is **irreducible** if and only if $\omega$ is a **pure** state. Irreducible
+means $\pi_\omega(\Alg)''=B(\HH_\omega)$: the representation generates *emph* bounded operator on
+$\HH_\omega$, leaving nothing outside its reach.
+- If $\omega$ is **faithful**, then $\ket\Omega$ is **separating** for $\pi_\omega(\Alg)$.
+Separating means that $\pi_\omega(A)\ket\Omega=0$ forces $\pi_\omega(A)=0$: no nonzero operator in the algebra
+annihilates the reference vector. (Indeed, $\pi_\omega(A)\ket\Omega=[A]=0$ means $\omega(A^\dagger A)=0$, so
+$A=0$.) Conversely, if $\ket\Omega$ is separating, then $\omega$ is faithful on the represented algebra
+$\pi_\omega(\Alg)$.
+
+
+The combination *emph* deserves attention now, although its full importance appears
+only in Chapter~4. Cyclic says that the algebra reaches every vector, starting from $\ket\Omega$. Separating
+says that different elements of the algebra act differently on $\ket\Omega$, so nothing nonzero is wasted.
+The two notions are linked: a vector is cyclic for $\M$ if and only if it is separating for $\M'$ (a standard
+fact). So a vector that is cyclic and separating for $\M$ is also cyclic and separating for $\M'$. In the
+finite-dimensional examples of this chapter, this happens exactly when $\ket\Omega$ is entangled between the
+two tensor factors with full Schmidt rank on both sides. This property is the foundation of Tomita—Takesaki
+modular theory, the subject of Chapter~4.
 
 ### The worked example, done completely with numbers
 
-Here is the example the paper gives (its eqs.~2.51—2.53), worked all the way through with concrete numbers
-rather than left symbolic, since this is the single most important computation in the entire section to
-actually see happen.
+We now work one standard example all the way through with numbers, rather than leaving it symbolic. It is
+the most important computation in this chapter to see in full.
 
 Let $\Alg=M_3(\mathbb C)$, the algebra of all $3\times3$ complex matrices, and take
 
@@ -1209,16 +1404,30 @@ $$
 
 $$
 
-Check first that $\omega$ really is a state in the Sec.~II.B.3 sense: it's linear (trace and matrix
-multiplication are both linear), positive ($\Tr(\rho A^\dagger A)\ge0$ since $\rho$ is a positive-semidefinite
-matrix and $A^\dagger A$ is too — a standard fact about traces of products of positive matrices), and
-normalized ($\Tr(\rho\cdot\id_3)=\Tr\rho=0.6+0.4+0=1$). Note $\rho$ has rank $2$, not rank $3$: it completely
-ignores the third basis direction, so $\omega$ will turn out to be a state that is *emph* faithful
-(exactly one property of $\rho$ that will show up directly in the construction below).
+First check that $\omega$ is a state in the sense defined earlier. It is linear, because the trace and matrix
+multiplication are linear. It is positive: since $\rho$ is diagonal,
+$\Tr(\rho A^\dagger A)=\sum_j\rho_{jj}(A^\dagger A)_{jj}=\sum_j\rho_{jj}\sum_k|A_{kj}|^2\ge0$. It is normalized:
+$\Tr(\rho\,\id_3)=\Tr\rho=0.6+0.4+0=1$. The matrix $\rho$ has rank $2$, not $3$. It ignores the third basis
+direction completely, so $\omega$ is *emph* faithful. For example, $e_{33}\ne0$ but
+$\omega(e_{33}^\dagger e_{33})=\rho_{33}=0$. This property will show up directly in the construction.
 
-Following the GNS recipe exactly: the general theory predicts (and this is confirmed by direct computation,
-not just asserted) that $\HH_\omega\cong\mathbb C^3\otimes\mathbb C^2$ — a 6-dimensional space, $3$ (the size
-of the original matrix algebra) times $2$ (the rank of $\rho$) — with
+Now follow the recipe, exactly as for System~2 above. The GNS inner product is
+\begin{align}
+\braket{A|B} = \Tr(\rho A^\dagger B)
+&\eqstep{1} \sum_{j=1}^3 \rho_{jj}\,(A^\dagger B)_{jj} \notag\\
+&\eqstep{2} 0.6\sum_{k=1}^3 A_{k1}^*B_{k1} + 0.4\sum_{k=1}^3 A_{k2}^*B_{k2} . \notag
+\end{align}
+**(1)** $\rho$ is diagonal.\quad
+**(2)** $(A^\dagger B)_{jj}=\sum_k A_{kj}^*B_{kj}$, and $\rho_{33}=0$ removes the $j=3$ term.
+
+So only the first two columns of a matrix matter. The null space $\mathcal J$ consists of the matrices whose
+first two columns vanish, with the third column arbitrary. It is 3-dimensional, so the quotient
+$\Alg/\mathcal J$ has dimension $9-3=6$. An orthonormal basis is
+$\ket k_R\ket j_L\equiv[e_{kj}]/\sqrt{\rho_{jj}}$, for $k=1,2,3$ and $j=1,2$. Left multiplication,
+$[Ae_{kj}]=\sum_lA_{lk}[e_{lj}]$, acts only on the row label $k$, so $\pi_\omega(A)=A\otimes\id_2$. The cyclic
+vector is $[\id_3]=[e_{11}]+[e_{22}]+[e_{33}]=[e_{11}]+[e_{22}]$, since $e_{33}\in\mathcal J$. Altogether,
+$\HH_\omega\cong\mathbb C^3\otimes\mathbb C^2$ is 6-dimensional: $3$ (the size of the matrices) times $2$ (the
+rank of $\rho$). The cyclic vector and the representation are
 
 $$
 
@@ -1228,116 +1437,126 @@ $$
 
 $$
 
-This was checked directly by computer, for several random $3\times3$ matrices $A,B$: both
-$\omega(A)=\Tr(\rho A)$ against $\braket{\Omega|\pi_\omega(A)|\Omega}$, and the GNS inner product
-$\braket{A|B}=\Tr(\rho A^\dagger B)$ against $\braket{\Omega|\pi_\omega(A)^\dagger\pi_\omega(B)|\Omega}$, and
-in every trial the two sides of each comparison agreed to machine precision (roughly one part in $10^{15}$,
-the limit of ordinary double-precision computer arithmetic — as close to "exactly equal" as a numerical
-check can demonstrate).
+We also checked this numerically. For several random complex $3\times3$ matrices $A,B$, we compared
+$\omega(A)=\Tr(\rho A)$ with $\braket{\Omega|\pi_\omega(A)|\Omega}$, and the GNS inner product
+$\braket{A|B}=\Tr(\rho A^\dagger B)$ with $\braket{\Omega|\pi_\omega(A)^\dagger\pi_\omega(B)|\Omega}$. In every
+trial the two sides agreed to about one part in $10^{16}$, the rounding error of ordinary double-precision
+arithmetic. The failure of faithfulness is also visible: $\pi_\omega(e_{13})\ket\Omega=0$ although
+$e_{13}\ne0$. So $\ket\Omega$ is cyclic but not separating, as the second structural fact leads us to expect.
 
-This is worth recognizing for what it is: $\ket\Omega$ is exactly the **purification** of $\rho$ you may
-already have met in Sakurai's discussion of density matrices — the standard trick of embedding a mixed state
-$\rho$ on a small Hilbert space into a pure state on a larger one by introducing an auxiliary system (here,
-the $L$ factor) entangled with the original. The GNS construction produces this purification completely
-automatically, with no separate ad hoc step of "now introduce an auxiliary system" — the auxiliary system
-$\HH_L$ *emph* the completion $\Alg/\mathcal J$ from Stage 4 above, and it appears with exactly the right
-dimension (the rank of $\rho$) because that's precisely how many independent equivalence classes $\mathcal
-J$ leaves behind.
+Recognize what this is. $\ket\Omega$ is the **purification** of $\rho$, familiar from quantum
+information. Purification is the standard way to write a mixed state $\rho$ on a small Hilbert space as a
+pure state on a larger one, by introducing an auxiliary system (here the $L$ factor) entangled with the
+original. The GNS construction produces this purification automatically, with no separate step of ``now
+introduce an auxiliary system.'' The auxiliary factor $\HH_L$ appears inside $\Alg/\mathcal J$ as the column
+label of the matrix $[A]$. Its dimension is the rank of $\rho$, because $\mathcal J$ removes exactly the
+columns on which $\rho$ vanishes.
 
-Two limits of this same example are worth noting explicitly, because they show the two Propositions above in
-action on numbers you can check directly:
+Two variations of the same example show the two structural facts at work, on numbers you can check directly:
 
-- Take $\rho=\mathrm{diag}(1,0,0)$ instead — rank $1$, a pure state. Then $\HH_\omega$ collapses to a
-single copy of $\mathbb C^3$ (the $L$ factor becomes 1-dimensional and drops out), and $\pi_\omega$ is
-irreducible — consistent with the Proposition above, since $\omega$ is now pure.
-- Take $\rho=\tfrac13\id_3$ instead — full rank ($3$), maximally mixed. Then $\HH_\omega=\mathbb
-C^3\otimes\mathbb C^3$, and $\ket\Omega=\tfrac1{\sqrt3}\sum_{a=1}^3\ket a_R\ket a_L$ is both cyclic
-*emph* separating — consistent with the second Proposition, since this $\omega$ is faithful (it's the
-maximally mixed state, which by definition assigns nonzero weight to literally everything). This maximally
-mixed, maximally entangled reference vector is the abstract, $3$-dimensional-matrix-algebra analogue of the
-Bell pair at $\theta=\pi/4$ from Sec.~I — the same structure, one level more general.
+- Take $\rho=\mathrm{diag}(1,0,0)$ instead, which has rank $1$ and is a pure state. Then $\HH_\omega$
+reduces to a single copy of $\mathbb C^3$: the $L$ factor becomes 1-dimensional and drops out. The
+representation $\pi_\omega$ is irreducible, consistent with the first structural fact, since $\omega$ is now
+pure.
+- Take $\rho=\tfrac13\id_3$ instead, which has full rank $3$ and is maximally mixed. Then
+$\HH_\omega=\mathbb C^3\otimes\mathbb C^3$, and $\ket\Omega=\tfrac1{\sqrt3}\sum_{a=1}^3\ket a_R\ket a_L$ is both
+cyclic *emph* separating. This is consistent with the second structural fact, since this $\omega$ is
+faithful: $\omega(A^\dagger A)=\tfrac13\Tr(A^\dagger A)>0$ for every nonzero $A$. This maximally mixed state, with
+its maximally entangled reference vector, is the $3$-dimensional analogue of the Bell pair at $\theta=\pi/4$
+from Chapter~1. It is the same structure, one size larger.
 
 
-## Sec.~II.E: emergent von Neumann algebras of the entangled spin example
+## Emergent von Neumann algebras of the entangled spin example
 
-This closing subsection of Sec.~II does exactly one thing: it takes the GNS machinery just built and applies
-it, explicitly, to the $N\to\infty$ Bell-pair-chain example from Sec.~I — turning the informal discussion
-there ("the finite-energy excitations form some Hilbert space $\HH_{\Phi_\theta}$") into an actual
-construction, with an actual algebra and an actual state.
+This closing section does one thing. It takes the GNS machinery just built and applies it explicitly to the
+$N\to\infty$ Bell-pair chain of Chapter~1. This turns the informal description given there (``the
+finite-energy excitations form some Hilbert space $\HH_{\Phi_\theta}$'') into an actual construction, with an
+actual algebra and an actual state.
 
-Define the algebra of **finite-energy operations**, $\Alg$: operators of the form
+Define the algebra of **finite-energy operations**, $\Alg$. It is generated by operators of the form
 
 $$
 
 O = \alpha_1\otimes\alpha_2\otimes\cdots\otimes\alpha_n\otimes\cdots ,
-\qquad \text{all but finitely many of the } \alpha_i \text{ equal } \id_2\otimes\id_2
+\qquad \text{all but finitely many of the } \alpha_i \text{ equal to } \id_2\otimes\id_2 .
 
 $$
 
-(eq.~2.54) — that is, $O$ acts on only finitely many of the (infinitely many) spin pairs, doing nothing
-(the identity) to every pair beyond some finite point. This restriction is not arbitrary; it is exactly the
-statement, translated into algebra, that $O$ corresponds to a process reachable at finite energy (recall from
-Sec.~I that flipping infinitely many spins costs infinite energy — an operator that acts nontrivially on
-infinitely many pairs at once is precisely the kind of thing a finite-energy process could never do). In the
-$N\to\infty$ limit, $O$ inherits a well-defined norm from the finite-$N$ operators it's built out of, and
-completing $\Alg$ in that norm makes it a genuine $C^*$-algebra — abstractly defined, with no particular
-Hilbert space singled out yet.
+So $O$ acts on only finitely many of the infinitely many spin pairs, and does nothing (the identity) to every
+pair beyond some finite point. This restriction is not arbitrary. It is the algebraic form of the statement
+that $O$ corresponds to a process reachable with finite energy. Recall from Chapter~1 that flipping
+infinitely many spins costs infinite energy. An operator that acts nontrivially on infinitely many pairs at
+once is exactly what a finite-energy process could never do. In the $N\to\infty$ limit, $O$ inherits a
+well-defined norm from the finite-$N$ operators it is built from. Completing $\Alg$ in that norm makes it a
+$C^*$-algebra. It is defined abstractly, with no particular Hilbert space singled out yet.
 
-The reference state $\ket{\Phi_\theta}$ (the infinite chain of Bell-like pairs from Sec.~I) defines a state
-$\omega_\theta$ on this algebra in the obvious way,
-
-$$
-
-\omega_\theta(O) = \braket{\Phi_\theta|O|\Phi_\theta} ,
+The reference state $\ket{\Phi_\theta}$, the infinite chain of Bell-like pairs from Chapter~1, defines a state
+$\omega_\theta$ on this algebra in the obvious way:
 
 $$
 
-(eq.~2.55) which makes sense precisely because $O$ only touches finitely many pairs, so the expectation value
-is computable using only finitely much of the state — no infinite sum or ill-defined limit is hiding inside
-this definition.
+\omega_\theta(O) = \braket{\Phi_\theta|O|\Phi_\theta} .
 
-Now apply the GNS construction of the previous subsection, exactly as given, to $(\Alg,\omega_\theta)$. It
-produces a Hilbert space $\HH_{\Phi_\theta}$ — and this *emph* the space of finite-energy excitations
-informally described back in Sec.~I, now obtained as a genuine mathematical construction rather than a
-descriptive placeholder. Heuristically (and this is exactly Stage 1 of the GNS recipe, applied to this
-specific case): $\HH_{\Phi_\theta}$ is what you get by completing the set of states reachable from
-$\ket{\Phi_\theta}$ by flipping a finite number of spins — precisely the informal description from Sec.~I,
-now made rigorous. In this particular representation, the von Neumann algebra you get out
-(eq.~2.39, $\pi_\omega(\Alg)''$) turns out to be all of $B(\HH_{\Phi_\theta})$ — every bounded operator on
-this emergent Hilbert space.
+$$
 
-Suppose now, exactly as in the running example throughout this section, that you only have access to the
-$R$-half of the spin system. $\M_R$, the subalgebra of $B(\HH_{\Phi_\theta})$ consisting of operators acting
-only on the $R$-spins, completed under weak convergence *emph*$}, is a
-von Neumann algebra — this is the object whose *emph* (I, II, or III, depending on $\theta$) is the
-entire subject of Secs.~III and IV. $\M_L$ is defined the same way for the $L$-spins, and because operations
-on the $L$-spins commute with operations on the $R$-spins by construction (they act on physically distinct
-degrees of freedom), you get $\M_L=\M_R'$ (eq.~2.56) — the $L$-algebra and the $R$-algebra's commutant coincide,
-exactly the "complement of a subsystem" picture from Sec.~II.B.1, now realized concretely rather than just
-asserted in the abstract.
+This makes sense because $O$ touches only finitely many pairs, so the expectation value uses only finitely
+much of the state. No infinite sum or ill-defined limit is hidden in this definition.
 
-One further, slightly subtle point, worth stating because it removes an apparent asymmetry: this particular
-example has a complete symmetry between $R$ and $L$ (nothing distinguishes them — the construction so far
-could equally well have been built starting from $\M_L$ instead of $\M_R$), and it turns out the same Hilbert
-space $\HH_{\Phi_\theta}$ can be reconstructed using *emph* the $R$-algebra, with no reference to $L$ at
-all. Concretely, redo the GNS construction using $\Alg_R$ (finite-energy operations on the $R$-spins only,
-eq.~2.57) and the state $\omega_\theta(A)=\braket{\Phi_\theta|A|\Phi_\theta}$ restricted to $A\in\Alg_R$
-(eq.~2.58). This $\omega_\theta$ is a *emph* state of $\Alg_R$ — even though, restricted to the
-full $\Alg$ from before, $\omega_\theta$ was not faithful there (a subtlety worth noting rather than glossing
-over: faithfulness is a property of a state *emph* a specific algebra, not an absolute property of
-the state alone) — and the GNS Hilbert space this produces coincides with the very same $\HH_{\Phi_\theta}$ as
-before. The intuition for why (given in the paper's footnote 17, worth restating in full): consider a single
-spin pair. Acting on $\ket{\phi_\theta}$ using only operators of the right spin can already generate every
-state reachable by acting with operators of the left spin instead — because the pair is only two-dimensional
-on each side, and (for $\theta\ne0$) both the right-spin operators and the left-spin operators, applied to
-$\ket{\phi_\theta}$, are each individually rich enough to reach the same two-dimensional space of resulting
-states. This mirrors, on a much larger scale, exactly the point already made in Sec.~II.B.5's discussion of
-minimal projections and irreps: $\M_R$, as an abstract algebra, already contains a full copy of everything
-needed to reconstruct the Hilbert space — $\HH_L$ was only ever tracking multiplicity, and in this
-perfectly-symmetric example, $R$ alone carries exactly as much information as $R$ and $L$ together did.
+Now apply the GNS construction of the previous section, exactly as given, to $(\Alg,\omega_\theta)$. It
+produces a Hilbert space $\HH_{\Phi_\theta}$. This *emph* the space of finite-energy excitations described
+informally in Chapter~1, now obtained as a mathematical construction rather than a descriptive placeholder.
+Heuristically, and this is Stage~1 of the GNS recipe applied to this case, $\HH_{\Phi_\theta}$ is the completion
+of the set of states reachable from $\ket{\Phi_\theta}$ by flipping a finite number of spins. That was
+exactly the informal description in Chapter~1. In this representation, the von Neumann algebra you get
+(the double commutant~\eqref{eq:GNS-vN}) is all of $B(\HH_{\Phi_\theta})$, every bounded operator on this
+emergent Hilbert space. The reason is the first structural fact: $\ket{\Phi_\theta}$ is a pure state of the
+whole chain, so the representation is irreducible.
 
-With $\HH_{\Phi_\theta}$, $\M_R$, and $\M_L=\M_R'$ now built explicitly rather than just described, the stage
-is set for the question that occupies the rest of the paper: for different values of $\theta$, what
-*emph* — in the precise Sec.~II.C sense — is $\M_R$? Section~III of this companion answers this directly,
-by explicit computation, for $\theta=\pi/4$ (finding type $\mathrm{II}_1$) and sets up the general
-$\theta\ne\pi/4$ case (type III, completed in Sec.~IV).
+Now suppose, as in Chapter~1, that you have access only to the $R$-half of the spin system. Let $\M_R$ be the
+subalgebra of $B(\HH_{\Phi_\theta})$ consisting of operators that act only on the $R$-spins, completed under
+weak convergence *emph* $\HH_{\Phi_\theta}$. It is a von Neumann algebra. Its
+*emph* (I, II, or III, depending on $\theta$) is the subject of Chapters~3 and~4. Define $\M_L$ in the
+same way for the $L$-spins. Operations on the $L$-spins commute with operations on the $R$-spins, because they
+act on physically distinct degrees of freedom. This shows directly that $\M_L\subseteq\M_R'$. In fact the two
+are equal, $\M_L=\M_R'$. This equality is a theorem about infinite tensor products of this kind, which we
+state without proof. So the $L$-algebra is exactly the commutant of the $R$-algebra. This is the
+"complement of a subsystem" picture from the start of this chapter, now realized concretely.
+
+One further point removes an apparent asymmetry. This example is completely symmetric between $R$ and $L$:
+nothing distinguishes them, and the construction could equally well have started from $\M_L$. It turns out
+that the same Hilbert space $\HH_{\Phi_\theta}$ can be rebuilt using *emph* the $R$-algebra, with no
+reference to $L$ at all. Concretely, redo the GNS construction using $\Alg_R$ (finite-energy operations on
+the $R$-spins only) and the state $\omega_\theta(A)=\braket{\Phi_\theta|A|\Phi_\theta}$ restricted to
+$A\in\Alg_R$. This restricted $\omega_\theta$ is a *emph* state of $\Alg_R$, because each pair's
+reduced density matrix, $\mathrm{diag}(\cos^2\theta,\sin^2\theta)$, has full rank for $\theta\in(0,\pi/4]$. On
+the full algebra $\Alg$, by contrast, $\omega_\theta$ is not faithful. For example, the projection
+$\id-\ket{\phi_\theta}\bra{\phi_\theta}$ on a single pair is nonzero, but $\omega_\theta$ gives it zero. So
+faithfulness is a property of a state *emph* a specific algebra, not a property of the state
+alone. The GNS Hilbert space built from $(\Alg_R,\omega_\theta)$ is the same $\HH_{\Phi_\theta}$ as before,
+because $\ket{\Phi_\theta}$ is cyclic for $\M_R$ (stated here without proof for the infinite chain).
+
+The intuition is clearest for a single pair. Acting on $\ket{\phi_\theta}$ with operators on the right spin
+alone already produces every vector in the pair's four-dimensional space $\mathbb C^2\otimes\mathbb C^2$.
+Indeed,
+
+$$
+
+(A\otimes\id)\ket{\phi_\theta}=\cos\theta\,\big(A\ket0\big)\ket0+\sin\theta\,\big(A\ket1\big)\ket1 ,
+
+$$
+
+and as $A$ ranges over all $2\times2$ matrices, this covers all of $\mathbb C^2\otimes\mathbb C^2$ when
+$\cos\theta$ and $\sin\theta$ are both nonzero. (We confirmed numerically that the four vectors
+$(e_{ij}\otimes\id)\ket{\phi_\theta}$ are linearly independent.) So operators on the right spin reach
+everything that operators on the left spin, or on both spins together, can reach. For the whole chain, the
+same statement is that $\ket{\Phi_\theta}$ is cyclic for $\M_R$. This mirrors, on a much larger scale, the
+point made earlier about minimal projections and irreducible representations. $\M_R$, as an abstract
+algebra, already contains everything needed to rebuild the Hilbert space; $\HH_L$ only ever tracked
+multiplicity. In this symmetric example, $R$ alone generates the same Hilbert space that $R$ and $L$ together
+do.
+
+With $\HH_{\Phi_\theta}$, $\M_R$, and $\M_L=\M_R'$ now built explicitly rather than only described, the stage is
+set for the question that occupies the next two chapters. For different values of $\theta$, what
+*emph*, in the precise sense of the classification above, is $\M_R$? Chapter~3 answers this by explicit
+computation for $\theta=\pi/4$, where the answer is type $\mathrm{II}_1$. It also sets up the general case
+$\theta\ne\pi/4$, which is type III and is completed in Chapter~4.

@@ -1,27 +1,27 @@
-# Sec. VIII: Emergence of Spacetime
+# Chapter 8: Emergence of Bulk Geometry
 
-# Sec.~VIII: Emergence of bulk geometric concepts
+# Emergence of bulk geometric concepts
 
-Sec.~VII established that a bulk region *emph* a boundary algebra. This section pushes that identification
+Chapter 7 established that a bulk region *emph* a boundary algebra. This chapter pushes that identification
 to its limit: causal structure, the formation of a horizon, and even whether two boundary theories are joined
 by a wormhole at all, can each be read directly off the type and commutant structure of boundary algebras —
-with no bulk metric assumed anywhere in the argument. This closes the two puzzles flagged back in Sec.~VI.C
+with no bulk metric assumed anywhere in the argument. This closes the two puzzles raised in Chapter 6
 (the factorization puzzle was already resolved there; the meeting-behind-the-horizon puzzle is resolved here,
-in Sec.~VIII.B).
+in the section on Kruskal-like time).
 
-## Sec.~VIII.A: algebraic characterization of bulk causal structure
+## Algebraic characterization of bulk causal structure
 
 ### Why boundary commutants can encode more than boundary causality
 
 Boundary operators separated in a spacelike way automatically commute — ordinary microcausality. But
 *emph*-separated boundary operators are not required to commute at all; whether they do depends on
 the specific representation, which is fixed by the state's two-point functions. This freedom is not a bug —
-it's exactly the room needed for boundary commutant structure to encode something richer than boundary
+it is exactly the room needed for boundary commutant structure to encode something richer than boundary
 causality alone: by subregion-subalgebra duality, it encodes bulk causal structure, in one higher dimension.
 
 ### The causal depth parameter
 
-Recall from Sec.~VI.B (eq.~6.33) that in empty AdS, a boundary time band $I_w$ generates the entire algebra,
+Recall from Chapter 6 that in empty AdS, a boundary time band $I_w$ generates the entire algebra,
 $Y_{I_w}=B(\HH_\Omega^{\text{GNS}})$, once $w\ge\pi R$ — geometrically, $\pi R$ is exactly the minimal width
 for which light rays from the band already cover an entire bulk Cauchy slice. This motivates a purely
 boundary-intrinsic definition:
@@ -34,34 +34,34 @@ largest $w$ for which the time-band algebra $Y_{I_w(t)}$ (centered at boundary t
 
 For empty AdS, $T(t)=\pi R$: finite and time-independent, matching the geometric statement that light rays
 from a band of exactly that width already reach everywhere. For a general horizon-free asymptotically-AdS
-geometry, $T(t)$ is expected to stay finite for all time. For a single-sided eternal black hole (Fig.~26(b) of
-the paper), by contrast, $Y_{I_w}$ has a *emph* commutant for *emph* finite $w$ — no matter
+geometry, $T(t)$ is expected to stay finite for all time. For a single-sided eternal black hole
+(Figure~\ref{fig:causal_depth}(b)), by contrast, $Y_{I_w}$ has a *emph* commutant for *emph* finite $w$ — no matter
 how wide a time band you take, you can never quite reach the full exterior algebra (only in the strict
 $w\to\infty$ limit does the commutant become trivial) — so $T(t)=\infty$, for all $t$: **a purely
 boundary-intrinsic signature of a horizon, requiring no bulk metric to state.** For a black hole formed by
-collapse (Fig.~25 again), $T(t)$ starts finite and grows monotonically, diverging only as $t\to\infty$ — the
+collapse (the single-sided collapse example of Chapter 7), $T(t)$ starts finite and grows monotonically, diverging only as $t\to\infty$ — the
 boundary-side signature of a horizon actually *emph*, in real time, rather than always having been
 there.
 
 A two-sided version, $T_R(t)$, is defined the same way but using the *emph* commutant of $Y_{I_w}$
 within $Y_R$ (the right boundary's own single-trace algebra) — for the thermofield double below
 $T_{\text{HP}}$, this reduces to ordinary empty AdS's $\pi R$; above $T_{\text{HP}}$, it diverges for all
-time, exactly reproducing eq.~7.40's bifurcating-horizon diagnostic from Sec.~VII.E in this new language.
+time, exactly reproducing the bifurcating-horizon diagnostic of Chapter 7, the statement that
+$(Y_{I_w}^{(R)})'\cap Y_R$ is nontrivial for every $w$, in this new language.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.90\textwidth]{figs/fig_causal_depth.pdf}
-\caption{The causal depth parameter $T(t)$ as an algebraic detector of horizons. (a) In empty AdS, a boundary time band $I_w$ of width $w \ge \pi R$ sends light rays that meet at the bulk center $r=0$ and cover an entire Cauchy slice, driving the commutant to triviality ($Y_{I_w}' = \mathbb{C}\mathbf{1}$) and giving a finite causal depth $T = \pi R$. (b) In a black hole spacetime, boundary light rays asymptotically wrap around the horizon without crossing, so $Y_{I_w}' \ne \mathbb{C}\mathbf{1}$ for all finite $w$. The causal depth diverges: $T = \infty$, serving as a purely algebraic boundary diagnostic of a horizon.}
+\caption{(a) Empty AdS drawn as a strip: the vertical edges are the boundary and the dotted line is the center $r=0$. Light rays (blue lines) from the ends of a boundary time band $I_w$ of width $w=\pi R$ meet at $r=0$, so the region they enclose (shaded) contains the whole $t=0$ slice (dashed), giving causal depth $T=\pi R$. (b) Penrose diagram of the eternal black hole: for a band $I_w$ of any finite width on the right boundary, the region its light rays enclose (shaded) stops short of the horizons (dashed red) and their crossing point, so it never covers the whole exterior $t=0$ slice and $T=\infty$.}
 \label{fig:causal_depth}
 \end{figure}
 
 ### $T$ as a measure of lost determinism
 
-Here's a genuinely illuminating reframing of what $T$ is measuring, worth holding onto because it explains why
-this whole construction is possible at all. At finite $N$, knowing the operator algebra on a single Cauchy
-slice determines the whole theory (ordinary causal time evolution, the time-slice axiom of Sec.~IV.D.3). In
+$T$ has a second meaning, and it explains why the whole construction is possible. At finite $N$, knowing the operator algebra on a single Cauchy
+slice determines the whole theory (ordinary causal time evolution, the time-slice axiom of Chapter 4). In
 the strict large-$N$ limit, this stops being true — there are no equations of motion relating single-trace
-operators at different times (Sec.~VI.A) — but the theory isn't completely disconnected across time either:
+operators at different times (Chapter 6) — but the theory isn't completely disconnected across time either:
 correlations (encoded in two-point functions) still relate a time band's algebra to the rest of the theory,
 just not through equations of motion. $T$ is exactly the minimal width of a band whose algebra is
 *emph*, via these correlations rather than dynamics, to recover the whole system. Read this way,
@@ -70,128 +70,150 @@ determinism; $T=\infty$, as in a black hole, is a complete loss of determinism �
 time, however wide, is ever enough.** The emergence of the bulk radial direction is, in this precise sense,
 tied to the boundary theory progressively losing determinism as $N\to\infty$.
 
-(The paper makes this fully rigorous by relating $T$ to a classical object from harmonic analysis called the
-*emph* of the spectral function $\rho(\omega)$ — the Fourier transform of the commutator
-$\braket{\Psi|[O(t),O(t')]|\Psi}$ (eqs.~8.1—8.5) — connecting it to an old question of Kolmogorov's about how
-long you must observe a chaotic classical system before you can predict its entire future. This machinery is
-flagged here for completeness; the physical content that matters going forward is the definition of $T$ itself
-and what it measures, not the harmonic-analysis technique used to compute it in specific examples.)
+The precise version of this statement relates $T$ to the *emph* $\rho(\omega)$, the
+Fourier transform of the commutator $\braket{\Psi|[O(t),O(0)]|\Psi}$. It connects to an old question of
+Kolmogorov's: how long must you watch a fluctuating signal before you can predict all of its future? The
+general theorem belongs to harmonic analysis and is quoted rather than proved here. What can be done with
+ordinary tools is to see, in two contrasting examples, why a discrete spectrum gives a finite $T$ and a
+continuous spectrum does not.
 
 ### Worked calculation: spectral functions and the divergence of causal depth
 
-To make the causal depth parameter $T(t)$ mathematically transparent, let us compute the spectral function $\rho(\omega)$ explicitly in two contrasting backgrounds: empty AdS versus a thermal black hole.
-The spectral function is defined as the Fourier transform of the boundary commutator:
+The spectral function is
 
 $$
 
-\rho(\omega) \equiv \int_{-\infty}^\infty dt\, e^{i\omega t}\, \braket{\Psi|\big[O(t),\, O(0)\big]|\Psi}
+\rho(\omega) \equiv \int_{-\infty}^\infty dt\, e^{i\omega t}\, \braket{\Psi|\big[O(t),\, O(0)\big]|\Psi} .
 
 $$
 
+It records which frequencies the operator $O$ can put into the system, and with what weight.
 
-1. **Vacuum state $\ket\Omega$ (Empty AdS)**:
-In global $\text{AdS}_{d+1}$ of radius $R$, the boundary CFT spectrum consists of discrete primaries and descendants with energies $\omega_n = (\Delta + 2n)/R$ for $n \in \mathbb{N}_0$. The Wightman function is:
 
-$$
-
-\braket{\Omega|O(t)O(0)|\Omega} = \sum_{n=0}^\infty c_n e^{-i(\Delta + 2n)t/R}
-
-$$
-
-The commutator is therefore:
+1. **Vacuum state $\ket\Omega$ (empty AdS).**
+In global $\text{AdS}_{d+1}$ of radius $R$, the modes created by $O$ have the discrete energies
+$\omega_n = (\Delta + 2n)/R$, $n=0,1,2,\dots$, exactly like the evenly spaced levels of a harmonic oscillator.
+The Wightman function is a sum over these levels,
 
 $$
 
-\braket{\Omega|\big[O(t),O(0)\big]|\Omega} = -2i \sum_{n=0}^\infty c_n \sin\big((\Delta + 2n)t/R\big)
+\braket{\Omega|O(t)O(0)|\Omega} = \sum_{n=0}^\infty c_n\, e^{-i\omega_n t}, \qquad c_n\ge0 ,
 
 $$
 
-Its Fourier transform $\rho(\omega)$ is a discrete sum of delta functions:
+and so
+\begin{align}
+\rho(\omega)
+&\eqstep{1} \int dt\, e^{i\omega t} \sum_{n} c_n \big(e^{-i\omega_n t} - e^{i\omega_n t}\big) \notag\\
+&\eqstep{2} 2\pi \sum_{n} c_n \Big(\delta(\omega - \omega_n) - \delta(\omega + \omega_n)\Big) .
+\label{eq:rho_vacuum_AdS}
+\end{align}
+**(1)** the commutator is $\braket{O(t)O(0)}-\braket{O(0)O(t)}$, and the second term is the complex
+conjugate of the first.\quad
+**(2)** $\int dt\, e^{i(\omega-\omega_n)t}=2\pi\,\delta(\omega-\omega_n)$.
+
+The spectrum is a comb of spikes with fixed spacing $2/R$. Now ask: which time bands are wide enough to
+separate the modes from one another? A smeared operator $\int dt\, f(t)\,O(t)$ with $f$ supported in a band of
+width $w$ picks up mode $n$ with weight $\tilde f(\omega_n)$. On a window of width exactly
 
 $$
 
-\rho(\omega) = 2\pi \sum_{n=0}^\infty c_n \Big(\delta\big(\omega - (\Delta+2n)/R\big) - \delta\big(\omega + (\Delta+2n)/R\big)\Big)
+w = \frac{2\pi}{\text{spacing}} = \frac{2\pi}{2/R} = \pi R ,
 
 $$
 
-Notice that $\rho(\omega) = 0$ identically in the frequency bandgap $|\omega| < \Delta/R$. By the classical Paley—Wiener theorem of Fourier analysis, a spectral function with this discrete bandgap structure has a finite exponential type:
+the functions $e^{-i\omega_n t}$ are mutually orthogonal, just as $e^{int}$ are orthogonal on
+$[0,2\pi]$ in an ordinary Fourier series. So by choosing $f$ to be one of these exponentials one can switch on
+a single mode and nothing else. Every mode operator is then in the band algebra, and the band algebra is the
+whole algebra of the vacuum sector. On a shorter window the exponentials overlap and cannot be separated. A
+direct numerical check with the first 40 modes confirms this: the overlap (Gram) matrix of the
+$e^{-i\omega_n t}$ is exactly the identity on a window of width $\pi R$, while on a window of width $0.9\,\pi R$
+its smallest eigenvalue has already dropped to about $6\times10^{-5}$, and at $0.6\,\pi R$ it is zero to
+machine precision. The threshold width is $T=\pi R$, exactly the light-crossing value found geometrically.
+2. **Thermal state $\ket{\Psi_\beta**$ (black hole).}
+Take the thermal two-point function of an operator of dimension $\Delta$ in a one-dimensional thermal
+system at inverse temperature $\beta$,
 
 $$
 
-T = \pi R < \infty
+\braket{O(t)O(0)}_\beta = \left(\frac{\pi}{i\beta \sinh\big(\frac{\pi}{\beta}(t - i\epsilon)\big)}\right)^{2\Delta} .
 
 $$
 
-Thus a boundary time band of finite width $w \ge \pi R$ is sufficient to reconstruct all operators in the vacuum sector.
-2. **Thermal state $\ket{\Psi_\beta**$ (BTZ Black Hole)}:
-For a 2D boundary CFT at finite temperature $T = 1/\beta$, the thermal two-point function on the cylinder is:
+Its Fourier transform and the resulting spectral function are
+\begin{align}
+G_\beta(\omega) &\equiv \int dt\, e^{i\omega t}\braket{O(t)O(0)}_\beta
+= \frac{1}{\Gamma(2\Delta)}\left(\frac{2\pi}{\beta}\right)^{2\Delta-1} e^{\beta\omega/2}
+\left|\Gamma\!\left(\Delta+\frac{i\beta\omega}{2\pi}\right)\right|^2 , \notag\\
+\rho(\omega) &\eqstep{1} G_\beta(\omega)\big(1-e^{-\beta\omega}\big)
+\eqstep{2} \frac{2}{\Gamma(2\Delta)}\left(\frac{2\pi}{\beta}\right)^{2\Delta-1}
+\sinh\!\left(\frac{\beta\omega}{2}\right)\left|\Gamma\!\left(\Delta+\frac{i\beta\omega}{2\pi}\right)\right|^2 .
+\label{eq:rho_thermal}
+\end{align}
+**(1)** the KMS condition of Chapter 4: in a thermal state $\braket{O(0)O(t)}$ transforms to
+$e^{-\beta\omega}G_\beta(\omega)$.\quad
+**(2)** $e^{\beta\omega/2}(1-e^{-\beta\omega})=2\sinh(\beta\omega/2)$.
 
-$$
+The formula for $G_\beta(\omega)$ was checked by numerical integration for $\Delta=1,\ 1.5,\ 2.3$ at several
+frequencies, agreeing to all twenty digits computed. For $\Delta=1$ it reduces to
+$G_\beta(\omega)=2\pi\omega/(1-e^{-\beta\omega})$, which is $2\pi\omega$ times the Bose—Einstein factor, as it
+should be for a thermal gas of bosons, and then $\rho(\omega)=2\pi\omega$ exactly.
 
-\braket{O(t)O(0)}_\beta = \left(\frac{\pi}{\beta \sinh\big(\frac{\pi}{\beta}(t - i\epsilon)\big)}\right)^{2\Delta}
-
-$$
-
-Taking the difference across the branch cut to evaluate the commutator and computing its Fourier transform yields:
-
-$$
-
-\rho(\omega) = \frac{2\pi}{\Gamma(2\Delta)}\left(\frac{2\pi}{\beta}\right)^{2\Delta - 1} \sinh\left(\frac{\beta\omega}{2}\right) \left|\Gamma\left(\Delta + \frac{i\beta\omega}{2\pi}\right)\right|^2
-
-$$
-
-For large frequency $|\omega| \gg 1/\beta$, Stirling's approximation gives:
-
-$$
-
-\rho(\omega) \approx C\, |\omega|^{2\Delta - 1} e^{-\beta |\omega| / 2}
-
-$$
-
-Unlike the vacuum, $\rho(\omega)$ is strictly positive and smooth for *emph* $\omega \in \mathbb{R}$, decaying only exponentially without any compact support or bandgap. Consequently, the exponential type of $\rho(\omega)$ is infinite:
-
-$$
-
-T = \infty
-
-$$
+The decisive difference from the vacuum is the *emph* of $\rho$. At high frequency, Stirling's formula
+gives $\rho(\omega)\to\frac{2\pi}{\Gamma(2\Delta)}|\omega|^{2\Delta-1}\operatorname{sgn}\omega$, the same power
+law as in the vacuum (the ultraviolet does not know about the temperature; numerically the ratio to this
+power law is $1.0247$ at $\beta\omega=20$ and $1.0001$ at $\beta\omega=400$). But unlike the vacuum comb,
+$\rho(\omega)$ is a smooth function that is nonzero at *emph* real frequency. There is no spacing between
+levels. Using the same reasoning as in the vacuum case, separating frequencies spaced by $\delta\omega$ needs a
+window of width $2\pi/\delta\omega$, and a continuous spectrum has $\delta\omega\to0$. No finite band can
+single out the individual modes, and the causal depth is $T=\infty$.
 
 
-This provides an exact, rigorous demonstration of why the black hole horizon creates an infinite causal depth $T = \infty$: the thermal dissipation of boundary correlators completely destroys finite-time determinism.
+The vacuum argument is complete as it stands. The thermal argument shows why no finite band could work by
+mode separation. The stronger statement, that the commutant of every finite band is genuinely nontrivial, is
+the harmonic-analysis theorem quoted above. Physically, the continuous spectrum is the boundary imprint of the
+horizon: a black hole absorbs perturbations at every frequency, and that damping destroys the sharp
+recurrences that let a finite window of the vacuum reconstruct everything.
 
-## Sec.~VIII.B: emergence of Kruskal-like time, and resolving the meeting-behind-the-horizon puzzle
+## Emergence of Kruskal-like time, and resolving the meeting-behind-the-horizon puzzle
 
 ### Two kinds of bulk time
 
 The eternal AdS black hole geometry has two qualitatively different notions of time. **Schwarzschild
 time** is an honest isometry — it maps the $R$ (or $L$) exterior region to itself, never leaving it. This is
-exactly the boundary time of the thermofield double: the identification eq.~6.36 already established
+exactly the boundary time of the thermofield double: Chapter 6 already established
 Schwarzschild time as the modular time of $\widetilde\M_R=Y_R$. **Kruskal time**, by contrast, is not an
-isometry at all — it's the time that actually carries a point from the exterior $R$ region across the horizon
-into the interior $F$ (future) or $P$ (past) regions (Fig.~27 of the paper — the Kruskal null coordinates $U,V$
-are exactly the light-cone coordinates $x^\mp$ of the Rindler-wedge discussion in Sec.~IV.E, since near the
-horizon the geometry looks locally like flat Rindler space). Schwarzschild time has an obvious boundary home
+isometry at all. It is the time that actually carries a point from the exterior $R$ region across the horizon
+into the interior $F$ (future) or $P$ (past) regions (see the Penrose diagram, Figure~\ref{fig:penrose}, in
+Chapter 6). The Kruskal null coordinates $U,V$ are exactly the light-cone coordinates $x^\mp$ of the
+Rindler-wedge discussion in Chapter 4, since near the horizon the geometry looks locally like flat Rindler
+space. Schwarzschild time has an obvious boundary home
 (it's just ordinary boundary time evolution); Kruskal time, at first glance, has no boundary home at all —
 boundary time simply runs to $\pm\infty$ as you approach the horizon and has nothing left to say about what
 happens beyond it.
 
 ### Kruskal time from half-sided modular inclusion
 
-Here is where Sec.~IV.E's half-sided modular inclusion machinery — introduced there as a purely algebraic
-curiosity, worked out on an abstract Rindler-wedge light-cone example — turns out to be *emph* the
-tool needed, verbatim, to manufacture Kruskal time out of nothing but boundary data. Take $\M=Y_R$ (the
+Here the half-sided modular inclusion machinery of Chapter 4, introduced there as a purely algebraic
+curiosity and worked out on an abstract Rindler-wedge light-cone example, turns out to be *emph* the
+tool needed to manufacture Kruskal time out of nothing but boundary data. Take $\M=Y_R$ (the
 right boundary's full single-trace algebra, cyclic-separating for $\ket{\Psi_\beta}$), and $\N=Y_-$, the
-subalgebra generated by single-trace operators supported on the semi-infinite band $t<0$ — by Sec.~VII.E's
-duality, $Y_-$ is dual to a specific bulk wedge region $W_-$ (Fig.~28 of the paper), itself type
+subalgebra generated by single-trace operators supported on the semi-infinite band $t<0$. By the
+time-band duality of Chapter 7, $Y_-$ is dual to a specific bulk wedge region $W_-$ (the part of the right
+exterior that can send and receive signals from the half-band $t<0$), itself type
 $\mathrm{III}_1$, with $\ket{\Psi_\beta}$ cyclic and separating for it too. Because $Y_R$'s modular flow is
 literally boundary time translation, $Y_-$ automatically satisfies exactly the half-sided modular inclusion
-condition of eq.~4.81 — so Sec.~IV.E's machinery applies immediately, producing a genuine positive generator
-$G_+\equiv\tfrac1{2\pi}(K_{Y_R}-K_{Y_-})$ (eq.~8.6), generating a brand-new time flow on $Y_R=\widetilde\M_R$
+condition of Chapter 4. So that machinery applies immediately, producing a genuine positive generator
+\begin{equation}
+G_+\equiv\tfrac1{2\pi}(K_{Y_R}-K_{Y_-}) ,
+\label{eq:Gplus}
+\end{equation}
+generating a brand-new time flow on $Y_R=\widetilde\M_R$
 that leaves $\ket{\Psi_\beta}$ fixed. Repeating with $\N=Y_+$ (the band $t>0$) gives a second, independent
 generator $G_-$.
 
-Near the horizon — where, exactly as in Sec.~IV.E's abstract example, the geometry reduces to flat Rindler
-space — these two generators act exactly as null translations in the two light-cone directions,
+Near the horizon, where, exactly as in the abstract example of Chapter 4, the geometry reduces to flat Rindler
+space, these two generators act exactly as null translations in the two light-cone directions,
 
 $$
 
@@ -206,11 +228,11 @@ e^{iG_-s}\phi(X)e^{-iG_-s}=\phi(X_s),\ \ X_s=(U,V+s,x_\perp)\ \ (U\ll1)
 
 $$
 
-(eqs.~8.7—8.8) — **$G_\pm$, built purely from boundary modular data, literally translate a bulk operator
-across the horizon**, and the combinations $p\equiv G_—G_+$, $h\equiv G_++G_-$ (eq.~8.9) generate ordinary
+**$G_\pm$, built purely from boundary modular data, literally translate a bulk operator
+across the horizon**, and the combinations $p\equiv G_—G_+$, $h\equiv G_++G_-$ generate ordinary
 spatial and genuine Kruskal-time translation respectively, right in the near-horizon region.
 
-**This resolves the meeting-behind-the-horizon puzzle from Sec.~VI.C directly**: the boundary
+**This resolves the meeting-behind-the-horizon puzzle of Chapter 6 directly**: the boundary
 Hamiltonian $H=H_R+H_L$ genuinely has no term coupling $R$ to $L$ — and yet the entanglement structure of
 $\ket{\Psi_\beta}$ itself, purely through the algebraic relationship between $Y_R$ and its subalgebras
 $Y_\pm$, generates emergent operators $G_\pm$ that couple the two sides and translate operators from $R$ and
@@ -218,166 +240,201 @@ $L$ into causal contact behind the horizon. No interaction term was ever needed 
 already latent in how entangled the state is, made manifest only once you build the right algebraic objects
 from it.
 
-Explicit computation (worked out in detail for the BTZ black hole, not reproduced symbol-by-symbol here, but
-worth knowing the shape of the answer) shows this is not just a qualitative statement — it reproduces the
-*emph* causal structure expected of the black hole geometry. Flowing an operator $\Phi(X,s)\equiv
-e^{iG_+s}\phi(X)e^{-iG_+s}$ starting at $X=(U_0,V_0,x_\perp)$: for $s$ below a precise threshold $s_0=-U_0$,
-$\Phi(X;s)$ stays entirely within $\widetilde\M_R$; the moment $s$ crosses $s_0$, operators from
-$\widetilde\M_L$ suddenly, sharply appear in $\Phi(X;s)$ — exactly the moment the flowed point crosses the
-horizon (Fig.~29(a)). And checking commutators directly: for two points $X_1\in R,X_2\in L$,
-$[\Phi(X_1,s),\phi(X_2)]$ stays exactly zero until $s$ crosses a precise threshold $s_{12}=-U_1+U_2$, then
-becomes nonzero (eq.~8.10, Fig.~29(b)) — **sharp causal structure, reproduced exactly, out of an
-evolution built entirely from algebraic data with no bulk light-cone put in by hand**.
+For the BTZ black hole the full computation reproduces the *emph* causal structure of the black hole
+geometry, not just a qualitative picture. Flow an operator, $\Phi(X,s)\equiv e^{iG_+s}\phi(X)e^{-iG_+s}$,
+starting at $X=(U_0,V_0,x_\perp)$. For $s$ below the threshold $s_0=-U_0$, $\Phi(X;s)$ stays entirely within
+$\widetilde\M_R$. Once $s$ passes $s_0$, operators from $\widetilde\M_L$ suddenly appear in $\Phi(X;s)$: the
+flowed point has crossed the horizon. Commutators tell the same story. For two points $X_1\in R$ and
+$X_2\in L$, $[\Phi(X_1,s),\phi(X_2)]$ is exactly zero until $s$ passes the threshold $s_{12}=U_2-U_1$, and
+nonzero after it. **Sharp causal structure comes out of an evolution built entirely from algebraic
+data, with no bulk light cone put in by hand.** The near-horizon part of this computation can be done
+explicitly, and that is the content of the next derivation.
 
 ### Worked derivation: Kruskal coordinates and horizon crossing in BTZ
 
-To see the algebra translate a point across the horizon with explicit formulas, consider the non-rotating BTZ black hole in $\text{AdS}_3$ with metric:
+The non-rotating BTZ black hole in $\text{AdS}_3$ has metric
 
 $$
 
-ds^2 = -\frac{r^2 - r_+^2}{R^2} dt^2 + \frac{R^2}{r^2 - r_+^2} dr^2 + \frac{r^2}{R^2} d\phi^2
+ds^2 = -\frac{r^2 - r_+^2}{R^2}\, dt^2 + \frac{R^2}{r^2 - r_+^2}\, dr^2 + \frac{r^2}{R^2}\, d\phi^2 .
 
 $$
 
-The surface gravity at the horizon $r = r_+$ is $\kappa = \frac{r_+}{R^2} = \frac{2\pi}{\beta}$. Define the radial tortoise coordinate $r^*(r)$:
+The surface gravity at the horizon $r = r_+$ is $\kappa = r_+/R^2$, and the Hawking temperature is
+$1/\beta=\kappa/2\pi$. The tortoise coordinate is
 
 $$
 
-r^*(r) \equiv \int \frac{R^2}{r^2 - r_+^2} dr = \frac{1}{2\kappa} \log\left(\frac{r - r_+}{r + r_+}\right) \in (-\infty, 0)
+r^*(r) \equiv \int \frac{R^2}{r^2 - r_+^2}\, dr = \frac{1}{2\kappa} \log\left(\frac{r - r_+}{r + r_+}\right)
+\in (-\infty, 0) ,
 
 $$
 
-In the right exterior wedge $R$ ($r > r_+$), define the Kruskal null coordinates:
+and in the right exterior $R$ ($r > r_+$) the Kruskal null coordinates are
 
 $$
 
-U \equiv -e^{-\kappa(t - r^*)}, \qquad V \equiv e^{\kappa(t + r^*)}
+U \equiv -e^{-\kappa(t - r^*)}, \qquad V \equiv e^{\kappa(t + r^*)} .
 
 $$
 
-Notice their properties in region $R$:
+In region $R$ one has $U<0$ and $V>0$. As $r\to r_+$, $r^*\to-\infty$ and $UV=-e^{2\kappa r^*}\to0$. The
+future horizon $\mathcal H^+$ is the null surface $U=0$, $V>0$, and the black hole interior $F$ is the region
+$U>0$, $V>0$.
 
-- $U < 0$ and $V > 0$ throughout region $R$.
-- As $r \to r_+$ ($r^* \to -\infty$), $UV = -e^{2\kappa r^*} \to 0$.
-- The future event horizon $\mathcal{H}^+$ is the null surface $U = 0$, $V > 0$.
-- The interior future region $F$ (behind the horizon) is described by $U > 0, V > 0$.
+First, the modular flow of $Y_R$ in these coordinates. Shifting Schwarzschild time, $t\to t+a$, gives
+$U\to e^{-\kappa a}U$ and $V\to e^{\kappa a}V$, so
+\begin{align}
+K_{Y_R} \eqstep{1} \beta H_R \eqstep{2} \beta\,\kappa\,(V\partial_V - U\partial_U) \eqstep{3}
+2\pi\,(V\partial_V - U\partial_U) .
+\label{eq:BTZ_boost}
+\end{align}
+**(1)** Chapter 6: the modular Hamiltonian of $Y_R$ in the thermofield double is $\beta$ times the
+right boundary Hamiltonian.\quad
+**(2)** $\partial_t=\kappa(V\partial_V-U\partial_U)$, read off from the transformation of $U,V$ under
+$t\to t+a$ (checked by finite differences).\quad
+**(3)** $\beta=2\pi/\kappa$.
 
-The boundary single-trace algebra $Y_R$ has modular generator $K_{Y_R} = \beta H_R = \frac{2\pi}{\kappa}(V\partial_V - U\partial_U)$, which generates Lorentz boosts in the $(U,V)$ plane leaving the horizon fixed ($U \mapsto e^{-2\pi s}U, V \mapsto e^{2\pi s}V$).
+The modular flow is a Lorentz boost in the $(U,V)$ plane: one unit of modular time sends $U\to e^{-2\pi s}U$,
+$V\to e^{2\pi s}V$, and it leaves the horizon $U=0$ in place. This is exactly the Rindler boost of Chapter 4.
 
-The half-sided modular translation generator $G_+ = \frac{1}{2\pi}(K_{Y_R} - K_{Y_-})$ instead acts near the horizon as a constant affine translation along the null generator:
+The half-sided modular generator $G_+=\frac{1}{2\pi}(K_{Y_R}-K_{Y_-})$ acts differently. Near the horizon it
+generates a rigid translation along the null direction $U$, normalised so that
 
 $$
 
-G_+ = \frac{1}{\kappa} \frac{\partial}{\partial U}
+\Phi(s) \equiv e^{i G_+ s}\, \phi(U_0, V_0)\, e^{-i G_+ s} = \phi(U_0 + s,\, V_0) .
 
 $$
 
-Now consider an operator $\phi(U_0, V_0)$ initialized at a point $(U_0, V_0)$ in the right exterior ($U_0 < 0$). Evolving under $G_+$ for parameter $s \ge 0$:
+Follow the coordinate $U(s) = U_0 + s$ of a point that starts in the right exterior, $U_0<0$:
 
-$$
+1. For $0 \le s < -U_0$: $U(s) < 0$. The point is still in the right exterior, and
+$\Phi(s) \in \widetilde\M_R = Y_R$.
+2. At $s = s_0 \equiv -U_0$: $U(s_0) = 0$. The point sits on the future horizon $\mathcal{H}^+$.
+3. For $s > -U_0$: $U(s) > 0$ and $V_0 > 0$, so the point is inside the black hole, in region $F$.
 
-\Phi(s) \equiv e^{i G_+ s} \phi(U_0, V_0) e^{-i G_+ s} = \phi(U_0 + s,\, V_0)
+Now bring in an operator $\phi(X_L)$ at a point $X_L = (U_L, V_L)$ of the left exterior, where $U_L > 0$ and
+$V_L < 0$. Near the horizon the metric is $ds^2\propto-dU\,dV$, so two points are causally connected exactly
+when $\Delta U\,\Delta V\ge0$. Here $\Delta V=V_0-V_L>0$, so the condition is $\Delta U=U_0+s-U_L\ge0$. By
+microcausality the commutator $[\Phi(s), \phi(X_L)]$ vanishes for $s<U_L-U_0$ and is generically nonzero once
+$s\ge U_L-U_0$. This is the threshold $s_{12}$ quoted above, now derived from the geometry.
 
-$$
+Near the horizon, then, the generator $G_+$, built from boundary modular data alone, carries a right-exterior
+operator into the interior, where it can meet an operator sent in from the left. That is the resolution of
+the meeting-behind-the-horizon puzzle, seen in coordinates.
 
-Let us trace the coordinate $U(s) = U_0 + s$ as the flow parameter $s$ increases:
+In a suitable large-conformal-weight limit this flow even becomes a genuinely *emph* bulk
+transformation, with trajectories running smoothly into the black hole singularity as $s$ approaches a further
+critical value. Together with the boost $K$, the generators $G_\pm$ close into an $SL(2,\mathbb R)$ algebra,
+the two-dimensional conformal structure already met abstractly in Chapter 4. These two statements are quoted
+without proof. A consistency check is immediate, however: below $T_{\text{HP}}$, $Y_R$ is type I, and
+half-sided modular inclusion cannot occur for a type I algebra (Chapter 4 showed that it requires type
+$\mathrm{III}_1$). This matches the bulk fact that the two boundaries are then disconnected, with no horizon
+and nothing to cross.
 
-1. For $0 \le s < -U_0$: $U(s) < 0$. The point remains strictly inside the right exterior wedge $R$. Therefore $\Phi(s) \in \widetilde\M_R = Y_R$.
-2. At $s = s_0 \equiv -U_0$: $U(s_0) = 0$. The point hits the future horizon $\mathcal{H}^+$!
-3. For $s > -U_0$: $U(s) = U_0 + s > 0$. Since $V_0 > 0$ and $U(s) > 0$, the operator has entered the **black hole interior** region $F$.
-
-By Haag duality and causal reconstruction, an operator at $U > 0, V > 0$ cannot commute with the left exterior algebra $\widetilde\M_L = Y_L$. For any operator $\phi(X_L)$ located at $X_L = (U_L, V_L)$ in the left wedge (where $U_L > 0, V_L < 0$), the commutator $[\Phi(s), \phi(X_L)]$ switches discontinuously from $0$ to a nonzero value at the exact threshold $s_{12} = -U_0 + U_L$.
-
-This provides a transparent mathematical proof: the algebraic generator $G_+$, built purely from boundary modular data, translates degrees of freedom across the horizon into the interior, directly resolving the meeting-behind-the-horizon puzzle.
-
-(In a suitable large
-conformal-weight limit, this flow even becomes a genuinely *emph* bulk transformation, eqs.~8.11—8.12,
-with trajectories running smoothly into the black hole singularity as $s$ approaches a further critical value
-— and $G_\pm$ together with the boost $K$ close into an $SL(2,\mathbb R)$ algebra, exactly the 2d conformal
-structure already previewed abstractly in Sec.~IV.E.) Finally, a clean consistency check: below
-$T_{\text{HP}}$, $Y_R$ is type I, for which half-sided modular inclusion simply cannot occur (Sec.~IV.E's
-theorem required type $\mathrm{III}_1$) — exactly matching the bulk fact that the two boundaries really are
-disconnected there, with no horizon and nothing to cross.
-
-## Sec.~VIII.C: emergent spacetime connectivity — algebraic ER$=$EPR
+## Emergent spacetime connectivity: algebraic ER$=$EPR
 
 ### Why the naive slogan needs fixing
 
-The naive ER$=$EPR slogan — any two entangled gravitational systems are connected by some kind of
-Einstein—Rosen bridge — runs into two genuine problems once examined carefully. **First**: below
-$T_{\text{HP}}$ in the thermofield double, $R$ and $L$ are certainly entangled (an $O(G_N^0)$ amount), but the
-bulk dual is two entirely *emph* copies of AdS (Sec.~VI.C) — so ``entangled $\Rightarrow$
-connected'' is already false as stated, unless you're willing to call this a "quantum wormhole" with no
-independent definition of what that even means. **Second**, and sharper: even refining the slogan to
-require $O(1/G_N)$ (i.e., large, semiclassical) entanglement specifically doesn't survive scrutiny — in an
-evaporating black hole, at a time $t<t_P$ (before the Page time) but still with $O(1/G_N)$ entanglement
-between the black hole and its already-emitted, causally disconnected radiation, the two systems are
-*emph* despite the large entanglement. Amount of entanglement alone, at any
-threshold, simply isn't the right diagnostic.
+The naive ER$=$EPR slogan says that any two entangled gravitational systems are connected by some kind of
+Einstein—Rosen bridge. Examined carefully, it runs into two problems. **First**: below $T_{\text{HP}}$ in
+the thermofield double, $R$ and $L$ are certainly entangled (by an amount of order $G_N^0$), but the bulk dual
+is two entirely *emph* copies of AdS (Chapter 6). So "entangled $\Rightarrow$ connected" is
+already false as stated, unless one calls this a "quantum wormhole" without any independent definition of
+what that means. **Second**, and sharper: even requiring a large, $O(1/G_N)$ amount of entanglement does
+not fix it. Consider an evaporating black hole at a time $t<t_P$ before the Page time. The black hole and the
+radiation it has already emitted share $O(1/G_N)$ entanglement, yet the two systems are *emph*. The amount of entanglement, at any threshold, is not the right diagnostic.
 
-### The fix: entanglement *emph*}
+### The fix: entanglement *emph*, not entanglement *emph*
 
-The resolution builds directly on everything established so far in this section: Sec.~VI.C already showed that
-classical bulk connectivity (a genuine, classical Einstein—Rosen bridge) corresponds to $Y_R,Y_L$ both being
-type $\mathrm{III}_1$; Sec.~VIII.B just showed that type $\mathrm{III}_1$, specifically, is what makes
-half-sided modular inclusion — and hence a genuine causal connection through the horizon — possible at all.
-**Algebraic ER$=$EPR** promotes this from an observation into a clean, three-way classification. For two
-entangled systems $R_1,R_2$ in a pure semiclassical state, with bulk dual $W_{R_1R_2}$ (every part of it
-touching some boundary), and algebras $\M_{R_1},\M_{R_2}$:
+Two facts established earlier point to the right diagnostic. Chapter 6 showed that a classical
+Einstein—Rosen bridge corresponds to $Y_R$ and $Y_L$ both being type $\mathrm{III}_1$. The previous section
+showed that type $\mathrm{III}_1$ is what makes half-sided modular inclusion, and hence a causal connection
+through the horizon, possible at all. **Algebraic ER$=$EPR** turns this observation into a three-way
+classification. Take two entangled systems $R_1$ and $R_2$ in a pure semiclassical state, with bulk dual
+$W_{R_1R_2}$ (every part of which touches some boundary) and algebras $\M_{R_1}$, $\M_{R_2}$. Then:
 
 - $W_{R_1R_2}$ is **disconnected** $\iff$ $\M_{R_1}$ and $\M_{R_2}$ are both type I.
-- $W_{R_1R_2}$ has a **classical** wormhole $\iff$ $\M_{R_1},\M_{R_2}$ are both type $\mathrm{III}_1$
-*emph* $W_{R_1R_2}$ is classical.
+- $W_{R_1R_2}$ has a **classical** wormhole $\iff$ $\M_{R_1}$ and $\M_{R_2}$ are both type
+$\mathrm{III}_1$ *emph* $W_{R_1R_2}$ is classical.
 - $W_{R_1R_2}$ has a **quantum** wormhole $\iff$ $W_{R_1R_2}$ is **quantum volatile** and
-$\M_{R_1},\M_{R_2}$ are not type I.
+$\M_{R_1}$, $\M_{R_2}$ are not type I.
 
-Here **quantum volatile** means the bulk spacetime fails to be classical in the $G_N\to0$ limit even
-though the limit is being taken — concretely, either diffeomorphism-invariant fluctuations fail to vanish as
-$G_N\to0$, or some genuine geometric quantity (a length, an area, a volume) blows up as $O(G_N^{-a})$ instead
-of staying finite. The paradigm example, worth keeping firmly in mind, is exactly the evaporating black hole
-around the Page time: the interior connecting the black hole to its radiation has a *emph* that
-scales as $O(1/G_N)$ — diverging as $G_N\to0$ — which is precisely why it counts as quantum volatile rather
-than an ordinary classical wormhole, even though the entanglement supporting it is large.
+A bulk spacetime is **quantum volatile** when it fails to become classical in the $G_N\to0$ limit even
+though that limit is being taken. Concretely, either diffeomorphism-invariant fluctuations do not die away as
+$G_N\to0$, or some geometric quantity (a length, an area, a volume) grows like $G_N^{-a}$ instead of staying
+finite. The standard example is the evaporating black hole before the Page time. The interior connecting the
+black hole to its radiation has a *emph* of order $1/G_N$, which diverges as $G_N\to0$. That is
+why it counts as quantum volatile rather than as an ordinary classical wormhole, even though the entanglement
+supporting it is large.
 
-This resolves both problems cleanly. Below $T_{\text{HP}}$, both boundary algebras are type I — algebraic
-ER$=$EPR correctly reports *emph* wormhole of either kind, fixing the first counterexample directly.
-For the evaporating black hole: before the Page time, the entanglement wedge connecting black hole and
-radiation is quantum volatile (that $O(1/G_N)$ interior length), so the connection there is a *emph*
-wormhole, not a classical one — the second counterexample is defused by correctly classifying it as quantum
-rather than either "no wormhole" or "ordinary classical wormhole." After the Page time, the entanglement
-wedge becomes genuinely classical, connecting to the radiation by an honest classical wormhole anchored at
-the quantum extremal surface. (A refinement of the causal-depth parameter from Sec.~VIII.A — a *emph*
-depth, built from modular rather than ordinary time bands — sharpens this even further, distinguishing the
-two regimes even though the boundary algebra is type $\mathrm{III}_1$ throughout: finite before the Page time,
-divergent after.)
 
-One clarifying caveat, worth keeping: this whole classification is stated for the strict $\alpha'\to0$ (large
-'t~Hooft coupling) limit, where genuinely geometric concepts apply in the bulk at all. In the stringy regime —
-taken up next — type $\mathrm{III}_1$ alone stops being sufficient to guarantee connectivity, and the story
-needs further refinement.
+> [!NOTE] **Physics Connection: why "structure," not "amount," already matters in ordinary quantum information**
+> The classification uses the *emph* of $\M_{R_1}$ and $\M_{R_2}$, not the amount of entanglement. The same
+> distinction already appears for three qubits. Compare the GHZ state
+> $\ket{\rm GHZ}=\tfrac1{\sqrt2}(\ket{000}+\ket{111})$ with the W state
+> $\ket{\rm W}=\tfrac1{\sqrt3}(\ket{001}+\ket{010}+\ket{100})$. Trace out qubit $C$ from each. In the basis
+> $\ket{00},\ket{01},\ket{10},\ket{11}$ the remaining two-qubit states are
+> 
+$$
 
-## Sec.~VIII.D: stringy geometry and stringy black holes (in brief)
+> \rho^{\rm GHZ}_{AB} = \begin{pmatrix}\tfrac12&0&0&0\\0&0&0&0\\0&0&0&0\\0&0&0&\tfrac12\end{pmatrix}, \qquad
+> \rho^{\rm W}_{AB} = \begin{pmatrix}\tfrac13&0&0&0\\0&\tfrac13&\tfrac13&0\\0&\tfrac13&\tfrac13&0\\0&0&0&0\end{pmatrix} .
+> 
+$$
 
-Everything so far assumed the bulk is well described by ordinary Einstein gravity coupled to matter — valid
-in the strict $N\to\infty$, $\lambda\to\infty$ ('t~Hooft coupling, equivalently $\alpha'\to0$) double limit. At
-finite $\lambda$ (finite string tension), an infinite tower of massive stringy fields appears, and the very
-notion of a sharp bulk causal region — built, throughout this section, from ordinary field-theoretic causal
-wedges and RT surfaces — becomes considerably more delicate: stringy effects are famously non-local at the
-string scale, so the clean dictionary between bulk causal structure and boundary commutant structure
-developed above needs real modification. The paper's own treatment here (its Sec.~VIII.D.1—2) works through,
-in outline, how boundary operator algebras can still be used to probe causal structure and define an
-analogue of a horizon in this regime, and specifically how the half-sided-modular-inclusion mechanism behind
-Kruskal time (Sec.~VIII.B) generalizes to a stringy black hole — concluding that type $\mathrm{III}_1$
-structure alone is no longer sufficient for connectivity once stringy effects are included, refining the
-algebraic ER$=$EPR classification of the previous subsection. This material is genuinely more exploratory and
-technical than the rest of the section, and is flagged here in summary rather than walked through in full
-detail, since the core conceptual arc of the paper — algebra $\to$ entanglement type $\to$ emergent spacetime
-— does not depend on it; it is the frontier of the subject, not its foundation.
+> Apply the Peres—Horodecki test: transpose the $B$ index and look for a negative eigenvalue. For
+> $\rho^{\rm GHZ}_{AB}$ the eigenvalues after partial transpose are $\{0,0,\tfrac12,\tfrac12\}$, all non-negative,
+> so **no entanglement is left** between $A$ and $B$. For $\rho^{\rm W}_{AB}$ they are
+> $\{\tfrac{1-\sqrt5}{6},\tfrac13,\tfrac13,\tfrac{1+\sqrt5}{6}\}\approx\{-0.206,\,0.333,\,0.333,\,0.539\}$. One is
+> negative, so **$A$ and $B$ are still entangled** after $C$ is gone.
+> 
+> By the simplest measure, GHZ is the *emph* entangled of the two. The entropy of one qubit against the
+> other two is $1$ bit for GHZ and $0.918$ bits for W. Yet removing a qubit destroys all remaining entanglement
+> in GHZ and not in W. The difference lies in how the entanglement is arranged. GHZ puts all of its correlation
+> into a three-way correlation with nothing left for any pair, while W spreads it out so that every pair keeps
+> some. Algebraic ER$=$EPR applies the same idea to gravitational systems. Type I, type $\mathrm{III}_1$, and
+> quantum volatile describe how entanglement is organised between $\M_{R_1}$ and $\M_{R_2}$. Two systems with
+> comparable entanglement entropy can land in different classes, just as $\rho^{\rm GHZ}_{AB}$ and
+> $\rho^{\rm W}_{AB}$ do.
+
+
+This resolves both problems. Below $T_{\text{HP}}$, both boundary algebras are type I, and algebraic
+ER$=$EPR correctly reports *emph* wormhole of either kind. For the evaporating black hole before the Page
+time, the entanglement wedge connecting the black hole and the radiation is quantum volatile (its interior
+length is of order $1/G_N$), so the connection is a *emph* wormhole rather than either "no wormhole"
+or an ordinary classical one. After the Page time the entanglement wedge becomes classical, and it connects to
+the radiation through a classical wormhole anchored at the quantum extremal surface. A refinement of the causal
+depth of the first section, the *emph* depth, built from modular rather than ordinary time bands,
+sharpens the distinction further. The boundary algebra is type $\mathrm{III}_1$ in both regimes, but the
+modular depth is finite before the Page time and infinite after it.
+
+The whole classification assumes the strict $\alpha'\to0$ (large 't~Hooft coupling) limit, in which the bulk
+has ordinary geometry. In the stringy regime, taken up next, type $\mathrm{III}_1$ alone is no longer enough
+to guarantee connectivity.
+
+## Stringy geometry and stringy black holes
+
+Everything so far assumed the bulk is described by ordinary Einstein gravity coupled to matter, which is valid
+in the double limit $N\to\infty$, $\lambda\to\infty$ ('t~Hooft coupling large, equivalently $\alpha'\to0$). At
+finite $\lambda$, that is, at finite string tension, an infinite tower of massive string modes appears. The
+notion of a sharp bulk causal region, built throughout this chapter from field-theory causal wedges and RT
+surfaces, becomes delicate, because strings are extended objects and interact non-locally on the string scale.
+The dictionary between bulk causal structure and boundary commutants must therefore be modified.
+
+Boundary operator algebras can still be used in this regime. They still probe causal structure, and they still
+define an analogue of a horizon. The half-sided modular inclusion mechanism behind Kruskal time also carries
+over to a stringy black hole. The main new lesson is negative: once stringy effects are included, type
+$\mathrm{III}_1$ structure alone no longer guarantees connectivity, and the algebraic ER$=$EPR classification
+needs an extra ingredient. This part of the subject is still being developed, and the details are not needed
+for anything that follows. The central chain of ideas, from algebra to type of entanglement to emergent
+spacetime, stands without it.
 
 \bigskip
-\noindent With bulk causal structure, horizon formation, and spacetime connectivity now all read directly off
-boundary algebra data, Sec.~IX turns to a different kind of question: rather than analyzing an existing
+\noindent Bulk causal structure, horizon formation, and spacetime connectivity have now all been read directly
+off boundary algebra data. Chapter 9 turns to a different kind of question. Rather than analysing an existing
 holographic theory, it builds simple, fully solvable *emph* of quantum gravity directly out of
-operator algebras — using the crossed product of Sec.~V, now applied not as an abstract construction but as
-the literal mechanism by which a physical observer's own clock produces the Bekenstein—Hawking area term and
+operator algebras. The crossed product of Chapter 5 returns there, no longer as an abstract construction but
+as the mechanism by which an observer's own clock produces the Bekenstein—Hawking area term and the
 de~Sitter entropy.

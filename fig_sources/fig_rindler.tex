@@ -1,65 +1,67 @@
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage{amsmath,amssymb,mathtools}
-\usepackage{braket}
+% Rindler wedges in 1+1 Minkowski space.  Hyperbolae x^2 - t^2 = rho^2 in R
+% (and their mirror images in L); arrows show the direction of the vacuum
+% modular flow of M_R, sigma_s = boost eta -> eta + 2 pi s (future-directed
+% in R, past-directed in L).  Included at 0.82\textwidth (5.33in).
+\documentclass[tikz,border=3pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
 \usepackage{xcolor}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,decorations.pathmorphing,decorations.pathreplacing,calc,positioning}
+\usetikzlibrary{arrows.meta}
 
-\definecolor{cobalt}{HTML}{2b4c7e}
-\definecolor{boxblue}{HTML}{eef3fa}
-\definecolor{boxgold}{HTML}{fbf3e3}
-\definecolor{boxred}{HTML}{fbecec}
-\definecolor{boxgreen}{HTML}{eaf6f0}
+\definecolor{boxblue}{HTML}{e8f0fa}
+\definecolor{boxgold}{HTML}{faf0dc}
 \definecolor{ruleblue}{HTML}{2b6cb0}
 \definecolor{rulegold}{HTML}{b7791f}
 \definecolor{rulered}{HTML}{c0392b}
-\definecolor{rulegreen}{HTML}{1f8a5f}
+\definecolor{axisgray}{HTML}{8a8f98}
 
-\newcommand{\HH}{\mathcal{H}}
-\newcommand{\M}{\mathcal{M}}
-\newcommand{\tr}{\operatorname{tr}}
-\newcommand{\Tr}{\operatorname{Tr}}
-\newcommand{\ii}{\mathrm{i}}
 \begin{document}
-\begin{tikzpicture}[scale=0.95, >=Latex]
-  % axes
-  \draw[-{Latex[length=2.5mm]}] (-3.4,0) -- (3.4,0) node[right] {$x$};
-  \draw[-{Latex[length=2.5mm]}] (0,-3.0) -- (0,3.0) node[above] {$t$};
-  % lightcones through origin
-  \draw[thick, gray] (-2.7,-2.7) -- (2.7,2.7);
-  \draw[thick, gray] (-2.7,2.7) -- (2.7,-2.7);
-  % shade right (R) and left (L) wedges
-  \begin{scope}
-    \clip (0,0) -- (2.9,2.9) -- (2.9,-2.9) -- cycle;
-    \fill[boxblue] (-3,-3) rectangle (3,3);
-  \end{scope}
-  \begin{scope}
-    \clip (0,0) -- (-2.9,2.9) -- (-2.9,-2.9) -- cycle;
-    \fill[boxgold] (-3,-3) rectangle (3,3);
-  \end{scope}
-  \node[ruleblue] at (2.0,0) {\textbf{$R$}};
-  \node[rulegold] at (-2.0,0) {\textbf{$L$}};
-  \node[gray] at (0,2.55) {$F$};
-  \node[gray] at (0,-2.55) {$P$};
-  % Rindler hyperbolas rho = const in R wedge:  x^2 - t^2 = rho^2
-  \foreach \rho/\col in {0.8/ruleblue!55, 1.35/ruleblue!80, 1.9/ruleblue}{
-    \draw[thick, \col, domain=-1.15:1.15, samples=60, variable=\e]
-      plot ({\rho*cosh(\e)}, {\rho*sinh(\e)});
-  }
-  % boost flow arrow along rho=1.35 hyperbola, at e=0.55
-  \pgfmathsetmacro{\ea}{0.55}
-  \pgfmathsetmacro{\xa}{1.35*cosh(\ea)}
-  \pgfmathsetmacro{\ya}{1.35*sinh(\ea)}
-  \pgfmathsetmacro{\eb}{0.75}
-  \pgfmathsetmacro{\xb}{1.35*cosh(\eb)}
-  \pgfmathsetmacro{\yb}{1.35*sinh(\eb)}
-  \draw[-{Latex[length=3mm]}, rulered, thick] (\xa,\ya) -- (\xb,\yb);
-  \node[rulered, right] at (\xb+0.05,\yb+0.05) {\footnotesize modular flow $\sigma_s$ (boost)};
-  % redshift/temperature label
-  \node[align=left, font=\footnotesize] at (2.55,-1.9) {Rindler observer\\ $\rho=$ const\\ $T_\rho=\dfrac{1}{2\pi\rho}$};
-  % origin bifurcation point
-  \fill[black] (0,0) circle (1.3pt);
-  \node[below left, font=\footnotesize] at (0,-0.05) {bifurcation surface};
-\end{tikzpicture}
+\begin{tikzpicture}[>=Latex, scale=1.3]
+  \def\X{4.6}   % half-width
+  \def\T{2.9}   % half-height
 
+  % wedges
+  \fill[boxblue] (0,0) -- (\T,\T) -- (\X,\T) -- (\X,-\T) -- (\T,-\T) -- cycle;
+  \fill[boxgold] (0,0) -- (-\T,\T) -- (-\X,\T) -- (-\X,-\T) -- (-\T,-\T) -- cycle;
+
+  % light cone through the origin
+  \draw[axisgray, line width=0.6pt] (-\T,-\T) -- (\T,\T);
+  \draw[axisgray, line width=0.6pt] (-\T,\T) -- (\T,-\T);
+
+  % axes
+  \draw[->, line width=0.5pt] (-\X-0.1,0) -- (\X+0.2,0) node[right] {$x$};
+  \draw[->, line width=0.5pt] (0,-\T-0.1) -- (0,\T+0.25) node[above] {$t$};
+
+  % hyperbolae rho = const in R and mirrored in L
+  \foreach \rho/\sh in {0.9/55, 1.6/80, 2.3/100} {
+    \pgfmathsetmacro{\em}{min(ln((\T + sqrt(\T*\T+\rho*\rho))/\rho), ln((\X + sqrt(\X*\X-\rho*\rho))/\rho))}
+    \draw[ruleblue!\sh, line width=0.8pt, domain=-\em:\em, samples=60, variable=\e]
+      plot ({\rho*cosh(\e)}, {\rho*sinh(\e)});
+    \draw[rulegold!\sh, line width=0.8pt, domain=-\em:\em, samples=60, variable=\e]
+      plot ({-\rho*cosh(\e)}, {\rho*sinh(\e)});
+  }
+
+  % modular-flow (boost) arrows on the middle hyperbola: future in R, past in L
+  \foreach \ea/\eb in {0.25/0.62} {
+    \draw[-{Latex[length=2.6mm]}, rulered, line width=1.1pt, domain=\ea:\eb, samples=20, variable=\e]
+      plot ({1.6*cosh(\e)}, {1.6*sinh(\e)});
+    \draw[-{Latex[length=2.6mm]}, rulered, line width=1.1pt, domain=\ea:\eb, samples=20, variable=\e]
+      plot ({-1.6*cosh(\e)}, {-1.6*sinh(\e)});
+  }
+  \node[rulered, right] at ({1.6*cosh(0.62)+0.02}, {1.6*sinh(0.62)-0.05}) {$\eta$};
+
+  % rho marker along the x axis
+  \draw[|<->|, line width=0.45pt, >={Latex[length=1.6mm]}] (0,-0.28) -- (1.6,-0.28);
+  \node[below] at (0.8,-0.28) {$\rho$};
+
+  % region labels
+  \node[ruleblue] at (3.75,1.9) {$R$};
+  \node[rulegold] at (-3.75,1.9) {$L$};
+  \node[axisgray!80!black] at (-0.55,2.35) {$F$};
+  \node[axisgray!80!black] at (-0.55,-2.35) {$P$};
+
+  % bifurcation point
+  \fill (0,0) circle (1.4pt);
+\end{tikzpicture}
 \end{document}

@@ -1,155 +1,226 @@
-# Sec. V: Crossed Product by Modular Group
+# Chapter 5: The Crossed Product by the Modular Group
 
-# Sec.~V: Crossed product by modular group
+# The crossed product by the modular group
 
-Section~IV ended on a genuinely uncomfortable note: type III algebras have no trace, so there is no density
-operator and no entropy for them at all — not even the signed, relative-to-a-reference kind that rescued type
-II in Sec.~III. If the eventual goal is to compute something like a black-hole entropy using nothing but
-operator algebra, this is a real obstruction, not a cosmetic one. The **crossed product** is the
-construction that removes it — not by cheating around the no-trace theorem, but by building a genuinely
-*emph* algebra, out of the original type III one, that turns out to always be type II (which
-does have a trace). The mechanism, remarkably, is completely mechanical and general-purpose, and it will
-reappear, essentially unchanged, as the actual physical mechanism behind gravitational entropy starting in
-Sec.~IX.
+Chapter~4 ended with a problem. A type III algebra has no trace. Without a trace there is no density operator,
+and without a density operator there is no entropy. This is true even for the weaker, ``relative to a
+reference'' kind of entropy that worked for type II in Chapter~3. Suppose the goal is to compute something like
+a black-hole entropy using only operator algebras. Then this is a real obstruction, not a technicality.
 
-## Sec.~V, opening: crossed products in general
+The **crossed product** is the construction that removes the obstruction. It does not get around the
+no-trace theorem. Instead, it builds a *emph* algebra out of the original type III algebra.
+This larger algebra always turns out to be type II, and a type II algebra does have a trace. The construction
+is mechanical and completely general. It comes back, almost unchanged, in Chapter~9, where it is the physical
+mechanism behind gravitational entropy.
 
-Here is the general-purpose construction, stated first without any reference to modular theory at all, because
-it's a standard piece of operator-algebra machinery on its own, and it's worth seeing that the specific
-application to modular flow (the one this paper actually needs) is just one instance of it. Suppose a group
-$G$ acts on a von Neumann algebra $\M$ by unitaries, $\alpha_g(A)=U_gAU_g^\dagger$ (eq.~5.1) — some
-one-parameter (or more general) family of symmetries of $\M$. Given the triple $(\M,G,\alpha)$, there is a
-standard construction, called the **crossed product** $\widehat\M\equiv\M\rtimes_\alpha G$, that builds a
-*emph* von Neumann algebra acting on the enlarged Hilbert space $\widehat\HH=\HH\otimes L^2(G)$ (functions
-on $G$, valued in $\HH$ — think of it as attaching an auxiliary quantum system whose configuration space is
-$G$ itself). For the case of interest here, $G=\mathbb R$ with generator $K$ and action $\alpha_t(A)=
-e^{iKt}Ae^{-iKt}$ (eq.~5.2), so $\widehat\HH=\HH\otimes L^2(\mathbb R)$ — an auxiliary particle on a line.
+One limitation should be stated at the start. It explains why this chapter has no qubit model of the whole
+construction. Every finite-dimensional von Neumann algebra is type I. The reason is simple. In finite
+dimensions every projection has finite rank. So a nonzero projection of smallest rank in the algebra cannot be
+split any further, and an algebra with such minimal projections is type I (Chapter~2). As a result, no finite
+matrix example can show the passage from type III to type II itself. That passage happens only in infinite
+dimensions. What small, explicit examples *emph* check is each individual step: the dressing condition, the
+commutator identities, the trace formula and its cyclicity, and the shape of the entropy formula. These steps
+are checked explicitly below. (The cyclicity of a type II trace was already checked on Bell-pair matrices in
+Chapter~3.)
 
-The specific case this paper needs, and the only one used from here on, takes $K=-\log\Delta_\Psi$ — the
-*emph* generator of $\M$ itself, for some cyclic-separating $\ket\Psi$ — so that eq.~5.2 is exactly
-the modular flow $\sigma_t$ already built in Sec.~IV. The headline result, proved step by step below: for a
-type III algebra $\M$, the resulting crossed product $\widehat\M$ is **always type II** — regardless of
-which type III subtype $\M$ started as. This immediately buys back everything Sec.~III's machinery (density
-operators, entropy) needs, applied now to $\widehat\M$ instead of $\M$ itself. And — a fact worth flagging
-immediately, even though it's only fully justified at the end of Sec.~V.B — $\widehat\M$ turns out to depend
-only on the algebra $\M$, not on which reference state $\ket\Psi$ was used to build the modular flow that
-crossed it — so this is really a construction *emph* to $\M$, not an artifact of an arbitrary
-choice. This is also, as flagged already back in Sec.~I, exactly the mechanism used in Sec.~IX to explain
-black-hole and de~Sitter entropy: there, $\hat q$ below will literally be a physical observer's clock Hamiltonian.
+## Crossed products in general
+
+The general construction does not mention modular theory at all. The modular case used in these notes is one
+special instance. Suppose a group $G$ acts on a von Neumann algebra $\M$ by unitaries,
+$\alpha_g(A)=U_gAU_g^\dagger$. Think of $\alpha$ as a family of symmetries of $\M$, labelled by the group
+elements $g$. Given the triple $(\M,G,\alpha)$, there is a standard way to build a *emph* von Neumann
+algebra, called the **crossed product** and written $\widehat\M\equiv\M\rtimes_\alpha G$. It acts on the
+enlarged Hilbert space $\widehat\HH=\HH\otimes L^2(G)$. The second factor $L^2(G)$ consists of square-integrable
+functions on $G$. One can think of it as an extra quantum system whose configuration space is the group $G$
+itself.
+
+In these notes the group is $G=\mathbb R$, with generator $K$ and action
+\begin{equation}
+\alpha_t(A)=e^{iKt}Ae^{-iKt} .
+\label{eq:cp-action}
+\end{equation}
+Then $\widehat\HH=\HH\otimes L^2(\mathbb R)$. The extra system is simply a quantum particle on a line.
+
+From now on, take $K=-\log\Delta_\Psi$. This is the *emph* generator of $\M$ itself, built from some
+cyclic and separating vector $\ket\Psi$. With this choice, \eqref{eq:cp-action} is exactly the modular flow
+$\sigma_t$ built in Chapter~4.
+
+The main result of this chapter is proved step by step below. If $\M$ is type III, the crossed product
+$\widehat\M$ is **always type II**, whichever type III subtype $\M$ started as. This makes the tools of
+Chapter~3 (density operators and entropy) available at once, applied to $\widehat\M$ instead of $\M$. A second
+fact is justified at the end of the next section. The algebra $\widehat\M$ depends only on $\M$, not on which
+reference state $\ket\Psi$ was used to build the modular flow. So the construction is *emph* to $\M$.
+It is not an artifact of an arbitrary choice. In Chapter~9 the same construction explains black-hole and
+de~Sitter entropy. There, the clock position $\hat q$ introduced below becomes the energy of a physical
+observer.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.88\textwidth]{figs/fig_crossed.pdf}
-\caption{The crossed product construction: crossing a Type $\mathrm{III}_1$ algebra $\M$ (which has no trace) with its modular automorphism group $\sigma_s = \Delta_\Psi^{-is} \cdot \Delta_\Psi^{is}$ via an auxiliary quantum observer clock $L^2(\mathbb{R})$ generates a Type $\mathrm{II}_\infty$ factor $\widehat\M = \M \rtimes_\sigma \mathbb{R}$. The resulting algebra supports a well-defined trace $\tau$, density matrices, and finite generalized entropy $S_{\rm gen}$.}
+\caption{The crossed product. A type $\mathrm{III}_1$ algebra $\M$, which has no trace, comes with its
+modular flow $\sigma_s$ (red arrow). Adding a clock, a particle on a line with position $\hat q$ and Hilbert
+space $L^2(\mathbb R)$ (a wavepacket is sketched), and combining the two produces the larger algebra
+$\widehat\M$. It is type $\mathrm{II}_\infty$ and does have a trace.}
 \label{fig:crossed_product}
 \end{figure}
 
-## Sec.~V.A: construction of $\widehat\M$
+## Construction of $\widehat\M$
 
-Attach a genuine one-dimensional quantum system — a particle on a line, with position $\hat q$ and momentum
-$\hat p$ satisfying the ordinary canonical commutation relation $[\hat q,\hat p]=i$ (eq.~5.3) — to the original
-system, giving the enlarged Hilbert space $\HH\otimes L^2(\mathbb R)$. Define the single operator
+Attach a genuine one-dimensional quantum system to the original system. This is a particle on a line, with
+position $\hat q$ and momentum $\hat p$ obeying the ordinary canonical commutation relation $[\hat q,\hat p]=i$.
+We call it the **clock**. The enlarged Hilbert space is $\HH\otimes L^2(\mathbb R)$. Define the single
+operator
+\begin{equation}
+C \equiv K+\hat q ,
+\label{eq:cp-constraint}
+\end{equation}
+and let $\widehat\M$ be the set of all operators in $\M\otimes B(L^2(\mathbb R))$ that commute with $C$. In
+symbols, $a\in\widehat\M$ if and only if $[a,C]=0$.
 
-$$
+Why is this the right condition? It is not obvious at first sight. The operator $C$ generates two translations
+at once. The piece $K$ generates the modular flow. The piece $\hat q$ generates translations of the clock's
+momentum. So $e^{iCs}$ shifts both by the same amount. Asking for invariance under $C$ therefore says that only
+the *emph* reading, "clock minus modular time," matters, and neither one matters on its own.
+Mathematically this is the same as the familiar idea that only relative positions matter, never the choice of
+an origin for the coordinates. In the applications of Chapter~9, $\hat q$ is an observer's own energy and
+$\hat p$ is the observer's proper time. There the invariance condition becomes the statement that physical
+observables must be diffeomorphism-invariant: they cannot depend on an arbitrary choice of where to put the
+zero of a clock.
 
-C \equiv K+\hat q
 
-$$
+> [!NOTE] **Physics Connection: this is the same trick as separating center-of-mass motion**
+> You have already solved a version of this problem in a first mechanics course, in the two-body problem. Two
+> particles have positions $x_1,x_2$ and momenta $p_1,p_2$. Their total momentum $P\equiv p_1+p_2$ generates a
+> *emph* translation of both particles, $e^{iPs}$. This is the same job that $C=K+\hat q$ does here:
+> it generates modular-time flow and clock translation together.
+> 
+> Suppose the Hamiltonian depends only on the relative coordinate $x_{\rm rel}\equiv x_1-x_2$. This is
+> translation invariance: nothing picks out an absolute position. Then the useful, physically meaningful
+> variables are the ones that are unchanged by the combined shift. These are the relative coordinate itself and
+> the total momentum $P$. Check the elementary commutator directly:
+> \begin{align}
+> [x_{\rm rel},P] = [x_1-x_2,\,p_1+p_2]
+> &\eqstep{1} [x_1,p_1] - [x_2,p_2]
+> \ \eqstep{2}\ i - i = 0 . \notag
+> \end{align}
+> **(1)** expand the commutator term by term. The cross terms $[x_1,p_2]$ and $[x_2,p_1]$ vanish because the
+> two particles are independent degrees of freedom.\quad
+> **(2)** the canonical commutator $[x_j,p_j]=i$ for each particle separately.
+> 
+> So $x_{\rm rel}$ commutes with the generator of the shift that we want the physics to ignore. Below, the
+> dressed operator $\widehat A=e^{iK\hat p}Ae^{-iK\hat p}$ plays exactly this role for $C$. The phrase ``translate
+> both particles'' is replaced by "translate modular time and the clock together."
+> 
+> The center-of-mass coordinate $X_{\rm cm}$ behaves differently. It does *emph* commute with $P$. Instead
+> $[X_{\rm cm},P]=i$, the ordinary canonical commutator. It plays the role that $\hat q$ would play if you forgot
+> to dress it: an absolute reference that the physics was never supposed to depend on.
+> 
+> None of the mathematics here is new. The only new features are these. The "coordinate" being made relative
+> is modular time, not ordinary position. And the "other particle" is the modular generator $K$, not a second
+> physical body.
 
-(eq.~5.4), and let $\widehat\M$ be the subalgebra of $\M\otimes B(L^2(\mathbb R))$ consisting of everything
-that commutes with $C$: $a\in\widehat\M$ iff $[a,C]=0$. It's worth pausing on why this particular condition is
-the physically right one to impose, since it isn't obvious on sight. $C$ generates *emph*
-translations: shifting $\hat q$ by some amount while also flowing modular time by the same amount (since $K$
-generates the modular flow and $\hat q$ generates ordinary translations on $L^2(\mathbb R)$, $e^{iCs}$
-translates both at once). Demanding invariance under $C$ is exactly demanding that only the *emph*
-reading of "clock minus modular time" matters, not either one separately — mathematically identical to the
-familiar physics idea that only relative position matters, never an absolute coordinate origin. Physically,
-in the applications of Sec.~IX, $\hat q$ will be an observer's own energy and $\hat p$ their proper time, and
-this invariance condition becomes exactly the statement that physical observables must be
-diffeomorphism-invariant (unable to depend on an arbitrary choice of where to put a clock's zero).
 
-Two families of operators manifestly satisfy $[a,C]=0$, and it can be shown they generate the whole of
-$\widehat\M$. First, $\hat q$ itself trivially commutes with $C=K+\hat q$ (since $[\hat q,\hat q]=0$ and
-$\hat q$ acts on a different factor than $K$), so any (Weyl-form, since $\hat q$ is unbounded) function of it,
-$e^{-i\hat qs}$, belongs to $\widehat\M$. Second — and this is the nontrivial part — ordinary elements $A\in
-\M$ do *emph* commute with $C$ on their own (since $[A,K]\ne0$ in general — that's exactly what it means
-for $K$ to generate a nontrivial flow on $A$), but a specific *emph* version of them does:
+Two families of operators obviously satisfy $[a,C]=0$, and together they generate all of $\widehat\M$.
 
-$$
+The first family is built from $\hat q$ itself. It commutes with $C=K+\hat q$, because $[\hat q,\hat q]=0$ and
+$\hat q$ acts on a different tensor factor than $K$. So every bounded function of $\hat q$ belongs to
+$\widehat\M$. An example is the unitary $e^{-i\hat qs}$.
 
-[e^{iK\hat p}Ae^{-iK\hat p},\,C] = 0, \qquad A\in\M
+The second family is the nontrivial one. An ordinary element $A\in\M$ does *emph* commute with $C$ by
+itself. The reason is that $[A,K]\ne0$ in general; this is exactly what it means for $K$ to generate a
+nontrivial flow on $A$. But a specific *emph* version of $A$ does commute with $C$:
+\begin{equation}
+[e^{iK\hat p}Ae^{-iK\hat p},\,C] = 0, \qquad A\in\M .
+\label{eq:cp-dressed}
+\end{equation}
+This identity follows from the canonical commutation relations alone. Here is the calculation. Write
+$\widehat A \equiv e^{iK\hat p}(A\otimes\id)e^{-iK\hat p}$. Because $[\hat q,\hat p]=i$, the position operator
+acts on functions of $\hat p$ like a derivative:
+$[\hat q, f(\hat p)] = i f'(\hat p)$. Apply this to the two exponentials. Since $K$ acts on $\HH$ and $\hat p$
+acts on the clock, $K$ can be treated as a constant when differentiating with respect to $p$:
+\begin{align}
+[\hat q, \, e^{iK\hat p}] &\eqstep{a} i(iK)\,e^{iK\hat p} = -K e^{iK\hat p}, \notag\\
+[\hat q, \, e^{-iK\hat p}] &\eqstep{b} i(-iK)\,e^{-iK\hat p} = K e^{-iK\hat p} . \notag
+\end{align}
+**(a)** $[\hat q,f(\hat p)]=if'(\hat p)$ with $f(p)=e^{iKp}$, so $f'(p)=iKe^{iKp}$.\quad
+**(b)** the same rule with $f(p)=e^{-iKp}$, so $f'(p)=-iKe^{-iKp}$.
 
-$$
+Now compute the commutator $[\hat q, \widehat A]$ with the product rule for commutators:
+\begin{align}
+[\hat q, \, \widehat A]
+&\eqstep{1} [\hat q, \, e^{iK\hat p}](A\otimes\id)e^{-iK\hat p} + e^{iK\hat p}(A\otimes\id)[\hat q, \, e^{-iK\hat p}] \notag\\
+&\eqstep{2} -K e^{iK\hat p}(A\otimes\id)e^{-iK\hat p} + e^{iK\hat p}(A\otimes\id) e^{-iK\hat p} K \notag\\
+&\eqstep{3} -K \widehat A + \widehat A K \ =\ -[K, \, \widehat A] . \notag
+\end{align}
+**(1)** the product rule $[\hat q,XYZ]=[\hat q,X]YZ+X[\hat q,Y]Z+XY[\hat q,Z]$, with the middle term zero
+because $[\hat q,A\otimes\id]=0$.\quad
+**(2)** substitute (a) and (b). In the second term, $K e^{-iK\hat p}=e^{-iK\hat p}K$, because $K$ commutes
+with any function of $K$ and $\hat p$.\quad
+**(3)** both terms contain $e^{iK\hat p}(A\otimes\id)e^{-iK\hat p}=\widehat A$, by definition.
 
-(eq.~5.5). Let us prove this commutator identity directly using ordinary canonical commutation relations. Let $\widehat A \equiv e^{iK\hat p}(A\otimes\id)e^{-iK\hat p}$. Using $[\hat q,\hat p]=i$, the position operator acts as a derivative in momentum space: $[\hat q, f(\hat p)] = i f'(\hat p)$. Applying this to the clock translation operator:
+Now take the commutator with the full constraint $C = K + \hat q$:
+\begin{align}
+[C, \, \widehat A] = [K + \hat q, \, \widehat A]
+&\eqstep{4} [K, \, \widehat A] + [\hat q, \, \widehat A]
+\ \eqstep{5}\ [K, \, \widehat A] - [K, \, \widehat A] \ =\ 0 . \notag
+\end{align}
+**(4)** the commutator is linear in each slot, so it splits over the sum $K+\hat q$.\quad
+**(5)** substitute $[\hat q,\widehat A]=-[K,\widehat A]$ from step (3).
 
-$$
+The dressing by the clock momentum $\hat p$ exactly cancels the failure of $A$ to commute with $K$. So
+$\widehat A$ is exactly invariant under $C$. The crossed product is therefore
+\begin{equation}
+\widehat\M = \big\{e^{iK\hat p}Ae^{-iK\hat p},\ e^{-i\hat qs} \ \big|\ A\in\M,\ s\in\mathbb R\big\}'' ,
+\label{eq:cp-generators}
+\end{equation}
+the von Neumann algebra generated by the two families. A general element has the schematic form
+$\widehat A=\int ds\,A(\hat p;s)\,e^{-i\hat qs}$. Here $A(\hat p;s)\equiv e^{iK\hat p}A(s)e^{-iK\hat p}$, built
+from an operator-valued function $A(s)\in\M$. Since $\hat p$ is now an operator, $A(\hat p;s)$ is an operator
+that depends on another operator, not on a fixed number. In the applications of Chapter~9, where $\hat p$ is an
+observer's time, this means the operator is evaluated at a time that is itself quantum.
 
-[\hat q, \, e^{iK\hat p}] = i(iK)e^{iK\hat p} = -K e^{iK\hat p}, \qquad [\hat q, \, e^{-iK\hat p}] = i(-iK)e^{-iK\hat p} = K e^{-iK\hat p} .
+There is a second, equivalent description of the same algebra. It comes from the unitary change of frame
+$U=e^{-iK\hat p}$, which maps $\widehat\M\to U\widehat\M U^\dagger$ and $C\to UCU^\dagger$. The same derivative
+rule as in (a) gives $U\hat qU^\dagger=\hat q-K$, so $C\to\hat q$ and $e^{-i\hat qs}\to e^{i(K-\hat q)s}$. The
+dressed operator $\widehat A$ goes back to the undressed $A$. This second form is more convenient for almost
+everything that follows:
+\begin{equation}
+\begin{gathered}
+\widehat\M = \big\{A,\ e^{i(K-\hat q)s} \ \big|\ A\in\M,\ s\in\mathbb R\big\}'', \\
+\widehat A = \int ds\, A(s)\,e^{is(K-\hat q)}, \qquad A(s)\in\M .
+\end{gathered}
+\label{eq:cp-frame2}
+\end{equation}
+In this frame, ordinary (undressed) elements of $\M$ sit directly inside $\widehat\M$. All the dressing has
+been moved into the clock-dependent generator $K-\hat q$. In this frame, $e^{i\hat qs}$ commutes with every
+$A\in\M$, because they act on different factors. It also commutes with every $e^{i(K-\hat q)s'}$, because
+$[K,\hat q]=0$. So $e^{i\hat qs}$ belongs to the commutant $\widehat\M'$. (This matches the constraint: in this
+frame $C$ has become $\hat q$, and everything in $\widehat\M$ commutes with it.)
 
-$$
-
-Now compute the commutator $[\hat q, \widehat A]$ using the Leibniz product rule:
-\begin{align*}
-[\hat q, \, \widehat A] &= [\hat q, \, e^{iK\hat p}](A\otimes\id)e^{-iK\hat p} + e^{iK\hat p}(A\otimes\id)[\hat q, \, e^{-iK\hat p}] \\
-&= -K e^{iK\hat p}(A\otimes\id)e^{-iK\hat p} + e^{iK\hat p}(A\otimes\id) e^{-iK\hat p} K \\
-&= -K \widehat A + \widehat A K = -[K, \, \widehat A] .
-\end{align*}
-Therefore, evaluating the commutator with the total constraint $C = K + \hat q$:
-
-$$
-
-[C, \, \widehat A] = [K + \hat q, \, \widehat A] = [K, \, \widehat A] + [\hat q, \, \widehat A] = [K, \, \widehat A] - [K, \, \widehat A] = 0 !
-
-$$
-
-The modular-flow dressing by the clock's momentum $\hat p$ exactly cancels the non-commutativity with $K$, ensuring that $\widehat A$ is strictly invariant under $C$.
-So
-
-$$
-
-\widehat\M = \big\{e^{iK\hat p}Ae^{-iK\hat p},\ e^{-i\hat qs} \ \big|\ A\in\M,\ s\in\mathbb R\big\}''
-
-$$
-
-(eq.~5.6), and a general element has the schematic form $\widehat A=\int ds\,A(\hat p;s)\,e^{-i\hat qs}$
-(eq.~5.7), with $A(\hat p;s)\equiv e^{iK\hat p}A(s)e^{-iK\hat p}$ built from an operator-valued function
-$A(s)\in\M$ — since $\hat p$ is now an operator, $A(\hat p;s)$ is a genuine operator-valued ``function of an
-operator,'' living in a kind of quantum spacetime.
-
-There's a second, equivalent way to present the same algebra, obtained by a unitary change of frame
-$U=e^{-iK\hat p}$ (which conjugates $\widehat\M\to U\widehat\M U^\dagger$, $C\to UCU^\dagger$), and this
-alternative form turns out to be more convenient for essentially everything that follows:
-
-$$
-
-\widehat\M = \big\{A,\ e^{i(K-\hat q)s} \ \big|\ A\in\M,\ s\in\mathbb R\big\}'', \qquad
-\widehat A = \int ds\, A(s)\,e^{is(K-\hat q)}, \ A(s)\in\M
-
-$$
-
-(eqs.~5.10, 5.12) — in this frame, ordinary (undressed) elements of $\M$ sit directly inside $\widehat\M$,
-and all the dressing has been absorbed into the clock-dependent generator $K-\hat q$ instead.
-
-## Sec.~V.B: $\widehat\M$ is always type II
+## $\widehat\M$ is always type II
 
 ### Finding the modular operator of $\widehat\M$
 
-Now specialize to $K=-\log\Delta_\Psi$, the genuine modular generator of $\M$, and take the reference vector
-
-$$
-
-\ket{\widehat\Psi} = \ket\Psi\otimes\ket{p=0}
-
-$$
-
-(eq.~5.13, the clock prepared in a definite-momentum, i.e.\ completely spread out in position, state — not
-literally normalizable, a technical point flagged in the paper's footnote~30 but not one that affects any
-conclusion below). It can be shown $\ket{\widehat\Psi}$ is cyclic and separating for $\widehat\M$, so
-Tomita—Takesaki theory applies, and the modular operator $\widehat\Delta$ can be found by directly solving the defining KMS relation, $\braket{\widehat\Psi|\widehat A\widehat B|\widehat\Psi}=\braket{\widehat\Psi|\widehat B\,\widehat\Delta\,\widehat A|\widehat\Psi}$ (eq.~5.14). While usually relegated to technical appendices, the explicit calculation reveals a remarkably transparent cancellation:
+Now set $K=-\log\Delta_\Psi$, the modular generator of $\M$. Work in the frame \eqref{eq:cp-frame2} and take the
+reference vector
+\begin{equation}
+\ket{\widehat\Psi} = \ket\Psi\otimes\ket{p=0} .
+\label{eq:cp-refvector}
+\end{equation}
+The clock is in a state of definite momentum, so it is completely spread out in position. This vector cannot be
+normalized: it is a plane wave. Strictly speaking it defines a *emph* rather than a state. This technical
+point does not change any conclusion below. The vector $\ket{\widehat\Psi}$ is cyclic and separating for
+$\widehat\M$ (a standard fact that we quote), so Tomita—Takesaki theory applies. The modular operator
+$\widehat\Delta$ can then be found from the KMS relation that characterizes it,
+\begin{equation}
+\braket{\widehat\Psi|\widehat A\widehat B|\widehat\Psi}=\braket{\widehat\Psi|\widehat B\,\widehat\Delta\,
+\widehat A|\widehat\Psi} ,
+\label{eq:cp-kms}
+\end{equation}
+or, equivalently, from the Tomita operator $\widehat S$. The calculation below shows a clean cancellation.
 
 \begin{keyresult}[: Derivation of the Crossed Product Modular Operator $\widehat\Delta$]
-**Goal:** Prove that on $\widehat\HH = \HH \otimes L^2(\mathbb{R})$ with reference vector $\ket{\widehat\Psi} = \ket\Psi \otimes \ket{p=0}$, the Tomita conjugate operator satisfies $\widehat S = S_\Psi \otimes \mathcal{P}_p$, and the modular operator satisfies:
+**Goal:** On $\widehat\HH = \HH \otimes L^2(\mathbb{R})$ with reference vector $\ket{\widehat\Psi} = \ket\Psi \otimes \ket{p=0}$, find the Tomita operator $\widehat S$ and show that the modular operator is
 
 $$
 
@@ -159,8 +230,8 @@ $$
 
 **Derivation:**
 
-1. **Action of general operator on reference state:**
-In the presentation of eq.~5.10, a general operator $\widehat A \in \widehat\M$ is given by:
+1. **A general operator acting on the reference vector.**
+In the frame \eqref{eq:cp-frame2}, a general operator $\widehat A \in \widehat\M$ has the form
 
 $$
 
@@ -168,9 +239,7 @@ $$
 
 $$
 
-Act with $\widehat A$ on the reference state $\ket{\widehat\Psi} = \ket\Psi \otimes \ket{p=0}$.
-Since $K = -\log\Delta_\Psi$ and $\Delta_\Psi\ket\Psi = \ket\Psi$, the modular Hamiltonian annihilates the state: $K\ket\Psi = 0 \implies e^{is K}\ket\Psi = \ket\Psi$.
-On the clock, $\hat q = i\partial_p$ in momentum space, so $e^{-is\hat q}$ translates the clock momentum:
+Act with $\widehat A$ on $\ket{\widehat\Psi} = \ket\Psi \otimes \ket{p=0}$. Two facts are needed. First, $K = -\log\Delta_\Psi$ and $\Delta_\Psi\ket\Psi = \ket\Psi$, so the modular Hamiltonian annihilates the state: $K\ket\Psi = 0$, and therefore $e^{is K}\ket\Psi = \ket\Psi$. Second, on the clock $\hat q = i\partial_p$ in the momentum representation, so $e^{-is\hat q}$ shifts the clock momentum:
 
 $$
 
@@ -178,41 +247,56 @@ e^{-is\hat q}\ket{p=0} = \ket{p = -s} .
 
 $$
 
-Since $K$ and $\hat q$ commute (acting on independent Hilbert spaces $\HH$ and $L^2(\mathbb{R})$):
+Since $K$ and $\hat q$ act on different factors, they commute, and
+\begin{align}
+e^{is(K - \hat q)}\ket{\widehat\Psi}
+&\eqstep{1} \big(e^{is K}\ket\Psi\big) \otimes \big(e^{-is\hat q}\ket{p=0}\big)
+\ \eqstep{2}\ \ket\Psi \otimes \ket{p = -s} . \notag
+\end{align}
+**(1)** $[K,\hat q]=0$, so the exponential factorizes into a piece acting on $\HH$ and a piece acting on
+the clock.\quad
+**(2)** $e^{isK}\ket\Psi=\ket\Psi$ and $e^{-is\hat q}\ket{p=0}=\ket{p=-s}$, both shown just above.
+
+Now multiply by $A(s) \in \M$ and integrate:
+\begin{align}
+\widehat A \ket{\widehat\Psi}
+&\eqstep{3} \int_{-\infty}^\infty ds \, A(s)\ket\Psi \otimes \ket{p = -s}
+\ \eqstep{4}\ \int_{-\infty}^\infty dp \, A(-p)\ket\Psi \otimes \ket{p} . \notag
+\end{align}
+**(3)** substitute the result of steps (1)—(2) inside the $s$ integral.\quad
+**(4)** change the integration variable to $p=-s$. The sign from $dp=-ds$ cancels the sign from swapping
+the limits.
+
+So the clock momentum $p$ labels the different pieces $A(s)$ of the operator: the component at clock momentum
+$p$ is $A(-p)\ket\Psi$.
+2. **The adjoint $\widehat A^\dagger$ acting on the reference vector.**
+The adjoint is
 
 $$
 
-e^{is(K - \hat q)}\ket{\widehat\Psi} = \big(e^{is K}\ket\Psi\big) \otimes \big(e^{-is\hat q}\ket{p=0}\big) = \ket\Psi \otimes \ket{p = -s} .
+\widehat A^\dagger = \int_{-\infty}^\infty ds \, e^{-is(K - \hat q)} A(s)^\dagger .
 
 $$
 
-Multiplying by $A(s) \in \M$ and substituting $p = -s$:
+Insert $\id=e^{is(K-\hat q)}e^{-is(K-\hat q)}$ to the right of $A(s)^\dagger$:
 
 $$
 
-\widehat A \ket{\widehat\Psi} = \int_{-\infty}^\infty ds \, A(s)\ket\Psi \otimes \ket{p = -s} = \int_{-\infty}^\infty dp \, A(-p)\ket\Psi \otimes \ket{p} .
+\widehat A^\dagger = \int_{-\infty}^\infty ds \, \Big( e^{-is(K - \hat q)} A(s)^\dagger e^{is(K - \hat q)} \Big) e^{-is(K - \hat q)} .
 
 $$
 
-The clock momentum $p$ directly sorts the modular-flow Fourier components of the state!
-2. **Action of the Hermitian conjugate $\widehat A^\dagger$:**
-Now compute the adjoint operator $\widehat A^\dagger$:
+Since $[\hat q, A(s)^\dagger] = 0$, the conjugation in brackets is just the modular flow of the original algebra $\M$:
+\begin{align}
+e^{-is(K - \hat q)} A(s)^\dagger e^{is(K - \hat q)}
+&\eqstep{5} e^{-is K} A(s)^\dagger e^{is K}
+\ \eqstep{6}\ \Delta_\Psi^{is} A(s)^\dagger \Delta_\Psi^{-is} \equiv \alpha_{-s}\big(A(s)^\dagger\big) . \notag
+\end{align}
+**(5)** $\hat q$ commutes with $A(s)^\dagger$ and with $K$, so the $\hat q$ exponentials cancel against each
+other.\quad
+**(6)** $K=-\log\Delta_\Psi$, so $e^{-isK}=\Delta_\Psi^{is}$.
 
-$$
-
-\widehat A^\dagger = \int_{-\infty}^\infty ds \, e^{-is(K - \hat q)} A(s)^\dagger = \int_{-\infty}^\infty ds \, \Big( e^{-is(K - \hat q)} A(s)^\dagger e^{is(K - \hat q)} \Big) e^{-is(K - \hat q)} .
-
-$$
-
-Since $[\hat q, A(s)^\dagger] = 0$, the internal conjugation is simply the modular flow on the original algebra $\M$:
-
-$$
-
-e^{-is(K - \hat q)} A(s)^\dagger e^{is(K - \hat q)} = e^{-is K} A(s)^\dagger e^{is K} = \Delta_\Psi^{is} A(s)^\dagger \Delta_\Psi^{-is} \equiv \alpha_{-s}\big(A(s)^\dagger\big) .
-
-$$
-
-Acting on $\ket{\widehat\Psi} = \ket\Psi \otimes \ket{p=0}$:
+The last factor $e^{-is(K-\hat q)}$ acts on $\ket{\widehat\Psi}$ as in step (2), with $s\to-s$, and gives $\ket\Psi\otimes\ket{p=s}$. Hence
 
 $$
 
@@ -220,7 +304,7 @@ $$
 
 $$
 
-Using $\Delta_\Psi^{-is}\ket\Psi = \ket\Psi$ and the Tomita definition $S_\Psi A\ket\Psi = A^\dagger\ket\Psi$:
+Now use $\Delta_\Psi^{-is}\ket\Psi = \ket\Psi$ and the definition of the Tomita operator, $S_\Psi A\ket\Psi = A^\dagger\ket\Psi$:
 
 $$
 
@@ -228,258 +312,320 @@ $$
 
 $$
 
-3. **The Tomita operator $\widehat S$ and clock parity:**
-Under the standard Tomita map $\widehat S(\widehat A\ket{\widehat\Psi}) = \widehat A^\dagger\ket{\widehat\Psi}$, comparing the vectors $\ket{p}$ and $\ket{-p}$ shows that the clock undergoes a momentum reflection (parity operation) $\mathcal{P}_p \ket{p} \equiv \ket{-p}$, while on $\HH$ the action is governed by $S_\Psi$:
+3. **The Tomita operator $\widehat S$.**
+The Tomita operator of $\widehat\M$ is defined by $\widehat S(\widehat A\ket{\widehat\Psi}) = \widehat A^\dagger\ket{\widehat\Psi}$. Compare the two results. The input has the vector $A(s)\ket\Psi$ at clock momentum $p=-s$. The output has the vector $\Delta_\Psi^{is}S_\Psi A(s)\ket\Psi$ at clock momentum $p=+s$. Three things happen. The clock momentum is reflected, $p\to-p$; call this reflection $\mathcal{P}_p \ket{p} \equiv \ket{-p}$. The $\HH$ part is acted on by $S_\Psi$. Finally, the component at clock momentum $p$ is multiplied by $\Delta_\Psi^{ip}$. So
 
 $$
 
-\widehat S = S_\Psi \otimes \mathcal{P}_p .
+\widehat S = \Delta_\Psi^{i\hat p}\,\big(S_\Psi \otimes \mathcal{P}_p\big) ,
 
 $$
 
-4. **Cancellation in the modular operator:**
+where $\Delta_\Psi^{i\hat p}=e^{-iK\hat p}$ is a unitary operator. (One can check that $S_\Psi$ commutes with $\Delta_\Psi^{is}$ for real $s$, so the order of $S_\Psi$ and $\Delta_\Psi^{ip}$ at fixed $p$ does not matter.)
+4. **Cancellation in the modular operator.**
 Now evaluate the modular operator $\widehat\Delta \equiv \widehat S^\dagger \widehat S$:
-
-$$
-
-\widehat\Delta = \big(S_\Psi^\dagger \otimes \mathcal{P}_p^\dagger\big) \big(S_\Psi \otimes \mathcal{P}_p\big) = \big(S_\Psi^\dagger S_\Psi\big) \otimes \big(\mathcal{P}_p^\dagger \mathcal{P}_p\big) .
-
-$$
-
-Because the parity reflection $\mathcal{P}_p$ is an isometry ($\mathcal{P}_p^\dagger \mathcal{P}_p = \id_{L^2(\mathbb{R})}$):
-
-$$
-
-\widehat\Delta = \Delta_\Psi \otimes \id_{L^2(\mathbb{R})} = \Delta_\Psi . \qquad \blacksquare
-
-$$
-
+\begin{align}
+\widehat\Delta
+&\eqstep{7} \big(S_\Psi^\dagger \otimes \mathcal{P}_p^\dagger\big)\,\Delta_\Psi^{-i\hat p}\,\Delta_\Psi^{i\hat p}\,\big(S_\Psi \otimes \mathcal{P}_p\big) \notag\\
+&\eqstep{8} \big(S_\Psi^\dagger S_\Psi\big) \otimes \big(\mathcal{P}_p^\dagger \mathcal{P}_p\big)
+\ \eqstep{9}\ \Delta_\Psi \otimes \id_{L^2(\mathbb{R})} = \Delta_\Psi . \qquad \blacksquare \notag
+\end{align}
+**(7)** the adjoint of a product reverses the order, and $(\Delta_\Psi^{i\hat p})^\dagger=\Delta_\Psi^{-i\hat p}$.\quad
+**(8)** the unitary factor cancels, $\Delta_\Psi^{-i\hat p}\Delta_\Psi^{i\hat p}=\id$; then products of tensor products multiply factor by factor.\quad
+**(9)** $S_\Psi^\dagger S_\Psi=\Delta_\Psi$ is the definition of the modular operator, and the reflection
+$\mathcal P_p$ is unitary, $\mathcal P_p^\dagger\mathcal P_p=\id_{L^2(\mathbb R)}$.
 
 \end{keyresult}
 
-The answer, remarkably simple given how much machinery went into $\widehat\M$'s construction, is:
-
-$$
-
-\widehat\Delta = \Delta_\Psi
-
-$$
-
-(eq.~5.15) — **the new algebra's modular operator, in this particular reference state, is exactly the same operator as the original algebra's modular operator.** Nothing new needed to be invented; the crossed product inherited its modular structure wholesale.
+The answer is very simple, given how much machinery went into building $\widehat\M$:
+\begin{equation}
+\widehat\Delta = \Delta_\Psi .
+\label{eq:cp-modop}
+\end{equation}
+**In this reference vector, the modular operator of the new algebra is the same operator as the modular
+operator of the original algebra.** Nothing new had to be invented. The crossed product inherits its modular
+structure directly from $\M$.
 
 ### Why this forces type II
 
-Here is the key algebraic manipulation, and it's short enough to walk through completely. Using
-$\widehat\Delta=e^{-K}$ directly:
-
-$$
-
+The key algebraic step is short. Start from $\widehat\Delta=e^{-K}$ and split the exponential:
+\begin{equation}
 \widehat\Delta = e^{-K} = e^{-(K-\hat q)}e^{-\hat q} \equiv \rho\rho'^{-1}, \qquad
-\rho\equiv e^{-(K-\hat q)}, \quad \rho'\equiv e^{\hat q}
+\rho\equiv e^{-(K-\hat q)}, \quad \rho'\equiv e^{\hat q} .
+\label{eq:cp-factorization}
+\end{equation}
+Splitting the exponential is allowed because $K$ and $\hat q$ commute. Hence
 
 $$
 
-(eq.~5.16), so
+\widehat\Delta^{-is} = e^{i(K-\hat q)s}\,e^{i\hat qs} .
 
 $$
 
-\widehat\Delta^{-is} = e^{i(K-\hat q)s}\,e^{i\hat qs}
+Now compare the two factors on the right with the descriptions of $\widehat\M$ and its commutant. The factor
+$e^{i(K-\hat q)s}$ is a unitary inside $\widehat\M$ itself; it is one of the generators in
+\eqref{eq:cp-frame2}. The factor $e^{i\hat qs}$ is a unitary inside the commutant $\widehat\M'$. **So
+$\widehat\Delta^{-is**$ is a unitary in $\widehat\M$ times a unitary in $\widehat\M'$.}
 
-$$
+When we conjugate an element of $\widehat\M$ by $\widehat\Delta^{-is}$, the factor in $\widehat\M'$ commutes
+with it and drops out. So the modular flow of $\widehat\M$ is implemented by a unitary that lies inside
+$\widehat\M$. This is the definition of an *emph* automorphism. By the criterion
+\eqref{eq:inner-criterion} of Chapter~4, the modular flow is inner for *emph* $s$ if and only if the
+algebra is type I or type II, never type III. **So $\widehat\M$ cannot be type III**, whatever $\M$ was.
+No explicit trace was needed for this step. It followed only from identifying the modular operator and checking
+the inner-automorphism criterion.
 
-(eq.~5.17). Now look at what the two factors on the right actually are, comparing against the two presentations
-of $\widehat\M$ and $\widehat\M'$ (eqs.~5.10—5.11) given above: $e^{i(K-\hat q)s}$ is manifestly a unitary
-sitting inside $\widehat\M$ itself (it's literally one of the generators listed in eq.~5.10), and $e^{i\hat
-qs}$ is manifestly a unitary sitting inside $\widehat\M'$ (the commutant, built from eq.~5.11's generators).
-**So $\widehat\Delta^{-is**$ factors as a product of a unitary in $\widehat\M$ times a unitary in
-$\widehat\M'$} — which is exactly the criterion (eq.~4.22 of Sec.~IV.B) for the modular flow to be an
-*emph* automorphism of $\widehat\M$. But Sec.~IV.B's criterion (eq.~4.21) says modular flow is inner for
-*emph* $s$ if and only if the algebra is type I or type II — never type III. **So $\widehat\M$
-cannot be type III**, whatever $\M$ itself was. And since $\widehat\HH=\HH\otimes L^2(\mathbb R)$ still cannot
-be factorized with respect to $\widehat\M$ (nothing about attaching a clock and imposing an invariance
-condition magically produced a tensor factorization — the underlying obstruction from $\M$ is still there),
-$\widehat\M$ cannot be type I either. **By elimination, $\widehat\M$ is type II.** This is worth
-appreciating as a genuinely clean piece of reasoning: no explicit trace needed to be constructed to reach this
-conclusion — it followed purely from identifying the modular operator and checking the inner-automorphism
-criterion already established in Sec.~IV.
+It remains to rule out type I. Here is an intuitive reason, which is not a proof. Attaching a clock and
+imposing an invariance condition does not create a tensor factorization of $\widehat\HH=\HH\otimes
+L^2(\mathbb R)$ adapted to $\widehat\M$. The obstruction that made $\M$ type III is still present.
+
+A sharper argument works when $\widehat\M$ is a factor, which is the case when $\M$ is type $\mathrm{III}_1$.
+Shift the clock by conjugating with $e^{i\hat ps}$, which sends $\hat q\to\hat q+s$. This maps $\widehat\M$ to
+itself: each $A\in\M$ is unchanged, and $e^{i(K-\hat q)t}$ only picks up a phase $e^{-ist}$. Using the trace
+\eqref{eq:cp-trace} constructed in the next subsection, together with $e^{-i\hat ps}\ket{p=0}=\ket{p=0}$, one
+finds that this shift multiplies the trace by $e^{s}$. In a type I factor $B(\mathcal K)$ every automorphism has
+the form $X\to VXV^\dagger$ with $V$ unitary, and such a map never changes the trace. So a type I factor has no
+automorphism that rescales its trace, and $\widehat\M$ cannot be type I. **By elimination, $\widehat\M$ is
+type II.** For a type $\mathrm{III}_1$ factor $\M$, the crossed product is a type $\mathrm{II}_\infty$ factor.
+For the other type III subtypes, $\widehat\M$ is still type II but has a nontrivial center. That last statement
+is a standard theorem of Takesaki that we quote without proof.
 
 ### Building the trace explicitly, and checking cyclicity by hand
 
-Having established *emph* a trace exists, it's worth actually writing one down and checking it really
-works, rather than just trusting the general argument. Define
+We now know *emph* a trace exists. It is useful to write one down and check that it works. Define
+\begin{equation}
+\tr\widehat A \equiv \braket{\widehat\Psi|\widehat A\,\rho^{-1}|\widehat\Psi} ,
+\label{eq:cp-trace}
+\end{equation}
+with $\rho=e^{-(K-\hat q)}$ from \eqref{eq:cp-factorization}. The motivation is as follows. If a trace exists,
+expectation values in the reference vector should have the form $\braket{A}=\tr(A\rho)$ for some density
+operator $\rho$. So to recover the trace from an expectation value, one removes $\rho$ by multiplying with
+$\rho^{-1}$.
+
+Cyclicity means $\tr(\widehat A\widehat B)=\tr(\widehat B\widehat A)$. It follows from nothing more than the
+KMS relation \eqref{eq:cp-kms}. In the chain below, $\braket{\cdots}$ is shorthand for
+$\braket{\widehat\Psi|\cdots|\widehat\Psi}$:
+\begin{align}
+\tr(\widehat A\widehat B) = \braket{\widehat A\widehat B\rho^{-1}}
+&\eqstep{1} \braket{\widehat B\rho^{-1}\widehat\Delta\,\widehat A} \notag\\
+&\eqstep{2} \braket{\widehat B\rho'^{-1}\widehat A}
+\ \eqstep{3}\ \braket{\widehat B\widehat A\rho'^{-1}}
+\ \eqstep{4}\ \tr(\widehat B\widehat A) . \notag
+\end{align}
+**(1)** the KMS relation \eqref{eq:cp-kms}, with $\widehat A$ as the first operator and $\widehat B\rho^{-1}$
+as the second. This is allowed because $\rho^{-1}=e^{K-\hat q}$ is built from a generator of $\widehat\M$.\quad
+**(2)** $\rho^{-1}\widehat\Delta=\rho^{-1}\rho\rho'^{-1}=\rho'^{-1}$, directly from the factorization
+$\widehat\Delta=\rho\rho'^{-1}$.\quad
+**(3)** $\rho'^{-1}=e^{-\hat q}$ is built from the commutant $\widehat\M'$. So it commutes with $\widehat A\in
+\widehat\M$ and can be moved to the far right.\quad
+**(4)** since $K\ket\Psi=0$, we have $\rho^{-1}\ket{\widehat\Psi}=e^{K-\hat q}\ket{\widehat\Psi}=e^{-\hat q}
+\ket{\widehat\Psi}=\rho'^{-1}\ket{\widehat\Psi}$. So $\braket{\widehat B\widehat A\rho'^{-1}}=
+\braket{\widehat B\widehat A\rho^{-1}}$, which is the definition \eqref{eq:cp-trace} of $\tr(\widehat B\widehat
+A)$.
+
+Every step is either a definition or something already established. No new assumption enters. (The
+manipulations are formal, since $\rho^{-1}$ is unbounded and $\ket{\widehat\Psi}$ is not normalizable, but they
+can be made precise.) The same mechanism appeared in a much more concrete setting in Chapter~3. There the trace
+on the infinite chain of maximally entangled Bell pairs was checked to be cyclic by explicit $2\times2$ matrix
+computation. In both cases the consistency conditions of a specific reference state force cyclicity. Here the
+argument is written in the general language of modular theory, which also works for type III, rather than
+worked out on small matrices.
+
+### Type $\mathrm{II}_\infty$, or type $\mathrm{II}_1$ if the clock's energy is bounded below
+
+Evaluate the trace \eqref{eq:cp-trace} on the identity. Since $K\ket\Psi=0$, only the clock factor $e^{-\hat q}$
+acts nontrivially. A plane wave has $|\braket{q|p=0}|^2=1/2\pi$ at every $q$, so
 
 $$
 
-\tr\widehat A \equiv \braket{\widehat\Psi|\widehat A\,\rho^{-1}|\widehat\Psi}
+\tr(\id) = \braket{p=0|e^{-\hat q}|p=0} = \frac{1}{2\pi}\int_{-\infty}^\infty dq\,e^{-q} = \infty .
 
 $$
 
-(eq.~5.20, using $\rho=e^{-(K-\hat q)}$ from eq.~5.16 — motivated by the standard fact that if a trace exists,
-expectation values in *emph* state should look like $\braket{A}=\tr(A\rho_{\text{state}})$ for some density
-operator $\rho_{\text{state}}$; solving for what $\rho_{\text{state}}$ would need to be, given that
-$\ket{\widehat\Psi}$ is itself the reference state used to build $\Delta_\Psi=\widehat\Delta$, directly
-motivates dividing by $\rho$). Cyclicity, $\tr(\widehat A\widehat B)=\tr(\widehat B\widehat A)$, is checked
-directly using nothing but the KMS relation (eq.~5.14) that defined $\widehat\Delta$ in the first place:
+The trace of the identity diverges. So, by the classification of Chapter~2, $\widehat\M$ is type
+$\mathrm{II}_\infty$.
+
+The divergence comes from the range of the clock variable. In the construction above, the clock's
+"energy" $\hat q$ is like the position $x$, or the momentum $p$, of a particle on a line. Its spectrum is the
+whole real line, and the weight $e^{-q}$ blows up as $q\to-\infty$. That is what gives type
+$\mathrm{II}_\infty$.
+
+There is a simple, physically motivated fix, used again in Chapter~9. Require the clock's energy to be bounded
+below, $q\ge0$. This says that a real observer's energy cannot be negative, which is a reasonable requirement
+for any physical clock. For example, an observer whose energy is a kinetic energy $p^2/2m\ge0$ has possible
+energies filling the half-line $[0,\infty)$, not the whole line.
+
+To impose this, insert a projector. In the frame \eqref{eq:cp-generators}, the operator $\hat q$ itself
+belongs to $\widehat\M$, and the projector is $\Pi=\theta(\hat q)$. Here $\theta$ is the step function, equal to
+$1$ for $q\ge0$ and $0$ for $q<0$. Define $\widehat\M_+\equiv\Pi\widehat\M\Pi$. In that frame it acts on the
+smaller Hilbert space $\HH\otimes L^2(\mathbb R_{>0})$. In the frame \eqref{eq:cp-frame2}, where the trace formula
+is written, the same projector reads $\Pi=\theta(\hat q-K)$. This is a function of the generator $K-\hat q$, so
+it lies in $\widehat\M$, and it acts on $\ket{\widehat\Psi}$ as $\theta(\hat q)$ because $K\ket\Psi=0$. The
+identity element of $\widehat\M_+$ is $\Pi$, and
+\begin{align}
+\tr_{\widehat\M_+}(\id)
+&\eqstep{1} \tr_{\widehat\M}(\Pi)
+\ \eqstep{2}\ \frac{1}{2\pi}\int_{-\infty}^\infty dq\,e^{-q}\theta(q)
+\ \eqstep{3}\ \frac{1}{2\pi}\int_0^\infty dq\,e^{-q} = \frac{1}{2\pi} . \notag
+\end{align}
+**(1)** the identity of $\widehat\M_+$ is the projector $\Pi$, viewed as an element of $\widehat\M$.\quad
+**(2)** the trace formula \eqref{eq:cp-trace}; acting on $\ket{\widehat\Psi}$, the projector inserts the
+factor $\theta(q)$ into the clock integral.\quad
+**(3)** $\theta(q)$ cuts the integration range down to $q\ge0$.
+
+The result is finite. A trace is only defined up to an overall positive constant, so multiplying it by $2\pi$
+normalizes it to $\tr(\id)=1$. **So restricting the observer's clock to positive energy is exactly the
+algebraic step that turns type $\mathrm{II**_\infty$ into type $\mathrm{II}_1$.}
+
+The same condition decides whether an ordinary Gibbs state exists. A partition function $Z=\Tr\,e^{-\beta H}$
+can converge only if $H$ is bounded below. For the harmonic oscillator, with energies $\omega(n+\tfrac12)$ for
+$n\ge0$, the geometric sum converges. For a Hamiltonian whose spectrum runs down to $-\infty$, the weights
+$e^{-\beta E}$ grow without bound and $Z=\infty$. An example is a particle in a linear potential $V=-Fx$ on the
+whole line: its spectrum is all of $\mathbb R$. The two integrals $\int_0^\infty e^{-q}\,dq$ (finite) and
+$\int_{-\infty}^\infty e^{-q}\,dq$ (infinite) express the same fact for the clock, whose "energy" is $\hat q$.
+
+One caution about the analogy. Being bounded below is necessary for a finite $Z$, but it is not sufficient. A
+free particle on the whole line has $p^2/2m\ge0$, yet its thermal $Z$ is infinite, because the infinite volume
+gives infinitely many states in any energy window. The clock trace has no such volume factor: it weights each
+value of $q$ with the flat measure $dq/2\pi$. So for the clock, the lower bound on the spectrum is the only
+thing that matters.
+
+This fork has real physical consequences. Black-hole entropy (type $\mathrm{II}_\infty$) and de~Sitter entropy
+(type $\mathrm{II}_1$) sit on opposite sides of it, as Chapter~9 shows.
+
+### The crossed product does not depend on the reference state
+
+The construction used a specific cyclic and separating vector $\ket\Psi$ to define the modular generator $K$.
+Choosing a different vector $\ket\Phi$ gives only a *emph* algebra,
 
 $$
 
-\tr(\widehat A\widehat B) = \braket{\widehat\Psi|\widehat A\widehat B\rho^{-1}|\widehat\Psi}
-= \braket{\widehat B\rho^{-1}\widehat\Delta\,\widehat A} = \braket{\widehat B\rho'^{-1}\widehat A}
-= \braket{\widehat B\widehat A\rho'^{-1}} = \tr(\widehat B\widehat A)
+\widehat\M_\Phi = u'_{\Phi\Psi}(\hat p)\,\widehat\M_\Psi\,u_{\Phi\Psi}'^\dagger(\hat p) .
 
 $$
 
-(eq.~5.22, suppressing the common $\braket{\widehat\Psi|\cdots|\widehat\Psi}$ for brevity in each term): the
-first step is just the definition of $\tr$; the second is the KMS relation (eq.~5.14) applied with the roles
-of $A\rho^{-1}$ and $B$ swapped; the third uses $\rho^{-1}\widehat\Delta=\rho^{-1}\rho\rho'^{-1}=\rho'^{-1}$
-directly from eq.~5.16's factorization; and the fourth uses that $\rho'^{-1}=e^{-\hat q}\in\widehat\M'$
-(established just above) commutes with $\widehat A\in\widehat\M$ by definition of the commutant. Every step is
-either a definition or something already established — no new assumption anywhere. This is worth comparing to
-the very similar, but much more concrete, cyclicity check already carried out by hand in Sec.~III.C.1
-(eqs.~3.12—3.14 of that companion section, for the finite Bell-pair-chain trace): the mechanism is
-structurally the same idea (a specific reference state's own consistency conditions force cyclicity), just
-now stated in the fully general, type-III-compatible language of modular theory rather than worked out on
-explicit small matrices.
+Here $u'_{\Phi\Psi}$ is the intertwining unitary of relative modular theory (Chapter~4). It relates the
+modular flows of the two states. In the formula above, its flow parameter is replaced by the clock momentum
+operator $\hat p$. The computation that proves this is a direct but somewhat long manipulation of the relative
+modular identities of Chapter~4, and we do not reproduce it. What matters is the conclusion: up to unitary
+equivalence, $\widehat\M$ is an *emph* invariant of $\M$ alone.
 
-### Type $\mathrm{II_\infty$, or type $\mathrm{II}_1$ if you restrict the clock's energy}
+## Density operator for $\widehat\M$ in a general semiclassical state
 
-Compute $\tr(\id)$ directly from eq.~5.21 (an explicit rewriting of eq.~5.20 for the identity element):
+With a trace in hand, the tools of Chapter~3 become available for $\widehat\M$. In particular, a density
+operator $\rho_{\widehat\M}$ for a state is defined by $\tr(A\rho_{\widehat\M})=\braket{\text{state}|A|
+\text{state}}$ for all $A\in\widehat\M$. Consider the physically motivated class of states
+\begin{equation}
+\ket{\widehat\Phi}=\ket\Phi\otimes\ket g ,
+\label{eq:cp-semiclassical}
+\end{equation}
+where $\ket g$ is a fixed clock wavefunction. It is normalized, $\int dq\,|g(q)|^2=1$, and nonzero everywhere.
 
-$$
+Solving the defining equation for the density operator is a longer computation. It uses the two-state KMS
+relation of relative modular theory (Chapter~4) twice. It also uses the explicit form
+$\braket{q|e^{-iK\hat p}|g}=g(q-K)$, which describes how the clock wavefunction changes between the two frames
+\eqref{eq:cp-generators} and \eqref{eq:cp-frame2}. Once the KMS relation is accepted, the rest is mostly
+bookkeeping, and we do not reproduce it. The result is clean [CLPW]:
+\begin{equation}
+\rho_{\widehat\Phi} = 2\pi\, g(\hat q-K)\,e^{\hat q}\,\Delta_{\Phi\Psi}\, g^*(\hat q-K) .
+\label{eq:cp-density}
+\end{equation}
+This expression is written in the frame \eqref{eq:cp-frame2}, the same frame as the trace
+\eqref{eq:cp-trace}. (There, $\hat q-K$ is minus the generator $K-\hat q$, so functions of it lie in
+$\widehat\M$.) The expression in the other frame follows by conjugating with $U^\dagger$. It is an explicit
+operator with three ingredients: the clock wavefunction $g$; the factor $e^{\hat q}$, which comes from the
+normalization of the trace; and the relative modular operator $\Delta_{\Phi\Psi}$ of Chapter~4, which compares
+the state of interest $\Phi$ with the reference $\Psi$ used to build the crossed product. The factor $2\pi$
+matches the $1/2\pi$ in the plane-wave normalization used for the trace.
 
-\tr(\id) = \int_{-\infty}^{\infty} dq\, e^{-q} \braket{\Psi|\id|\Psi} = \int_{-\infty}^\infty dq\,e^{-q} = \infty
-
-$$
-
-(eq.~5.25) — divergent, so by the Sec.~II.C classification, $\widehat\M$ is (so far) type $\mathrm{II}_\infty$.
-But here is a genuinely simple, physically motivated fix, worth seeing in full because it's exactly the
-mechanism reused in Sec.~IX: restrict the clock's spectrum to be bounded below, $q\ge0$ — physically, the
-statement that a real observer's energy cannot be negative, certainly a reasonable restriction on any
-physically sensible clock. Concretely, insert the projector $\Pi=\theta(\hat q)$ (the step function, $1$ for
-$q\ge0$ and $0$ for $q<0$) and define $\widehat\M_+\equiv\Pi\widehat\M\Pi$, acting only on the restricted
-Hilbert space $\HH\otimes L^2(\mathbb R_{>0})$. The identity of this smaller algebra is $\Pi$ itself, and
-
-$$
-
-\tr_{\widehat\M_+}(\id) = \tr_{\widehat\M}(\Pi) = \int_{-\infty}^\infty dq\,e^{-q}\theta(q) = \int_0^\infty
-dq\,e^{-q} = 1
-
-$$
-
-(eq.~5.26) — finite, and in fact already normalized to $1$ with no further rescaling needed. **So
-restricting a physical observer's clock to have positive energy is exactly the algebraic operation that turns
-type $\mathrm{II**_\infty$ into type $\mathrm{II}_1$} — a purely mathematical fact about which subtype of type
-II you land in, but one with an immediate and physically loaded reading: whether the observer crossing your
-algebra has a bounded-below energy spectrum directly decides which flavor of type II entropy you'll be
-computing. This exact fork reappears, with real physical stakes attached, when black hole entropy
-(type $\mathrm{II}_\infty$, Sec.~IX.B) is contrasted with de~Sitter entropy (type $\mathrm{II}_1$, Sec.~IX.C).
-
-### The crossed product doesn't actually depend on which reference state you started with
-
-One loose end, promised at the start of this section: $\widehat\M$ was built using a specific cyclic-separating
-$\ket\Psi$ to define the modular generator $K$ that got crossed with — does a different choice $\ket\Phi$ give
-a genuinely different algebra? It can be shown it does not, only a *emph* one,
-
-$$
-
-\widehat\M_\Phi = u'_{\Phi\Psi}(\hat p)\,\widehat\M_\Psi\,u_{\Phi\Psi}'^\dagger(\hat p)
-
-$$
-
-(eq.~5.27), where $u'_{\Phi\Psi}$ is exactly the intertwining unitary from Sec.~IV.F (eq.~4.114), with the flow
-parameter identified with the clock's momentum operator $\hat p$. (The short computation establishing this,
-eq.~5.29, is a direct if slightly involved manipulation using the identities from Sec.~IV.F and is not
-reproduced symbol-by-symbol here — the content that matters is the conclusion: $\widehat\M$ is, up to unitary
-equivalence, an *emph* invariant of $\M$ alone, exactly as claimed at the start of this section.)
-
-## Sec.~V.C: density operator for $\widehat\M$ in a general semiclassical state
-
-With a genuine trace in hand, Sec.~III's machinery — a density operator defined by
-$\tr(A\rho_{\widehat\M})=\braket{\text{state}|A|\text{state}}$ — becomes available for $\widehat\M$. The
-paper works this out for a
-class of physically motivated states of the form $\ket{\widehat\Phi}=\ket\Phi\otimes\ket g$ (eq.~5.30), where
-$\ket g$ is some fixed clock wavefunction, normalized ($\int dq\,|g(q)|^2=1$, eq.~5.31) and nonvanishing
-everywhere. Solving the defining equation for the resulting density operator is a genuinely involved
-computation (eqs.~5.32—5.41 of the paper, using the two-state KMS relation, eq.~4.105, from Sec.~IV.F, twice
-over, together with the explicit form $\braket{q|e^{-iK\hat p}|g}=g(q-K)$, eq.~5.37, for how the clock
-wavefunction transforms between the two frames of eqs.~5.6 and 5.10) — not walked through symbol by symbol
-here, since the manipulation itself is mostly bookkeeping once the KMS relation is trusted, but the outcome is
-clean:
-
-$$
-
-\rho_{\widehat\Phi} = 2\pi\, g(\hat q-K)\,e^{\hat q}\,\Delta_{\Phi\Psi}\, g^*(\hat q-K)
-
-$$
-
-(eq.~5.39, in the frame of eqs.~5.6—5.7; the corresponding expression in the other frame, eq.~5.10, is
-obtained by conjugating with $U^\dagger$, eq.~5.41) — an explicit operator, built from the clock wavefunction
-$g$, the (already familiar) $e^{\hat q}$ factor from the trace's own normalization, and the relative modular
-operator $\Delta_{\Phi\Psi}$ from Sec.~IV.F comparing the state of interest $\Phi$ to the reference $\Psi$
-used to build the crossed product in the first place.
-
-## Sec.~V.D: entanglement entropy for $\widehat\M$ in a general semiclassical state
+## Entanglement entropy for $\widehat\M$ in a general semiclassical state
 
 ### The final formula, and why it has exactly the shape it does
 
-Plugging $\rho_{\widehat\Phi}$ into the ordinary entropy formula, $S_{\widehat\M}=-\tr(\rho_{\widehat\Phi}\log
-\rho_{\widehat\Phi})$ (eq.~5.42), and specializing to a **semiclassical** clock wavefunction — one that
-varies slowly, $g'(q)\propto\epsilon$ for some small parameter $\epsilon$, and working to leading order in
-$\epsilon$ — the paper carries out an expansion (eqs.~5.43—5.48: expand $-\log\rho_{\widehat\Phi}$ using
-$K_{\Phi\Psi}=K_\Phi+K-K_{\Psi\Phi}$ from Sec.~IV.F's eq.~4.116, then evaluate the resulting expectation value
-term by term, using $K_\Phi\ket\Phi=0$ from the ordinary modular-operator property eq.~4.9, and recognizing
-the surviving piece directly as the relative entropy definition, eq.~4.117, of Sec.~IV.F) that lands on
+Insert $\rho_{\widehat\Phi}$ into the ordinary entropy formula, $S_{\widehat\M}=-\tr(\rho_{\widehat\Phi}\log
+\rho_{\widehat\Phi})$. Then specialize to a **semiclassical** clock wavefunction. This means one that
+varies slowly, with $g'(q)\propto\epsilon$ for a small parameter $\epsilon$, and we work to leading order in
+$\epsilon$. The expansion has three steps. First, expand $-\log\rho_{\widehat\Phi}$ using the relative-modular
+identity $K_{\Phi\Psi}=K_\Phi+K-K_{\Psi\Phi}$ of Chapter~4. Second, evaluate the resulting expectation value
+term by term, using $K_\Phi\ket\Phi=0$. Third, recognize the surviving piece as the relative entropy of
+Chapter~4. The result, due to Chandrasekaran, Longo, Penington and Witten [CLPW], is
+\begin{equation}
+\begin{gathered}
+S_{\widehat\M}(\widehat\Phi) = -S_\M(\Phi\|\Psi) - \bar q + S_o, \\
+\bar q = \int dq\,q\,|g(q)|^2, \qquad S_o = -\int dq\,|g(q)|^2\log|g(q)|^2 .
+\end{gathered}
+\label{eq:cp-entropy}
+\end{equation}
+Here $\bar q$ is the mean clock reading in the probability distribution $|g(q)|^2$. The quantity $S_o$ is the
+ordinary (differential) Shannon entropy of that same distribution. Both depend only on the shape of the clock
+wavefunction $g$, not on the state $\Phi$. (The formula holds up to an additive constant, which depends on how
+the trace is normalized.)
+
+**Up to terms fixed entirely by the clock, the entropy of the type II crossed-product algebra is minus
+the type III relative entropy of the original algebra $\M$.** This closes the loop opened in Chapter~4. There,
+relative entropy was introduced as the one entropy-like quantity that survives in type III, where ordinary
+entropy does not. Now it turns out to *emph* an ordinary entropy, of a different and larger algebra built by
+attaching a clock.
+
+\begin{workedexamplebox}[: the clock terms of the entropy formula, from a Gaussian clock]
+The clock terms $-\bar q+S_o$ in \eqref{eq:cp-entropy} can be checked on a fully explicit example. Take
+$\Phi=\Psi$, so the relative-entropy term is zero. Then look only at the operators in $\widehat\M$ that are
+functions of $X\equiv\hat q-K$ (in the frame \eqref{eq:cp-frame2}). These form a commutative subalgebra, so
+this is a toy calculation on a subalgebra, not the full entropy of $\widehat\M$. It does check where the clock
+terms come from.
+
+*emph* Since $K\ket\Psi=0$, a function $f(X)$ acts on $\ket{\widehat\Psi}$ as
+$f(\hat q)$. With $|\braket{q|p=0}|^2=1/2\pi$, the trace \eqref{eq:cp-trace} becomes
 
 $$
 
-S_{\widehat\M}(\widehat\Phi) = -S_\M(\Phi\|\Psi) - \bar q + S_o, \qquad
-\bar q = \int dq\,q\,|g(q)|^2, \qquad S_o = -\int dq\,|g(q)|^2\log|g(q)|^2
+\tr f(X) = \frac{1}{2\pi}\int dq\,e^{-q}f(q) .
 
 $$
 
-(eqs.~5.49—5.50): $\bar q$ is simply the mean clock reading under the probability distribution $|g(q)|^2$, and
-$S_o$ is the ordinary (differential) Shannon entropy of that same distribution — both depending only on the
-shape of the clock wavefunction $g$, not on the state $\Phi$ being described. **The entropy of the type
-II crossed-product algebra, up to state-independent constants fixed entirely by the clock, is exactly minus
-the type III relative entropy of the original algebra $\M$.** This is worth appreciating as a genuinely
-satisfying closing of the loop opened at the very start of Sec.~IV: relative entropy, introduced there as ``the
-one thing that survives type III when ordinary entropy doesn't,'' now turns out to literally *emph* an
-ordinary, honest entropy — just of a different, larger algebra, built by attaching a clock.
+*emph* For $\Phi=\Psi$ we have $\Delta_{\Phi\Psi}=\Delta_\Psi=e^{-K}$, and
+\eqref{eq:cp-density} reduces to $\rho(X)=2\pi\,|g(X)|^2e^{X}$. Check that it reproduces the state:
+\begin{align}
+\tr\big(\rho(X)f(X)\big)
+&\eqstep{1} \frac{1}{2\pi}\int dq\,e^{-q}\,2\pi|g(q)|^2e^{q}f(q)
+\ \eqstep{2}\ \int dq\,|g(q)|^2f(q) . \notag
+\end{align}
+**(1)** the trace formula just derived, applied to the function $\rho f$.\quad
+**(2)** the factors $2\pi$ and $e^{\pm q}$ cancel.
 
-\begin{quote}
-*textit* It's
-worth seeing the qualitative content of eq.~5.49 confirmed on a fully explicit, computable example, even
-though the actual derivation above is more careful about tracking exactly which piece is the relative-entropy
-term. Model the leading-order, unnormalized weight the state assigns to clock reading $q$ as
-$\rho(q)\propto g(q)^2\,e^{q}$ (the $e^q$ factor tracking the $\rho^{-1}=e^{K-\hat q}$ dependence built into the
-trace's own definition, eq.~5.20, once the $\M$-sector operator content has been integrated out against a
-fixed state and only the clock dependence is left), for a Gaussian clock wavefunction of width $\sigma$
-centered at $\bar q_0$, $g(q)^2=\frac{1}{\sqrt{2\pi}\sigma}\exp\!\big(-(q-\bar q_0)^2/2\sigma^2\big)$. Carrying
-out the resulting Gaussian integral symbolically: the normalization is $Z=\int dq\,g(q)^2e^{q}=\exp(\bar
-q_0+\sigma^2/2)$, and the resulting (still Gaussian, same width $\sigma$) tilted distribution
-$\rho(q)/Z$ has its mean shifted up by exactly one unit of variance, $\braket{q}=\bar q_0+\sigma^2$ — the
-$e^q$ factor systematically biases the observed clock reading upward, an effect you can see directly in this
-toy model rather than having to trust it abstractly. Its (differential) entropy is the standard Gaussian
-formula $\tfrac12\log(2\pi e\sigma^2)$, so
+The right side is the expectation value of $f(X)$ in $\ket\Psi\otimes\ket g$, because $X$ acts on that vector
+as $\hat q$ and the clock distribution is $|g(q)|^2$. With $f=1$ this also gives $\tr\rho=1$.
+
+*emph*
+\begin{align}
+-\tr(\rho\log\rho)
+&\eqstep{3} -\int dq\,|g(q)|^2\big(\log 2\pi+\log|g(q)|^2+q\big) \notag\\
+&\eqstep{4} -\bar q + S_o - \log 2\pi . \notag
+\end{align}
+**(3)** apply step (2) with $f=\log\rho=\log2\pi+\log|g|^2+X$.\quad
+**(4)** $\int|g|^2=1$, and the definitions of $\bar q$ and $S_o$ in \eqref{eq:cp-entropy}.
+
+The constant $-\log2\pi$ disappears if the trace is rescaled by $2\pi$. So the clock terms have exactly the
+shape $-\bar q+S_o$.
+
+*emph* Take a Gaussian clock distribution of width $\sigma$ centered at $\bar q_0$,
+$|g(q)|^2=\frac{1}{\sqrt{2\pi}\sigma}\exp\!\big(-(q-\bar q_0)^2/2\sigma^2\big)$. Then $\bar q=\bar q_0$ and
+$S_o=\tfrac12\log(2\pi e\sigma^2)$, so
 
 $$
 
--\braket{q} + \big(\text{entropy}\big) = -\bar q_0 - \sigma^2 + \tfrac12\log(2\pi e\sigma^2) ,
+-\tr(\rho\log\rho) = -\bar q_0 + \tfrac12\log(2\pi e\sigma^2) - \log 2\pi .
 
 $$
 
-computed exactly for this Gaussian example: an expression of the form $-\bar q_0$ plus clock-shape-only terms,
-matching the general shape of eq.~5.49 (with the leftover $-\sigma^2+\tfrac12\log(2\pi e\sigma^2)$ terms
-playing the role of the general formula's $S_o$, in this simplified toy where the relative-entropy piece
-has been set aside by construction). This is offered as a sanity check on the *emph* of the general
-result, not as a substitute for the paper's own, more careful derivation above, which correctly separates out
-the $\M$-sector relative-entropy contribution that this simplified toy model doesn't track.
-\end{quote}
+We checked this numerically by doing the $q$ integrals directly (for $\bar q_0=0.4$, $\sigma=0.8$), and also
+checked $\tr\rho=1$. This example tests the clock terms only. The relative-entropy term, which needs
+$\Phi\ne\Psi$ and the full non-commutative algebra, is not tested by it.
+\end{workedexamplebox}
 
 \bigskip
-\noindent This closes Sec.~V, and with it, the entire first half of the paper (Secs.~II—V): a type III
-algebra, with no trace and no entropy of its own, can always be crossed by its own modular group to produce a
-type II algebra that does have both — and that type II algebra's entropy is nothing but the original algebra's
-relative entropy, in disguise. Section~VI turns to the payoff this machinery was built for: applying every
-tool developed so far — the type classification, modular theory, and now the crossed product — to the
-large-$N$ limit of the AdS/CFT correspondence itself.
+\noindent This completes the operator-algebra toolkit of Chapters~2—5. A type III algebra has no trace and no
+entropy of its own. But it can always be crossed with its own modular group to produce a type II algebra that
+has both. And the entropy of that type II algebra is the relative entropy of the original algebra, in disguise.
+Chapter~6 applies all of these tools (the type classification, modular theory, and the crossed product) to the
+large-$N$ limit of the AdS/CFT correspondence.

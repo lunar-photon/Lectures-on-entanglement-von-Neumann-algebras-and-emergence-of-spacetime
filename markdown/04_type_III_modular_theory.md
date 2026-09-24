@@ -1,613 +1,696 @@
-# Sec. IV: Type III Algebras & Modular Theory
+# Chapter 4: Type III Algebras and Modular Theory
 
-# Sec.~IV: Von Neumann algebras and entanglement: type III
+# Von Neumann algebras and entanglement: type III
 
-This is the technical heart of the whole paper, and it earns that description honestly: type III algebras have
-no trace, so eqs.~3.1—3.2 (the density operator $\rho_\M$ and the entropy $S_\M$) simply cannot be written
-down — there is no equation left to solve. And yet, as flagged repeatedly, type III is not some exotic
-mathematical curiosity to be handled as a special case; it is the type that governs local regions of a
-relativistic quantum field theory, and (as Sec.~VII will show) the type that governs holographic boundary
-algebras in the strict large-$N$ limit. If the goal is to say anything at all about entanglement in exactly
-the settings this paper cares about most, an entirely different tool is needed. That tool is
-**Tomita—Takesaki modular theory**, and the core physical idea behind it is worth stating in one sentence
-before any formalism: *emph* — entanglement, viewed from inside just one half, always looks
-like heat. Everything in this section is that one idea, made completely precise.
+This chapter is the technical heart of the notes. A type III algebra has no trace. So the density operator
+$\rho_\M$ and the entropy $S_\M$ of Chapter~3 cannot even be defined. Type III is not a rare special case,
+though. It is the type of the algebra of a local region in a relativistic quantum field theory. As Chapter~7
+will show, it is also the type of the holographic boundary algebras in the strict large-$N$ limit. To say
+anything about entanglement in these settings, we need a different tool. That tool is
+**Tomita—Takesaki modular theory**. Its core physical idea fits in one sentence, before any formalism:
+*emph* Seen from inside one half, entanglement looks like heat. This chapter makes that one
+idea precise.
 
-## Sec.~IV.A: emergent times from entanglement — modular flows
+## Emergent times from entanglement — modular flows
 
 ### Starting from something you already understand: the type I case, retold
 
-To motivate the general construction, go back to an ordinary type I bipartite pure state $\ket\Psi$ with
-full-rank reduced density matrix $\rho_R$ ("full-rank" meaning invertible — every eigenvalue strictly
-positive, so $\rho_R^{-1}$ exists; this will matter in a moment). Instead of studying the entropy $S_R$
-directly, package the same information differently: write
+To motivate the general construction, go back to an ordinary type I bipartite pure state $\ket\Psi$. Assume
+that its reduced density matrix $\rho_R$ is full-rank. "Full-rank" means invertible: every eigenvalue is
+strictly positive, so $\rho_R^{-1}$ exists. This will matter in a moment. Instead of studying the entropy $S_R$
+directly, we package the same information in a different way. Write
 
 $$
 
-\rho_R = e^{-K_R}, \qquad K_R\equiv-\log\rho_R
+\rho_R = e^{-K_R}, \qquad K_R\equiv-\log\rho_R .
 
 $$
 
-(eq.~4.1). $K_R$ is called the **entanglement Hamiltonian**, and $K_R\ge0$ (since $\rho_R$'s eigenvalues
-are all in $(0,1]$, their negative logarithms are all $\ge0$). The full set of eigenvalues of $K_R$ — the
-*emph* — carries strictly more information than the entropy $S_R$ alone or any finite
-list of R\'enyi entropies (each of those is just some specific weighted sum over the spectrum; the full
-spectrum is the un-summed data), which is why condensed-matter physicists studying entanglement spectra
-directly (rather than just the single number $S_R$) have found it such a fruitful diagnostic tool.
+The operator $K_R$ is called the **entanglement Hamiltonian**. It satisfies $K_R\ge0$, because the
+eigenvalues of $\rho_R$ lie in $(0,1]$, so their negative logarithms are all $\ge0$. The full set of
+eigenvalues of $K_R$ is called the *emph*. It carries more information than the entropy
+$S_R$, and more than any finite list of R\'enyi entropies. Each of those numbers is one particular weighted sum
+over the spectrum, while the spectrum itself is the unsummed data. This is why condensed-matter physicists
+study entanglement spectra directly, and not only the single number $S_R$. It has proved to be a very useful
+diagnostic.
 
 Now use $K_R$ to generate a flow:
+\begin{equation}
+A(s) = e^{iK_Rs}Ae^{-iK_Rs} \in B(\HH_R), \qquad A\in B(\HH_R) .
+\label{eq:modflow-typeI}
+\end{equation}
+This has the same form as ordinary Heisenberg time evolution, $A(t)=e^{iHt}Ae^{-iHt}$. Here $K_R$ plays the
+role of the Hamiltonian and $s$ plays the role of time. The flow is called **modular flow**, and $s$ is
+called **modular time**. The key physical claim is the following. An observer confined to $R$, who uses
+$s$ as their time, should see their system in thermal equilibrium. The reason is simple. By construction,
+$\rho_R=e^{-K_R}$ is an ordinary Gibbs density matrix for the "Hamiltonian" $K_R$, at the dimensionless
+inverse temperature $\beta=1$. In precise terms, correlation functions of modular-flowed operators satisfy the
+**Kubo—Martin—Schwinger (KMS) condition**. This condition is the mathematical signature of thermal
+equilibrium. It is spelled out precisely below.
+
+The same construction works on the $L$ side, with $K_L=-\log\rho_L$. To treat both sides at once, define
+\begin{equation}
+\Delta_\Psi \equiv \rho_R\otimes\rho_L^{-1}, \qquad -\log\Delta_\Psi = K_R - K_L ,
+\label{eq:Delta-typeI}
+\end{equation}
+and let the modular flow act on operators of *emph* side:
 
 $$
 
-A(s) = e^{iK_Rs}Ae^{-iK_Rs} \in B(\HH_R), \qquad A\in B(\HH_R)
+\begin{aligned}
+\sigma_s(A) &\equiv \Delta_\Psi^{-is}A\Delta_\Psi^{is}\in B(\HH_R), &\qquad& A\in B(\HH_R), \\
+\sigma_s(A') &\equiv \Delta_\Psi^{-is}A'\Delta_\Psi^{is}\in B(\HH_L), && A'\in B(\HH_L) .
+\end{aligned}
 
 $$
 
-(eq.~4.2) — this is formally identical to ordinary Heisenberg time evolution, $A(t)=e^{iHt}Ae^{-iHt}$, with
-$K_R$ playing the role of a Hamiltonian and $s$ playing the role of time. It's called **modular flow**,
-and $s$ is called **modular time**. The key physical claim, which is really just the statement that
-$e^{-K_R}=\rho_R$ is already, by construction, an ordinary Gibbs thermal density matrix at (dimensionless)
-inverse temperature $\beta=1$ for the "Hamiltonian" $K_R$: an observer confined to $R$, using $s$ as their
-notion of time, should see their system in thermal equilibrium — meaning correlation functions of
-modular-flowed operators satisfy the **Kubo—Martin—Schwinger (KMS) condition**, the mathematical
-signature of thermal equilibrium (spelled out precisely below).
-
-You can do the same construction on the $L$ side, with $K_L=-\log\rho_L$. To treat both sides on equal
-footing at once, define
-
-$$
-
-\Delta_\Psi \equiv \rho_R\otimes\rho_L^{-1}, \qquad -\log\Delta_\Psi = K_R - K_L
-
-$$
-
-(eq.~4.3), and let the modular flow act on operators of *emph* side:
-
-$$
-
-\sigma_s(A) \equiv \Delta_\Psi^{-is}A\Delta_\Psi^{is}\in B(\HH_R),\ \ A\in B(\HH_R), \qquad
-\sigma_s(A') \equiv \Delta_\Psi^{-is}A'\Delta_\Psi^{is}\in B(\HH_L),\ \ A'\in B(\HH_L)
-
-$$
-
-(eqs.~4.4—4.5) — check this reduces to eq.~4.2 for $A\in B(\HH_R)$: since $\rho_L^{-1}$ (and hence any power
-of it) commutes past $A\otimes\id_L$ trivially, $\Delta_\Psi^{-is}A\Delta_\Psi^{is}=\rho_R^{-is}A\rho_R^{is}$,
-exactly eq.~4.2 with $s\leftrightarrow$ what was called $s$ there (a short but worthwhile check — it confirms
-the joint object $\Delta_\Psi$ correctly reduces to the separate one-sided flows on each side). $\Delta_\Psi$
-is called the **modular operator**.
+Here, as usual, an operator $A$ on $\HH_R$ stands for $A\otimes\id_L$, and an operator $A'$ on $\HH_L$ stands
+for $\id_R\otimes A'$. Let us check that this reduces to the one-sided flow \eqref{eq:modflow-typeI} for
+$A\in B(\HH_R)$:
+\begin{align}
+\Delta_\Psi^{-is}(A\otimes\id_L)\Delta_\Psi^{is}
+&\eqstep{1} (\rho_R^{-is}\otimes\rho_L^{is})(A\otimes\id_L)(\rho_R^{is}\otimes\rho_L^{-is}) \notag\\
+&\eqstep{2} \rho_R^{-is}A\rho_R^{is}\otimes\rho_L^{is}\rho_L^{-is}
+\ \eqstep{3}\ \rho_R^{-is}A\rho_R^{is}\otimes\id_L . \notag
+\end{align}
+**(1)** a power of a tensor product of positive operators is the tensor product of the powers.\quad
+**(2)** operators on different tensor factors multiply factor by factor.\quad
+**(3)** $\rho_L^{is}\rho_L^{-is}=\id_L$.
+Since $\rho_R^{-is}=e^{iK_Rs}$, this is exactly \eqref{eq:modflow-typeI}. So the single joint object
+$\Delta_\Psi$ reproduces the one-sided flow on each side. The operator $\Delta_\Psi$ is called the
+**modular operator**.
 
 
 > [!EXAMPLE] **Worked Example:**
-> Take $\ket{\phi_\theta}=\cos\theta\ket{00}+\sin\theta\ket{11}$
-> from Sec.~I, so $\rho_R=\rho_L=\mathrm{diag}(\cos^2\theta,\sin^2\theta)$, and write out $\Delta_\Psi=
-> \rho_R\otimes\rho_L^{-1}$ as an explicit $4\times4$ matrix in the basis $\ket{00},\ket{01},\ket{10},\ket{11}$:
+> Take the two-qubit state
+> $\ket{\phi_\theta}=\cos\theta\ket{00}+\sin\theta\ket{11}$ from Chapter~1, with $0<\theta<\pi/2$ so that both
+> coefficients are nonzero. In each basis vector $\ket{ab}$, the first label refers to the $R$ qubit and the
+> second to the $L$ qubit. Then $\rho_R=\rho_L=\mathrm{diag}(\cos^2\theta,\sin^2\theta)$. In the basis
+> $\ket{00},\ket{01},\ket{10},\ket{11}$, the modular operator $\Delta_\Psi=\rho_R\otimes\rho_L^{-1}$ is the
+> diagonal matrix
 > 
 $$
 
-> \Delta_\Psi = \begin{pmatrix} 1&0&0&0\\ 0&\cos^2\theta/\sin^2\theta&0&0\\
-> 0&0&\sin^2\theta/\cos^2\theta&0\\0&0&0&1\end{pmatrix} = \operatorname{diag}\left(1, \; \cot^2\theta, \; \tan^2\theta, \; 1\right) .
+> \Delta_\Psi = \begin{pmatrix} 1&0&0&0\\ 0&\cot^2\theta&0&0\\
+> 0&0&\tan^2\theta&0\\0&0&0&1\end{pmatrix}
+> = \operatorname{diag}\left(1, \; \cot^2\theta, \; \tan^2\theta, \; 1\right) .
 > 
 $$
 
-> Its eigenvalues are $1$ (multiplicity two, on $\ket{00}$ and $\ket{11}$), $\lambda\equiv\tan^2\theta$ (on $\ket{10}$), and $\lambda^{-1}=\cot^2\theta$ (on $\ket{01}$).
+> For example, the $\ket{01}$ entry is $\cos^2\theta/\sin^2\theta=\cot^2\theta$. The eigenvalues are $1$
+> (twice, on $\ket{00}$ and $\ket{11}$), $\lambda\equiv\tan^2\theta$ (on $\ket{10}$), and
+> $\lambda^{-1}=\cot^2\theta$ (on $\ket{01}$).
 > 
-> Now let us construct the Tomita operator $S_\Psi$, its adjoint $F_\Psi = S_\Psi^\dagger$, and the modular conjugation $J_\Psi$ explicitly from first principles:
+> Now let us build three more objects from first principles, using only the algebra and the state. They are the
+> Tomita operator $S_\Psi$, its adjoint $F_\Psi \equiv S_\Psi^\dagger$, and the modular conjugation $J_\Psi$.
+> (Remark~(c) after the Tomita—Takesaki theorem below defines them in general.) We will see that $\Delta_\Psi$
+> comes out of them.
 > 
-1. **Action of the algebra on $\ket{\phi_\theta**$:} Any operator $A \in B(\HH_R)$ has the form $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$. Its action on $\ket{\phi_\theta}$ produces:
+1. **Action of the algebra on $\ket{\phi_\theta**$.} Any operator $A \in B(\HH_R)$ is a $2\times2$
+> matrix $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$. Acting on $\ket{\phi_\theta}$ it gives
 > 
 $$
 
-> (A\otimes\id_L)\ket{\phi_\theta} = a\cos\theta\ket{00} + b\sin\theta\ket{01} + c\cos\theta\ket{10} + d\sin\theta\ket{11} .
+> (A\otimes\id_L)\ket{\phi_\theta} = a\cos\theta\ket{00} + b\sin\theta\ket{01} + c\cos\theta\ket{10}
+> + d\sin\theta\ket{11} .
 > 
 $$
 
-> Given an arbitrary 4-component vector $\ket x = x_{00}\ket{00} + x_{01}\ket{01} + x_{10}\ket{10} + x_{11}\ket{11}$, matching coefficients gives $a = x_{00}/\cos\theta$, $b = x_{01}/\sin\theta$, $c = x_{10}/\cos\theta$, $d = x_{11}/\sin\theta$.
+> Now take an arbitrary vector $\ket x = x_{00}\ket{00} + x_{01}\ket{01} + x_{10}\ket{10} + x_{11}\ket{11}$.
+> Matching coefficients shows that $\ket x=(A\otimes\id_L)\ket{\phi_\theta}$ for exactly one $A$, namely
+> $a = x_{00}/\cos\theta$, $b = x_{01}/\sin\theta$, $c = x_{10}/\cos\theta$, $d = x_{11}/\sin\theta$.
 > 
 >
-2. **The Tomita operator $S_\Psi$:** By definition, $S_\Psi$ maps $(A\otimes\id_L)\ket{\phi_\theta} \mapsto (A^\dagger\otimes\id_L)\ket{\phi_\theta}$. Since $A^\dagger = \begin{pmatrix} a^* & c^* \\ b^* & d^* \end{pmatrix}$, we have:
+2. **The Tomita operator $S_\Psi$.** It is defined by
+> $S_\Psi(A\otimes\id_L)\ket{\phi_\theta} = (A^\dagger\otimes\id_L)\ket{\phi_\theta}$. It is antilinear, which
+> means $S_\Psi(z\ket x)=z^*S_\Psi\ket x$ for a complex number $z$. Since
+> $A^\dagger = \begin{pmatrix} a^* & c^* \\ b^* & d^* \end{pmatrix}$, we have
 > 
 $$
 
-> (A^\dagger\otimes\id_L)\ket{\phi_\theta} = a^*\cos\theta\ket{00} + c^*\sin\theta\ket{01} + b^*\cos\theta\ket{10} + d^*\sin\theta\ket{11} .
+> (A^\dagger\otimes\id_L)\ket{\phi_\theta} = a^*\cos\theta\ket{00} + c^*\sin\theta\ket{01}
+> + b^*\cos\theta\ket{10} + d^*\sin\theta\ket{11} .
 > 
 $$
 
-> Substituting the expressions for $a,b,c,d$ in terms of $x_{ij}$:
-> 
-$$
-
-> S_\Psi \begin{pmatrix} x_{00} \\ x_{01} \\ x_{10} \\ x_{11} \end{pmatrix} = \begin{pmatrix} x_{00}^* \\ \frac{\sin\theta}{\cos\theta} x_{10}^* \\ \frac{\cos\theta}{\sin\theta} x_{01}^* \\ x_{11}^* \end{pmatrix} = \begin{pmatrix} x_{00}^* \\ \tan\theta\, x_{10}^* \\ \cot\theta\, x_{01}^* \\ x_{11}^* \end{pmatrix} .
-> 
-$$
-
-> Notice that applying $S_\Psi$ twice gives $S_\Psi^2\ket x = \ket x$, verifying $S_\Psi^2 = \id_4$ and $S_\Psi\ket{\phi_\theta} = \ket{\phi_\theta}$!
+> Now substitute the expressions for $a,b,c,d$ in terms of the $x_{ij}$:
+> \begin{align}
+> S_\Psi \begin{pmatrix} x_{00} \\ x_{01} \\ x_{10} \\ x_{11} \end{pmatrix}
+> \eqstep{1} \begin{pmatrix} x_{00}^* \\ \frac{\sin\theta}{\cos\theta} x_{10}^* \\
+> \frac{\cos\theta}{\sin\theta} x_{01}^* \\ x_{11}^* \end{pmatrix}
+> \eqstep{2} \begin{pmatrix} x_{00}^* \\ \tan\theta\, x_{10}^* \\ \cot\theta\, x_{01}^* \\ x_{11}^*
+> \end{pmatrix} . \notag
+> \end{align}
+> **(1)** insert $a^*=x_{00}^*/\cos\theta$, $c^*=x_{10}^*/\cos\theta$, $b^*=x_{01}^*/\sin\theta$ and
+> $d^*=x_{11}^*/\sin\theta$ into the four coefficients $a^*\cos\theta$, $c^*\sin\theta$, $b^*\cos\theta$ and
+> $d^*\sin\theta$. The angles are real, so conjugation does not affect them.\quad
+> **(2)** $\sin\theta/\cos\theta=\tan\theta$ and $\cos\theta/\sin\theta=\cot\theta$.
+> Applying $S_\Psi$ twice gives back the original vector. For example, the second slot becomes
+> $\tan\theta\,(\cot\theta\,x_{01}^*)^*=x_{01}$. So $S_\Psi^2 = \id$. Also $S_\Psi\ket{\phi_\theta} =
+> \ket{\phi_\theta}$, because $\ket{\phi_\theta}$ is $(A\otimes\id_L)\ket{\phi_\theta}$ with $A=\id$, and
+> $\id^\dagger=\id$.
 > 
 >
-3. **The adjoint operator $F_\Psi \equiv S_\Psi^\dagger$:** From the inner product relation $\braket{y|S_\Psi x} = \braket{x|F_\Psi y}^*$, we find:
+3. **The adjoint operator $F_\Psi \equiv S_\Psi^\dagger$.** For an antilinear operator, the adjoint is
+> defined by $\braket{y|S_\Psi x} = \braket{x|F_\Psi y}$ for all vectors $\ket x,\ket y$. Writing out both
+> sides in components and comparing gives
 > 
 $$
 
-> F_\Psi \begin{pmatrix} y_{00} \\ y_{01} \\ y_{10} \\ y_{11} \end{pmatrix} = \begin{pmatrix} y_{00}^* \\ \cot\theta\, y_{10}^* \\ \tan\theta\, y_{01}^* \\ y_{11}^* \end{pmatrix} .
+> F_\Psi \begin{pmatrix} y_{00} \\ y_{01} \\ y_{10} \\ y_{11} \end{pmatrix}
+> = \begin{pmatrix} y_{00}^* \\ \cot\theta\, y_{10}^* \\ \tan\theta\, y_{01}^* \\ y_{11}^* \end{pmatrix} .
 > 
 $$
 
 > 
 >
-4. **The modular operator $\Delta_\Psi = F_\Psi S_\Psi$:** Multiplying the two operators:
+4. **The modular operator $\Delta_\Psi = F_\Psi S_\Psi$.** Multiply the two operators:
+> \begin{align}
+> \Delta_\Psi \begin{pmatrix} x_{00} \\ x_{01} \\ x_{10} \\ x_{11} \end{pmatrix}
+> \eqstep{1} F_\Psi \begin{pmatrix} x_{00}^* \\ \tan\theta\, x_{10}^* \\ \cot\theta\, x_{01}^* \\ x_{11}^*
+> \end{pmatrix}
+> \eqstep{2} \begin{pmatrix} x_{00} \\ \cot^2\theta\, x_{01} \\ \tan^2\theta\, x_{10} \\ x_{11} \end{pmatrix} .
+> \notag
+> \end{align}
+> **(1)** apply $S_\Psi$ first, using the formula from item~2.\quad
+> **(2)** apply $F_\Psi$ from item~3 to the vector
+> $(y_{00},y_{01},y_{10},y_{11})=(x_{00}^*,\tan\theta\,x_{10}^*,\cot\theta\,x_{01}^*,x_{11}^*)$. The second slot
+> becomes $\cot\theta\,y_{10}^*=\cot\theta\cdot\cot\theta\,x_{01}$. The third becomes
+> $\tan\theta\,y_{01}^*=\tan\theta\cdot\tan\theta\,x_{10}$. The two complex conjugations cancel.
+> 
+> This is exactly the diagonal matrix found at the start,
 > 
 $$
 
-> \Delta_\Psi \begin{pmatrix} x_{00} \\ x_{01} \\ x_{10} \\ x_{11} \end{pmatrix} = F_\Psi \begin{pmatrix} x_{00}^* \\ \tan\theta\, x_{10}^* \\ \cot\theta\, x_{01}^* \\ x_{11}^* \end{pmatrix} = \begin{pmatrix} x_{00} \\ \cot^2\theta\, x_{01} \\ \tan^2\theta\, x_{10} \\ x_{11} \end{pmatrix} ,
+> \Delta_\Psi = \operatorname{diag}(1, \cot^2\theta, \tan^2\theta, 1) .
 > 
 $$
 
-> which is exactly the diagonal matrix $\Delta_\Psi = \operatorname{diag}(1, \cot^2\theta, \tan^2\theta, 1)$!
+> So the modular operator can be obtained from the Tomita operator alone, as
+> $\Delta_\Psi=S_\Psi^\dagger S_\Psi$.
 > 
 >
-5. **The modular conjugation $J_\Psi = S_\Psi \Delta_\Psi^{-1/2**$:} The square root is $\Delta_\Psi^{1/2} = \operatorname{diag}(1, \cot\theta, \tan\theta, 1)$. Applying $S_\Psi$ to $\Delta_\Psi^{-1/2}\ket x$:
+5. **The modular conjugation $J_\Psi = S_\Psi \Delta_\Psi^{-1/2**$.} The positive square root of
+> $\Delta_\Psi$ is
 > 
 $$
 
-> J_\Psi \begin{pmatrix} x_{00} \\ x_{01} \\ x_{10} \\ x_{11} \end{pmatrix} = S_\Psi \begin{pmatrix} x_{00} \\ \tan\theta\, x_{01} \\ \cot\theta\, x_{10} \\ x_{11} \end{pmatrix} = \begin{pmatrix} x_{00}^* \\ x_{10}^* \\ x_{01}^* \\ x_{11}^* \end{pmatrix} .
+> \Delta_\Psi^{1/2} = \operatorname{diag}(1, \cot\theta, \tan\theta, 1) .
 > 
 $$
 
-> $J_\Psi$ is anti-unitary, satisfies $J_\Psi^2 = \id$, and acts as complex conjugation composed with the SWAP of qubits $\ket{01} \leftrightarrow \ket{10}$! Furthermore, $J_\Psi \Delta_\Psi J_\Psi = \Delta_\Psi^{-1}$.
+> Apply $S_\Psi$ to $\Delta_\Psi^{-1/2}\ket x$:
+> \begin{align}
+> J_\Psi \begin{pmatrix} x_{00} \\ x_{01} \\ x_{10} \\ x_{11} \end{pmatrix}
+> \eqstep{1} S_\Psi \begin{pmatrix} x_{00} \\ \tan\theta\, x_{01} \\ \cot\theta\, x_{10} \\ x_{11}
+> \end{pmatrix}
+> \eqstep{2} \begin{pmatrix} x_{00}^* \\ x_{10}^* \\ x_{01}^* \\ x_{11}^* \end{pmatrix} . \notag
+> \end{align}
+> **(1)** $\Delta_\Psi^{-1/2}=\operatorname{diag}(1,\tan\theta,\cot\theta,1)$, the inverse of the square
+> root just written.\quad
+> **(2)** apply $S_\Psi$. The second slot becomes $\tan\theta\cdot(\cot\theta\,x_{10})^*=x_{10}^*$. The
+> third becomes $\cot\theta\cdot(\tan\theta\,x_{01})^*=x_{01}^*$.
+> So $J_\Psi$ conjugates every component and then exchanges $\ket{01} \leftrightarrow \ket{10}$. That exchange
+> is the SWAP of the two qubits. $J_\Psi$ is antiunitary and satisfies $J_\Psi^2 = \id$. It also satisfies
+> $J_\Psi \Delta_\Psi J_\Psi = \Delta_\Psi^{-1}$, because the swap exchanges the two diagonal entries
+> $\cot^2\theta$ and $\tan^2\theta$.
 > 
 >
-6. **Exact modular flow on Pauli matrices:** The modular flow of an observable $A \in B(\HH_R)$ is $\sigma_s(A) = \Delta_\Psi^{-is} (A\otimes\id_L) \Delta_\Psi^{is}$.
+6. **Exact modular flow on Pauli matrices.** The modular flow of an observable $A \in B(\HH_R)$ is
+> $\sigma_s(A) = \Delta_\Psi^{-is} (A\otimes\id_L) \Delta_\Psi^{is}$.
 > 
 
 
-> Modular flow on the qubit is an **exact spatial rotation** in the $xy$-plane of the Bloch sphere around the $z$-axis with constant angular frequency $\Omega = 2\log\cot\theta$!
+> So on the qubit $R$, modular flow is an exact rotation of the Bloch sphere about the $z$-axis. The rotation
+> angle is $-\alpha=2s\log\cot\theta$, so the angular frequency is the constant $2\log\cot\theta$. It is
+> positive for $0<\theta<\pi/4$.
 >
 
 
 
-Two facts about $\Delta_\Psi$ deserve to be stated plainly, because they are the two facts that survive,
-completely unchanged in spirit, all the way to the fully general (type III) theory below.
+Two facts about $\Delta_\Psi$ deserve to be stated plainly. They are the two facts that carry over, unchanged
+in spirit, to the fully general (type III) theory below.
 
 
-1. $\Delta_\Psi\ket\Psi=\ket\Psi$, and in fact $\Delta_\Psi^{-1}\ket\Psi=\ket\Psi$ too, i.e.\
-$(K_R-K_L)\ket\Psi=0$ (eq.~4.6) — check this directly on the worked example: $\ket\Psi=\ket{\phi_\theta}=
-\cos\theta\ket{00}+\sin\theta\ket{11}$ is built entirely out of the two eigenvalue-$1$ eigenvectors of
-$\Delta_\Psi$, so of course $\Delta_\Psi$ fixes it exactly. This says the modular flow is a kind of emergent,
-purely internal time evolution under which the physical state itself never changes at all, even though the
-flow acts nontrivially on operators living separately in $R$ and in $L$. This is also the precise, operator
-version of the elementary fact that $S_R=S_L$ for a pure global state (Sec.~I): $\rho_R$ and $\rho_L$ have
-the same set of eigenvalues (this is exactly what the Schmidt decomposition guarantees), so $K_R$ and $K_L$
-have the same spectrum too, and $(K_R-K_L)\ket\Psi=0$ is one precise way of encoding that symmetry as an
-operator statement.
-2. Correlators of modular-flowed operators satisfy the KMS condition — made fully precise just below —
-which is exactly the mathematical signature of thermal equilibrium at $\beta=1$: an observer with access only
-to $R$ (or only to $L$), using modular time as their clock, experiences a genuinely thermal state.
+1. $\Delta_\Psi\ket\Psi=\ket\Psi$, and also $\Delta_\Psi^{-1}\ket\Psi=\ket\Psi$. Equivalently,
+$(K_R-K_L)\ket\Psi=0$. To see this in general, write the Schmidt decomposition
+$\ket\Psi=\sum_n\sqrt{\lambda_n}\ket n_R\ket n_L$. Each term $\ket n_R\ket n_L$ is an eigenvector of $K_R$
+with eigenvalue $-\log\lambda_n$, and of $K_L$ with the same eigenvalue, so $K_R-K_L$ annihilates it. In the
+worked example, $\ket\Psi=\ket{\phi_\theta}=\cos\theta\ket{00}+\sin\theta\ket{11}$ is built entirely out of
+the two eigenvectors of $\Delta_\Psi$ with eigenvalue $1$, so $\Delta_\Psi$ fixes it. Physically, modular flow
+is an emergent, internal time evolution under which the state itself never changes. It still acts nontrivially
+on operators in $R$ and in $L$. This fact is also the operator version of the elementary statement $S_R=S_L$
+for a pure global state (Chapter~1). By the Schmidt decomposition, $\rho_R$ and $\rho_L$ have the same nonzero
+eigenvalues, so $K_R$ and $K_L$ have the same spectrum. The equation $(K_R-K_L)\ket\Psi=0$ expresses this
+symmetry as an operator statement.
+2. Correlators of modular-flowed operators satisfy the KMS condition, which is made precise just below. This
+is the mathematical signature of thermal equilibrium at $\beta=1$. An observer with access only to $R$ (or only
+to $L$), who uses modular time as their clock, sees a thermal state.
 
 
 ### The swap operator $J_\Psi$
 
-There's a third, related object worth building explicitly, because it will reappear repeatedly. The
-requirement that $\rho_R,\rho_L$ both be full-rank forces $\dim\HH_R=\dim\HH_L$ (a full-rank density matrix on
-$\HH_R$ has as many nonzero eigenvalues as $\dim\HH_R$; by the Schmidt decomposition, that must match the
-number of nonzero Schmidt coefficients, which is at most $\dim\HH_L$ too — so the two dimensions must agree
-exactly for both reduced density matrices to be simultaneously full-rank). This matching dimension lets you
-build an explicit **swap operator**: writing the Schmidt decomposition $\ket\Psi=\sum_n\sqrt{\lambda_n}
-\ket n_R\ket n_L$, and a general vector $\ket\phi=\sum_{mn}\phi_{mn}\ket m_R\ket n_L$ in this same Schmidt
-basis, define
+A third object will appear again and again, so it pays to build it explicitly now. Requiring both $\rho_R$ and
+$\rho_L$ to be full-rank forces $\dim\HH_R=\dim\HH_L$. The reason is short. The number of nonzero Schmidt
+coefficients of $\ket\Psi$ equals the rank of $\rho_R$, and it also equals the rank of $\rho_L$. If $\rho_R$ is
+full-rank, this number is $\dim\HH_R$. If $\rho_L$ is full-rank, it is $\dim\HH_L$. So the two dimensions must
+be equal. Because the dimensions match, we can build an explicit **swap operator**. Write the Schmidt
+decomposition $\ket\Psi=\sum_n\sqrt{\lambda_n}\ket n_R\ket n_L$. Expand a general vector in the same Schmidt
+basis, $\ket\phi=\sum_{mn}\phi_{mn}\ket m_R\ket n_L$. Define
 
 $$
 
-J_\Psi\ket\phi = \sum_{m,n}\phi_{mn}^*\ket n_R\ket m_L
+J_\Psi\ket\phi = \sum_{m,n}\phi_{mn}^*\ket n_R\ket m_L .
 
 $$
 
-(eq.~4.7) — it swaps the labels $R\leftrightarrow L$ *emph* complex-conjugates every coefficient. $J_\Psi$
-is **anti-unitary** (it involves that complex conjugation — a genuinely different kind of map from an
-ordinary unitary, which is why it needs its own name), and $J_\Psi^2=\id$ (eq.~4.8, checked immediately: swap
-twice and conjugate twice, and you're back where you started). One can check directly that conjugating an
-operator in $\M=B(\HH_R)\otimes\id_L$ by $J_\Psi$ produces an operator in $\M'=\id_R\otimes B(\HH_L)$ — $J_\Psi$
-literally exchanges the subsystem with its complement, at the level of operators, not just of vectors. This is
-called the **modular conjugation operator**.
+This operator swaps the labels $R\leftrightarrow L$ *emph* complex-conjugates every coefficient. For the
+two-qubit example it is exactly the $J_\Psi$ found in item~5 above. $J_\Psi$ is **antiunitary**: because
+of the complex conjugation it is a different kind of map from an ordinary unitary, and it needs its own name.
+It satisfies $J_\Psi^2=\id$, since swapping twice and conjugating twice gives back the starting vector. A
+direct check shows $J_\Psi(A\otimes\id_L)J_\Psi=\id_R\otimes\bar A$, where $\bar A$ is the matrix of $A$ in
+the Schmidt basis with every entry complex-conjugated. So conjugating an operator in $\M=B(\HH_R)\otimes\id_L$
+by $J_\Psi$ produces an operator in $\M'=\id_R\otimes B(\HH_L)$. In other words, $J_\Psi$ exchanges the
+subsystem with its complement at the level of operators, not just of vectors. It is called the
+**modular conjugation operator**.
 
 ### The key limitation, and the reformulation that removes it
 
-Everything above required $\rho_R,\rho_L$ full-rank — a real restriction, forcing (among other things)
-$\dim\HH_R=\dim\HH_L$, which already rules out plenty of ordinary type I examples, let alone type II or III
-where there's no $\rho_R$ at all. The entire strategic move of this subsection is to find a way of restating
-"$\rho_R,\rho_L$ full-rank" that makes no reference whatsoever to $\rho_R,\rho_L$ — so that it can survive
-into a setting where those objects don't exist.
+Everything above required $\rho_R$ and $\rho_L$ to be full-rank. This is a real restriction. Among other
+things, it forces $\dim\HH_R=\dim\HH_L$, which already rules out many ordinary type I examples. It also says
+nothing about type II, where there is no factorization $\HH_R\otimes\HH_L$ and the density operators of
+Chapter~3 are of a different kind, or about type III, where there is no density operator at all. The strategy
+now is to restate "$\rho_R$ and $\rho_L$ are full-rank" in a way that never mentions $\rho_R$ or $\rho_L$.
+Then the condition can survive in a setting where those objects do not exist.
 
-The needed restatement uses exactly the two properties singled out at the end of Sec.~II.D of this companion:
-**cyclic** and **separating**. Recall: $\ket\Psi$ is cyclic with respect to $\M$ if $\{A\ket\Psi :
-A\in\M\}$ is dense in $\HH$ (the algebra can reach essentially everywhere, starting from $\ket\Psi$); it is
-separating with respect to $\M$ if $A\ket\Psi=0$ forces $A=0$ (no nonzero operator in $\M$ is wasted on
-$\ket\Psi$). It's a short exercise (not carried out in the paper, but genuinely short) to check that
-"$\rho_R,\rho_L$ both full-rank" is *emph* to ``$\ket\Psi$ is cyclic with respect to both
-$\M=B(\HH_R)\otimes\id_L$ and its commutant $\M'=\id_R\otimes B(\HH_L)$.'' And there's a further, genuinely
-elegant simplification available: $\ket\Psi$ being cyclic with respect to $\M'$ turns out to be equivalent to
-$\ket\Psi$ being *emph* with respect to $\M$ (cyclic for the complement $\iff$ separating for the
-algebra itself — a duality worth sitting with, since it means you never need to check both algebras
-separately). So the entire condition collapses to a single, self-contained statement about $\M$ alone:
-**$\ket\Psi$ is cyclic and separating with respect to $\M$.** This is a genuinely important moment in the
-logical structure of the paper — it shows, one more time, that everything about bipartite entanglement really
-is encoded in the algebra of just one side, with no need to reference the complement at all.
+The restatement uses the two properties singled out at the end of Chapter~2's discussion of the GNS
+construction: **cyclic** and **separating**. Recall the definitions. The vector $\ket\Psi$ is cyclic
+with respect to $\M$ if $\{A\ket\Psi : A\in\M\}$ is dense in $\HH$. In words, the algebra can reach
+essentially every vector, starting from $\ket\Psi$. The vector $\ket\Psi$ is separating with respect to $\M$
+if $A\ket\Psi=0$ forces $A=0$. In words, no nonzero operator in $\M$ annihilates $\ket\Psi$. A short exercise
+with the Schmidt decomposition shows two things. First, $\ket\Psi$ is cyclic for $\M=B(\HH_R)\otimes\id_L$
+exactly when $\rho_L$ is full-rank. Second, $\ket\Psi$ is cyclic for the commutant $\M'=\id_R\otimes B(\HH_L)$
+exactly when $\rho_R$ is full-rank. So "$\rho_R$ and $\rho_L$ are both full-rank" is *emph* to "$\ket\Psi$ is cyclic with respect to both $\M$ and $\M'$."
+
+A further simplification is available. For any von Neumann algebra, $\ket\Psi$ is cyclic with respect to $\M'$
+if and only if it is separating with respect to $\M$. (Cyclic for the complement is the same as separating
+for the algebra itself.) So we never need to look at the two algebras separately. The whole condition becomes a
+single statement about $\M$ alone: **$\ket\Psi$ is cyclic and separating with respect to $\M$.** This is
+an important step in the logic. It shows once more that the relevant facts about bipartite entanglement can be
+stated using the algebra of one side only, with no reference to the complement.
 
 ### The Tomita—Takesaki theorem, stated in full
 
-Here is the theorem, and it holds for *emph* von Neumann algebra $\M$ with a cyclic and separating vector
-$\ket\Psi$ — no reference anywhere in its statement to a trace, a density matrix, or a tensor factorization.
-This is exactly why it survives into type III.
+Here is the theorem. It holds for *emph* von Neumann algebra $\M$ with a cyclic and separating vector
+$\ket\Psi$. Its statement never mentions a trace, a density matrix, or a tensor factorization. This is exactly
+why it survives into type III.
 
 
-1. There is a positive operator $\Delta_\Psi$ (still called the *emph*) leaving
-$\ket\Psi$ invariant, $\Delta_\Psi\ket\Psi=\ket\Psi$ (eq.~4.9), and $K_\Psi\equiv-\log\Delta_\Psi$ generates a
-genuine automorphism of $\M$ (a map from $\M$ to itself that respects all the algebra structure) and,
-separately, of $\M'$:
-
-$$
-
+1. There is a positive operator $\Delta_\Psi$, still called the *emph*, that leaves
+$\ket\Psi$ invariant: $\Delta_\Psi\ket\Psi=\ket\Psi$. The operator $K_\Psi\equiv-\log\Delta_\Psi$ generates an
+automorphism of $\M$ (a map from $\M$ to itself that respects all of the algebra structure), and separately an
+automorphism of $\M'$:
+\begin{equation}
 \sigma_s(A) \equiv \Delta_\Psi^{-is}A\Delta_\Psi^{is}\in\M\ \ \forall A\in\M,
 \qquad
-\sigma_s(A') \equiv \Delta_\Psi^{-is}A'\Delta_\Psi^{is}\in\M'\ \ \forall A'\in\M'
-
-$$
-
-(eqs.~4.10—4.11) — the flow really does stay inside the algebra it started in, at every modular time $s$, for
-both $\M$ and $\M'$ separately.
-2. There is an antiunitary **modular conjugation** $J_\Psi$ satisfying
-$J_\Psi\ket\Psi=\ket\Psi$, $J_\Psi=J_\Psi^{-1}=J_\Psi^\dagger$, $J_\Psi\Delta_\Psi J_\Psi=\Delta_\Psi^{-1}$
-(eq.~4.12), and $J_\Psi\M J_\Psi=\M'$, $J_\Psi\M'J_\Psi=\M$ (eq.~4.13) — $J_\Psi$ swaps $\M$ and $\M'$,
-exactly the role the explicit swap operator played in the type I worked example above, now established as a
-general fact.
-3. A technical but important analyticity statement (eq.~4.14—4.15, stated here for completeness but not
-needed for the physical content that follows): the vector $\Delta_\Psi^{-is}A\ket\Psi$, as a function of $s$,
-extends to complex values of $s$ in the strip $\Im s\in(0,\tfrac12)$, with a specific relation,
-$\Delta_\Psi^{-i(t+i/2)}A\ket\Psi=\Delta_\Psi^{-it}J_\Psi A^\dagger\ket\Psi$, holding on the boundary of that
-strip.
-4. Correlation functions of modular-flowed operators, $f_{AB}(s)\equiv\braket{\Psi|\sigma_s(A)B|\Psi}$,
-analytically continue into the wider strip $\Im s\in(-1,0)$ and satisfy the **KMS relation**
-
-$$
-
-f_{AB}(s) = f_{BA}(-s-i)
-
-$$
-
-(eqs.~4.16—4.17) — this is the precise mathematical statement of "looks thermal at $\beta=1$": it is
-exactly the periodicity-in-imaginary-time relation that an ordinary thermal correlator, $\Tr(e^{-\beta H}A(t)B)$,
-satisfies (with $\beta=1$ here, and the KMS relation being the operator-algebra way of encoding the cyclic
-property of the trace $\Tr(e^{-\beta H}\cdots)$ without ever needing $e^{-\beta H}$ to literally exist as a
-trace-class operator — precisely what's needed once no trace exists at all, as in type III).
+\sigma_s(A') \equiv \Delta_\Psi^{-is}A'\Delta_\Psi^{is}\in\M'\ \ \forall A'\in\M' .
+\label{eq:modflow-auto}
+\end{equation}
+So at every modular time $s$, the flow stays inside the algebra it started in. This holds for $\M$ and for
+$\M'$ separately.
+2. There is an antiunitary **modular conjugation** $J_\Psi$. It satisfies $J_\Psi\ket\Psi=\ket\Psi$,
+$J_\Psi=J_\Psi^{-1}=J_\Psi^\dagger$, $J_\Psi\Delta_\Psi J_\Psi=\Delta_\Psi^{-1}$, and
+$J_\Psi\M J_\Psi=\M'$, $J_\Psi\M'J_\Psi=\M$. So $J_\Psi$ swaps $\M$ and $\M'$. This is the role the explicit
+swap operator played in the type I example above, now established as a general fact.
+3. There is a technical analyticity statement. It is included for completeness and is not needed for the
+physics that follows. As a function of $s$, the vector $\Delta_\Psi^{-is}A\ket\Psi$ extends to complex values
+of $s$ in the strip $0<\Im s<\tfrac12$. On the upper edge of that strip it satisfies
+$\Delta_\Psi^{-i(t+i/2)}A\ket\Psi=\Delta_\Psi^{-it}J_\Psi A^\dagger\ket\Psi$.
+4. Consider correlation functions of modular-flowed operators, $f_{AB}(s)\equiv\braket{\Psi|\sigma_s(A)B|\Psi}$.
+They extend to analytic functions in the strip $-1<\Im s<0$, of width $1$, and satisfy the **KMS
+relation**
+\begin{equation}
+f_{AB}(s) = f_{BA}(-s-i) .
+\label{eq:kms}
+\end{equation}
+This is the precise mathematical statement of "looks thermal at $\beta=1$." It is the same
+periodicity-in-imaginary-time relation that an ordinary thermal correlator $\Tr(e^{-\beta H}A(t)B)$ satisfies,
+here with $\beta=1$. For an ordinary thermal state, the relation comes from the cyclic property of the trace
+$\Tr(e^{-\beta H}\cdots)$. The KMS relation encodes that property without needing $e^{-\beta H}$ to exist as a
+trace-class operator. That is exactly what is needed once there is no trace at all, as in type III.
 
 
 
 > [!NOTE] **Physics Connection: KMS Condition in Thermal QFT**
-> You have almost certainly already met the KMS relation, just not by that name, in an ordinary
-> finite-temperature quantum mechanics or statistical field theory course, and it's worth checking the
-> identical relation on a completely mundane example before trusting it applies to a type III algebra with no
-> Hamiltonian at all. Take an ordinary two-level system, $H=\omega\ket1\!\bra1 = \begin{pmatrix} 0 & 0 \\ 0 & \omega \end{pmatrix}$, in the thermal (Gibbs) state:
+> You have almost certainly met the KMS relation already, perhaps not by that name, in a course on
+> finite-temperature quantum mechanics or statistical field theory. Before trusting it for a type III algebra with
+> no Hamiltonian at all, let us check the same relation on an ordinary example. Take a two-level system,
+> $H=\omega\ket1\!\bra1 = \begin{pmatrix} 0 & 0 \\ 0 & \omega \end{pmatrix}$, in the thermal (Gibbs) state
 > 
 $$
 
-> \rho = \frac{e^{-\beta H}}{Z} = \frac{1}{1 + e^{-\beta\omega}} \begin{pmatrix} 1 & 0 \\ 0 & e^{-\beta\omega} \end{pmatrix} .
+> \rho = \frac{e^{-\beta H}}{Z} = \frac{1}{1 + e^{-\beta\omega}}
+> \begin{pmatrix} 1 & 0 \\ 0 & e^{-\beta\omega} \end{pmatrix} .
 > 
 $$
 
-> For two operators $A, B$, define $f_{AB}(t) \equiv \Tr(\rho A(t) B)$ where $A(t) = e^{iHt} A e^{-iHt}$. Let us prove analytically that $f_{AB}(t) = f_{BA}(-t-i\beta)$:
-> \begin{align*}
-> f_{AB}(t) &= \Tr\left( \frac{e^{-\beta H}}{Z} e^{iHt} A e^{-iHt} B \right) \\
-> &= \Tr\left( B \, \frac{e^{-\beta H}}{Z} e^{iHt} A e^{-iHt} \right) \qquad \text{(by cyclicity of the trace)} \\
-> &= \Tr\left( \frac{e^{-\beta H}}{Z} \left[ e^{\beta H} B e^{-\beta H} \right] e^{iHt} A e^{-iHt} \right) \\
-> &= \Tr\left( \rho \, B(-i\beta) \, A(t) \right) .
-> \end{align*}
-> Applying time-translation invariance to both operators (shifting $t \to 0$ and $0 \to -t$):
-> \begin{align*}
-> f_{AB}(t) &= \Tr\left( \rho \, e^{-iHt} B(-i\beta) e^{iHt} \, A \right) = \Tr\left( \rho \, B(-t - i\beta) \, A \right) = f_{BA}(-t - i\beta) .
-> \end{align*}
-> This algebraic proof relies only on the cyclicity of the trace and the group property $e^{-\beta H} e^{iHt} = e^{i(t + i\beta)H}$. It shows why thermal states are periodic in imaginary time with period $\beta$. Tomita—Takesaki theory abstracts this exact property to define thermal states at $\beta=1$ without assuming a trace or Hamiltonian.
+> The computation below in fact works for any Hamiltonian on a finite-dimensional space. For two operators
+> $A, B$, define $f_{AB}(t) \equiv \Tr(\rho A(t) B)$, where $A(t) = e^{iHt} A e^{-iHt}$. Write
+> $B(s)\equiv e^{iHs}Be^{-iHs}$ for the same flow applied to $B$. Substituting the imaginary time $s=-i\beta$
+> gives $B(-i\beta)=e^{\beta H}Be^{-\beta H}$, an analytic continuation of the flow to imaginary time. Then:
+> \begin{align}
+> f_{AB}(t) &= \Tr\!\left( \frac{e^{-\beta H}}{Z}\, e^{iHt} A e^{-iHt} B \right) \notag\\
+> &\eqstep{1} \Tr\!\left( B \, \frac{e^{-\beta H}}{Z}\, e^{iHt} A e^{-iHt} \right) \notag\\
+> &\eqstep{2} \Tr\!\left( \frac{e^{-\beta H}}{Z} \left[ e^{\beta H} B e^{-\beta H} \right] e^{iHt} A e^{-iHt}
+> \right) \notag\\
+> &\eqstep{3} \Tr\big( \rho \, B(-i\beta) \, A(t) \big) \notag\\
+> &\eqstep{4} \Tr\big( \rho \, e^{-iHt} B(-i\beta) e^{iHt} \, A \big) \notag\\
+> &\eqstep{5} \Tr\big( \rho \, B(-t - i\beta) \, A \big) \ =\ f_{BA}(-t - i\beta) . \notag
+> \end{align}
+> **(1)** cyclicity of the ordinary matrix trace, moving $B$ to the front.\quad
+> **(2)** insert $\id=e^{-\beta H}e^{\beta H}$ in front of $B$. This changes nothing, since it is the
+> identity, but it sets up the next step.\quad
+> **(3)** $e^{-\beta H}/Z=\rho$, the bracket is $B(-i\beta)$, and $e^{iHt}Ae^{-iHt}=A(t)$ by definition.\quad
+> **(4)** cyclicity again: move the factor $e^{-iHt}$ at the right end of $A(t)$ around to the front, then
+> use that $\rho$ commutes with $e^{-iHt}$ (both are functions of $H$).\quad
+> **(5)** the group property of the flow, $e^{-iHt}B(-i\beta)e^{iHt}=B(-t-i\beta)$: flowing by $-i\beta$ and
+> then by $-t$ is the same as flowing by $-t-i\beta$. The last equality is the definition of $f_{BA}$.
 > 
-> So what changed, going from this ordinary example to the general Tomita—Takesaki statement? Only this: here,
-> the flow generating $A(t)$ was an honest Hamiltonian $H$, and $\rho$ was a genuine, normalizable density
-> matrix you could write down as a finite matrix. In Sec.~IV.A's general theorem, neither of those needs to
-> exist — $\sigma_s$ can be *emph* flow with no Hamiltonian living in $\M$ at all (exactly the defining
-> property of type III, eq.~4.21), and there may be no $\rho$ to build a trace out of. The KMS relation survives
-> this demotion completely intact, because it was never really a statement about $H$ or $\rho$ individually —
-> it's a statement about the correlator $f_{AB}$ alone, which is exactly why it, rather than the Hamiltonian or
-> the density matrix, is the object General Tomita—Takesaki theory promotes to primary status.
+> This algebraic proof uses only the cyclicity of the trace and the group property of the flow. It shows why
+> thermal correlators are periodic in imaginary time, with period $\beta$. Tomita—Takesaki theory takes this
+> exact property as the definition of a thermal state at $\beta=1$. It needs no trace and no Hamiltonian.
+> 
+> So what changed between this ordinary example and the general Tomita—Takesaki statement? Only this. Here the
+> flow generating $A(t)$ came from an honest Hamiltonian $H$, and $\rho$ was a normalizable density matrix that you
+> could write down as a finite matrix. In the general theorem, neither needs to exist. The flow $\sigma_s$ can be
+> generated by no Hamiltonian that lives in $\M$. This is exactly the defining property of type III, given by the
+> inner-automorphism criterion \eqref{eq:inner-criterion} below. There may also be no $\rho$ from which to build
+> a trace. The KMS relation \eqref{eq:kms} survives all of this unchanged. It was never really a statement about
+> $H$ or $\rho$ separately. It is a statement about the correlator $f_{AB}$ alone. That is why the general theory
+> takes the KMS relation, rather than the Hamiltonian or the density matrix, as the basic object.
 
 
-Read physically, in one sentence: *emph* operator algebra equipped with a cyclic-and-separating reference
-vector automatically comes with a canonical, built-in notion of time flow, one under which the reference state
-itself looks exactly thermal at inverse temperature $1$ — and this holds completely independently of whether
-$\M$ has a trace. This is the sense in which the type I story above is not being generalized by analogy, but
-literally subsumed as the special case where the canonical flow happens to be generated by an honest
-Hamiltonian $K_R$ that lives inside $\M$ itself.
+Read physically, the theorem says the following. *emph* operator algebra with a cyclic and separating
+reference vector comes with a canonical, built-in notion of time flow. Under this flow, the reference state
+looks exactly thermal at inverse temperature $1$. This holds whether or not $\M$ has a trace. So the type I
+story above is not being generalized by analogy. It is included as the special case in which the canonical
+flow is generated by an honest Hamiltonian $K_R$ that lives inside $\M$ itself.
 
-A handful of remarks the paper makes here are worth keeping explicitly:
+Several remarks complete the theorem:
 
-- [(a)] Physically: given $\M$ and a cyclic-separating $\ket\Psi$, there is an emergent time evolution,
-internal to $\M$ (or to $\M'$), that leaves $\ket\Psi$ fixed, and relative to which an observer confined to
-$\M$ (or to $\M'$) feels a genuine temperature $1/\beta=1$.
-- [(b)] For type I, the cyclic-and-separating condition was a genuinely restrictive requirement (forcing
-$\dim\HH_R=\dim\HH_L$). For the type III situations this paper actually cares about — quantum field theory,
-statistical mechanics in the thermodynamic limit — this condition turns out to be satisfied *emph*,
-as you'll see explicitly in Secs.~IV.C and IV.D below (Reeh—Schlieder theorem, and the $N\to\infty$
-entangled-spin construction).
-- [(c)] The theorem is usually *emph* (not merely stated) by first defining an antilinear
-**Tomita operator** $S_\Psi$ directly from $\M$ and $\ket\Psi$,
+- [(a)] Physically: given $\M$ and a cyclic and separating $\ket\Psi$, there is an emergent time evolution,
+internal to $\M$ (or to $\M'$), that leaves $\ket\Psi$ fixed. Relative to this time, an observer confined to
+$\M$ (or to $\M'$) feels a temperature $1/\beta=1$.
+- [(b)] For type I, the cyclic and separating condition was a real restriction, since it forced
+$\dim\HH_R=\dim\HH_L$. For the type III situations that matter most in these notes, namely quantum field theory
+and statistical mechanics in the thermodynamic limit, the condition holds very widely. You will see this
+explicitly later in this chapter, in the $N\to\infty$ entangled-spin construction and in the Reeh—Schlieder
+theorem.
+- [(c)] The theorem is usually *emph*, not just stated, by first defining an antilinear
+**Tomita operator** $S_\Psi$ directly from $\M$ and $\ket\Psi$:
 
 $$
 
 S_\Psi A\ket\Psi = A^\dagger\ket\Psi\ \ (A\in\M), \qquad
-S_\Psi A'\ket\Psi = A'^\dagger\ket\Psi\ \ (A'\in\M') ,
+S_\Psi^2=\id, \qquad S_\Psi\ket\Psi=\ket\Psi .
 
 $$
 
+Its adjoint $F_\Psi=S_\Psi^\dagger$ does the same job for the commutant:
 
 $$
 
-S_\Psi^2=\id, \qquad S_\Psi\ket\Psi=\ket\Psi ,
+F_\Psi A'\ket\Psi = A'^\dagger\ket\Psi\ \ (A'\in\M') .
 
 $$
 
-(eqs.~4.18—4.19 — note $S_\Psi$ is well-defined here precisely because $\ket\Psi$ is separating, the same
-role separating played in the GNS construction of Sec.~II.D), and then taking its **polar
-decomposition**: writing $S_\Psi=J_\Psi\Delta_\Psi^{1/2}$ (eq.~4.20), the operator analogue of writing a
-complex number as $z=e^{i\phi}|z|$ — an antiunitary "phase" $J_\Psi$ times a positive "modulus"
-$\Delta_\Psi^{1/2}$. Every statement above is then a theorem derived from this one definition (a genuinely
-technical piece of functional analysis, not reproduced here, but worth knowing the construction exists and
-where it starts).
-- [(d)] Conversely — a fact used to actually *emph* the modular operator in specific physical
-examples, including the Rindler-wedge computation in Sec.~IV.D below — if you can find *emph* operator
-that generates an automorphism of $\M$ (in the sense of eqs.~4.10—4.11) and whose flow satisfies the KMS
-relation, it *emph* the modular operator for $\ket\Psi$. There is only one flow with these properties,
-so finding one by any means (a physical argument, a symmetry, a guess later verified) is enough.
-- [(e)] If $\M$ is type II, $\rho_\M,\rho_{\M'}$ (Sec.~III's density operators) exist, and $\Delta_\Psi$
-can still be built from eq.~4.3, now with $\rho_\M,\rho_{\M'}$ in place of $\rho_R,\rho_L$. If $\ket\Psi$
-happens to be the tracial state itself (so $\rho_\M=\rho_{\M'}=\id$), then $\Delta_\Psi=\id$ — exactly the
-worked example above at $\theta=\pi/4$.
-- [(f)] If $\M$ is type III, $\Delta_\Psi$ cannot be split as a product $\rho_\M\otimes\rho_{\M'}^{-1}$ at
-all — there is no $\rho_\M$ to split it into. $\Delta_\Psi$ still exists (by the theorem above), but it is now
-an irreducibly joint object with no factorized description.
+(In the two-qubit worked example one can check directly that it is $F_\Psi$, not $S_\Psi$, that acts this way
+on vectors $A'\ket\Psi$; the two operators differ unless $\theta=\pi/4$.) The operator $S_\Psi$ is well
+defined precisely because $\ket\Psi$ is separating. If $A\ket\Psi=B\ket\Psi$, then $(A-B)\ket\Psi=0$, so
+$A=B$, and therefore $A^\dagger\ket\Psi=B^\dagger\ket\Psi$. This is the same role the separating property played
+in the GNS construction of Chapter~2. One then takes the **polar decomposition**
+$S_\Psi=J_\Psi\Delta_\Psi^{1/2}$, with $\Delta_\Psi=S_\Psi^\dagger S_\Psi$. This is the operator analogue of
+writing a complex number as $z=e^{i\phi}|z|$: an antiunitary "phase" $J_\Psi$ times a positive "modulus"
+$\Delta_\Psi^{1/2}$. Every statement of the theorem is then derived from this one definition. The derivation is
+a technical piece of functional analysis and is not reproduced here. What matters is that the whole
+construction starts from this one simple map.
+- [(d)] There is a converse, which is used to *emph* the modular operator in physical examples,
+including the Rindler-wedge computation later in this chapter. Suppose you find a one-parameter group of
+unitaries that leaves $\ket\Psi$ invariant, maps $\M$ to itself in the sense of \eqref{eq:modflow-auto}, and
+whose flow satisfies the KMS relation \eqref{eq:kms}. Then it *emph* the modular flow $\Delta_\Psi^{-is}$
+for $\ket\Psi$. Only one flow has these properties. So finding one by any means is enough, whether by a
+physical argument, a symmetry, or a guess that is later checked.
+- [(e)] If $\M$ is type II, the density operators $\rho_\M\in\M$ and $\rho_{\M'}\in\M'$ of Chapter~3 exist.
+Then $\Delta_\Psi$ can still be built as in \eqref{eq:Delta-typeI}, with $\rho_\M,\rho_{\M'}$ in place of
+$\rho_R,\rho_L$. The tensor product is replaced by an ordinary product of these two commuting operators,
+$\Delta_\Psi=\rho_\M\rho_{\M'}^{-1}$. If $\ket\Psi$ is the tracial state itself (so
+$\rho_\M=\rho_{\M'}=\id$), then $\Delta_\Psi=\id$. This matches the worked example above at $\theta=\pi/4$.
+- [(f)] If $\M$ is type III, $\Delta_\Psi$ cannot be split into a piece from $\M$ and a piece from $\M'$ at
+all, because there is no $\rho_\M$. $\Delta_\Psi$ still exists, by the theorem above, but it is now a single
+joint object with no factorized description.
 
 
-Finally, one lemma worth keeping close at hand, because it does real work starting in Sec.~VII (it's exactly
-the mechanism behind entanglement-wedge reconstruction going strictly beyond causal-wedge reconstruction):
+Finally, one lemma does real work starting in Chapter~7. It is the mechanism that lets entanglement-wedge
+reconstruction go strictly beyond causal-wedge reconstruction.
 
 \begin{quote}
-**Lemma (an "ergodic" property of modular flow).** If $\N\subset\mathcal X$ are two von Neumann algebras
-and $\ket\Psi$ is jointly cyclic and separating for both, then the modular flow $\sigma_s$ of the
-*emph* algebra $\mathcal X$, applied to the *emph* algebra $\N$, regenerates all of
+**Lemma (an "ergodic" property of modular flow).** Let $\N\subset\mathcal X$ be two von Neumann
+algebras, and let $\ket\Psi$ be cyclic and separating for both. Apply the modular flow $\sigma_s$ of the
+*emph* algebra $\mathcal X$ to the *emph* algebra $\N$. The result regenerates all of
 $\mathcal X$: $\{\sigma_s(A):A\in\N, s\in\mathbb R\}''=\mathcal X$.
 \end{quote}
-In words: flowing a small piece of an algebra in modular time, using the larger algebra's own modular clock,
-sweeps out the entire larger algebra. This sounds almost too strong to be true on first reading, and it's
-worth remembering as a flag for exactly the kind of counter-intuitive but rigorously established fact modular
-theory keeps producing.
+In words: flow a small piece of an algebra in modular time, using the larger algebra's own modular clock, and
+you sweep out the entire larger algebra. This may sound too strong to be true. It follows from a theorem of
+Takesaki. That theorem says that a subalgebra of $\mathcal X$ that is mapped into itself by the modular flow
+of $\mathcal X$, and for which $\ket\Psi$ is still cyclic, must be all of $\mathcal X$. The algebra generated by
+all the $\sigma_s(A)$ is such a subalgebra. It contains $\N$, so $\ket\Psi$ is cyclic for it.
 
-## Sec.~IV.B: classification of type III factors
+## Classification of type III factors
 
 ### Telling type III apart from type I and II, using modular flow alone
 
-Here is a clean, checkable criterion, stated already in Sec.~II.B of this companion's discussion of modular
-flow (eq.~4.22, "inner automorphism"), now established as the actual dividing line between the types:
-
-$$
-
-\sigma_s(\M) \text{ is an inner automorphism of } \M \text{ for *emph* } s\in\mathbb R
-
-$$
-
-
-$$
-
-\iff \qquad \M \text{ is type I or type II}
-
-$$
-
-(eq.~4.21), where $\sigma_s$ being an **inner automorphism** means there's a unitary $U_s\in\M$ itself
-(not just some unitary on $\HH$, but one actually belonging to the algebra) implementing the flow,
-$\sigma_s(A)=U_sAU_s^\dagger$. For type I and type II, this holds with $U_s=e^{-iK_Rs}$ (or the type-II
-analogue built from $\rho_\M$) — exactly the ordinary type I story from earlier in this section, now
-recognized as "the flow is inner." The content of eq.~4.21, read the other direction: **for a type III
-algebra, there must exist *emph* This is, in fact, the cleanest possible operational definition of type
-III: modular time genuinely flows, but no clock generating that flow can be found anywhere inside the algebra
-being flowed.
+Here is a clean, checkable criterion. It was met briefly in Chapter~2's discussion of inner automorphisms, and
+it is now established as the actual dividing line between the types:
+\begin{equation}
+\sigma_s \text{ is an inner automorphism of } \M \text{ for *emph* } s\in\mathbb R
+\qquad \iff \qquad \M \text{ is type I or type II} .
+\label{eq:inner-criterion}
+\end{equation}
+Here $\sigma_s$ is an **inner automorphism** if there is a unitary $U_s$ that belongs to $\M$ itself (not
+just some unitary on $\HH$) and implements the flow: $\sigma_s(A)=U_sAU_s^\dagger$. For type I, this holds with
+$U_s=\rho_R^{-is}=e^{iK_Rs}$. For type II it holds with the analogous operator built from $\rho_\M$. This is
+the ordinary type I story from earlier in this chapter, now described as "the flow is inner." Now read
+\eqref{eq:inner-criterion} in the other direction. **For a type III algebra, there must be *emph* This gives a
+practical definition of type III: modular time flows, but no clock that generates the flow can be found inside
+the algebra being flowed.
 
 ### State-independence: relating the flows of different reference vectors
 
-The modular operator $\Delta_\Psi$, and hence the flow $\sigma_s^\Psi$, depends on which cyclic-separating
-reference vector $\ket\Psi$ you chose. For a different choice $\ket\Omega$, you'd get a different
-$\Delta_\Omega$ and flow $\sigma_s^\Omega$. It's a genuine (and reassuring) theorem that these different flows
-are never wildly unrelated: there exists a family of unitaries $u_{\Psi\Omega}(s)\in\M$, one for each $s$,
-relating the two,
+The modular operator $\Delta_\Psi$, and hence the flow $\sigma_s^\Psi$, depends on the choice of the cyclic and
+separating reference vector $\ket\Psi$. A different choice $\ket\Omega$ gives a different $\Delta_\Omega$ and a
+different flow $\sigma_s^\Omega$. A reassuring theorem, due to Connes, says that these flows are never wildly
+unrelated. There is a family of unitaries $u_{\Psi\Omega}(s)\in\M$, one for each $s$, relating the two:
+\begin{equation}
+\sigma_s^\Psi(A) = u_{\Psi\Omega}(s)\,\sigma_s^\Omega(A)\,u_{\Psi\Omega}(s)^\dagger, \qquad \forall A\in\M .
+\label{eq:cocycle}
+\end{equation}
+So modular flows for different reference states differ only by an inner automorphism, never by anything more
+drastic. These unitaries also obey a chain rule through a third vector $\Phi$,
+$u_{\Psi\Omega}(t)u_{\Omega\Phi}(t)=u_{\Psi\Phi}(t)$. This is what one wants if "relating two flows" is to be
+a consistent notion.
+
+This result lets us define two **state-independent** invariants of the algebra $\M$ itself. They are sets
+of numbers that depend only on $\M$, not on the reference vector used to compute them. That is exactly why they
+are useful for *emph* algebras rather than states. The first is
 
 $$
 
-\sigma_s^\Psi(A) = u_{\Psi\Omega}(s)\,\sigma_s^\Omega(A)\,u_{\Psi\Omega}(s)^\dagger, \qquad \forall A\in\M
+T(\M) \equiv \{t\in\mathbb R : \sigma_t^\Psi \text{ is inner on } \M\} .
 
 $$
 
-(eq.~4.23) — different reference states give modular flows that differ only by an inner automorphism, never
-by anything more drastic. (A short consistency check worth having explicitly: applying this relation
-transitively through a third vector $\Phi$ forces the chain rule $u_{\Psi\Omega}(t)u_{\Omega\Phi}(t)=
-u_{\Psi\Phi}(t)$, eq.~4.25 — exactly what you'd want from "relating flows" to be a self-consistent notion.)
+It does not depend on $\Psi$, by \eqref{eq:cocycle}: composing with an inner automorphism does not change
+whether a map is inner. The second is
+\begin{equation}
+S(\M) \equiv \bigcap_\Psi \sigma(\Delta_\Psi) \subset \mathbb R_{\ge0} ,
+\label{eq:connes-S}
+\end{equation}
+where $\sigma(\Delta_\Psi)$ denotes the spectrum of $\Delta_\Psi$. It is the intersection, over *emph*
+cyclic and separating reference vector, of the spectrum of the corresponding modular operator. Whatever
+survives this intersection is a property of $\M$ alone. These are **Connes' two fundamental invariants**.
+By \eqref{eq:inner-criterion}, $T(\M)=\mathbb R$ for type I and type II, since every modular time is inner.
+For type III, $T(\M)$ is a proper subgroup of $\mathbb R$. (For the type III examples below it is a discrete
+set.) For type I or type II, $S(\M)=\{1\}$. The reason is that there is a tracial reference for which
+$\Delta=\id$, whose spectrum is the single point $\{1\}$. For the $\mathrm{I}_\infty$ and $\mathrm{II}_\infty$
+cases the trace is not a normalizable state. The precise definition of $S(\M)$ therefore takes the
+intersection over a slightly larger class of reference functionals (called weights), which includes the trace.
 
-This lets two genuinely **state-independent** invariants of the algebra $\M$ itself be defined — numbers
-or sets that depend only on $\M$, not on which reference vector happened to be used to compute them, which is
-precisely why they're useful for *emph* algebras rather than states:
-
-$$
-
-T(\M) \equiv \{t\in\mathbb R : \sigma_t^\Psi \text{ is inner on } \M\}
-
-$$
-
-(eq.~4.26 — independent of $\Psi$ by eq.~4.23, since being related by an inner automorphism doesn't change
-whether something itself is inner), and
-
-$$
-
-S(\M) \equiv \bigcap_\Psi \sigma(\Delta_\Psi) \subset \mathbb R_{\ge0}
-
-$$
-
-(eq.~4.27 — the intersection, over *emph* possible cyclic-separating reference vector, of the spectrum
-of the resulting modular operator; whatever survives this intersection is a property of $\M$ alone). These are
-**Connes' two fundamental invariants**. By eq.~4.21, $T(\M)=\mathbb R$ (every modular time is inner) for
-type I and type II; for type III it's a proper subset of $\mathbb R$ (in fact, a set of Lebesgue measure
-zero — "almost none" of the real line, in a precise sense). For type I or type II, $S(\M)=\{1\}$ (since
-there's always a tracial state for which $\Delta_\Psi=\id$, whose spectrum is the single point $\{1\}$ — for
-the $\mathrm{I}_\infty,\mathrm{II}_\infty$ cases this tracial state isn't itself normalizable, but can be
-approached arbitrarily closely by normalizable ones, footnote~24).
-
-Connes proved — a genuine, hard theorem, not re-derived here — that $S(\M)$ must be a closed multiplicative
-subgroup of $\mathbb R_{>0}$ (together with $0$), and this algebraic constraint forces exactly three
-possibilities, no others:
-
-$$
-
+For a type III factor, Connes proved that $S(\M)$ with the point $0$ removed is a closed multiplicative
+subgroup of $\mathbb R_{>0}$. This is a hard theorem and is not re-derived here. The closed subgroups of
+$\mathbb R_{>0}$ are $\{1\}$, the powers $\lambda^{\mathbb Z}$ of a single number, and all of $\mathbb R_{>0}$.
+So there are exactly three possibilities, and no others:
+\begin{gather}
 \text{Type III}_0:\ S(\M)=\{0,1\}, \qquad
-\text{Type III}_\lambda:\ S(\M)=\{0\}\cup\{\lambda^n : n\in\mathbb Z\},\ \lambda\in(0,1),
-
-$$
-
-
-$$
-
+\text{Type III}_\lambda:\ S(\M)=\{0\}\cup\{\lambda^n : n\in\mathbb Z\},\ \lambda\in(0,1), \notag\\
 \text{Type III}_1:\ S(\M)=\mathbb R_{\ge0} .
-
-$$
-
-(eqs.~4.28—4.30). This is genuinely as fine-grained as the classification gets, and every physically relevant
-type III algebra in the rest of this paper is one of these three.
+\label{eq:typeIII-classes}
+\end{gather}
+This is as fine as the classification gets. Every physically relevant type III algebra in the rest of these notes
+is one of these three.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.95\textwidth]{figs/fig_connes_spectrum.pdf}
-\caption{Connes' modular spectrum classification of von Neumann factors. The invariant $S(\mathcal{M}) \equiv \bigcap_\Psi \mathrm{Spec}(\Delta_\Psi) \subset \mathbb{R}_{\ge 0}$ characterizes the factor type: Types $\mathrm{I}$ and $\mathrm{II}$ have trivial spectrum $\{1\}$; Type $\mathrm{III}_0$ has $\{0, 1\}$; Type $\mathrm{III}_\lambda$ ($0 < \lambda < 1$) forms a discrete geometric ladder $\{0\} \cup \lambda^{\mathbb{Z}}$ (Powers factors); and Type $\mathrm{III}_1$ fills the entire non-negative continuum $[0, \infty)$ (relativistic QFT subregions and large-$N$ holography).}
+\caption{Connes' invariant $S(\M)$ for each kind of factor, drawn as a set of points on the half-line
+$\mathbb R_{\ge0}$ (dashed guides mark $0$ and $1$). Types I and II give the single point $1$, and type
+$\mathrm{III}_0$ gives the two points $0$ and $1$. Type $\mathrm{III}_\lambda$ gives $0$ together with every
+integer power of $\lambda$ (drawn for $\lambda=1/2$), and these powers pile up at $0$. Type $\mathrm{III}_1$
+fills the whole half-line.}
 \label{fig:connes_spectrum}
 \end{figure}
 
-(The paper closes this subsection with further technical properties of the intertwining unitaries $u_{\Psi\Omega}(s)$ — a cocycle identity, eq.~4.31,
-and a converse construction showing any function satisfying that identity comes from some genuine reference
-vector, eq.~4.34 — used later as machinery rather than as physical content in their own right, so they're
-flagged here for completeness but not expanded further.)
+The unitaries $u_{\Psi\Omega}(s)$ have further technical properties. They satisfy a so-called cocycle
+identity. Conversely, any family of unitaries satisfying that identity comes from some other reference state
+(more precisely, from a weight). These facts serve later as machinery rather than as physical content, so they
+are only mentioned here.
 
-## Sec.~IV.C: the entangled spin example revisited
+## The entangled spin example revisited
 
-Here is the promised payoff: computing $S(\M_\theta)$ and $T(\M_\theta)$ explicitly, by hand, for the
-$N$-Bell-pair-chain algebra $\M_\theta\equiv\M_R(\theta)$ from Sec.~II.E, and finding that different $\theta$
-genuinely do give different type $\mathrm{III}_\lambda$ subtypes.
+We can now compute $S(\M_\theta)$ and $T(\M_\theta)$ explicitly, by hand, for the algebra
+$\M_\theta\equiv\M_R(\theta)$ of the infinite chain of entangled spin pairs from Chapter~2. We will find that
+different values of $\theta$ give different type $\mathrm{III}_\lambda$ subtypes.
 
 ### Setting up the finite-$N$ computation
 
-At finite $N$, the $R$-system algebra is ordinary type I, and the reduced density matrices are just $N$-fold
-tensor products of the single-pair result already computed in Sec.~I:
+At finite $N$, the algebra of the $R$ system is an ordinary type I algebra. The reduced density matrices are
+$N$-fold tensor products of the single-pair result from Chapter~1:
 
 $$
 
 \rho_R(\Phi_\theta) = \rho_r(\phi_\theta)^{\otimes N}, \qquad
-\rho_r(\phi_\theta) = \begin{pmatrix}\cos^2\theta&0\\0&\sin^2\theta\end{pmatrix},
+\rho_r(\phi_\theta) = \begin{pmatrix}\cos^2\theta&0\\0&\sin^2\theta\end{pmatrix}.
 
 $$
 
-(eqs.~4.35—4.36, and identically for $\rho_L$, since the pair is symmetric between $R$ and $L$). For
-$\theta\in(0,\pi/4)$, both are strictly positive (full rank — every diagonal entry nonzero), so
-$\ket{\Phi_\theta}$ is cyclic and separating with respect to the $R$-algebra at every finite $N$, and the
-modular operator can be built directly from eq.~4.3:
+The same holds for $\rho_L$, since each pair is symmetric between $R$ and $L$. For $\theta\in(0,\pi/4)$ both
+are strictly positive (full rank, since every diagonal entry is nonzero). So $\ket{\Phi_\theta}$ is cyclic and
+separating with respect to the $R$-algebra at every finite $N$, and the modular operator can be built directly
+from \eqref{eq:Delta-typeI}:
+\begin{align}
+\Delta_{\Phi_\theta} = \rho_R(\Phi_\theta)\otimes\rho_L(\Phi_\theta)^{-1} \eqstep{1} \delta_\theta^{\otimes N},
+\qquad \delta_\theta \equiv \rho_r(\phi_\theta)\otimes\rho_l(\phi_\theta)^{-1} . \notag
+\end{align}
+**(1)** $\rho_R$ and $\rho_L^{-1}$ are both $N$-fold tensor products. Regroup the factors pair by pair,
+with the $i$-th $r$ factor next to the $i$-th $l$ factor. The whole operator is then the $N$-fold tensor power
+of the single-pair operator $\delta_\theta$.
 
-$$
-
-\Delta_{\Phi_\theta} = \rho_R(\Phi_\theta)\otimes\rho_L(\Phi_\theta)^{-1} = \delta_\theta^{\otimes N},
-\qquad \delta_\theta \equiv \rho_r(\phi_\theta)\otimes\rho_l(\phi_\theta)^{-1}
-
-$$
-
-(eq.~4.37) — exactly the single-pair worked example already computed explicitly in Sec.~IV.A above, whose
-eigenvalues were found there (and verified symbolically) to be $(1,\lambda,\lambda^{-1})$ with
-$\lambda=\tan^2\theta$. Tensoring $N$ independent, identical copies together, the eigenvalues of the full
+The single-pair operator $\delta_\theta$ is exactly the modular operator of the two-qubit worked example
+earlier in this chapter. Its eigenvalues were computed there: $1$ (twice), $\lambda$ and $\lambda^{-1}$, with
+$\lambda=\tan^2\theta$. The $N$ pairs are independent, identical copies. So the eigenvalues of the full
 $\Delta_{\Phi_\theta}$ are all possible products,
-
-$$
-
-\bigotimes_{i=1}^N(1,\lambda,\lambda^{-1}) = \prod_{i=1}^N\lambda^{\alpha_i}, \qquad \alpha_i\in\{0,1,-1\}
-
-$$
-
-(eq.~4.38) — each of the $N$ pairs independently contributes a factor of $1$, $\lambda$, or $\lambda^{-1}$ to
-the product, and every possible combination of choices appears as an eigenvalue.
+\begin{equation}
+\bigotimes_{i=1}^N(1,\lambda,\lambda^{-1}) = \prod_{i=1}^N\lambda^{\alpha_i}, \qquad \alpha_i\in\{0,1,-1\} .
+\label{eq:powers-eigs}
+\end{equation}
+Each of the $N$ pairs independently contributes a factor $1$, $\lambda$ or $\lambda^{-1}$ to the product, and
+every combination of choices appears as an eigenvalue.
 
 ### Taking $N\to\infty$, and reading off the type
 
-As $N\to\infty$, the set of achievable exponents $n=\sum_i\alpha_i$ (each term $0$ or $\pm1$, summed over
-infinitely many independent choices) becomes every integer, each with growing multiplicity, so the set of
-eigenvalues $\lambda^n$ becomes dense in a specific set:
-
-$$
-
-\sigma(\Delta_{\Phi_\theta}) = \{0\}\cup\{\lambda^n : n\in\mathbb Z\}
-
-$$
-
-(eq.~4.39 — the $\{0\}$ appears in the limit because, as $N\to\infty$, you can make the exponent $n$ as
-negative as you like by choosing more and more of the $\alpha_i=-1$, driving $\lambda^n=\lambda^{-|n|}\to
-\infty$'s reciprocal, i.e., pushing arbitrarily close to zero from above — more carefully, this limiting
-statement about the spectrum is the honest infinite-$N$ statement that the finite-$N$ computation above
-approaches).
+The eigenvalue \eqref{eq:powers-eigs} depends only on the exponent $n=\sum_i\alpha_i$, where each term is $0$
+or $\pm1$. As $N\to\infty$, every integer $n$ becomes achievable, each with a growing multiplicity. So the
+eigenvalues are the numbers $\lambda^n$ with $n\in\mathbb Z$, and the spectrum is
+\begin{equation}
+\sigma(\Delta_{\Phi_\theta}) = \{0\}\cup\{\lambda^n : n\in\mathbb Z\} .
+\label{eq:powers-spec}
+\end{equation}
+The point $\{0\}$ appears because the spectrum is a closed set. Since $0<\lambda<1$, the eigenvalues $\lambda^n$
+come arbitrarily close to zero as $n\to+\infty$ (choose more and more $\alpha_i=+1$). The eigenvalue $0$
+itself is never reached. It is a limit point, and the spectrum includes all its limit points. The keyresult
+below makes this infinite-$N$ statement precise.
 
 \begin{keyresult}[: Spectral Derivation of the Connes Invariant for the Powers Factor]
-**Goal:** Prove that for the infinite entangled spin chain $\M_\theta$ with $\theta \in (0, \pi/4)$ and $\lambda = \tan^2\theta$:
+**Goal:** Show that for the infinite entangled spin chain $\M_\theta$ with $\theta \in (0, \pi/4)$ and
+$\lambda = \tan^2\theta$,
 
 $$
 
-\mathrm{Spec}(\Delta_{\Phi_\theta}) = \{0\} \cup \{\lambda^n : n \in \mathbb{Z}\}, \qquad S(\M_\theta) \equiv \bigcap_{\Psi} \mathrm{Spec}(\Delta_\Psi) = \{0\} \cup \lambda^{\mathbb{Z}} .
+\begin{aligned}
+\mathrm{Spec}(\Delta_{\Phi_\theta}) &= \{0\} \cup \{\lambda^n : n \in \mathbb{Z}\}, \\
+S(\M_\theta) \equiv \bigcap_{\Psi} \mathrm{Spec}(\Delta_\Psi) &= \{0\} \cup \lambda^{\mathbb{Z}} .
+\end{aligned}
 
 $$
+
+Steps 1 and 2 are a complete computation of the first line. Step 3 is a sketch of the second line, which rests
+on a theorem quoted from the literature.
 
 **Derivation:**
 
-1. **Action on the local GNS basis:**
-The GNS Hilbert space $\HH_\theta$ is the completion of the span of local operator excitations acting on $\ket{\Phi_\theta}$:
+1. **Action on the local GNS basis.**
+The GNS Hilbert space $\HH_\theta$ is the completion of the span of local excitations of $\ket{\Phi_\theta}$:
 
 $$
 
-\ket{\Psi_{\{a_k\}}} \equiv \big(a_1 \otimes a_2 \otimes \cdots \otimes a_m \otimes \id \otimes \cdots\big) \ket{\Phi_\theta} .
+\ket{\Psi_{\{a_k\}}} \equiv \big(a_1 \otimes a_2 \otimes \cdots \otimes a_m \otimes \id \otimes \cdots\big)
+\ket{\Phi_\theta} .
 
 $$
 
-Expand each single-site $2\times2$ matrix in the standard transition basis $\{e_{00}, e_{01}, e_{10}, e_{11}\}$, where $e_{ij} \equiv \ket{i}\bra{j}$.
-Using the Tomita involution $S_\phi (a\ket\phi) = a^\dagger\ket\phi$ on a single pair $\ket\phi = \cos\theta\ket{00} + \sin\theta\ket{11}$:
-\begin{align*}
-S_\phi (e_{00}\ket\phi) &= S_\phi (\cos\theta\ket{00}) = e_{00}^\dagger\ket\phi = \cos\theta\ket{00} = e_{00}\ket\phi , \\
-S_\phi (e_{11}\ket\phi) &= S_\phi (\sin\theta\ket{11}) = e_{11}^\dagger\ket\phi = \sin\theta\ket{11} = e_{11}\ket\phi , \\
-S_\phi (e_{01}\ket\phi) &= S_\phi (\sin\theta\ket{01}) = e_{10}\ket\phi = \cos\theta\ket{10} = \frac{\cos\theta}{\sin\theta} (e_{01}\ket\phi)^* \dots
-\end{align*}
-Computing the adjoint $S_\phi^\dagger$ and modular operator $\delta_\theta = S_\phi^\dagger S_\phi = \rho_r \otimes \rho_l^{-1}$ on the matrix basis gives the four exact eigenvectors:
+Expand each single-site $2\times2$ matrix in the standard basis $\{e_{00}, e_{01}, e_{10}, e_{11}\}$, where
+$e_{ij} \equiv \ket{i}\bra{j}$. Use the Tomita operator $S_\phi (a\ket\phi) = a^\dagger\ket\phi$ on a single
+pair $\ket\phi = \cos\theta\ket{00} + \sin\theta\ket{11}$:
+\begin{align}
+S_\phi (e_{00}\ket\phi) = S_\phi (\cos\theta\ket{00}) &\eqstep{1} e_{00}^\dagger\ket\phi \eqstep{2}
+e_{00}\ket\phi = \cos\theta\ket{00} , \notag\\
+S_\phi (e_{11}\ket\phi) = S_\phi (\sin\theta\ket{11}) &\eqstep{1} e_{11}^\dagger\ket\phi \eqstep{2}
+e_{11}\ket\phi = \sin\theta\ket{11} , \notag\\
+S_\phi (e_{01}\ket\phi) = S_\phi (\sin\theta\ket{01}) &\eqstep{1} e_{01}^\dagger\ket\phi \eqstep{2}
+e_{10}\ket\phi = \cos\theta\ket{10} , \notag\\
+S_\phi (e_{10}\ket\phi) = S_\phi (\cos\theta\ket{10}) &\eqstep{1} e_{10}^\dagger\ket\phi \eqstep{2}
+e_{01}\ket\phi = \sin\theta\ket{01} . \notag
+\end{align}
+**(1)** the defining property of the Tomita operator, $S_\phi(a\ket\phi)=a^\dagger\ket\phi$.\quad
+**(2)** $e_{00}$ and $e_{11}$ are Hermitian, while $e_{01}^\dagger=e_{10}$ and $e_{10}^\dagger=e_{01}$.
+
+$S_\phi$ is antilinear and the angles are real. So the last two lines say $S_\phi\ket{01}=\cot\theta\ket{10}$
+and $S_\phi\ket{10}=\tan\theta\ket{01}$. This is exactly the $4\times4$ Tomita operator found in the worked
+example earlier in this chapter. Computing the adjoint $S_\phi^\dagger$ and the modular operator
+$\delta_\theta = S_\phi^\dagger S_\phi = \rho_r \otimes \rho_l^{-1}$ on this basis gives four exact
+eigenvectors:
 
 $$
 
-\delta_\theta (e_{00}\ket\phi) = 1 \cdot (e_{00}\ket\phi), \qquad \delta_\theta (e_{11}\ket\phi) = 1 \cdot (e_{11}\ket\phi),
+\delta_\theta (e_{00}\ket\phi) = 1 \cdot (e_{00}\ket\phi), \qquad
+\delta_\theta (e_{11}\ket\phi) = 1 \cdot (e_{11}\ket\phi),
 
 $$
 
 
 $$
 
-\delta_\theta (e_{10}\ket\phi) = \tan^2\theta \cdot (e_{10}\ket\phi) = \lambda \cdot (e_{10}\ket\phi), \qquad \delta_\theta (e_{01}\ket\phi) = \cot^2\theta \cdot (e_{01}\ket\phi) = \lambda^{-1} \cdot (e_{01}\ket\phi) .
+\begin{aligned}
+\delta_\theta (e_{10}\ket\phi) &= \tan^2\theta \cdot (e_{10}\ket\phi) = \lambda \cdot (e_{10}\ket\phi), \\
+\delta_\theta (e_{01}\ket\phi) &= \cot^2\theta \cdot (e_{01}\ket\phi) = \lambda^{-1} \cdot (e_{01}\ket\phi) .
+\end{aligned}
 
 $$
 
-2. **Eigenvalue spectrum on the infinite chain:**
-On any product state involving $n_+$ raising transitions $e_{10}$ and $n_-$ lowering transitions $e_{01}$ across the chain:
+2. **Eigenvalue spectrum on the infinite chain.**
+Consider a product excitation $\ket\Psi$ in which $n_+$ sites carry the factor $e_{10}$, $n_-$ sites carry
+$e_{01}$, and all other sites carry $e_{00}$, $e_{11}$ or $\id$. The modular operator acts site by site, so
 
 $$
 
-\Delta_{\Phi_\theta} \ket{\Psi} = \lambda^{n_+ - n_-} \ket{\Psi} = \lambda^n \ket{\Psi}, \qquad n = n_+ - n_- \in \mathbb{Z} .
+\Delta_{\Phi_\theta} \ket{\Psi} = \lambda^{n_+ - n_-} \ket{\Psi} = \lambda^n \ket{\Psi},
+\qquad n = n_+ - n_- \in \mathbb{Z} .
 
 $$
 
-Since $n_+$ and $n_-$ can be chosen independently as any non-negative integers, the set of eigenvalues is precisely the geometric progression $\{\lambda^n : n \in \mathbb{Z}\}$.
-Because the spectrum of a self-adjoint operator is closed, and $\lambda \in (0, 1)$ implies $\lim_{n \to +\infty} \lambda^n = 0$, the point $0$ is an accumulation point and belongs to the spectrum:
+The numbers $n_+$ and $n_-$ can be any non-negative integers. So the set of eigenvalues is exactly the
+geometric progression $\{\lambda^n : n \in \mathbb{Z}\}$. These eigenvectors span a dense subspace of
+$\HH_\theta$, so the spectrum is the closure of this set. Since $\lambda \in (0, 1)$, we have
+$\lambda^n \to 0$ as $n \to +\infty$. So $0$ is an accumulation point and belongs to the spectrum:
 
 $$
 
@@ -615,9 +698,10 @@ $$
 
 $$
 
-3. **Invariance under change of state (Connes Cocycle):**
-Why does this spectrum not depend on the reference vector $\ket{\Phi_\theta}$?
-Let $\ket\Psi$ be any other cyclic and separating vector. By Connes' Radon—Nikodym theorem, the modular automorphism flows are related by a unitary cocycle $u_t \equiv (D\Psi : D\Phi_\theta)_t \in \M_\theta$:
+3. **Independence of the reference state (sketch).**
+Why does the intersection over all states not shrink this set? Let $\ket\Psi$ be any other cyclic and
+separating vector. By Connes' theorem \eqref{eq:cocycle}, the two modular flows are related by unitaries
+$u_t\in\M_\theta$:
 
 $$
 
@@ -625,121 +709,145 @@ $$
 
 $$
 
-Because $\M_\theta$ is an Infinite Tensor Product of Finite Factors (ITPFI, or Powers factor), any normal state $\Psi$ can be approximated in norm by perturbing $\Phi_\theta$ on only finitely many sites $1, \dots, K$. On the infinite tail $k > K$, the state remains identical to $\Phi_\theta$.
-The modular operator therefore factorizes asymptotically as:
+The algebra $\M_\theta$ is an infinite tensor product of finite type I factors (an "ITPFI" factor; this
+particular one is called a Powers factor). Any normal state on it can be approximated in norm by states that
+differ from $\Phi_\theta$ only on finitely many sites $1, \dots, K$. On the infinite tail $k > K$, such a state
+is identical to $\Phi_\theta$. Heuristically, its modular operator then factorizes as
 
 $$
 
-\Delta_\Psi \sim \Delta_{\Psi,\text{local}} \otimes \bigotimes_{k=K+1}^\infty \delta_\theta^{(k)} .
+\Delta_\Psi \approx \Delta_{\Psi,\text{local}} \otimes \bigotimes_{k=K+1}^\infty \delta_\theta^{(k)} ,
 
 $$
 
-In Araki and Woods' asymptotic ratio set $\Gamma(\M_\theta)$, the infinite tail eigenvalues $\lambda^n$ dominate the spectrum, forcing the intersection over all cyclic-separating states to be invariant:
+and the infinite tail still produces all the eigenvalues $\lambda^n$. The precise version is a theorem.
+Araki and Woods defined an invariant of such infinite tensor products, the asymptotic ratio set, that is built
+only from the tail of the chain. Connes later showed that it equals $S(\M)$ for these algebras. For the Powers
+factor it equals $\{0\}\cup\lambda^{\mathbb Z}$. Hence
 
 $$
 
-S(\M_\theta) \equiv \bigcap_{\Psi} \mathrm{Spec}(\Delta_\Psi) = \{0\} \cup \{\lambda^n : n \in \mathbb{Z}\} = \{0\} \cup \lambda^{\mathbb{Z}} .
+S(\M_\theta) \equiv \bigcap_{\Psi} \mathrm{Spec}(\Delta_\Psi) = \{0\} \cup \{\lambda^n : n \in \mathbb{Z}\}
+= \{0\} \cup \lambda^{\mathbb{Z}} .
 
 $$
 
-Comparing with Connes' definition, this uniquely identifies $\M_\theta$ as a **type $\mathrm{III**_\lambda$} factor with $\lambda = \tan^2\theta$. $\blacksquare$
+Comparing with Connes' classification, $\M_\theta$ is a **type $\mathrm{III**_\lambda$} factor with
+$\lambda = \tan^2\theta$. $\blacksquare$
 
 \end{keyresult}
 
-This is eq.~4.39's spectrum for the *emph* reference vector $\ket{\Phi_\theta}$; the Connes invariant $S(\M_\theta)$ needs the intersection over *emph* cyclic-separating reference vector (eq.~4.27) — and the derivation above proves that this intersection in fact coincides exactly with eq.~4.39 for this example. Comparing directly to the three-way classification of Sec.~IV.B (eqs.~4.28—4.30): $\{0\}\cup\{\lambda^n\}$ with $\lambda=\tan^2\theta\in(0,1)$ is exactly the signature of **type $\mathrm{III**_\lambda$}. **So $\M_\theta$ is type $\mathrm{III**_{\tan^2\theta}$, for every $\theta\in(0,\pi/4)$} — different entangling angles genuinely produce different, inequivalent von Neumann algebra subtypes.
+The spectrum \eqref{eq:powers-spec} belongs to *emph* reference vector, $\ket{\Phi_\theta}$. The
+Connes invariant $S(\M_\theta)$ needs the intersection over *emph* cyclic and separating reference
+vector, as in \eqref{eq:connes-S}. The Araki—Woods—Connes result quoted in step~3 says that for this example
+the intersection is the same set \eqref{eq:powers-spec}. Now compare with the three-way classification
+\eqref{eq:typeIII-classes}. The set $\{0\}\cup\{\lambda^n\}$ with $\lambda=\tan^2\theta\in(0,1)$ is exactly the
+signature of **type $\mathrm{III**_\lambda$}. **So $\M_\theta$ is type $\mathrm{III**_{\tan^2\theta}$,
+for every $\theta\in(0,\pi/4)$.} Different entangling angles produce different, inequivalent von Neumann
+algebras.
 
-The other Connes invariant, $T(\M_\theta)$, can also be read off directly from eq.~4.38: $\Delta_{\Phi_\theta}
-^{it}=1$ (i.e., the flow does nothing — is manifestly inner, trivially implemented by the identity) exactly
-when $\lambda^{int}=1$ for every eigenvalue simultaneously, i.e., $t\log\lambda\in2\pi\mathbb Z$. This holds
-for any finite $N$, and hence also in the $N\to\infty$ limit, giving (this can be shown to be exhaustive — no
-other values of $t$ work)
+The other Connes invariant, $T(\M_\theta)$, can also be read off from \eqref{eq:powers-eigs}. The operator
+$\Delta_{\Phi_\theta}^{it}$ equals $1$ exactly when $\lambda^{int}=1$ for every eigenvalue at once, that is,
+when $t\log\lambda\in2\pi\mathbb Z$. At those times the flow does nothing, so it is trivially inner,
+implemented by the identity. This holds at every finite $N$, and hence also in the $N\to\infty$ limit. One can
+show that no other values of $t$ give an inner flow; this part is quoted, not proved here. The result is
 
 $$
 
-T(\M_\theta) = \left\{\frac{2\pi n}{\log\lambda} : n\in\mathbb Z\right\}, \qquad \lambda=\tan^2\theta
+T(\M_\theta) = \left\{\frac{2\pi n}{\log\lambda} : n\in\mathbb Z\right\}, \qquad \lambda=\tan^2\theta .
 
 $$
 
-(eqs.~4.40—4.41) — a discrete, measure-zero subset of $\mathbb R$, exactly as the general type III criterion
-(Sec.~IV.B) demanded.
+This is a discrete proper subgroup of $\mathbb R$. It is not all of $\mathbb R$, as the type III criterion
+\eqref{eq:inner-criterion} requires.
 
-### The endpoints, and how to reach $\mathrm{III_0$ and $\mathrm{III}_1$ too}
+### The endpoints, and how to reach $\mathrm{III}_0$ and $\mathrm{III}_1$ too
 
-Two special values of $\theta$ are worth explicitly reconciling with everything discussed so far. At
-$\theta=\pi/4$: this was already established, in Sec.~III, to be type $\mathrm{II}_1$, not type III — and
-indeed $\lambda=\tan^2(\pi/4)=1$ here, which sits right at the edge of the allowed range $\lambda\in(0,1)$ for
-type $\mathrm{III}_\lambda$, consistent with this being a genuinely different (and, as shown in Sec.~III, more
-tractable — trace-having) type. At $\theta=0$: the two spins in each pair are completely unentangled to begin
-with, so the whole $N\to\infty$ construction never leaves ordinary type I at all — there's no entanglement to
-generate anything new.
+Two special values of $\theta$ need to be reconciled with all this. At $\theta=\pi/4$, Chapter~3 already showed
+that the algebra is type $\mathrm{II}_1$, not type III. Indeed $\lambda=\tan^2(\pi/4)=1$ here. This sits just
+outside the range $\lambda\in(0,1)$ of type $\mathrm{III}_\lambda$, consistent with this being a different type,
+one that has a trace and is easier to handle (Chapter~3). At $\theta=0$, the two spins in each pair are not
+entangled at all. The $N\to\infty$ construction then never leaves ordinary type I, because there is no
+entanglement to produce anything new.
 
-What about type $\mathrm{III}_0$ and type $\mathrm{III}_1$ — can they be reached from some variant of this
-same family of examples? Yes, and seeing how is worth doing, because it shows the classification is genuinely
-sensitive to fine details of *emph* the infinite limit is taken, not just to some single overall parameter.
-Instead of using the same $\theta$ for every pair, let the $i$-th pair have its own angle $\theta_i$, so
-$\lambda_i=\tan^2\theta_i$ can vary from pair to pair. Equation~4.38's eigenvalue formula generalizes to
-$\prod_i\lambda_i^{\alpha_i}$ (eq.~4.42), and what happens in the $N\to\infty$ limit now depends on the
-*emph* of the whole infinite sequence $\{\lambda_i\}$, not on any single number. A
-mathematical result due to Araki and Woods pins this down completely: if $\lambda_1,\lambda_2,\dots$ converges
-to some fixed $\lambda\in(0,1)$, you get type $\mathrm{III}_\lambda$ (the case just worked out, with every
-$\lambda_i$ literally equal to the same constant being the simplest special case); if the sequence converges
-to $0$ fast enough, you instead get an ordinary type $\mathrm{I}_\infty$ algebra (no genuinely new structure —
-the entanglement dies off quickly enough that nothing new happens in the limit); if it converges to $0$ but
-*emph* fast enough, you get type $\mathrm{III}_0$; and — this is the generic case, the one that happens
-for essentially any "typical" (non-fine-tuned) choice of the sequence $\{\lambda_i\}$ that doesn't converge
-to a single value at all — you get type $\mathrm{III}_1$, the "most chaotic" member of the family.
+Can type $\mathrm{III}_0$ and type $\mathrm{III}_1$ be reached from a variant of the same family? Yes. Seeing
+how shows that the classification is sensitive to fine details of *emph* the infinite limit is taken, not
+just to a single overall parameter. Instead of using the same $\theta$ for every pair, give the $i$-th pair its
+own angle $\theta_i$. Then $\lambda_i=\tan^2\theta_i$ can vary from pair to pair. The eigenvalue formula
+\eqref{eq:powers-eigs} becomes $\prod_i\lambda_i^{\alpha_i}$. What happens in the $N\to\infty$ limit now depends
+on the *emph* of the whole sequence $\{\lambda_i\}$, not on any single number. Araki and
+Woods worked out the answer. Stated roughly, it is as follows. If every $\lambda_i$ equals the same
+$\lambda\in(0,1)$, one gets type $\mathrm{III}_\lambda$; this is the case just worked out. If $\lambda_i\to0$
+fast enough that $\sum_i\lambda_i$ is finite, one gets an ordinary type $\mathrm{I}_\infty$ algebra. The
+entanglement dies off so quickly that nothing new happens in the limit. If $\lambda_i\to0$ more slowly, one
+gets a type III algebra, and type $\mathrm{III}_0$ can arise this way. Finally, sequences that do not settle
+down to a single value typically give type $\mathrm{III}_1$, the "most chaotic" member of the family. A
+simple example is a sequence that keeps returning to two values whose logarithms have an irrational ratio.
 
-There's a second, independent way to manufacture type $\mathrm{III}_1$ directly, worth knowing because it will
-resurface, in a completely different physical guise, when the Rindler wedge is discussed in the next
-subsection: instead of qubits, use pairs of *emph* (spin-$1$ systems, three-dimensional instead of
-two-dimensional) in a general entangled state, so the single-pair reduced density matrix is a $3\times3$
-diagonal matrix $\rho_r=\tfrac{1}{1+\lambda+\tilde\lambda}\,\mathrm{diag}(1,\lambda,\tilde\lambda)$ for two
-independent parameters $\lambda,\tilde\lambda>0$ (eq.~4.43). Now the $N\to\infty$ modular eigenvalues are all
-products $\lambda^n\tilde\lambda^m$ for integers $n,m$ — and for *emph* (irrational-ratio) choices of
-$\lambda,\tilde\lambda$, this two-parameter family of products becomes dense in *emph* of
-$\mathbb R_{\ge0}$, giving $\sigma(\Delta_\Psi)=\mathbb R_{\ge0}=S(\M)$ directly — type $\mathrm{III}_1$ again,
-reached this time not by varying $\theta_i$ pair-by-pair but by having two independent, incommensurate
-"frequencies" $\log\lambda,\log\tilde\lambda$ built into a single repeated building block.
+There is a second way to build type $\mathrm{III}_1$ directly. It will return, in a quite different physical
+form, when the Rindler wedge is discussed in the next section. Instead of qubits, use pairs of *emph*
+(three-level systems, such as spin-$1$) in an entangled state. The single-pair reduced density matrix is then a
+$3\times3$ diagonal matrix, $\rho_r=\tfrac{1}{1+\lambda+\tilde\lambda}\,\mathrm{diag}(1,\lambda,\tilde\lambda)$,
+with two independent parameters $\lambda,\tilde\lambda>0$. The single-pair modular eigenvalues are the ratios of
+these entries. So in the $N\to\infty$ limit the modular eigenvalues are all products $\lambda^n\tilde\lambda^m$
+with integers $n,m$. Suppose the ratio $\log\lambda/\log\tilde\lambda$ is irrational, which is the generic
+case. Then these products are dense in all of $\mathbb R_{\ge0}$, so $\sigma(\Delta_\Psi)=\mathbb R_{\ge0}$. By
+the same Araki—Woods—Connes argument, $S(\M)=\mathbb R_{\ge0}$, which is type $\mathrm{III}_1$ again. This
+time the result comes not from varying $\theta_i$ from pair to pair, but from two incommensurate
+"frequencies," $\log\lambda$ and $\log\tilde\lambda$, built into a single repeated building block.
 
-## Sec.~IV.D: local algebras in a relativistic quantum field theory
+## Local algebras in a relativistic quantum field theory
 
-### Sec.~IV.D.1: the Rindler wedge, and why the modular flow is a boost
+### The Rindler wedge, and why the modular flow is a boost
 
-Now return to Ex.~3 of Sec.~I: cutting a relativistic quantum field theory in half by the surface $x=0$, in
-$1{+}1$-dimensional Minkowski space with coordinates $(t,x)$. Sec.~I already established that the vacuum
-state $\ket\Omega$ has infinite entanglement across this cut, so no tensor factorization exists. The way to
-characterize this entanglement, in the language now available, is via the algebra $\M_R$ of operators
+Now return to the third example of Chapter~1. There, a relativistic quantum field theory in
+$1{+}1$-dimensional Minkowski space, with coordinates $(t,x)$, was cut in half at the surface $x=0$. Chapter~1
+showed that the vacuum state $\ket\Omega$ has infinite entanglement across this cut, so no tensor factorization
+exists. In the language now available, we describe this entanglement through the algebra $\M_R$ of operators
 localized in the right region $R=\{x>0\}$.
 
-One geometric fact is worth being explicit about, because it's used constantly from here on: in a relativistic
-theory, time evolution is causal (nothing propagates faster than light), which means $\M_R$ — built from
-operators localized at $x>0$ at a single instant — is actually equivalent to the algebra of operators
-localized anywhere in the *emph* $\widehat R$ of that region (the notion from Sec.~I.B),
-which for the half-line $x>0$ is exactly the **right Rindler wedge**, $\{(t,x): x>|t|\}$ — everything
-that data on the initial slice $x>0$ completely determines, both to its future and its past. By causality,
-$\M_R' = \M_L = \M_{\widehat L}$ — the commutant is exactly the algebra of the causally complementary (left)
-wedge, with no gap between them.
+One geometric fact is used constantly from here on, so we state it explicitly. In a relativistic theory, time
+evolution is causal: nothing propagates faster than light. So $\M_R$, built from operators localized at $x>0$ at
+a single instant, is the same as the algebra of operators localized anywhere in the *emph*
+$\widehat R$ of that region (the notion from Chapter~1). For the half-line $x>0$, the domain of dependence is
+the **right Rindler wedge**, $\{(t,x): x>|t|\}$. It is everything that data on the initial slice $x>0$
+determines completely, both to the future and to the past. Causality alone gives $\M_L\subseteq\M_R'$: operators
+in the left wedge commute with those in the right wedge. For wedges the stronger statement
+$\M_R' = \M_L = \M_{\widehat L}$ also holds. The commutant is exactly the algebra of the causally complementary
+(left) wedge, with no gap between them. This equality is known as wedge duality, and it follows from the
+Bisognano—Wichmann theorem discussed below.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.82\textwidth]{figs/fig_rindler.pdf}
-\caption{The spacetime geometry of the Rindler wedge: Minkowski spacetime split into the Right wedge $R$ ($x > |t|$), Left wedge $L$ ($x < -|t|$), Future $F$, and Past $P$. The boost hyperbolae $x^2 - t^2 = \rho^2$ represent trajectories of uniformly accelerated observers with proper acceleration $a = 1/\rho$, whose proper time $\tau = \rho \eta$ is governed by the boost parameter $\eta$.}
+\caption{The Rindler wedges. The light cone through the origin (dot) splits Minkowski spacetime into the right
+wedge $R$ ($x>|t|$, blue), the left wedge $L$ ($x<-|t|$, gold), the future $F$ and the past $P$. The curves are
+the hyperbolae $x^2-t^2=\rho^2$ (the bar marks $\rho$ for one of them), worldlines of uniformly accelerated
+observers with proper acceleration $a=1/\rho$ and proper time $\tau=\rho\eta$, where $\eta$ is the boost
+parameter. The red arrows show which way a boost that increases $\eta$ moves points: toward the future in $R$ and
+toward the past in $L$.}
 \label{fig:rindler}
 \end{figure}
 
-The **Reeh—Schlieder theorem** — stated here and proved below — says: in a relativistic quantum field theory, acting on the vacuum $\ket\Omega$ with operators localized in *emph* open spacetime region (however small) produces a set of states that is dense in the entire Hilbert space.
+The **Reeh—Schlieder theorem**, stated here and sketched below, says the following. In a relativistic
+quantum field theory, act on the vacuum $\ket\Omega$ with operators localized in *emph* open spacetime
+region, however small. The resulting set of states is dense in the entire Hilbert space.
 
 \begin{keyresult}[: Derivation of the Reeh—Schlieder Theorem]
-**Theorem:** Let $\mathcal{O} \subset \mathbb{R}^{1,d-1}$ be any nonempty open region in Minkowski spacetime, and let $\M(\mathcal{O})$ be the local von Neumann algebra generated by fields smeared with test functions supported in $\mathcal{O}$. In any relativistic QFT satisfying the Wightman axioms:
+**Theorem:** Let $\mathcal{O} \subset \mathbb{R}^{1,d-1}$ be a nonempty open region in Minkowski
+spacetime. Let $\M(\mathcal{O})$ be the local von Neumann algebra generated by fields smeared with test
+functions supported in $\mathcal{O}$. In any relativistic QFT satisfying the Wightman axioms:
 
 1. $\ket\Omega$ is **cyclic** for $\M(\mathcal{O})$: $\overline{\M(\mathcal{O})\ket\Omega} = \HH$.
-2. $\ket\Omega$ is **separating** for $\M(\mathcal{O})$: $A\ket\Omega = 0 \implies A = 0$ for all $A \in \M(\mathcal{O})$.
+2. If the causal complement of $\mathcal O$ contains a nonempty open region (as it does for any bounded
+region, and for a wedge), then $\ket\Omega$ is also **separating** for $\M(\mathcal{O})$:
+$A\ket\Omega = 0 \implies A = 0$ for all $A \in \M(\mathcal{O})$.
 
 
-**Proof:**
+**Proof sketch** (treating the fields as if they were defined at points, a standard shortcut):
 
-1. **Orthogonality hypothesis:**
-To prove cyclicity, suppose there exists a state $\ket\chi \in \HH$ orthogonal to $\M(\mathcal{O})\ket\Omega$, so that:
+1. **Orthogonality hypothesis.**
+To prove cyclicity, suppose some state $\ket\chi \in \HH$ is orthogonal to $\M(\mathcal{O})\ket\Omega$:
 
 $$
 
@@ -747,8 +855,9 @@ $$
 
 $$
 
-Let $\phi(f_1)\cdots\phi(f_n)\ket\Omega$ be an arbitrary $n$-point field state with $\mathrm{supp}(f_j) \subset \mathcal{O}$.
-Using spacetime translation covariance $\phi(x) = e^{i P_\mu x^\mu} \phi(0) e^{-i P_\mu x^\mu}$ and vacuum translation invariance $P_\mu\ket\Omega = 0$, define the correlator function:
+Consider field states $\phi(x_1)\cdots\phi(x_n)\ket\Omega$ with all points $x_j$ in $\mathcal O$. Use
+translation covariance, $\phi(x) = e^{i P_\mu x^\mu} \phi(0) e^{-i P_\mu x^\mu}$, and translation invariance of
+the vacuum, $P_\mu\ket\Omega = 0$. Define the function
 
 $$
 
@@ -756,24 +865,27 @@ F(x_1, \dots, x_n) \equiv \braket{\chi | \phi(x_1)\phi(x_2)\cdots\phi(x_n)|\Omeg
 
 $$
 
-2. **Relativistic spectral condition and holomorphy:**
-Change to relative difference coordinates $\xi_j \equiv x_j - x_{j+1}$ ($j = 1, \dots, n-1$):
+2. **Relativistic spectrum condition and analyticity.**
+Change to the difference coordinates $\xi_j \equiv x_j - x_{j+1}$ ($j = 1, \dots, n-1$). Inserting the
+translation formula and using $e^{-iP\cdot x_n}\ket\Omega=\ket\Omega$ gives
 
 $$
 
-F(\xi_1, \dots, \xi_{n-1}) = \Braket{\chi \Big| \phi(0) e^{-i P \cdot \xi_1} \phi(0) e^{-i P \cdot \xi_2} \cdots e^{-i P \cdot \xi_{n-1}} \phi(0) \Big| \Omega} .
+F = \Braket{\chi \Big| e^{iP\cdot x_1}\phi(0) e^{-i P \cdot \xi_1} \phi(0) e^{-i P \cdot \xi_2}
+\cdots e^{-i P \cdot \xi_{n-1}} \phi(0) \Big| \Omega} .
 
 $$
 
-By the relativistic spectrum condition, the joint spectrum of the energy-momentum operator $P^\mu = (H, \vec P)$ lies entirely within the closed forward lightcone:
+By the relativistic spectrum condition, the joint spectrum of the energy-momentum operator
+$P^\mu = (H, \vec P)$ lies in the closed forward lightcone:
 
 $$
 
-\mathrm{Spec}(P^\mu) \subseteq \bar V^+ = \{p^\mu : p^0 \ge |\vec p| \ge 0\} .
+\mathrm{Spec}(P^\mu) \subseteq \bar V^+ = \{p^\mu : p^0 \ge |\vec p|\} .
 
 $$
 
-Now analytically continue the differences into the complex domain:
+Now continue the differences into the complex domain:
 
 $$
 
@@ -781,41 +893,50 @@ $$
 
 $$
 
-Evaluating the operator exponential on any state with physical four-momentum $p \in \bar V^+$:
+On a state with four-momentum $p \in \bar V^+$, the exponent becomes
 
 $$
 
--i P \cdot (\xi_j - i \eta_j) = -i P \cdot \xi_j - P \cdot \eta_j .
+-i p \cdot (\xi_j - i \eta_j) = -i p \cdot \xi_j - p \cdot \eta_j .
 
 $$
 
-Because both $p \in \bar V^+$ and $\eta_j \in V^+$, the Lorentzian inner product $p \cdot \eta_j = p^0 \eta_j^0 - \vec p \cdot \vec\eta_j > 0$ is strictly positive!
-The factor $e^{-P \cdot \eta_j}$ provides uniform exponential damping, guaranteeing that the operator product is bounded and holomorphic for all $\eta_j \in V^+$.
-Therefore, $F(\zeta_1, \dots, \zeta_{n-1})$ is holomorphic in the multidimensional forward tube domain $\mathcal{T}_{n-1} = (\mathbb{R}^d - i V^+)^{n-1}$.
-3. **Edge-of-the-Wedge theorem and global vanishing:**
-By assumption, when all $x_j \in \mathcal{O}$, the boundary value $F(x_1, \dots, x_n) = 0$.
-The set $\mathcal{O}^n$ contains a nonempty open real ball. By the Edge-of-the-Wedge theorem (the multivariable generalization of the Schwarz reflection principle and identity theorem), if a holomorphic function in a tube domain has vanishing boundary values on an open real set, it must vanish *emph* throughout its entire domain of holomorphy:
+For $p \in \bar V^+$ and $\eta_j \in V^+$, the Lorentzian inner product
+$p \cdot \eta_j = p^0 \eta_j^0 - \vec p \cdot \vec\eta_j$ is non-negative (and strictly positive unless
+$p=0$). So the factor $e^{-p \cdot \eta_j}$ is at most $1$. It damps high momenta, which keeps the operator
+product bounded and makes it depend holomorphically on the $\zeta_j$. The same argument applies to $x_1$,
+continued to $x_1+i\eta_0$ with $\eta_0\in V^+$. Therefore $F$ is holomorphic in a tube domain $\mathcal T$:
+the set of complex arguments whose imaginary parts lie in these forward cones.
+3. **Edge-of-the-wedge theorem and global vanishing.**
+By assumption, the boundary value $F(x_1, \dots, x_n)$ vanishes when all $x_j \in \mathcal{O}$. The set of
+such real points is a nonempty open set. The edge-of-the-wedge theorem is a many-variable version of the
+Schwarz reflection principle. Together with the identity theorem for holomorphic functions, it implies the
+following: a function holomorphic in a tube domain whose boundary values vanish on a real open set must vanish
+*emph* on the whole tube:
 
 $$
 
-F(\zeta_1, \dots, \zeta_{n-1}) \equiv 0 \qquad \text{on } \mathcal{T}_{n-1} .
+F \equiv 0 \qquad \text{on } \mathcal{T} .
 
 $$
 
-Taking the boundary limit back to the real axis implies:
+Taking the boundary limit back to real arguments gives
 
 $$
 
-\braket{\chi | \phi(x_1)\phi(x_2)\cdots\phi(x_n)|\Omega} = 0 \qquad \text{for *emph*} \ x_1, \dots, x_n \in \mathbb{R}^{1,d-1} .
+\braket{\chi | \phi(x_1)\phi(x_2)\cdots\phi(x_n)|\Omega} = 0 \qquad
+\text{for *emph*} \ x_1, \dots, x_n \in \mathbb{R}^{1,d-1} .
 
 $$
 
-4. **Conclusion of Cyclicity:**
-By the Wightman reconstruction axioms, polynomials of fields smeared over the entire spacetime generate a dense subspace of $\HH$. Since $\ket\chi$ is orthogonal to this dense subspace, $\ket\chi = 0$. Thus $\overline{\M(\mathcal{O})\ket\Omega} = \HH$, proving $\ket\Omega$ is **cyclic**.
-5. **Separating property:**
-Suppose $A \in \M(\mathcal{O})$ satisfies $A\ket\Omega = 0$.
-Choose any nonempty open region $\mathcal{O}'$ in the spacelike complement of $\mathcal{O}$. By microcausality, $[A, B'] = 0$ for all $B' \in \M(\mathcal{O}')$.
-Therefore:
+4. **Conclusion of cyclicity.**
+By the Wightman axioms, polynomials in fields smeared over all of spacetime, acting on $\ket\Omega$, give a
+dense subspace of $\HH$. The vector $\ket\chi$ is orthogonal to this dense subspace, so $\ket\chi = 0$. Thus
+$\overline{\M(\mathcal{O})\ket\Omega} = \HH$, and $\ket\Omega$ is **cyclic**.
+5. **Separating property.**
+Suppose $A \in \M(\mathcal{O})$ satisfies $A\ket\Omega = 0$. Choose a nonempty open region $\mathcal{O}'$ in
+the causal (spacelike) complement of $\mathcal{O}$. By microcausality, $[A, B'] = 0$ for all
+$B' \in \M(\mathcal{O}')$. Therefore
 
 $$
 
@@ -823,26 +944,35 @@ A \big(B'\ket\Omega\big) = B' \big(A\ket\Omega\big) = B'(0) = 0 .
 
 $$
 
-By cyclicity of $\M(\mathcal{O}')$ established in Step~4, vectors of the form $B'\ket\Omega$ are dense in $\HH$.
-An operator vanishing on a dense subspace is identically zero: $A = 0$.
-Hence $\ket\Omega$ is **separating** for $\M(\mathcal{O})$. $\blacksquare$
+By the cyclicity of step~4, applied to $\mathcal O'$, vectors of the form $B'\ket\Omega$ are dense in $\HH$.
+A bounded operator that vanishes on a dense subspace is zero, so $A = 0$. Hence $\ket\Omega$ is
+**separating** for $\M(\mathcal{O})$. $\blacksquare$
 
 \end{keyresult}
 
-Applied here, this guarantees $\ket\Omega$ is cyclic with respect to both $\M_R$ and $\M_L$, and hence — by the cyclic-separating duality established in Sec.~IV.A — cyclic *emph* separating with respect to $\M_R$ alone. So Tomita—Takesaki theory applies directly, with no further assumption needed.
+Apply this to the two wedges. It shows that $\ket\Omega$ is cyclic with respect to both $\M_R$ and $\M_L$.
+Since $\M_L\subseteq\M_R'$, it is also cyclic for $\M_R'$. By the cyclic—separating duality established
+earlier in this chapter, $\ket\Omega$ is therefore cyclic *emph* separating with respect to $\M_R$ alone. So
+Tomita—Takesaki theory applies directly, with no further assumption.
 
-Here is the genuinely striking physical fact, arrived at by using remark (d) from Sec.~IV.A above (find *emph* generator satisfying the KMS condition, and it must be *emph* modular operator, since uniqueness is guaranteed): the modular operator for $\M_R$ in the vacuum state turns out to be
-
-$$
-
-K_\Omega \equiv -\log\Delta_\Omega = 2\pi K
-
-$$
-
-(eq.~4.44), where $K$ is the ordinary **boost generator** — the same operator that generates Lorentz boosts in special relativity, an honest geometric symmetry of Minkowski space, with absolutely nothing abstract or algebraic about its definition. Justifying eq.~4.44 requires checking two things: (i) flows generated by $K$ are automorphisms of $\M_R$ — immediate, since a boost maps the Rindler wedge $\widehat R$ to itself; and (ii) correlators of boosted operators satisfy the KMS relation with $\beta=2\pi$.
+Now comes a striking physical fact. It is found using the uniqueness remark~(d) after the Tomita—Takesaki
+theorem: find *emph* flow with the right properties that satisfies the KMS condition, and it must be
+*emph* modular flow. The result is that the modular operator for $\M_R$ in the vacuum state is
+\begin{equation}
+K_\Omega \equiv -\log\Delta_\Omega = 2\pi K ,
+\label{eq:bw}
+\end{equation}
+where $K$ is the ordinary **boost generator**. This is the operator that generates Lorentz boosts in
+special relativity. It is a geometric symmetry of Minkowski space, and nothing about its definition is abstract
+or algebraic. This result is the **Bisognano—Wichmann theorem**. To justify \eqref{eq:bw}, two things must
+be checked. (i) The flow generated by $K$ maps $\M_R$ to itself and leaves $\ket\Omega$ invariant. This is
+immediate: a boost maps the Rindler wedge $\widehat R$ to itself, and the vacuum is Lorentz invariant. (ii)
+Correlators of boosted operators satisfy the KMS relation with $\beta=2\pi$.
 
 \begin{workedexamplebox}[: Verification of the Bisognano—Wichmann KMS Condition]
-**Goal:** Prove that the boost flow $\alpha_\eta(A) = e^{i K \eta} A e^{-i K \eta}$ satisfies the KMS condition at $\beta = 2\pi$ for any operators $A, B \in \M_R$:
+**Goal:** Show, by a Euclidean path-integral argument, that the boost flow
+$\alpha_\eta(A) = e^{i K \eta} A e^{-i K \eta}$ satisfies the KMS condition at $\beta = 2\pi$ for any
+operators $A, B \in \M_R$:
 
 $$
 
@@ -850,10 +980,14 @@ $$
 
 $$
 
+Here $\alpha_{i2\pi}(B)=e^{-2\pi K}Be^{2\pi K}$ is the flow continued to the imaginary parameter
+$\eta=2\pi i$.
+
 **Calculation:**
 
-1. **Rindler coordinates and Euclidean rotation:**
-The right Rindler wedge $\widehat R = \{(t,x) : x > |t|\}$ is parametrized by proper distance $\rho > 0$ and boost parameter $\eta \in \mathbb{R}$:
+1. **Rindler coordinates and Euclidean rotation.**
+The right Rindler wedge $\widehat R = \{(t,x) : x > |t|\}$ is described by a proper distance $\rho > 0$ and a
+boost parameter $\eta \in \mathbb{R}$:
 
 $$
 
@@ -861,8 +995,9 @@ t = \rho \sinh\eta, \qquad x = \rho \cosh\eta .
 
 $$
 
-Under a boost by parameter $s$, the coordinates transform as $\eta \to \eta + s$.
-Perform a Wick rotation to Euclidean time: $t_E \equiv i t$, $\eta_E \equiv -i \eta$. Then:
+A boost by parameter $s$ shifts $\eta \to \eta + s$. Now rotate to Euclidean signature by setting
+$t_E \equiv -i t$ and $\eta_E \equiv -i \eta$, so that $t=it_E$ and $\eta=i\eta_E$. Since
+$\sinh(i\eta_E)=i\sin\eta_E$ and $\cosh(i\eta_E)=\cos\eta_E$, this gives
 
 $$
 
@@ -870,17 +1005,19 @@ t_E = \rho \sin\eta_E, \qquad x = \rho \cos\eta_E .
 
 $$
 
-The Euclidean Minkowski metric becomes:
+The Euclidean version of the Minkowski metric is
 
 $$
 
-ds_E^2 = dt_E^2 + dx^2 + dx_\perp^2 = d\rho^2 + \rho^2 d\eta_E^2 + dx_\perp^2 .
+ds_E^2 = dt_E^2 + dx^2 + dx_\perp^2 = d\rho^2 + \rho^2 d\eta_E^2 + dx_\perp^2 ,
 
 $$
 
-In the $(\rho, \eta_E)$ plane, these are standard polar coordinates where $\rho$ is the radius and $\eta_E$ is the polar angle!
-2. **Regularity and Euclidean $2\pi$-periodicity:**
-To avoid a conical deficit angle (singularity) at the horizon $\rho = 0$, the Euclidean angle $\eta_E$ must have period $2\pi$:
+where $dx_\perp^2$ collects the transverse directions, if there are any. In the $(\rho, \eta_E)$ plane these are
+standard polar coordinates: $\rho$ is the radius and $\eta_E$ is the polar angle.
+2. **Regularity and Euclidean $2\pi$-periodicity.**
+The point $\rho = 0$ is the Euclidean image of the horizon. For the plane to be smooth there, with no conical
+singularity, the Euclidean angle must have period $2\pi$:
 
 $$
 
@@ -888,7 +1025,8 @@ $$
 
 $$
 
-Translating back to Lorentzian boost parameter $\eta = i \eta_E$, a rotation by $2\pi$ corresponds to an imaginary shift of the boost rapidity:
+In terms of the Lorentzian boost parameter $\eta = i \eta_E$, the full turn $\eta_E\to\eta_E+2\pi$ is an
+imaginary shift of the rapidity:
 
 $$
 
@@ -896,25 +1034,37 @@ $$
 
 $$
 
-Geometrically, rotating $\eta_E$ by $\pi$ maps $(t_E, x) \to (-t_E, -x)$, sending an operator in the right wedge $R$ to the left wedge $L$. Rotating by $2\pi$ completes a full circle around the wedge bifurcation surface $\rho = 0$, returning to the right wedge.
-3. **Path integral and operator ordering:**
-In the Euclidean path integral representation of the vacuum state $\ket\Omega$, imaginary time evolution by $\eta_E$ inserts operators at angular positions around the Euclidean origin:
+Geometrically, rotating $\eta_E$ by $\pi$ maps $(t_E, x) \to (-t_E, -x)$. This sends an operator in the right
+wedge $R$ to the left wedge $L$. Rotating by $2\pi$ goes once around the point $\rho = 0$ and returns to the
+right wedge.
+3. **Path integral and operator ordering.**
+In the Euclidean path integral that prepares the vacuum $\ket\Omega$, flowing an operator by the imaginary
+boost parameter $i\vartheta$ moves its insertion to the Euclidean angle $\eta_E=\vartheta$. So for
+$0<\vartheta<2\pi$, the correlator is a path integral with $A$ inserted at angle $0$ and $B$ at angle
+$\vartheta$. The path integral orders operators by their angle:
 
 $$
 
-\braket{\Omega | A \, e^{i K (\eta + 2\pi i)} B e^{-i K (\eta + 2\pi i)} | \Omega} = \braket{\Omega | \mathcal{T}_{\eta_E} \big[ A(\eta_E=0) B(\eta_E=2\pi) \big] | \Omega} .
+\begin{aligned}
+&\braket{\Omega | A \, e^{-\vartheta K} B e^{\vartheta K} | \Omega} \\
+&\qquad = \braket{\Omega | \mathcal{T}_{\eta_E} \big[ A(\eta_E{=}0)\, B(\eta_E{=}\vartheta) \big] | \Omega} ,
+\qquad 0<\vartheta<2\pi .
+\end{aligned}
 
 $$
 
-Because Euclidean time ordering places operators with larger $\eta_E$ to the left, and $2\pi$ wraps past the insertion at $\eta_E = 0$:
+The right side is a single smooth function of the angle $\vartheta$, because in the Euclidean plane no angle is
+special. As $\vartheta\to0$, the insertion of $B$ approaches $A$ from one side, and the ordered product becomes
+$AB$. As $\vartheta\to2\pi$, it approaches the same point from the other side, and the ordering puts $B$ to the
+left of $A$:
 
 $$
 
-\mathcal{T}_{\eta_E} \big[ A(0) B(2\pi) \big] = B(0) A(0) .
+\lim_{\vartheta\to2\pi}\mathcal{T}_{\eta_E} \big[ A(0)\, B(\vartheta) \big] = B\,A .
 
 $$
 
-Therefore:
+Therefore
 
 $$
 
@@ -922,19 +1072,23 @@ $$
 
 $$
 
-This is identically the KMS relation with inverse temperature $\beta = 2\pi$ with respect to the boost parameter $\eta$!
-By Tomita—Takesaki uniqueness, the modular operator is uniquely identified as $\Delta_\Omega = e^{-2\pi K}$. $\blacksquare$
+This is the KMS relation with inverse temperature $\beta = 2\pi$ with respect to the boost parameter $\eta$.
+The argument treats the path integral formally, so it is a heuristic. The rigorous statement, for any QFT
+satisfying the Wightman axioms, is the Bisognano—Wichmann theorem. Given the KMS property, and property (i)
+above, the uniqueness remark~(d) identifies the modular operator as $\Delta_\Omega = e^{-2\pi K}$.
+$\blacksquare$
 
 \end{workedexamplebox}
 
-The physical translation of condition (ii) is exactly the **Unruh effect**, and it's worth spelling out
-the geometry carefully, because "a Rindler observer" is not just a figure of speech. Writing the Minkowski
-metric as $ds^2=-dt^2+dx^2=-\rho^2d\eta^2+d\rho^2$ (Rindler coordinates: $\rho$ is a radial-like coordinate,
-$\eta$ a boost-angle-like coordinate), a trajectory of constant $\rho$ traces out a hyperbola in the $(t,x)$
-plane — this is exactly the worldline of an observer undergoing constant proper acceleration $a=1/\rho$, and
-$\eta$, the boost parameter, is proportional to that observer's own proper time, $d\tau=\rho\,d\eta$.
-Condition (ii) says: observers using $\eta$ as their clock — i.e., *emph* — experience the ordinary Minkowski vacuum, which contains no particles at all as far as an
-inertial observer is concerned, as a genuinely thermal bath, at temperature
+The physical meaning of condition (ii) is the **Unruh effect**. The geometry deserves to be spelled out,
+because "a Rindler observer" is not just a figure of speech. Write the Minkowski metric as
+$ds^2=-dt^2+dx^2=-\rho^2d\eta^2+d\rho^2$. In these Rindler coordinates, $\rho$ plays the role of a radius and
+$\eta$ the role of a boost angle. A trajectory of constant $\rho$ is a hyperbola in the $(t,x)$ plane. It is the
+worldline of an observer with constant proper acceleration $a=1/\rho$. Along it, the boost parameter $\eta$ is
+proportional to the observer's own proper time: $d\tau=\rho\,d\eta$. Condition (ii) says that observers who use
+$\eta$ as their clock, which means exactly these uniformly accelerated observers, see the Minkowski vacuum as a
+thermal bath. For an inertial observer the vacuum contains no particles at all. The accelerated observers see
+the temperature
 
 $$
 
@@ -942,37 +1096,80 @@ T_\rho = \frac{1}{2\pi\rho} = \frac{a}{2\pi} .
 
 $$
 
-This is Unruh's 1976 result, arrived at here as a direct, unavoidable consequence of Tomita—Takesaki theory
-applied to the vacuum of a relativistic field, with the specific factor of $2\pi$ in eq.~4.44 being exactly
-what converts the universal, dimensionless modular temperature $\beta=1$ into this specific, physical
-temperature once $\eta$ is converted to the accelerated observer's own proper time $\tau$.
+This is Unruh's 1976 result. Here it appears as a direct consequence of Tomita—Takesaki theory applied to the
+vacuum of a relativistic field. The factor $2\pi$ in \eqref{eq:bw} converts the universal, dimensionless modular
+temperature $\beta=1$ into this physical temperature, once $\eta$ is converted to the accelerated observer's own
+proper time $\tau$.
+
+
+> [!NOTE] **Physics Connection: a finite-matrix version of the Unruh effect, from quantum optics**
+> The field-theory argument above is rigorous but abstract. It involves every mode of the field, an honest boost,
+> and a full QFT vacuum. The same thermality already appears in a finite, checkable calculation, using a toy
+> model that every quantum-optics course covers: a two-mode squeezed state. Take two copies of a single
+> harmonic-oscillator mode, labelled $R$ and $L$, and build
+> 
+$$
+
+> \ket{\mathrm{TFD}_x} = \sqrt{1-x^2}\sum_{n=0}^\infty x^n\,\ket n_R\ket n_L , \qquad x\in(0,1) .
+> 
+$$
+
+> This is the standard two-mode squeezed vacuum. It is already in Schmidt form, with probabilities
+> $p_n=(1-x^2)x^{2n}$. We truncated at $40$ Fock levels and computed
+> $\rho_R=\Tr_L\ket{\mathrm{TFD}_x}\bra{\mathrm{TFD}_x}$ numerically at $x=0.6$. The off-diagonal entries vanish,
+> as they must, since the state is already diagonal in the Fock basis. The trace $\Tr\rho_R$ equals $1$ to
+> machine precision (the truncation error is $x^{80}\approx 2\times10^{-18}$). The diagonal entries match
+> $p_n=(1-x^2)x^{2n}$ to machine precision for every $n$. Now compare this with an ordinary Gibbs state:
+> 
+$$
+
+> p_n = (1-x^2)x^{2n} \ \eqstep{1}\ (1-e^{-\beta\omega})e^{-n\beta\omega} .
+> 
+$$
+
+> **(1)** set $x^2\equiv e^{-\beta\omega}$. The right side is the Boltzmann distribution of a single mode
+> of frequency $\omega$ at inverse temperature $\beta$.
+> 
+> At $x=0.6$ this gives $\beta\omega=-\log(x^2)\approx1.022$. **The observer with access only to mode $R$
+> looks at a pure, zero-entropy global state and measures an exactly thermal distribution.** No approximation or
+> large-$N$ limit is involved. It is just the ordinary partial trace, applied to a state that happens to be
+> diagonal. This is more than an analogy to the Rindler-wedge argument above. It is the same calculation with the
+> geometry stripped away. In free field theory, rewriting the Minkowski vacuum in Rindler modes produces exactly
+> this two-mode squeezed form, mode by mode. The squeezing parameter is tied to the proper acceleration $a$ by
+> $x=e^{-\pi\omega/a}$, so $\beta=2\pi/a$. Summing this thermal spectrum over every field mode is the full
+> field-theoretic Unruh calculation.
+
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.78\textwidth]{figs/fig_unruh.pdf}
-\caption{The Bisognano—Wichmann theorem and the Unruh effect: the modular flow $\sigma_t^\Omega(A) = \Delta_\Omega^{it} A \Delta_\Omega^{-it}$ acting on the right Rindler wedge $\M_R$ is geometrically equivalent to a Lorentz boost with parameter $\eta = 2\pi t$. Accelerated observers perceive the Minkowski vacuum as a thermal KMS state with local Unruh temperature $T(x) = \hbar c / (2\pi k_B x)$.}
+\caption{The Bisognano—Wichmann theorem and the Unruh effect. (a) The Euclidean plane $(x,t_E)$: the $t=0$
+slice is the horizontal axis, split at the horizon point $\rho=0$ (dot) into the half-lines $R$ (blue) and $L$
+(gold), and the Euclidean boost angle $\eta_E$ (red) turns about that point, carrying $R$ onto $L$ after a half
+turn and back after a full turn of $2\pi$, the periodicity behind the KMS condition at $\beta=2\pi$. (b) The resulting Unruh
+temperature $T=1/(2\pi x)$ seen by the accelerated observer passing through the point $x$ of $R$ at $t=0$; it
+diverges at the horizon and falls off far from it.}
 \label{fig:unruh}
 \end{figure}
 
-The boost generator $K$ has purely continuous spectrum, all of $(-\infty,\infty)$ (it's the generator of an
-honest noncompact symmetry — there's no smallest nonzero boost, and boosts of arbitrarily large rapidity all
-exist), so $\Delta_\Omega=e^{-2\pi K}$ has spectrum all of $\mathbb R_{\ge0}$ — and it can be shown that
-$S(\M_R)$ coincides with this spectrum, giving (by the classification of Sec.~IV.B) **$\M_R$ is type
-$\mathrm{III**_1$}. The modular conjugation $J_\Omega$ turns out to be exactly $CRT$ — charge conjugation,
-combined with a spatial reflection and time reversal — meaning Tomita—Takesaki theory, applied to a
-relativistic vacuum, reconstructs the celebrated CPT theorem directly out of nothing but the algebra and the
-vacuum state, with no separate argument needed.
+The boost generator $K$ has continuous spectrum covering the whole real line, $(-\infty,\infty)$. (The only
+eigenvector is the vacuum, with eigenvalue $0$.) Boosts form a noncompact group: there are boosts of
+arbitrarily large rapidity, and no smallest nonzero one. So $\Delta_\Omega=e^{-2\pi K}$ has spectrum
+$\mathbb R_{\ge0}$. One can show that $S(\M_R)$ equals this spectrum. By the classification
+\eqref{eq:typeIII-classes}, **$\M_R$ is type $\mathrm{III**_1$}. The modular conjugation $J_\Omega$ also has
+a geometric meaning. It is $CRT$: charge conjugation, combined with a reflection of the $x$ direction and time
+reversal. So the CPT symmetry of relativistic quantum field theory shows up as part of the modular structure of
+the vacuum, built from nothing but the algebra and the state.
 
-This entire story generalizes immediately to higher spacetime dimensions (any transverse directions just ride
-along unaffected, since the boost only acts in the $t$-$x$ plane), and — this is the deeper point, worth
-holding onto — it generalizes to a *emph* open region $O$ on a Cauchy slice, not just the special case
-of a half-space. Reeh—Schlieder guarantees $\ket\Omega$ is still cyclic and separating for $\M_O$, so
-Tomita—Takesaki theory applies; the modular operator can no longer, in general, be written down in closed
-form (it depends on the precise theory and the precise shape of $O$), but a scale-invariance argument (valid
-whenever the theory has a scale-invariant UV fixed point — true of essentially any interacting quantum field
-theory taken to short enough distances) still pins down its type. The argument: right near the boundary
-$\Sigma_O$ of the region $O$, that boundary looks, at short enough distances, just like a flat plane — locally
-indistinguishable from the Rindler-wedge geometry just worked out — so
+This whole story extends at once to higher spacetime dimensions. Any transverse directions just come along
+unchanged, since the boost acts only in the $t$-$x$ plane. More importantly, it extends in part to a
+*emph* open region $O$ on a Cauchy slice, not just to a half-space. Reeh—Schlieder guarantees that
+$\ket\Omega$ is still cyclic and separating for $\M_O$, so Tomita—Takesaki theory applies. In general the
+modular operator can no longer be written in closed form. It depends on the precise theory and on the precise
+shape of $O$. Still, a scale-invariance argument pins down its type. The argument needs the theory to have a
+scale-invariant fixed point at short distances, which is believed to be true of essentially every interacting
+quantum field theory. Very close to the boundary $\Sigma_O$ of the region $O$, the boundary looks like a flat
+plane. So locally the geometry cannot be told apart from the Rindler wedge just worked out, and
 
 $$
 
@@ -980,393 +1177,444 @@ $$
 
 $$
 
-(eq.~4.46) with $K$ now the boost that locally leaves $\Sigma_O$ fixed, forcing the same continuous spectrum
-$\mathbb R_{\ge0}$ and hence, again, type $\mathrm{III}_1$. **The type $\mathrm{III**_1$ nature of every
-local algebra in a relativistic quantum field theory can be traced directly to this local Rindler structure
-near any entangling surface, which in turn is a direct consequence of relativistic causal structure itself} —
-this is the precise sense in which ``the causal structure of a relativistic QFT requires type
-$\mathrm{III}_1$,'' and correspondingly, a *emph*-relativistic field theory (with no light-cone structure
-forcing this local Rindler behavior near any cut) need not have type $\mathrm{III}_1$ local algebras at all.
+with $K$ now the boost that locally leaves $\Sigma_O$ fixed. This forces the same continuous spectrum
+$\mathbb R_{\ge0}$, and hence type $\mathrm{III}_1$ again. As stated, this is a heuristic. It can be made
+rigorous under a technical assumption about the short-distance (scaling) limit of the theory. **So the
+type $\mathrm{III**_1$ nature of local algebras in a relativistic quantum field theory can be traced to the local
+Rindler structure near any entangling surface, and that structure comes from relativistic causality.} This is
+the precise sense in which "the causal structure of a relativistic QFT requires type $\mathrm{III}_1$."
+Correspondingly, a *emph*-relativistic field theory, with no light-cone structure to force this local
+Rindler behavior, need not have type $\mathrm{III}_1$ local algebras at all.
 
-### Sec.~IV.D.2: the split property
+### The split property
 
-The heuristic picture from Sec.~I — that non-factorization and type III structure come from infinite
-entanglement concentrated among short-distance degrees of freedom right at the boundary of a region — can be
-made completely precise, and it's worth seeing the precise version, because it resolves what might otherwise
-look like a contradiction: how can two regions be infinitely entangled (type III, no factorization) and yet,
-intuitively, "mostly independent" once you're not sitting exactly on the shared boundary?
+Chapter~1 gave a heuristic picture: non-factorization and type III structure come from infinite entanglement
+among short-distance degrees of freedom right at the boundary of a region. This picture can be made precise.
+The precise version also resolves what could look like a contradiction. How can two regions be infinitely
+entangled (type III, no factorization) and yet, intuitively, "mostly independent" away from their shared
+boundary?
 
-Separate $R$ and $L$ by a small but nonzero buffer distance $\epsilon_b$ (so there's a thin strip $I_\epsilon$
-of "no man's land" between them). The **split property** states that there *emph* a genuine tensor
-factorization $\HH=\HH_1\otimes\HH_2$, with
-
-$$
-
-\M_R \subset B(\HH_1)\otimes\id_{\HH_2} \subset \M_L' = \M_{R_\epsilon}, \qquad
-\M_L \subset \id_{\HH_1}\otimes B(\HH_2) \subset \M_R' = \M_{L_\epsilon}
+Separate $R$ and $L$ by a small but nonzero buffer distance $\epsilon_b$. There is then a thin strip
+$I_\epsilon$ of "no man's land" between them. The **split property** states that there *emph* a
+genuine tensor factorization $\HH=\HH_1\otimes\HH_2$, with
 
 $$
 
-(eq.~4.47, where $R_\epsilon\equiv R\cup I_\epsilon$, similarly $L_\epsilon$) — a genuine type I factor,
-$B(\HH_1)\otimes\id_{\HH_2}$, sandwiched in between the two type $\mathrm{III}_1$ algebras $\M_R$ and
-$\M_{R_\epsilon}$. This says something with real physical bite: once $R$ and $L$ are separated by *emph*
-nonzero distance, however small, they *emph* be completely disentangled — there exist genuine, honest
-product states with respect to the factors $\HH_1,\HH_2$, on which $\M_R$ and $\M_L$ act purely separately.
-The entanglement obstruction from Sec.~I, in other words, is a purely short-distance, boundary-localized
-phenomenon; it evaporates completely the instant you step back even an infinitesimal amount from the shared
-edge. More generally, for any two regions $O_1\subset O_2$ whose boundaries don't actually touch (the closure
-of $O_1$ sits strictly inside the interior of $O_2$), the split property guarantees a genuine type I factor
-$\N$ with $\M_{O_1}\subset\N\subset\M_{O_2}$ (eq.~4.48) — a type I "buffer" can always be inserted, as long
-as there's any geometric gap at all to insert it into.
+\begin{aligned}
+\M_R &\subset B(\HH_1)\otimes\id_{\HH_2} \subset \M_L' = \M_{R_\epsilon}, \\
+\M_L &\subset \id_{\HH_1}\otimes B(\HH_2) \subset \M_R' = \M_{L_\epsilon} ,
+\end{aligned}
 
-The split property is not an extra assumption pulled from nowhere; it can be shown to follow from a technical
-condition called the *emph* — a statement about how quickly the theory's energy density
-grows at high energies — believed to hold for any "reasonable" relativistic QFT. Given the split property,
-it can further be shown that $\M_O$, for an open region $O$, is not just type $\mathrm{III}_1$ but also
-**hyperfinite**: it can be built as the weak closure of an increasing sequence of ordinary,
-finite-dimensional matrix algebras (exactly the kind of construction used throughout this companion — bigger
-and bigger, but always finite, matrices, taken to a limit). A deep uniqueness theorem then applies: hyperfinite
-type $\mathrm{III}_1$ von Neumann algebras are, up to isomorphism, all the *emph* algebra. The striking
-consequence: **the local algebra of any region in any "reasonable" relativistic QFT — free or
-interacting, weakly or strongly coupled, any spacetime dimension — is abstractly isomorphic to the local
-algebra of any other region in any other such theory.** Different theories are distinguished not by what their
-local algebras *emph* (abstractly, they're all the same object), but by how those algebras sit relative to
-one another — which operators are shared between overlapping regions, how correlators between distant regions
-behave, and so on. This is a genuinely surprising, almost counter-intuitive statement, and it's stated here
-exactly as strongly as the paper states it, because it's one of the cleanest illustrations of how much
-structure the type classification alone captures, and how much it deliberately does *emph* capture (the
-dynamics, which lives entirely in the relations between algebras, not in any single algebra's abstract type).
+$$
 
-Two further, related consequences are worth walking through, because the first comes with an actual proof
-sketch worth seeing, and the second is one of the more startling facts in the whole paper.
+where $R_\epsilon\equiv R\cup I_\epsilon$, and similarly for $L_\epsilon$. So a type I factor,
+$B(\HH_1)\otimes\id_{\HH_2}$, sits between the two type $\mathrm{III}_1$ algebras $\M_R$ and $\M_{R_\epsilon}$.
+This has real physical content. Once $R$ and $L$ are separated by *emph* nonzero distance, however small,
+they *emph* be completely disentangled. There are honest product states with respect to the factors
+$\HH_1,\HH_2$, and on them $\M_R$ and $\M_L$ act independently. In other words, the entanglement obstruction of
+Chapter~1 is a short-distance effect localized at the boundary. It disappears as soon as the two regions are
+separated by any finite gap. More generally, take two regions $O_1\subset O_2$ whose boundaries do not touch
+(the closure of $O_1$ lies inside the interior of $O_2$). The split property then guarantees a type I factor
+$\N$ with $\M_{O_1}\subset\N\subset\M_{O_2}$. A type I "buffer" can always be inserted, as long as there is
+some geometric gap to put it in.
 
-**Strong local preparability.** Take the setup of Fig.~5 (regions $R,L$ split by a buffer $I_\epsilon$).
-For a general state $\omega$, there's generally a genuine correlation between $R$ and $L$-operators,
-$\omega(AB)\ne\omega(A)\omega(B)$ for $A\in\M_R,B\in\M_L$ (eq.~4.49) — nothing surprising there. The startling
-claim: using an operation $W$ supported only in the slightly enlarged region $R_\epsilon$ (not $R$ itself, but
-$R$ plus the thin buffer strip), it is possible to build a *emph* state $\omega_W$ that (i) has
-*emph* correlation between $\M_R$ and $\M_L$ at all, and (ii) matches some arbitrarily chosen target
-state $\phi$ exactly on $\M_R$, while leaving the state on $\M_L$ completely unchanged from the original
-$\omega$ (eqs.~4.50—4.51). This sounds like it should be nearly impossible — locally erase all correlation
-with a distant system while simultaneously re-preparing your own region into any state you like, without
-touching the distant system at all — and yet it follows in a few lines from the split property and the type
-III structure. Here is the argument, worth seeing because it's short: by the split property, $\M_R\subset
-B(\HH_1)$, so there's a vector $\ket\xi\in\HH_1$ representing the target state, $\phi(A)=\braket{\xi|A|\xi}$
-(justified more carefully in Sec.~IV.G below). The projection $P_\xi=\ket\xi\rangle\langle\xi|\otimes
-\id_{\HH_2}$ lies in $\M_{R_\epsilon}$; since $\M_{R_\epsilon}$ is type III, *emph* nonzero projection in
-it is equivalent to the identity (Sec.~II.B.5's finiteness discussion, pushed to its extreme: in type III,
-nothing is finite, so everything is as "big" as the whole algebra) — so there's an isometry $W\in
-\M_{R_\epsilon}$ with $WW^\dagger=P_\xi$, $W^\dagger W=\id$. Because $W\in\M_{R_\epsilon}\subset\M_L'$, it
-commutes with everything in $\M_L$, so $\omega_W(B)\equiv\omega(W^\dagger BW)=\omega(B)$ for $B\in\M_L$
-(eq.~4.51) — the $L$-side is untouched, exactly as claimed. And a short algebraic manipulation using
-$P_\xi AP_\xi=\phi(A)P_\xi$ (immediate from $\ket\xi$ representing $\phi$) gives $W^\dagger AW=\phi(A)\id$
-(eq.~4.52), from which $\omega(W^\dagger ABW)=\phi(A)\omega(B)$ follows directly (eq.~4.53) — exactly the
-claimed factorized, re-prepared state.
+The split property is not an extra assumption pulled from nowhere. It can be shown to follow from a technical
+condition called the *emph*. This is a statement about how quickly the number of available
+states of the theory grows with energy. It is believed to hold for any "reasonable" relativistic QFT. Given
+the split property, one can further show that $\M_O$, for an open region $O$, is not only type
+$\mathrm{III}_1$ but also **hyperfinite**. This means it can be built as the weak closure of an increasing
+sequence of ordinary finite-dimensional matrix algebras. That is exactly the kind of construction used
+throughout these notes: bigger and bigger, but always finite, matrices, taken to a limit. A deep uniqueness
+theorem then applies: up to isomorphism, there is only *emph* hyperfinite type $\mathrm{III}_1$ factor. The
+consequence is striking. **The local algebra of any region in any "reasonable" relativistic QFT (free or
+interacting, weakly or strongly coupled, in any spacetime dimension) is abstractly isomorphic to the local
+algebra of any other region in any other such theory.** Different theories are not distinguished by what their
+local algebras *emph*, since abstractly these are all the same object. They are distinguished by how the
+algebras sit relative to one another: which operators are shared between overlapping regions, how correlators
+between distant regions behave, and so on. This statement is surprising, and it is given here at full strength
+for a reason. It shows clearly how much structure the type classification captures. It also shows how much it
+deliberately does *emph* capture: the dynamics, which lives entirely in the relations between algebras, not
+in the abstract type of any single algebra.
+
+Two further consequences follow. The first comes with a short proof. The second is one of the more startling
+facts in the whole subject.
+
+**Strong local preparability.** Take the split setup just described, with regions $R$ and $L$ separated by
+a buffer $I_\epsilon$. In a general state $\omega$, operators in $R$ and in $L$ are correlated:
+$\omega(AB)\ne\omega(A)\omega(B)$ for $A\in\M_R$, $B\in\M_L$. Nothing is surprising there. The startling claim is
+the following. There is an operation $W$, supported only in the slightly larger region $R_\epsilon$ ($R$ plus
+the thin buffer strip), that turns $\omega$ into a *emph* state $\omega_W$ with three properties. (i) There
+is *emph* correlation at all between $\M_R$ and $\M_L$. (ii) On $\M_R$, the new state equals an arbitrarily
+chosen target state $\phi$. (iii) On $\M_L$, the new state is the same as the original $\omega$. This sounds
+nearly impossible. It says you can locally erase all correlation with a distant system and, at the same time,
+re-prepare your own region in any state you like, without touching the distant system. Yet it follows in a few
+lines from the split property and the type III structure.
+
+Here is the argument. By the split property, $\M_R\subset B(\HH_1)\otimes\id_{\HH_2}$. So there is a vector
+$\ket\xi\in\HH_1$ that represents the target state, $\phi(A)=\braket{\xi|A|\xi}$. (This step is justified more
+carefully in the section on the natural cone at the end of this chapter.) The projection
+$P_\xi=\ket\xi\bra\xi\otimes\id_{\HH_2}$ lies in $\M_{R_\epsilon}$. Since $\M_{R_\epsilon}$ is type III,
+*emph* nonzero projection in it is equivalent to the identity. This is Chapter~2's discussion of finite
+and infinite projections pushed to its extreme: in type III nothing is finite, so every projection is as "big"
+as the whole algebra. So there is an isometry $W\in\M_{R_\epsilon}$ with $WW^\dagger=P_\xi$ and
+$W^\dagger W=\id$. Define $\omega_W(X)\equiv\omega(W^\dagger XW)$. Because $W\in\M_{R_\epsilon}\subset\M_L'$,
+it commutes with everything in $\M_L$. So for $B\in\M_L$,
+\begin{align}
+\omega_W(B)\equiv\omega(W^\dagger BW) \eqstep{1} \omega(W^\dagger W B) \eqstep{2} \omega(B) . \notag
+\end{align}
+**(1)** $W$ commutes with $B$, because $W\in\M_L'$.\quad
+**(2)** $W^\dagger W=\id$.
+
+So the $L$ side is untouched, as claimed. For the $R$ side, we use the relation $P_\xi AP_\xi=\phi(A)P_\xi$,
+which follows at once from $\ket\xi$ representing $\phi$. For $A\in\M_R$ it gives
+\begin{align}
+W^\dagger AW &\eqstep{1} W^\dagger (WW^\dagger)A(WW^\dagger)W \notag\\
+&\eqstep{2} W^\dagger P_\xi AP_\xi W
+\eqstep{3} \phi(A)\,W^\dagger P_\xi W
+\eqstep{4} \phi(A)\,\id . \notag
+\end{align}
+**(1)** $W^\dagger W=\id$ implies $W^\dagger=W^\dagger WW^\dagger$ and $W=WW^\dagger W$.\quad
+**(2)** $WW^\dagger=P_\xi$.\quad
+**(3)** $P_\xi AP_\xi=\phi(A)P_\xi$.\quad
+**(4)** $W^\dagger P_\xi W=W^\dagger WW^\dagger W=\id$.
+
+Combining the two results gives the factorized, re-prepared state. For $A\in\M_R$ and $B\in\M_L$,
+\begin{align}
+\omega_W(AB)\equiv\omega(W^\dagger ABW) \eqstep{1} \omega(W^\dagger AW\,B) \eqstep{2} \phi(A)\,\omega(B) .
+\notag
+\end{align}
+**(1)** $W$ commutes with $B\in\M_L$, so $BW=WB$.\quad
+**(2)** $W^\dagger AW=\phi(A)\id$, from the chain just above.
 
 **The Connes—St\o rmer transitivity theorem.** For a type $\mathrm{III}_1$ factor, *emph* two states
-$\phi,\omega$ can be connected to arbitrary precision $\epsilon>0$ by a unitary $W$ *emph*, $\|\phi-\omega_W\|<\epsilon$ (eq.~4.54). In words: every state can be prepared, locally, to
-arbitrary accuracy, starting from any other state — a statement of ergodicity so strong it's fair to call the
-resulting state space *emph*: no state is structurally special or hard to reach from any other,
-in sharp contrast to a type I algebra with a nontrivial center, where different superselection sectors are, by
-definition, mutually unreachable by anything in the algebra.
+$\phi$ and $\omega$ can be connected to arbitrary precision $\epsilon>0$ by a unitary $W$ *emph*: $\|\phi-\omega_W\|<\epsilon$. In words, every state can be prepared locally, to arbitrary
+accuracy, starting from any other state. This is such a strong form of ergodicity that it is fair to call the
+state space *emph*. No state is structurally special or hard to reach from another. This is in
+sharp contrast with a type I factor $B(\HH)$. There, unitary conjugation $\rho\to U\rho U^\dagger$ preserves the
+eigenvalues of the density matrix, so a pure state can never be brought close to a mixed one. With a
+nontrivial center it is worse still: different superselection sectors are, by definition, unreachable from one
+another by anything in the algebra.
 
-### Sec.~IV.D.3: the collection of algebras $\{\M(O)\$, and Haag duality}
+### The collection of algebras $\{\M(O)\}$, and Haag duality
 
-One closing structural point, worth having on hand because it resurfaces directly in Sec.~VII: the full
-collection of local algebras $\{\M(O)\}$, one for every open spacetime region $O$, is expected to satisfy
-several basic consistency relations, each one a direct algebraic translation of an ordinary physical
-principle. **Isotony**, $\M(O_1)\subseteq\M(O_2)$ for $O_1\subseteq O_2$ (eq.~4.55): a bigger region
-gives access to at least as many operations as a smaller one it contains — this is almost definitional.
-**The time-slice axiom**, $\M(O)=\M(\widehat O)$ (eq.~4.56): because the equations of motion are causal,
-operators anywhere in the domain of dependence $\widehat O$ can be re-expressed, via time evolution, in terms
-of operators in $O$ itself — so knowing the algebra on a single Cauchy slice already determines it everywhere.
-**Locality (commutativity)**, $\M(O')\subseteq\M(O)'$ (eq.~4.57): operators in the causal complement
-$O'$ (spacelike separated from all of $O$) commute with everything in $\M(O)$ — the operator-algebra statement
-of ordinary microcausality. When this last relation holds with *emph*, $\M(O')=\M(O)'$, it's called
-**Haag duality** (eq.~4.58) — a strictly stronger statement, saying that literally *emph* operator
-commuting with $\M(O)$ is already accounted for by the causal complement, with nothing extra hiding outside
-that count. Haag duality is not automatic (it can fail for topologically nontrivial regions), but is expected
-to hold quite generally for the vacuum sector of an ordinary relativistic QFT on topologically simple regions.
-Two further relations — **additivity**, $\M(O_1\cup O_2)=\M(O_1)\vee\M(O_2)$ (eq.~4.60: no "extra,"
-genuinely nonlocal operators hide in a union that aren't already built from the pieces), and the resulting
-**intersection property**, $\M(O_1\cap O_2)=\M(O_1)\cap\M(O_2)$ (eq.~4.61, which follows from combining
-Haag duality and additivity via a short commutant manipulation, eqs.~4.62—4.63) — round out the full package.
-A theory satisfying all of these, for every region (not just topologically trivial ones), is called
-"complete." These relations are worth having memorized in outline, not for their own sake, but because
-Sec.~VII builds subregion-subalgebra duality directly on top of exactly this dictionary, translated to the
-boundary theory of AdS/CFT.
+One more structural point returns directly in Chapter~7. Consider the full collection of local algebras
+$\{\M(O)\}$, one for every open spacetime region $O$. It is expected to satisfy several basic consistency
+relations. Each one is an algebraic translation of an ordinary physical principle.
 
-## Sec.~IV.E: emergent times from subalgebras — half-sided modular inclusion
+- **Isotony**, $\M(O_1)\subseteq\M(O_2)$ for $O_1\subseteq O_2$. A bigger region gives access to at
+least as many operations as a smaller region inside it. This is almost a definition.
+- **The time-slice axiom**, $\M(O)=\M(\widehat O)$. The equations of motion are causal. So operators
+anywhere in the domain of dependence $\widehat O$ can be rewritten, using time evolution, in terms of operators
+in $O$ itself. Knowing the algebra on a single Cauchy slice therefore determines it everywhere.
+- **Locality (commutativity)**, $\M(O')\subseteq\M(O)'$. Operators in the causal complement $O'$
+(spacelike separated from all of $O$) commute with everything in $\M(O)$. This is the operator-algebra form of
+ordinary microcausality.
 
-This subsection introduces a second, genuinely distinct notion of emergent time — one that comes not from a
-single algebra's own modular flow, but from the relationship between an algebra and a carefully chosen
-subalgebra of it. It is a unique feature of type $\mathrm{III}_1$ algebras specifically, and it is exactly the
-mechanism, picked up again in Sec.~VII, that lets a single band of boundary time generate the entire interior
-of an emergent black-hole horizon.
+When the last relation holds with *emph*, $\M(O')=\M(O)'$, it is called **Haag duality**. This
+is strictly stronger. It says that *emph* operator commuting with $\M(O)$ already comes from the causal
+complement, with nothing extra hiding elsewhere. Haag duality is not automatic. It can fail for topologically
+nontrivial regions. It is expected to hold quite generally for the vacuum sector of an ordinary relativistic QFT
+on topologically simple regions. Two further relations complete the package. The first is
+**additivity**, $\M(O_1\cup O_2)=\M(O_1)\vee\M(O_2)$: no "extra," genuinely nonlocal operators hide in a
+union beyond those built from the pieces. The second is the **intersection property**,
+$\M(O_1\cap O_2)=\M(O_1)\cap\M(O_2)$. It can be derived from Haag duality and additivity by taking commutants,
+in cases where the causal complement of $O_1\cap O_2$ is the union of $O_1'$ and $O_2'$. A theory that
+satisfies all of these relations for every region (not just topologically trivial ones) is called
+"complete." It helps to know these relations in outline, not for their own sake, but because Chapter~7 builds
+subregion-subalgebra duality on exactly this dictionary, translated to the boundary theory of AdS/CFT.
+
+## Emergent times from subalgebras — half-sided modular inclusion
+
+This section introduces a second, distinct notion of emergent time. It does not come from the modular flow of a
+single algebra. It comes from the relationship between an algebra and a carefully chosen subalgebra of it. It
+is special to type $\mathrm{III}_1$ algebras. It is also the mechanism, taken up again in Chapters~7 and~8, that
+lets a single band of boundary time generate the entire interior of an emergent black-hole horizon.
 
 ### A new, positive "Hamiltonian" $G$
 
-Let $\M$ be a von Neumann algebra with cyclic-separating vector $\ket\Omega$, modular data $\Delta_\M=
-e^{-K_\M}$, $J_\M$, as in Sec.~IV.A. Now suppose $\N\subset\M$ is a genuine subalgebra, and $\ket\Omega$
-happens to *emph* be cyclic for $\N$ (automatically separating too, since $\N\subset\M$ and $\ket\Omega$
-is already separating for the bigger algebra $\M$). $\N$ inherits its own modular data, $\Delta_\N=e^{-K_\N}$,
-$J_\N$, with respect to the same $\ket\Omega$.
+Let $\M$ be a von Neumann algebra with a cyclic and separating vector $\ket\Omega$. Its modular data are
+$\Delta_\M=e^{-K_\M}$ and $J_\M$, as in the Tomita—Takesaki theorem. Now suppose $\N\subset\M$ is a
+subalgebra, and $\ket\Omega$ is *emph* cyclic for $\N$. It is then automatically separating for $\N$ too:
+it is separating for the bigger algebra $\M$, and $\N\subset\M$. So $\N$ has its own modular data,
+$\Delta_\N=e^{-K_\N}$ and $J_\N$, with respect to the same $\ket\Omega$.
 
-Here is the first new structural fact, and it's worth seeing the one-line reason it's true: because $\N\subset
-\M$, the Tomita operator $S_\M$ (built from $\M$ and $\ket\Omega$) is literally an extension of $S_\N$ (built
-from the smaller algebra $\N$ and the same $\ket\Omega$) — $S_\M$ agrees with $S_\N$ everywhere $S_\N$ is
-defined, but is also defined on the larger domain $\M\ket\Omega\supseteq\N\ket\Omega$. A general fact about
-unbounded operators (extending an operator can only make $X^\dagger X$ bigger, never smaller, in the operator
-ordering sense) then gives $\Delta_\N\ge\Delta_\M$ (eq.~4.64), i.e., using $-\log$ (which reverses
-inequalities for positive operators), $K_\M\ge K_\N$. Define
-
-$$
-
-G \equiv \frac{1}{2\pi}(K_\M-K_\N) \ \ge 0, \qquad G\ket\Omega=0
-
-$$
-
-(eq.~4.65 — the $2\pi$ is just a convenient normalization chosen for what follows; $G\ket\Omega=0$ follows
-because both $K_\M$ and $K_\N$ individually annihilate $\ket\Omega$, eq.~4.9 applied to each). $G$ is a
-genuinely positive operator, so it deserves to be called a Hamiltonian, and the flow $e^{iGs}$ it generates is
-a legitimate new notion of "time" — a second one, distinct from either $\M$'s own modular flow or $\N$'s —
-that also happens to leave the reference vector $\ket\Omega$ fixed.
+Here is the first new structural fact, with the reason it holds. Because $\N\subset\M$, the Tomita operator
+$S_\M$ (built from $\M$ and $\ket\Omega$) is an extension of $S_\N$ (built from $\N$ and the same
+$\ket\Omega$). That is, $S_\M$ agrees with $S_\N$ wherever $S_\N$ is defined, but it is also defined on the
+larger set $\M\ket\Omega\supseteq\N\ket\Omega$. There is a general fact about unbounded operators: if $X$
+extends $Y$, then $X^\dagger X\le Y^\dagger Y$ as quadratic forms. The two forms agree wherever both are
+defined. The form of $X^\dagger X$ is defined on more vectors, and in this ordering that makes it the smaller
+one. Applied to $\Delta_\M=S_\M^\dagger S_\M$ and $\Delta_\N=S_\N^\dagger S_\N$, this gives
+$\Delta_\M\le\Delta_\N$. The logarithm preserves inequalities between positive operators, so
+$\log\Delta_\M\le\log\Delta_\N$, which means $K_\M\ge K_\N$. Define
+\begin{equation}
+G \equiv \frac{1}{2\pi}(K_\M-K_\N) \ \ge 0, \qquad G\ket\Omega=0 .
+\label{eq:G-def}
+\end{equation}
+The factor $2\pi$ is a normalization chosen for convenience later. The equation $G\ket\Omega=0$ holds because
+$K_\M$ and $K_\N$ each annihilate $\ket\Omega$. This is the invariance $\Delta\ket\Omega=\ket\Omega$ from the
+Tomita—Takesaki theorem, applied to each algebra. $G$ is a positive operator, so it deserves to be called a
+Hamiltonian. The flow $e^{iGs}$ that it generates is a legitimate new notion of "time." It is distinct from
+the modular flows of both $\M$ and $\N$, and it also leaves the reference vector $\ket\Omega$ fixed.
 
 ### The half-sided modular inclusion condition, and what it buys you
 
-Everything so far works for *emph* subalgebra $\N\subset\M$ sharing a cyclic-separating vector. Something
-much stronger becomes available if $\N$ satisfies one additional geometric-looking condition, called
+Everything so far works for *emph* subalgebra $\N\subset\M$ that shares a cyclic and separating vector with
+$\M$. Much more follows if $\N$ satisfies one additional, geometric-looking condition, called
 **half-sided modular inclusion**:
+\begin{equation}
+\N_t \equiv \Delta_\M^{-it}\N\Delta_\M^{it} \subset \N, \qquad \text{for every } t\le0 .
+\label{eq:hsmi}
+\end{equation}
+In words: flowing $\N$ by $\M$'s *emph* modular flow, for negative modular time, always shrinks $\N$ or
+leaves it the same. It never grows it. When this holds, a theorem of Wiesbrock, building on earlier work of
+Borchers, gives three consequences at once. We quote it without proof. None of the three is assumed; all are
+derived from \eqref{eq:hsmi} alone.
+
+
+1. $K_\M$, $K_\N$ and $G$ satisfy the commutation relations
 
 $$
 
-\N_t \equiv \Delta_\M^{-it}\N\Delta_\M^{it} \subset \N, \qquad \text{for every } t\le0
+[K_\M,K_\N] = -4\pi^2i\,G , \qquad [K_\M,G] = 2\pi i\,G ,
 
 $$
 
-(eq.~4.81) — flowing $\N$ by $\M$'s *emph* modular flow, for negative modular time, always shrinks $\N$
-(or leaves it the same), never grows it. When this holds, a theorem (due to Wiesbrock and, independently,
-Borchers, building on earlier work) establishes three remarkable consequences at once, none of them assumed —
-all derived purely from eq.~4.81:
-
-
-1. $K_\M$ and $K_\N$ satisfy the commutation relations of a genuine **two-dimensional conformal
-(M\"obius) algebra** together with $G$:
-
-$$
-
-[K_\M,K_\N] = -4\pi^2i\,G , \qquad [K_\M,G] = 2\pi i\,G
+together with a companion relation for the modular conjugations. Since $K_\N=K_\M-2\pi G$, these are the
+commutation relations of the dilations and translations of a line. They form a two-dimensional subalgebra of
+the M\"obius algebra, which is the global conformal symmetry of a line. So a recognizable piece of conformal
+symmetry is produced from nothing but one algebraic inclusion condition on two von Neumann algebras.
+2. The flow generated by $G$ maps $\M$ into itself for one whole half of the time axis:
+$e^{iGs}\M e^{-iGs}\subset\M$ for $s\le0$. In particular, $\N=e^{-iG}\M e^{iG}$. So $\N$ is exactly the image
+of $\M$ under one unit of this new time translation generated by $G$. Running $G$ continuously gives a nested,
+continuously parametrized family of algebras $e^{-iGu}\M e^{iGu}$ for $u\ge0$. For $0\le u_1<u_2$ they satisfy
 
 $$
 
-(eq.~4.82, with a companion relation for the modular conjugations, eq.~4.83) — an entire, recognizable piece
-of two-dimensional conformal symmetry, produced out of nothing but one algebraic inclusion condition on two
-von Neumann algebras.
-2. The flow generated by $G$ moves $\M$ into itself for one whole half of the time axis: $e^{iGs}\M
-e^{-iGs}\subset\M$ for $s<0$ (eq.~4.84), and in particular $\N=e^{-iG}\M e^{iG}$ (eq.~4.85) — $\N$ is exactly
-the image of $\M$ under one unit of this new, $G$-generated time translation. Running $G$ continuously
-produces a whole nested, continuously-parametrized family $\N_t\equiv e^{-iGt}\M e^{iGt}$, with $\N_{t_1}
-\subset\N_{t_2}\subset\M$ for $t_1<t_2$ and $\N_\infty=\M$ (eqs.~4.89—4.90) — genuinely new time translation,
-distinct from $\M$'s own modular flow, acting purely by relating the algebra to smaller and smaller versions
-of itself.
-3. **$\M$ must be type $\mathrm{III**_1$.} Half-sided modular inclusion is not just a convenient
-technical condition — its very existence forces the ambient algebra to be the "most chaotic" type
-identified back in Sec.~IV.B.
+e^{-iGu_2}\M e^{iGu_2}\ \subset\ e^{-iGu_1}\M e^{iGu_1}\ \subset\ \M ,
 
-(The paper builds several further technical objects along the way to this theorem — unitaries $D(t)=\Delta_\M
-^{-it}\Delta_\N^{it}$, $V=J_\M J_\N$, and a chain of nested algebras built by repeatedly conjugating with $V$,
-eqs.~4.66—4.80 — used to actually *emph* the theorem and to establish that this half-sided-inclusion
-structure, once it exists, is completely unique. These are genuine, careful pieces of functional analysis;
-they're flagged here so the notation isn't a surprise if you look at the original, but the three numbered
-consequences above are the physical content that matters for everything downstream.)
+$$
+
+with $u=0$ giving $\M$ itself and $u=1$ giving $\N$. This is a new time translation, distinct from $\M$'s own
+modular flow. It acts by relating the algebra to smaller and smaller copies of itself.
+3. **$\M$ must be type $\mathrm{III**_1$} (as long as $\N\ne\M$). Half-sided modular inclusion is not
+just a convenient technical condition. Its existence forces the ambient algebra to be the "most chaotic" type
+identified earlier in this chapter.
+
+The proof of this theorem builds several further objects along the way. They include the unitaries
+$D(t)=\Delta_\M^{-it}\Delta_\N^{it}$ and $V=J_\M J_\N$, and a chain of nested algebras built by repeatedly
+conjugating with $V$. These are used to *emph* the theorem and to show that this half-sided inclusion
+structure, once it exists, is unique. They are careful pieces of functional analysis. They are named here so
+that the notation is not a surprise in the research literature. The three numbered consequences above are the
+physical content that matters for everything that follows.
 
 ### The concrete example: light-cone translations in the Rindler wedge
 
-Here is the worked example the paper gives, and it's worth working through fully, because it turns the
-abstract theorem above into something you can literally picture. Take $\M$ to be the algebra of the right
-Rindler wedge $\widehat R$ from Sec.~IV.D.1, and let $\N$ be the algebra of the smaller region $\{x^+>0,\,
-x^-<-1\}$ (using light-cone coordinates $x^\pm=x^0\pm x^1$) — a wedge-shaped region nested strictly inside
-$\widehat R$, shifted over by one unit along the $x^-$ direction (Fig.~6, left panel). Using $K_\M=2\pi K$
-(the boost generator, eq.~4.44) to flow $\N$: because a boost acts on light-cone coordinates by simple
-rescaling, $x^\pm\to e^{\mp\eta}x^\pm$, flowing the defining condition $x^->-1$ for time $t$ using
-$e^{iK_\M t}=e^{2\pi iKt}$ turns it into $x^->-e^{-2\pi t}$ — so
+Here is a worked example that turns the abstract theorem into something you can picture. Use light-cone
+coordinates $x^\pm=x^0\pm x^1$, so that the right Rindler wedge $\widehat R$ from earlier in this chapter is
+$\{x^+>0,\,x^-<0\}$. Take $\M$ to be the algebra of $\widehat R$. Let $\N$ be the algebra of the smaller region
+$\{x^+>0,\,x^-<-1\}$. This is a wedge nested strictly inside $\widehat R$, with its tip moved by one unit along
+the $x^-$ direction, to the point $(x^+,x^-)=(0,-1)$. Now flow $\N$ using $K_\M=2\pi K$ (the boost generator,
+\eqref{eq:bw}). A boost acts on light-cone coordinates by a simple rescaling. With the sign convention in which
+the modular flow moves the right wedge forward in time, the flow $e^{iK_\M t}=e^{2\pi iKt}$ is a boost by
+$\eta=2\pi t$ that acts as $x^\pm\to e^{\pm2\pi t}x^\pm$. It turns the defining condition $x^-<-1$ into
+$x^-<-e^{-2\pi t}$. So
 
 $$
 
-\N_t \equiv e^{iK_\M t}\N e^{-iK_\M t} = \text{algebra of the region } \{x^+>0,\,x^-<-e^{-2\pi t}\}
+\N_t \equiv e^{iK_\M t}\N e^{-iK_\M t} = \text{algebra of the region } \{x^+>0,\,x^-<-e^{-2\pi t}\} .
 
 $$
 
-(eq.~4.95), and since $e^{-2\pi t}>1$ for $t<0$, this region is genuinely *emph* than the original
-$\N$ (it requires $x^-$ to be even more negative) — exactly $\N_t\subset\N$ for $t<0$, precisely the
-half-sided modular inclusion condition, verified directly on an explicit geometric example rather than just
-asserted abstractly.
+For $t<0$ we have $e^{-2\pi t}>1$. So this region is *emph* than the original one, since it requires
+$x^-$ to be even more negative. This is exactly $\N_t\subset\N$ for $t<0$, the half-sided modular inclusion
+condition. Here it is checked directly on an explicit geometric example, not just asserted.
 
-Identifying $G$ explicitly here is a short computation using the ordinary Poincar\'e algebra you already know
-from special relativity: writing $P^\pm=\tfrac12(P^0\pm P^1)$ for the light-cone components of the momentum
-(energy-momentum) operator, the standard commutation relation between the boost generator and momentum,
-$[K,P^\pm]=\pm iP^\pm$ (eq.~4.97 — this is just the ordinary statement that a boost rescales energy and
-momentum, exactly the way it rescales light-cone coordinates), combined with the definition of $K_\N$ via a
-translation of $K_\M$ by the fixed point $a^\mu=(0,-1)$ of $\N$'s own boost symmetry (eq.~4.96), gives directly
+Identifying $G$ here takes a short computation with the ordinary Poincar\'e algebra of special relativity.
+Write $P^\pm=\tfrac12(P^0\pm P^1)$ for the light-cone components of the energy-momentum operator. The boost
+generator and the momentum satisfy $[K,P^\pm]=\pm iP^\pm$. This is the statement that a boost rescales energy
+and momentum in the same way that it rescales light-cone coordinates. The region of $\N$ is the region of $\M$
+translated so that its tip moves from the origin to $(x^+,x^-)=(0,-1)$. So $K_\N$ is $K_\M$ conjugated by this
+translation, which is the unitary $e^{-iP^+}$:
+\begin{align}
+K_\N = e^{-iP^+}K_\M\,e^{iP^+} \eqstep{1} K_\M - i\,[P^+,K_\M] \eqstep{2} K_\M - 2\pi P^+ . \notag
+\end{align}
+**(1)** expand $e^{-iP^+}K_\M e^{iP^+}=K_\M-i[P^+,K_\M]+\dots$; the higher terms vanish, because
+$[P^+,K_\M]$ is proportional to $P^+$, which commutes with $P^+$.\quad
+**(2)** $[P^+,K_\M]=-2\pi[K,P^+]=-2\pi iP^+$.
+
+Then the definition \eqref{eq:G-def}, $G=\tfrac1{2\pi}(K_\M-K_\N)$, gives
 
 $$
 
-K_\N = K_\M - 2\pi P^+ \qquad \Longrightarrow \qquad G = P^+
+G = P^+ .
 
 $$
 
-(eqs.~4.98—4.99, using the definition $G=\tfrac1{2\pi}(K_\M-K_\N)$ from eq.~4.65). **So in this example,
-the abstract "positive Hamiltonian" $G$ is nothing more exotic than the ordinary light-cone momentum
-operator $P^+$, and the abstract new "time flow" it generates is nothing more exotic than ordinary
-translation in the $x^-$ direction.** Every one of the general statements 1—3 above (the conformal algebra,
-the half-sided translation structure, the forced type $\mathrm{III}_1$ conclusion) can be checked directly on
-this example using nothing but ordinary special-relativistic kinematics — and this is exactly the mechanism
-that Sec.~VIII will reuse, essentially verbatim, to show that a single band of *emph* time in
-AdS/CFT can generate the entire interior of an emergent black-hole horizon: the interior turns out to be built
-by exactly this kind of half-sided-modular-inclusion light-cone translation, with $G$ playing the role of a
-genuine, positive bulk momentum.
+**So in this example, the abstract "positive Hamiltonian" $G$ is just the ordinary light-cone momentum
+operator $P^+$. The new "time flow" it generates is just ordinary translation in the $x^-$ direction.** It is
+positive, as it must be: $P^+\ge0$ by the spectrum condition. The general statements~1 and~2 above (the
+commutation relations and the half-sided translation structure) can be checked directly on this example with
+ordinary special-relativistic kinematics. For instance, $[K_\M,G]=2\pi[K,P^+]=2\pi iG$. Statement~3 agrees with
+the type $\mathrm{III}_1$ result for the Rindler wedge found earlier. This is the mechanism that Chapter~8
+reuses to show that a single band of *emph* time in AdS/CFT can generate the entire interior of an
+emergent black-hole horizon. There, the interior is built by exactly this kind of half-sided modular inclusion
+light-cone translation, with $G$ playing the role of a positive bulk momentum.
 
-(One further variant, quickly: taking $\N$ to instead be the region in Fig.~6's right panel gives a half-sided
-inclusion on the *emph* $t$-axis instead, $\N_t\subset\N$ for $t\ge0$ eq.~4.92, with correspondingly
-sign-flipped relations eq.~4.93—4.94, and a modular translation generator $G=P^-$ instead of $P^+$ — the
-mirror-image construction, translating in $x^+$ instead of $x^-$.)
+One further variant is the mirror image. Take $\N$ to be the region $\{x^+>1,\,x^-<0\}$, shifted along $x^+$
+instead of $x^-$. This gives a half-sided inclusion on the *emph* half of the time axis,
+$\N_t\subset\N$ for $t\ge0$. The commutation relations have the opposite sign, and the translation generator is
+$G=P^-$ instead of $P^+$.
 
-## Sec.~IV.F: relative modular flows and relative entropy
+## Relative modular flows and relative entropy
 
-Everything in this subsection is a direct generalization of the material already met in Sec.~I (relative
-entropy $S(\rho\|\sigma)$) and Sec.~IV.A (the Tomita operator $S_\Psi$) to a version involving *emph*
-different reference states $\ket\Psi,\ket\Omega$ at once, both cyclic and separating for the same $\M$. The
-goal, worth keeping in view through the machinery: produce a version of relative entropy that survives even
-when $\M$ is type III (where, as emphasized since Sec.~III, ordinary entropy $S_\M$ cannot be defined at all).
+This section extends two familiar objects, the relative entropy $S(\rho\|\sigma)$ of Chapter~1 and the
+Tomita operator $S_\Psi$ of this chapter, to a setting with *emph* states $\ket\Psi$ and $\ket\Omega$,
+both cyclic and separating for the same $\M$. The aim is a relative entropy that still makes sense when $\M$
+is type III, where the ordinary entropy $S_\M$ cannot be defined at all (Chapter~3).
 
-Define a **relative Tomita operator** exactly analogously to before, but now mapping between the two
-reference vectors:
+The **relative Tomita operator** is defined like the ordinary one, except that it maps between the two
+vectors:
 
 $$
 
 S_{\Psi\Omega}A\ket\Omega = A^\dagger\ket\Psi\ \ (A\in\M), \qquad
-S_{\Psi\Omega}A'\ket\Omega = A'^\dagger\ket\Psi\ \ (A'\in\M')
+F_{\Psi\Omega}A'\ket\Omega = A'^\dagger\ket\Psi\ \ (A'\in\M') ,
 
 $$
 
-(eq.~4.100), with polar decomposition $S_{\Psi\Omega}=J_{\Psi\Omega}\Delta_{\Psi\Omega}^{1/2}$ (eq.~4.102)
-defining the **relative modular operator** $\Delta_{\Psi\Omega}\ge0$ and **relative modular
-conjugation** $J_{\Psi\Omega}$, exactly the way the ordinary versions were built in Sec.~IV.A, but now
-genuinely mixing the two states. (A short algebraic identity, $S_{\Psi\Omega}S_{\Omega\Psi}=\id$, eq.~4.101,
-following directly from the definition, forces a relation $J_{\Psi\Omega}=J_{\Omega\Psi}^\dagger$ and
-$J_{\Psi\Omega}\Delta_{\Psi\Omega}J_{\Psi\Omega}=\Delta_{\Omega\Psi}^{-1}$, eqs.~4.103—4.104 — a genuine
-consistency check, worked out from the polar-decomposition uniqueness, but not needed for what follows.) There
-is a two-state generalization of the KMS relation,
+with $F_{\Psi\Omega}=S_{\Psi\Omega}^\dagger$, exactly as $S_\Psi$ and $F_\Psi$ act on $\M$ and $\M'$ in the
+single-state case.
+Its polar decomposition $S_{\Psi\Omega}=J_{\Psi\Omega}\Delta_{\Psi\Omega}^{1/2}$ defines the
+**relative modular operator** $\Delta_{\Psi\Omega}\ge0$ and the **relative modular conjugation**
+$J_{\Psi\Omega}$. When $\Psi=\Omega$ these are the ordinary $\Delta_\Psi$ and $J_\Psi$. For the type I case
+$\M=B(\HH_1)\otimes\id$, the same calculation that gave $\Delta_\Psi=\rho_R\otimes\rho_L^{-1}$ at the start of
+this chapter now gives
 
 $$
 
-\braket{\Psi|AB|\Psi} = \braket{\Omega|B\,\Delta_{\Psi\Omega}\,A|\Omega}, \qquad A,B\in\M
+\Delta_{\Psi\Omega}=\rho_\Psi\otimes\rho_\Omega'^{-1} ,
 
 $$
 
-(eq.~4.105, whose short proof, eq.~4.106, is just unpacking the definition of $S_{\Psi\Omega}$ on both
-sides) — this single relation lets you convert correlation functions computed in one state, $\ket\Psi$,
-directly into correlation functions computed in the other, $\ket\Omega$, and vice versa: genuinely useful
-machinery, used freely later without re-derivation whenever the paper needs to compare correlators across two
-different reference states.
+the density matrix of $\Psi$ on the $\M$ side and the inverse density matrix of $\Omega$ on the commutant
+side. (Here $\rho_\Psi$ and $\rho'_\Psi$ are the reduced density matrices of $\Psi$ on $\HH_1$ and $\HH_2$,
+the $\rho_R$ and $\rho_L$ of the opening example.) The relative modular operator lets one convert correlation functions in one state into correlation
+functions in the other. For $A,B\in\M$,
+\begin{align}
+\braket{\Psi|AB|\Psi}
+&\eqstep{1} \big\langle A^\dagger\Psi\,\big|\,B\Psi\big\rangle
+\eqstep{2} \big\langle S_{\Psi\Omega}A\Omega\,\big|\,S_{\Psi\Omega}B^\dagger\Omega\big\rangle \notag\\
+&\eqstep{3} \big\langle \Delta_{\Psi\Omega}^{1/2}B^\dagger\Omega\,\big|\,\Delta_{\Psi\Omega}^{1/2}A\Omega\big\rangle
+\eqstep{4} \braket{\Omega|B\,\Delta_{\Psi\Omega}\,A|\Omega} .
+\label{eq:twostate-kms}
+\end{align}
+**(1)** move $A$ to the left as $A^\dagger$.\quad
+**(2)** the definition of $S_{\Psi\Omega}$, used twice: $A^\dagger\Psi=S_{\Psi\Omega}A\Omega$ and
+$B\Psi=S_{\Psi\Omega}B^\dagger\Omega$.\quad
+**(3)** $S_{\Psi\Omega}=J_{\Psi\Omega}\Delta_{\Psi\Omega}^{1/2}$, and the antiunitary $J$ satisfies
+$\braket{J\xi|J\eta}=\braket{\eta|\xi}$, which swaps the two slots.\quad
+**(4)** $\Delta_{\Psi\Omega}^{1/2}$ is self-adjoint, and $(B^\dagger)^\dagger=B$.
 
-The flow generated by $\Delta_{\Psi\Omega}$ can be shown to coincide, on $\M$, with the flow generated by the
-ordinary (single-state) $\Delta_\Psi$, and on $\M'$ with the flow generated by $\Delta_\Omega$ (eqs.~4.107—
-4.108) — and a further intertwining unitary $u_{\Omega\Psi}(s)\equiv\Delta_{\Omega\Phi}^{-is}\Delta_{\Psi\Phi}
-^{is}$ (eq.~4.109, built using a third, auxiliary reference $\ket\Phi$, but shown to not actually depend on
-which $\Phi$ was used) gives an *emph* of the inner automorphism relating $\sigma_s^\Psi$
-and $\sigma_s^\Omega$ promised back in eq.~4.23 of Sec.~IV.B — closing a loop left open there. (A further
-family of identities, eqs.~4.110—4.116, work out consistency relations and alternative expressions for these
-intertwiners; they are used as technical machinery later and are not reproduced here.)
+This is the two-state version of the KMS relation. For two random states of a pair of qutrits it was checked
+numerically, with $\Delta_{\Psi\Omega}=\rho_\Psi\otimes\rho_\Omega'^{-1}$ and random $A,B$: both sides agree to
+fifteen digits.
 
-### The payoff: relative entropy for type III, and a genuine positivity proof
+Two further facts are quoted without proof. On $\M$, the flow generated by $\Delta_{\Psi\Omega}$ is the same
+as the flow generated by the ordinary $\Delta_\Psi$, and on $\M'$ it is the same as the flow generated by
+$\Delta_\Omega$. And the unitary $u_{\Omega\Psi}(s)\equiv\Delta_{\Omega\Phi}^{-is}\Delta_{\Psi\Phi}^{is}$,
+built with the help of a third state $\ket\Phi$ but independent of which $\Phi$ is used, is the explicit
+unitary in $\M$ that relates $\sigma_s^\Psi$ to $\sigma_s^\Omega$ in \eqref{eq:cocycle}.
 
-Here, finally, is the object that survives everything: for a type III algebra $\M$, no entropy $S_\M(\Omega)$
-can be assigned to a single state $\Omega$ — but a **relative** entropy between two states can be, using
-the relative modular operator just constructed:
+### Relative entropy for type III, and a proof that it is positive
 
-$$
-
+For a type III algebra no entropy can be assigned to a single state. A **relative** entropy between two
+states can be, using the relative modular operator:
+\begin{equation}
 S_\M(\Psi\|\Omega) \equiv -\braket{\Psi|\log\Delta_{\Omega\Psi}|\Psi} .
+\label{eq:araki-relent}
+\end{equation}
+In the type I case this reduces to the familiar formula:
+\begin{align}
+-\braket{\Psi|\log\Delta_{\Omega\Psi}|\Psi}
+&\eqstep{1} -\braket{\Psi|\log\rho_\Omega\otimes\id|\Psi} + \braket{\Psi|\id\otimes\log\rho_\Psi'|\Psi}
+\notag\\
+&\eqstep{2} -\tr(\rho_\Psi\log\rho_\Omega) + \tr(\rho'_\Psi\log\rho'_\Psi)
+\eqstep{3} \tr(\rho_\Psi\log\rho_\Psi) - \tr(\rho_\Psi\log\rho_\Omega) .
+\notag
+\end{align}
+**(1)** $\Delta_{\Omega\Psi}=\rho_\Omega\otimes\rho_\Psi'^{-1}$, and the logarithm of a tensor product
+of commuting positive factors is the sum of the logarithms.\quad
+**(2)** the expectation value of an operator acting on one factor is its trace against that factor's
+reduced density matrix.\quad
+**(3)** for a pure state $\ket\Psi$, $\rho_\Psi$ and $\rho'_\Psi$ have the same nonzero eigenvalues
+(Schmidt decomposition), so $\tr(\rho'_\Psi\log\rho'_\Psi)=\tr(\rho_\Psi\log\rho_\Psi)$.
 
-$$
+This is the relative entropy of Chapter~1. For the same random qutrit states, the left side of the chain and
+the familiar formula both give $2.10961$, agreeing to thirteen digits. The definition \eqref{eq:araki-relent}
+never uses a trace, however, so it carries over unchanged to type III.
 
-(eq.~4.117.) When $\M$ does have a trace (type I or II, with $\Delta_{\Omega\Psi}=\rho_\Omega\rho_\Psi'^{-1}$
-in terms of density operators, eq.~4.118), this reduces exactly to the familiar formula
+Positivity takes only a few lines. The inequality $\log x\le x-1$ holds for every positive real $x$, with
+equality only at $x=1$. (The function $f(x)=x-1-\log x$ has $f(1)=0$ and $f'(x)=1-1/x$, which is negative for
+$x<1$ and positive for $x>1$, so $x=1$ is its unique minimum.) Then
+\begin{align}
+-\braket{\Psi|\log\Delta_{\Omega\Psi}|\Psi}
+&\geqstep{1} \braket{\Psi|\,\id-\Delta_{\Omega\Psi}\,|\Psi} \notag\\
+&\eqstep{2} \braket{\Psi|\Psi} - \braket{\Omega|\Omega}
+\ \eqstep{3}\ 0 . \notag
+\end{align}
+**(1)** $\log x\le x-1$, applied to the spectrum of the positive operator $\Delta_{\Omega\Psi}$ and then
+averaged in the state $\ket\Psi$.\quad
+**(2)** the two-state KMS relation \eqref{eq:twostate-kms} with $\Psi$ and $\Omega$ exchanged and
+$A=B=\id$ gives $\braket{\Psi|\Delta_{\Omega\Psi}|\Psi}=\braket{\Omega|\Omega}$ (numerically $0.99999\ldots$
+for the qutrit example).\quad
+**(3)** both states are normalized.
 
-$$
+So $S_\M(\Psi\|\Omega)\ge0$ for every type of algebra. Chapter~3 found that the ordinary entropy $S_\M$ of a
+type II algebra can be negative. Relative entropy does not have this problem, because it measures how
+distinguishable $\Psi$ is from a fixed reference state $\Omega$. It never needs an absolute zero of entropy,
+which type II and type III algebras do not have.
 
-S_\M(\Psi\|\Omega) = \tr(\rho_\Psi\log\rho_\Psi) - \tr(\rho_\Psi\log\rho_\Omega)
+## A canonical purification: the natural cone
 
-$$
+This last section answers a natural question about purifications. Given a state $\omega$ on $\M$, is there a
+*emph* vector $\ket\xi\in\HH$ with $\omega(A)=\braket{\xi|A|\xi}$?
 
-(eq.~4.119, matching eq.~1.8 of Sec.~I of this companion) — but eq.~4.117 itself needs no trace to be
-well-defined, and survives, completely intact, into type III.
+In general many vectors do the job. For $\M=B(\HH_1)\otimes\id_{\HH_2}$, any vector in $\HH_1\otimes\HH_2$ whose
+reduced density matrix on $\HH_1$ is the right one works, and ordinary quantum mechanics gives no reason to
+prefer one of them. Suppose, however, that $\HH$ contains *emph* cyclic and separating vector for $\M$.
+The pair $(\M,\HH)$ is then said to be in **standard form**. This holds, for instance, for $\M=\M_O$ with
+$O$ an open region in the vacuum sector of a relativistic QFT (by Reeh—Schlieder), and for any GNS
+representation built from a faithful state (Chapter~2). In standard form there is a canonical choice.
 
-It's worth seeing the positivity of this relative entropy actually proved, rather than just asserted, since it
-is short and genuinely instructive: using the elementary calculus inequality $\log x\le x-1$ (true for every
-positive real $x$, with equality only at $x=1$ — a fact you can check by noting $f(x)=x-1-\log x$ has
-$f(1)=0$ and $f'(x)=1-1/x$, which is negative for $x<1$ and positive for $x>1$, so $x=1$ is the unique global
-minimum of $f$, where $f=0$),
+Fix a cyclic and separating reference vector $\ket\Omega$. The **natural cone** $P_\Omega$ is the closure
+of the set $\{A\,j_\Omega(A)\ket\Omega : A\in\M\}$, where $j_\Omega(A)\equiv J_\Omega AJ_\Omega$. An
+equivalent description is the closure of $\{\Delta_\Omega^{1/4}A^\dagger A\ket\Omega : A\in\M\}$. Every normal
+state $\omega$ on $\M$ has exactly one representative vector in $P_\Omega$, and that vector is the canonical
+purification. It depends on the choice of $\Omega$: a different reference vector gives a different cone.
 
-$$
+For two qubits the cone is easy to see. Take $\M=B(\mathbb C^2)\otimes\id$ and the reference vector
+$\ket\Omega=\tfrac1{\sqrt2}(\ket{00}+\ket{11})$. Write a vector as $\ket\xi=\sum_{ia}\xi_{ia}\ket{i}\ket{a}$,
+that is, as a $2\times2$ matrix $\xi$. For this $\Omega$, $J_\Omega$ acts by $\xi\mapsto\xi^\dagger$, and
+$A\,j_\Omega(A)\ket\Omega$ corresponds to the matrix $A A^\dagger/\sqrt2$, which is positive semidefinite. The
+natural cone is therefore the set of positive semidefinite $2\times2$ matrices. A state with density matrix
+$\rho$ on the first qubit is represented by every $\xi$ with $\xi\xi^\dagger=\rho$, but only one of these is
+positive, namely $\xi=\sqrt\rho$. The canonical purification is
+$\ket{\xi_\rho}=\sum_{ia}(\sqrt\rho)_{ia}\ket i\ket a$, the familiar "square-root" purification of ordinary
+quantum information. The inner product of two such vectors is $\tr(\sqrt{\rho}\sqrt{\sigma})$, which is real
+and non-negative.
 
--\braket{\Psi|\log\Delta_{\Omega\Psi}|\Psi} \ \ge\ \braket{\Psi|1-\Delta_{\Omega\Psi}|\Psi}
-\ =\ -\braket{\Psi|\Psi} + \braket{\Omega|\Omega} \ =\ 0
-
-$$
-
-(eq.~4.120), where the middle equality uses the two-state KMS relation (eq.~4.105) applied with $A=B=\id$, and
-the final equality is just $\braket{\Psi|\Psi}=\braket{\Omega|\Omega}=1$ (both are normalized states). So
-$S_\M(\Psi\|\Omega)\ge0$ always — the relative entropy is never negative — proved here using nothing beyond
-one calculus inequality and the KMS relation already established. This non-negativity is worth contrasting
-directly with Sec.~III's finding that the ordinary (non-relative) entropy $S_\M$, in a type II algebra, could
-come out negative: relative entropy is the more robust, better-behaved object precisely because it's always
-measuring distinguishability from a fixed, explicit reference, never trying to count states from some absolute
-zero that a type II or III algebra simply doesn't have.
-
-## Sec.~IV.G: a canonical purification — the natural cone
-
-This closing, more technical subsection answers a question that was quietly used without justification in the
-strong-local-preparability proof above (Sec.~IV.D.2): given a state $\omega$ on $\M$, is there a
-*emph* choice of purifying vector $\ket\xi\in\HH$ with $\omega(A)=\braket{\xi|A|\xi}$ — and can it
-always be chosen to represent a genuine (not just formal) vector?
-
-In general there can be infinitely many different purifying vectors for the same $\omega$ (a simple type I
-example: for $\M=B(\HH_1)\otimes\id_{\HH_2}$, any vector in $\HH_1\otimes\HH_2$ that reduces to the right
-density matrix on $\HH_1$ works, pure or mixed, and there's no reason to prefer one over another in general).
-But if $\HH$ happens to contain *emph* cyclic-separating vector for $\M$ at all (a condition called being
-in **standard form** — satisfied, for instance, whenever $\M=\M_O$ for an open region $O$ in the vacuum
-sector of a relativistic QFT, courtesy of Reeh—Schlieder, and satisfied automatically by any GNS
-representation built from a faithful state, Sec.~II.D), then a genuinely canonical purifying vector
-$\ket{\xi_\omega}$ exists (eq.~4.121).
-
-It's constructed as follows: given a fixed cyclic-separating reference $\ket\Omega$, define the **natural
-cone** $P_\Omega$ as the closure of the set $\{Aj_\Omega(A)\ket\Omega : A\in\M\}$, where $j_\Omega(A)\equiv
-J_\Omega AJ_\Omega$ (eq.~4.122; an equivalent description, eq.~4.123, is the closure of
-$\{\Delta_\Omega^{1/4}A^\dagger A\ket\Omega : A\in\M\}$). Every normal state $\omega$ on $\M$ then has a
-*emph* representative vector inside $P_\Omega$ — this is the canonical purification. (It depends on the
-choice of $\Omega$ used to build the cone in the first place; a different reference vector gives, in general,
-a different natural cone and hence a different canonical purification of the same $\omega$.)
-
-The paper lists several further technical properties of vectors in the natural cone (eqs.~4.124—4.134) — that
-inner products between any two vectors in $P_\Omega$ are automatically real and non-negative (eq.~4.126, the
-property actually used in the strong-local-preparability argument above, and the one worth remembering); a
-decomposition property for vectors fixed by $J_\Omega$ (eq.~4.127); a distance bound relating the vector-space
-distance between two purifications to the more abstract distance between the two states they represent
-(eq.~4.128); the fact that any two different cyclic-separating vectors within the same natural cone share
-*emph* of their modular data — the same $J$, the same cone (eqs.~4.129—4.131); how to handle a
-cyclic-separating vector that sits *emph* the natural cone, by relating it back with an explicit
-unitary correction (eq.~4.132); and the fact that every automorphism of $\M$ can be implemented by a unitary
-chosen to preserve the natural cone (eqs.~4.133—4.134). These are the technical tools that make later,
-more advanced arguments in the paper watertight; the property that actually matters for the physical content
-of this companion is the existence-and-uniqueness statement itself (eq.~4.121) and the positivity property
-(eq.~4.126) — both used explicitly already, above.
+Vectors in the natural cone have several further properties, quoted here without proof. The inner product of
+any two vectors in $P_\Omega$ is real and non-negative, as in the two-qubit example. Vectors fixed by $J_\Omega$ can be decomposed into cone vectors. The
+distance between two cone vectors is bounded by the distance between the states they represent. Two different
+cyclic and separating vectors in the same natural cone have the same $J$ and the same cone. A cyclic and
+separating vector outside the cone can be moved into it by an explicit unitary. Every automorphism of $\M$ can
+be implemented by a unitary that preserves the cone. The physics in the rest of these notes uses only the
+existence and uniqueness of the canonical purification and the positivity of inner products.
 
 \bigskip
-\noindent This closes Sec.~IV, and with it, every tool needed to talk about entanglement for *emph* type
-of von Neumann algebra — I, II, and now III. Section~V picks up exactly where remark (f) of Sec.~IV.A left
-off: type III has no trace and hence no entropy of its own, which is a real problem if the goal is ever to
-compute something like a black-hole entropy using this machinery. The **crossed product**, introduced
-next, is the construction that fixes this — by literally attaching an auxiliary quantum system (a clock) to a
-type III algebra and turning it into a type II algebra, which *emph* have a trace.
+\noindent With this, the tools for entanglement are in place for every type of von Neumann algebra: I, II, and
+III. Chapter~5 takes up the problem noted in remark (f) after the Tomita—Takesaki theorem. A type III algebra
+has no trace and so no entropy of its own, which is a serious problem if the goal is to compute a black-hole
+entropy. The **crossed product** fixes this. It attaches an extra quantum system, a clock, to a type III
+algebra and turns it into a type II algebra, which does have a trace.

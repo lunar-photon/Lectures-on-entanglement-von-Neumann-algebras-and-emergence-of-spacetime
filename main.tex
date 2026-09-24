@@ -1,27 +1,69 @@
-\documentclass[11pt]{article}
+\documentclass[11pt]{report}
 \input{preamble}
 
-\title{A Reading Companion to Hong Liu's\\ \emph{``Lectures on entanglement, von Neumann algebras, and
-emergence of spacetime''}\\[6pt] \Large arXiv:2510.07017}
+\title{\textbf{Entanglement, Operator Algebras,\\ and the Emergence of Spacetime}\\[10pt]
+\Large A First Introduction for Physicists}
 \author{}
 \date{}
 
 \begin{document}
 \maketitle
+\thispagestyle{empty}
 
-\section*{How to use this}
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+\markboth{Preface}{Preface}
 
-This is meant to be read with Liu's paper open next to it, not instead of it. It follows the paper's own
-section numbers exactly, so ``Sec.~IV.B'' here means the same section there. The job of this document is to
-never let a sentence in the original go by just because it's true and the paper states it correctly — every
-definition is walked through with the reasoning spelled out in full, every equation is derived rather than
-dropped, and every worked example is done with actual numbers you can check by hand or with a calculator,
-not left abstract. Nothing is assumed except ordinary linear algebra (vectors, matrices, eigenvalues) and the
-standard undergraduate quantum mechanics of Griffiths and Sakurai (kets, operators, the Schr\"odinger
-equation, spin, density matrices). Anything beyond that is built from scratch, on the page, before it's used.
+Quantum mechanics is usually taught with the Hilbert space as the starting point: a system has a space of
+state vectors, observables are operators acting on it, and a composite system is described by a tensor
+product. This picture works perfectly for a spin, an atom, or any system with finitely many degrees of
+freedom. It stops working for a quantum field cut into two regions, for a many-body system in the
+thermodynamic limit, and for quantum gravity in the limit where a classical spacetime appears. In each of these
+cases the entanglement between a subsystem and its surroundings is infinite, and the tensor-product split that
+defines ``subsystem'' in the first place no longer exists.
 
-Where you had written a question in the margin of your own copy of the paper, that question is answered
-directly and explicitly, by name, at the point where it comes up.
+These notes develop the replacement. A subsystem is described by the algebra of operators an observer can
+measure, not by a factor of the Hilbert space. The classification of such algebras into types I, II and III
+turns out to be a classification of how a subsystem is entangled with the rest of the world, and the modular
+theory of Tomita and Takesaki supplies a notion of time and temperature for any such algebra. In the second
+half of the notes these tools are applied to holography, where they show that regions of a gravitational
+spacetime, their causal structure, their horizons and their entropy can all be read off from the algebras of
+a boundary quantum system.
+
+\section*{Who these notes are for}
+
+The reader is assumed to know linear algebra (vectors, matrices, eigenvalues) and undergraduate quantum
+mechanics at the level of Griffiths or Sakurai: kets and bras, operators, the Schr\"odinger and Heisenberg
+pictures, spin, the harmonic oscillator, and density matrices. Some familiarity with statistical mechanics
+(Gibbs states and partition functions) helps in Chapters 3--5. Everything beyond that is built on the page
+before it is used.
+
+\section*{How the notes are organised}
+
+Chapters 1--5 develop the mathematics using only finite quantum systems and free fields: why the tensor
+product fails (Chapter~1), von Neumann algebras and the GNS construction (Chapter~2), algebras with a trace
+(Chapter~3), type III algebras and modular theory (Chapter~4), and the crossed product that turns a type III
+algebra into one with a well-defined entropy (Chapter~5). Chapters 6--9 apply these tools to the AdS/CFT
+correspondence and to simple models of quantum gravity, and Chapter~10 summarises.
+
+Three kinds of boxes appear throughout. \emph{Physics Connection} boxes compute the same quantity twice ---
+once the way you already know from ordinary quantum mechanics, and once with the new construction --- and show
+that the answers agree. \emph{Worked Example} boxes carry out a construction on a small system with explicit
+numbers. \emph{Key Result} boxes collect theorems and their proofs.
+
+Calculations are written as chains of equalities in which every non-trivial step carries a small number over
+its equals sign, for example $A\eqstep{1}B\eqstep{2}C$. The sentence immediately after the chain explains each
+numbered step, so no step is left for the reader to reconstruct. Where a result is quoted from the research
+literature rather than derived, the text says so.
+
+\section*{Sources}
+
+The logical development follows the lectures of H.~Liu~\cite{Liu2025}, which review this subject at research
+level. The treatment of entanglement in quantum field theory draws on Witten~\cite{Witten2018}; the
+mathematical foundations of algebraic quantum mechanics on Strocchi~\cite{Strocchi} and Haag~\cite{HaagBook};
+the statistical interpretation of states on Slavnov~\cite{Slavnov2001}; and the crossed-product treatment of
+de~Sitter entropy on Chandrasekaran, Longo, Penington and Witten~\cite{CLPW}. Numerical values quoted in worked
+examples were checked by direct computation.
 
 \tableofcontents
 
@@ -36,7 +78,7 @@ directly and explicitly, by name, at the point where it comes up.
 \input{chapters/09_quantum_gravity_regimes}
 \input{chapters/10_conclusions}
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{99}
 \bibitem{Liu2025} H.~Liu, \emph{Lectures on entanglement, von Neumann algebras, and emergence of spacetime},
 arXiv:2510.07017 [hep-th].
 \bibitem{Witten2018} E.~Witten, \emph{Notes on some entanglement properties of quantum field theory},
@@ -53,6 +95,8 @@ Fortsch.\ Phys.\ \textbf{61}, 781 (2013), arXiv:1306.0533.
 Phys.\ Rev.\ Lett.\ \textbf{96}, 181602 (2006), hep-th/0603001.
 \bibitem{CLPW} V.~Chandrasekaran, R.~Longo, G.~Penington, and E.~Witten, \emph{An algebra of observables for
 de Sitter space}, JHEP \textbf{02} (2023) 082, arXiv:2206.10780.
+\bibitem{AHMST} A.~Almheiri, T.~Hartman, J.~Maldacena, E.~Shaghoulian, and A.~Tajdini, \emph{The entropy of
+Hawking radiation}, Rev.\ Mod.\ Phys.\ \textbf{93}, 035002 (2021), arXiv:2006.06872.
 \bibitem{HaagBook} R.~Haag, \emph{Local Quantum Physics: Fields, Particles, Algebras}, 2nd ed., Springer
 (1996).
 \end{thebibliography}

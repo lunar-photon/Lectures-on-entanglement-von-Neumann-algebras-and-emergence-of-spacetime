@@ -1,38 +1,58 @@
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage{amsmath,amssymb,mathtools}
-\usepackage{braket}
+% Crossed product: M (type III_1, with its modular flow sigma_s) together with
+% a clock (a particle on a line, Hilbert space L^2(R)) gives \widehat M (type II_infty).
+% Included at 0.88\textwidth (5.72in); drawn at ~1:1.
+\documentclass[tikz,border=3pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
 \usepackage{xcolor}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,decorations.pathmorphing,decorations.pathreplacing,calc,positioning}
+\usetikzlibrary{arrows.meta}
 
-\definecolor{cobalt}{HTML}{2b4c7e}
-\definecolor{boxblue}{HTML}{eef3fa}
-\definecolor{boxgold}{HTML}{fbf3e3}
 \definecolor{boxred}{HTML}{fbecec}
-\definecolor{boxgreen}{HTML}{eaf6f0}
+\definecolor{boxblue}{HTML}{e8f0fa}
+\definecolor{boxgreen}{HTML}{e6f4ed}
 \definecolor{ruleblue}{HTML}{2b6cb0}
-\definecolor{rulegold}{HTML}{b7791f}
 \definecolor{rulered}{HTML}{c0392b}
 \definecolor{rulegreen}{HTML}{1f8a5f}
+\definecolor{axisgray}{HTML}{8a8f98}
 
-\newcommand{\HH}{\mathcal{H}}
 \newcommand{\M}{\mathcal{M}}
-\newcommand{\tr}{\operatorname{tr}}
-\newcommand{\Tr}{\operatorname{Tr}}
-\newcommand{\ii}{\mathrm{i}}
-\begin{document}
-\begin{tikzpicture}[>=Latex, node distance=1.1cm]
-\node[draw, rounded corners=3pt, fill=boxred, draw=rulered, align=center, minimum width=3.6cm, minimum height=1.4cm] (M) at (0,0)
-  {$\M$ \\ \footnotesize type III$_1$, no trace};
-\node[draw, rounded corners=3pt, fill=boxblue, draw=ruleblue, align=center, minimum width=3.6cm, minimum height=1.4cm] (clock) at (0,-2.4)
-  {clock $L^2(\mathbb R_{\hat q})$ \\ \footnotesize $[\hat q,\hat p]=\ii$};
-\node[draw, rounded corners=3pt, fill=boxgreen, draw=rulegreen, align=center, minimum width=5.2cm, minimum height=1.6cm] (Mhat) at (5.6,-1.2)
-  {$\widehat\M=\{e^{\ii K\hat p}Ae^{-\ii K\hat p},\, e^{-\ii \hat q s}\}''$ \\ \footnotesize type II$_\infty$ (or II$_1$ if $\hat q\ge0$): \emph{has} a trace};
-\draw[->, thick] (M.east) .. controls +(1.6,0.3) and +(-1.6,0.9) .. (Mhat.west);
-\draw[->, thick] (clock.east) .. controls +(1.6,-0.1) and +(-1.6,-0.9) .. (Mhat.west);
-\node[align=center, font=\footnotesize] at (2.8,1.6) {crossed product by\\ modular group $\sigma_s=\Delta_\Psi^{-is}\cdot\Delta_\Psi^{is}$};
-\node[align=center, font=\footnotesize, text width=3.9cm] at (5.6,0.55) {$\tr(\hat A)=\big\langle\hat\Psi\big|\hat A\,\rho^{-1}\big|\hat\Psi\big\rangle$\\ density operator $\rho_{\hat\Phi}$ exists};
-\node[align=center, font=\footnotesize, text width=4.6cm] at (5.6,-2.9) {entropy $S_{\widehat\M}=-S_\M(\Phi\|\Psi)+\text{const}$\\ $\;=\;$ generalized entropy $S_{\rm gen}$ (gravity)};
-\end{tikzpicture}
 
+\begin{document}
+\begin{tikzpicture}[>=Latex, scale=1.27]
+  % ---- M with its modular flow ----
+  \fill[boxred] (0,0) circle (1.0);
+  \draw[rulered, line width=0.8pt] (0,0) circle (1.0);
+  \node[font=\large] at (0,0) {$\M$};
+  \draw[-{Latex[length=2.2mm]}, rulered, line width=0.9pt]
+    (125:1.32) arc[start angle=125, end angle=55, radius=1.32];
+  \node[rulered] at (90:1.58) {$\sigma_s$};
+  \node[rulered] at (0,-1.3) {III$_1$};
+
+  % ---- plus ----
+  \node[font=\Large, axisgray!70!black] at (1.85,0) {$+$};
+
+  % ---- clock: a particle on a line with a wavepacket ----
+  \begin{scope}[xshift=4.1cm]
+    \fill[boxblue, rounded corners=6pt] (-1.55,-1.0) rectangle (1.55,1.0);
+    \draw[ruleblue, line width=0.8pt, rounded corners=6pt] (-1.55,-1.0) rectangle (1.55,1.0);
+    \draw[->, line width=0.5pt] (-1.25,-0.45) -- (1.3,-0.45) node[above left=-1pt, font=\small] {$\hat q$};
+    \fill[ruleblue!25] plot[domain=-1.2:1.2, samples=80, variable=\u]
+      ({\u}, {-0.45 + 1.05*exp(-(\u+0.15)^2/0.12)}) -- (1.2,-0.45) -- (-1.2,-0.45) -- cycle;
+    \draw[ruleblue, line width=0.9pt, domain=-1.2:1.2, samples=80, variable=\u]
+      plot ({\u}, {-0.45 + 1.05*exp(-(\u+0.15)^2/0.12)});
+    \node[ruleblue] at (0,-1.3) {$L^2(\mathbb{R})$};
+  \end{scope}
+
+  % ---- arrow ----
+  \draw[-{Latex[length=3mm]}, line width=1pt] (6.05,0) -- (7.45,0);
+
+  % ---- crossed product ----
+  \begin{scope}[xshift=8.85cm]
+    \fill[boxgreen] (0,0) circle (1.1);
+    \draw[rulegreen, line width=0.8pt] (0,0) circle (1.1);
+    \node[font=\large] at (0,0) {$\widehat\M$};
+    \node[rulegreen] at (0,-1.3) {II$_\infty$};
+  \end{scope}
+\end{tikzpicture}
 \end{document}

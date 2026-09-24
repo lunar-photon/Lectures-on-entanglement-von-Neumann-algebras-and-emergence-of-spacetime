@@ -1,50 +1,49 @@
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage{amsmath,amssymb,mathtools}
-\usepackage{braket}
+% fig:roadmap -- tensor factors (left) vs. operator subalgebras (right).
+% Included at 0.92\textwidth (~15.2 cm); drawn at roughly that natural width.
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
 \usepackage{xcolor}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,decorations.pathmorphing,decorations.pathreplacing,calc,positioning}
+\usetikzlibrary{arrows.meta,calc,decorations.pathmorphing}
 
-\definecolor{cobalt}{HTML}{2b4c7e}
 \definecolor{boxblue}{HTML}{eef3fa}
 \definecolor{boxgold}{HTML}{fbf3e3}
-\definecolor{boxred}{HTML}{fbecec}
 \definecolor{boxgreen}{HTML}{eaf6f0}
 \definecolor{ruleblue}{HTML}{2b6cb0}
 \definecolor{rulegold}{HTML}{b7791f}
-\definecolor{rulered}{HTML}{c0392b}
 \definecolor{rulegreen}{HTML}{1f8a5f}
 
 \newcommand{\HH}{\mathcal{H}}
 \newcommand{\M}{\mathcal{M}}
-\newcommand{\tr}{\operatorname{tr}}
-\newcommand{\Tr}{\operatorname{Tr}}
-\newcommand{\ii}{\mathrm{i}}
 \begin{document}
-\begin{tikzpicture}[
-  box/.style={draw, rounded corners=4pt, align=left, inner sep=8pt, font=\small},
-  every node/.style={font=\small}
-]
-\node[box, fill=boxblue, draw=ruleblue, text width=6.1cm] (left) at (0,0) {
-  \textbf{Standard QM} \,(Griffiths, Sakurai)\\[4pt]
-  $\HH=\HH_R\otimes\HH_L$\\[2pt]
-  $\ket\Psi=\sum_n c_n\ket{n}_R\ket{n}_L$\\[2pt]
-  $\rho_R=\Tr_L\ket\Psi\!\bra\Psi$\\[2pt]
-  $S_R=-\Tr\rho_R\log\rho_R$\\[6pt]
-  subsystem $\equiv$ tensor factor
-};
-\node[box, fill=boxgold, draw=rulegold, text width=6.1cm] (right) at (9.0,0) {
-  \textbf{Algebraic QM} \,(von Neumann, Liu)\\[4pt]
-  $\M\subset B(\HH)$, a weakly closed $*$-algebra\\[2pt]
-  $\M'=\{B: [B,A]=0\ \forall A\in\M\}$\\[2pt]
-  type I/II: $\rho_\M$ via $\tr(A\rho_\M)=\braket{\Psi|A|\Psi}$\\[2pt]
-  type III: modular operator $\Delta_\Psi=e^{-K_\Psi}$\\[6pt]
-  subsystem $\equiv$ operator subalgebra
-};
-\draw[-{Latex[length=3mm]}, ruleblue, thick] (left.east) .. controls +(1.2,0.9) and +(-1.2,0.9) .. (right.west)
-  node[midway, above, font=\footnotesize, text width=3.4cm, align=center, yshift=2pt]{generalizes};
-\draw[-{Latex[length=3mm]}, rulegreen, thick] (right.south) .. controls +(-1.2,-1.1) and +(1.2,-1.1) .. (left.south)
-  node[midway, below, font=\footnotesize, text width=4.4cm, align=center, yshift=-2pt]{special case: $\M$ is type I $\iff$ $\HH=\HH_R\otimes\HH_L$ exists};
-\end{tikzpicture}
+\begin{tikzpicture}[every node/.style={font=\small}, line width=0.6pt]
 
+% ---------------- left: tensor product of two Hilbert spaces --------------
+\begin{scope}[shift={(0,0)}]
+  \draw[ruleblue, fill=boxblue] (-1.35,0) circle (1.0);
+  \draw[ruleblue, fill=boxblue] ( 1.35,0) circle (1.0);
+  \node at (-1.35,0) {$\HH_R$};
+  \node at ( 1.35,0) {$\HH_L$};
+  \node[font=\normalsize] at (0,0) {$\otimes$};
+\end{scope}
+
+% ---------------- right: subalgebras inside B(H) ---------------------------
+\begin{scope}[shift={(9.6,0)}]
+  \draw[gray!70!black, rounded corners=8pt, fill=gray!6] (-3.0,-1.45) rectangle (3.0,1.45);
+  \node[anchor=north east, gray!30!black] at (2.95,1.42) {$B(\HH)$};
+  \draw[rulegold, fill=boxgold] (-1.25,-0.1) ellipse (1.25 and 0.9);
+  \draw[rulegreen, fill=boxgreen] (1.25,-0.1) ellipse (1.25 and 0.9);
+  \node at (-1.25,-0.1) {$\M$};
+  \node at ( 1.25,-0.1) {$\M'$};
+\end{scope}
+
+% ---------------- arrows ---------------------------------------------------
+\draw[-{Latex[length=2.6mm]}, ruleblue, thick]
+  (1.9,1.1) .. controls (3.5,2.0) and (5.2,2.0) .. (6.7,1.25);
+\draw[-{Latex[length=2.6mm]}, rulegreen, thick]
+  (6.7,-1.25) .. controls (5.2,-2.0) and (3.5,-2.0) .. (1.9,-1.1)
+  node[pos=0.5, below=1pt, text=rulegreen!70!black] {type I};
+
+\end{tikzpicture}
 \end{document}

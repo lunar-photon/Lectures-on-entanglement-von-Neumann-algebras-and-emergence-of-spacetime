@@ -1,153 +1,189 @@
-# Sec. VI: AdS/CFT Duality in Large-N Limit
+# Chapter 6: AdS/CFT in the Large-N Limit
 
-# Sec.~VI: AdS/CFT duality in the large-$N$ limit: algebraic formulation
+# AdS/CFT in the large-$N$ limit: an algebraic formulation
 
-Everything built in Secs.~II—V was developed for its own sake, using nothing more exotic than qubits, matrix
-algebras, and (in Sec.~IV.D) an ordinary free quantum field. This section is where the payoff begins: applying
-every one of those tools — the type classification, GNS, modular theory, the crossed product — to the actual
-physical system this paper's title promises to explain, the AdS/CFT correspondence, in the specific limit
-($N\to\infty$, equivalently $G_N\to0$) where bulk spacetime is supposed to emerge.
+Chapters~2—5 developed their tools on their own terms. They used nothing more exotic than qubits, matrix
+algebras, and (in Chapter~4) an ordinary free quantum field. This chapter applies all of those tools (the type
+classification, the GNS construction, modular theory, and the crossed product) to the physical system these notes
+are aiming at. That system is the AdS/CFT correspondence, in the limit $N\to\infty$, or equivalently $G_N\to0$,
+where bulk spacetime is supposed to emerge.
 
-## Sec.~VI.A: general description
+## General description
 
 ### The dictionary, restated precisely
 
-AdS/CFT conjectures that quantum gravity on $(d{+}1)$-dimensional anti-de~Sitter space is completely
-equivalent to an ordinary (non-gravitational) conformal field theory living on its $d$-dimensional boundary —
-the prototypical example being type IIB string theory on $\text{AdS}_5\times S^5$, dual to $\mathcal N=4$
-super-Yang-Mills with gauge group $SU(N)$. The dictionary's core entries (eqs.~6.1—6.5): the two theories
-share literally the same Hilbert space, $\HH_{\text{bulk}}=\HH_{\text{CFT}}\equiv\HH$; the classical-gravity
-limit $G_N\to0$ is the same as the large-$N$ limit of the boundary gauge theory; the limit $\alpha'\to0$ (the
-string tension going to zero, so stringy corrections switch off) is the same as the boundary 't~Hooft coupling
-$\lambda\to\infty$; elementary bulk fields correspond to **single-trace operators** (boundary operators
-literally built as a trace over color indices, $\Tr(\cdots)$, eq.~6.7); and a classical bulk geometry $\phi_c$
-corresponds to a specific boundary state $\ket\Psi$, called a **semiclassical state**.
+AdS/CFT is a conjecture. It says that quantum gravity on $(d{+}1)$-dimensional anti-de~Sitter space (AdS) is
+completely equivalent to an ordinary conformal field theory (CFT), without gravity, living on the
+$d$-dimensional boundary of that space. The standard example is type IIB string theory on
+$\text{AdS}_5\times S^5$, which is dual to $\mathcal N=4$ super-Yang-Mills theory with gauge group $SU(N)$.
 
-The precise bulk-to-boundary map for fields, the **extrapolate dictionary**, is
+The core entries of the dictionary are these.
 
-$$
+- The two theories share the same Hilbert space, $\HH_{\text{bulk}}=\HH_{\text{CFT}}\equiv\HH$.
+- The classical-gravity limit $G_N\to0$ is the same as the large-$N$ limit of the boundary gauge theory.
+- The limit $\alpha'\to0$ is the same as the limit of infinite 't~Hooft coupling, $\lambda\to\infty$, in the
+boundary theory. Here $\alpha'$ sets the string length, so $\alpha'\to0$ switches off stringy corrections.
+- Elementary bulk fields correspond to **single-trace operators**. These are boundary operators built as
+a single trace over color indices, $\Tr(\cdots)$.
+- A classical bulk geometry $\phi_c$ corresponds to a specific boundary state $\ket\Psi$, called a
+**semiclassical state**.
 
-O(x) = \lim_{r\to\infty} r^\Delta\,\phi(r,x)
 
-$$
+The precise map from bulk fields to boundary operators is the **extrapolate dictionary**:
+\begin{equation}
+O(x) = \lim_{r\to\infty} r^\Delta\,\phi(r,x) .
+\label{eq:ads-extrapolate}
+\end{equation}
+In words: take a bulk field $\phi$ and evaluate it at radial coordinate $r$ and boundary point $x$. Multiply by
+$r^\Delta$, where $\Delta$ is the conformal dimension of the operator, a number fixed by the mass of the field.
+Then send $r\to\infty$, which moves the point out to the AdS boundary. What survives this limit is the
+corresponding boundary operator $O(x)$.
 
-(eq.~6.6): take a bulk field $\phi$, evaluate it at radial coordinate $r$ and boundary point $x$, rescale by
-$r^\Delta$ (where $\Delta$ is the operator's conformal dimension, a number fixed by the field's mass), and
-send $r\to\infty$ (out to the AdS boundary) — what survives this limit is exactly the corresponding boundary
-operator $O(x)$. This equation is not a definition invented for convenience; for holographic theories where an
-independent definition of $O(x)$ already exists (like $\Tr(\cdots)$ in super-Yang-Mills), eq.~6.6 is a
-derived fact. For more general holographic systems where no such independent definition is available, eq.~6.6
-*emph* taken as the definition of what counts as a single-trace operator.
+This equation is not just a convenient definition. In some holographic theories an independent definition of
+$O(x)$ already exists, such as $\Tr(\cdots)$ in super-Yang-Mills. There, \eqref{eq:ads-extrapolate} is a derived
+fact. In more general holographic systems no such independent definition is available. There,
+\eqref{eq:ads-extrapolate} *emph* taken as the definition of what counts as a single-trace operator.
 
-A semiclassical state $\ket\Psi$ is one with a well-defined $N\to\infty$ limit — meaning it can genuinely be
-built as the limit of a sequence of states $\{\ket{\Psi_N}\}$, one for each finite-$N$ theory. The vacuum
-$\ket\Omega$ (dual to empty AdS) and the thermofield double $\ket{\Psi_\beta}$ (dual, at high enough
-temperature, to an eternal black hole) are the two worked examples of this section; a single-sided black hole
-formed by collapse is a third example, generally harder to write down explicitly.
+A semiclassical state $\ket\Psi$ is one with a well-defined $N\to\infty$ limit. This means it can be built as
+the limit of a sequence of states $\{\ket{\Psi_N}\}$, one for each finite-$N$ theory. This chapter works out two
+examples. The first is the vacuum $\ket\Omega$, dual to empty AdS. The second is the thermofield double
+$\ket{\Psi_\beta}$, which at high enough temperature is dual to an eternal black hole. A third example is a
+single-sided black hole formed by collapse. It is generally harder to write down explicitly.
 
-### Building the boundary operator algebra with GNS — and why it might be bigger than you'd guess
+### Building the boundary operator algebra with GNS, and why it can be bigger than expected
 
-Here is where the machinery of Secs.~II and IV gets put to direct use. Call an operator $A$ ``having a
-well-defined large-$N$ limit in the state $\ket\Psi$'' if it's the limit of some sequence of finite-$N$
-operators $\{A_N\}$ (with corresponding states $\{\ket{\Psi_N}\}$) whose expectation value converges to
-something finite, $\lim_{N\to\infty}\braket{\Psi_N|A_N|\Psi_N}<\infty$ (eq.~6.8) — precisely the kind of
-finite-energy restriction from Sec.~I's Bell-pair-chain discussion, now applied to a genuine gauge theory.
-Call the collection of all such operators $\Alg_\Psi$. One universal subset, present for every semiclassical
-state, is
-
-$$
-
-\Sscr \equiv \text{the } *\text{-algebra generated by single-trace operators} \subseteq \Alg_\Psi
+Here the tools of Chapters~2 and~4 are used directly. Say that an operator $A$ has a well-defined large-$N$
+limit in the state $\ket\Psi$ if two things hold. First, $A$ is the limit of some sequence of finite-$N$
+operators $\{A_N\}$, with corresponding states $\{\ket{\Psi_N}\}$. Second, the expectation values converge to
+something finite:
 
 $$
 
-(eq.~6.9) — but the containment need not be an equality: $\Alg_\Psi$ may contain *emph* operators than
-just those built from single-trace operators, and which extra operators survive can depend on the specific
-state $\Psi$. (This inclusion being strict, rather than an equality, turns out to be exactly the mechanism
-behind describing a black-hole *emph* in Sec.~VI.D below — worth flagging now, since it's easy to
-skim past this subtlety on a first read.)
+\lim_{N\to\infty}\braket{\Psi_N|A_N|\Psi_N}<\infty .
 
-Assuming $\Alg_\Psi$ is closed under products (a $*$-algebra) and completed in its inherited norm (a
-$C^*$-algebra, exactly the objects of Sec.~II.B), expectation values in $\ket\Psi$ define a state $\omega_\Psi$
-on $\Alg_\Psi$ — and now the entire GNS machinery of Sec.~II.D applies directly: build the GNS Hilbert space
-$\HH_\Psi^{\text{GNS}}$ from $(\Alg_\Psi,\omega_\Psi)$, with representation $\pi_\Psi(\Alg_\Psi)$. This is,
-quite literally, "the space of small excitations around $\ket\Psi$" — exactly the same construction already
-carried out by hand, on qubits, back in Sec.~II.E. If the bulk geometry dual to $\Psi$ is smooth and $\Psi$ is
-pure, $\omega_\Psi$ is expected to be a pure state on $\Alg_\Psi$, which by Sec.~II.D's Proposition~II.1 means
-the representation is irreducible, $B(\HH_\Psi^{\text{GNS}})=\pi_\Psi(\Alg_\Psi)''$ (eq.~6.10) — this can fail
-if the dual geometry has a singularity reachable on some Cauchy slice, a subtlety picked back up in the
-firewall discussion of Sec.~VI.E. Write $Y\equiv(\pi_\Psi(\Sscr))''$, $Y_O\equiv(\pi_\Psi(\Sscr_O))''$
-(eq.~6.11) for the (possibly strictly smaller) von Neumann algebra generated by single-trace operators alone,
-restricted if needed to a boundary region $O$.
+$$
+
+This is the same kind of finite-energy restriction met for the infinite chain of Bell pairs in Chapters~1
+and~2, now applied to a real gauge theory. Call the collection of all such operators $\Alg_\Psi$. One subset is
+present for every semiclassical state:
+
+$$
+
+\Sscr \equiv \text{the } *\text{-algebra generated by single-trace operators} \subseteq \Alg_\Psi .
+
+$$
+
+The inclusion need not be an equality. The set $\Alg_\Psi$ may contain *emph* operators than those built
+from single-trace operators, and which extra operators survive can depend on the state $\Psi$. This point is
+easy to skip on a first reading. But the fact that the inclusion can be strict turns out to be exactly what
+allows a description of a black-hole *emph*. This is discussed in the section on general black holes
+below.
+
+Assume that $\Alg_\Psi$ is closed under products, so it is a $*$-algebra. Assume also that it is completed in
+the norm it inherits, so it is a $C^*$-algebra, exactly the kind of object studied in Chapter~2. Then
+expectation values in $\ket\Psi$ define a state $\omega_\Psi$ on $\Alg_\Psi$. The GNS construction of Chapter~2
+applies directly. It gives a GNS Hilbert space $\HH_\Psi^{\text{GNS}}$ built from $(\Alg_\Psi,\omega_\Psi)$,
+together with a representation $\pi_\Psi(\Alg_\Psi)$. This Hilbert space is, quite literally, ``the space of
+small excitations around $\ket\Psi$.'' It is the same construction that Chapter~2 carried out by hand on qubits.
+
+Suppose the bulk geometry dual to $\Psi$ is smooth and $\Psi$ is pure. Then $\omega_\Psi$ is expected to be a
+pure state on $\Alg_\Psi$. Chapter~2 showed that a pure state gives an irreducible GNS representation. So
+\begin{equation}
+B(\HH_\Psi^{\text{GNS}})=\pi_\Psi(\Alg_\Psi)'' .
+\label{eq:ads-irreducible}
+\end{equation}
+This can fail if the dual geometry has a singularity that can be reached on some Cauchy slice. We return to
+this in the discussion of firewalls later in this chapter. Write
+
+$$
+
+Y\equiv(\pi_\Psi(\Sscr))'', \qquad Y_O\equiv(\pi_\Psi(\Sscr_O))''
+
+$$
+
+for the von Neumann algebra generated by single-trace operators alone, and for its restriction to a boundary
+region $O$. The algebra $Y$ may be strictly smaller than $\pi_\Psi(\Alg_\Psi)''$.
 
 ### Matching this to an ordinary bulk Fock space
 
-On the gravity side, expand every bulk field around its classical background exactly as before (Sec.~VI.A of
-this companion echoes Sec.~I's roadmap here): $\phi=\phi_c+\kappa\delta\phi$, $\kappa=\sqrt{8\pi G_N}$
-(eq.~6.12), giving an action $S[\phi_c]+S_2[\delta\phi]+S_{\text{int}}[\delta\phi]$ with $S_{\text{int}}=
-\kappa S_3+\kappa^2S_4+\cdots$ (eqs.~6.13—6.14). At leading order $\kappa\to0$, only the free, quadratic
-piece $S_2$ survives, giving an ordinary free quantum field theory of $\delta\phi$ on the fixed background
-$\phi_c$ — quantized in the standard way, with some vacuum $\ket0_{\phi_c}$, into a genuine Fock space
-$\HH_\Psi^{\text{Fock}}$.
+On the gravity side, expand every bulk field around its classical background:
+$\phi=\phi_c+\kappa\delta\phi$, with $\kappa=\sqrt{8\pi G_N}$. This gives an action
+$S[\phi_c]+S_2[\delta\phi]+S_{\text{int}}[\delta\phi]$, with $S_{\text{int}}=\kappa S_3+\kappa^2S_4+\cdots$. At
+leading order, $\kappa\to0$, only the quadratic piece $S_2$ survives. It describes an ordinary free quantum field
+$\delta\phi$ on the fixed background $\phi_c$. Quantizing it in the standard way, with some vacuum
+$\ket0_{\phi_c}$, gives a Fock space $\HH_\Psi^{\text{Fock}}$.
 
-For the AdS/CFT duality to actually hold, these two constructions — one built from the boundary algebra via
-GNS, the other built from the bulk field theory via ordinary quantization — must agree:
+We now have two Hilbert spaces. One is built from the boundary algebra by GNS. The other is built from the bulk
+field theory by ordinary quantization. For the AdS/CFT duality to hold, they must agree:
+\begin{equation}
+\HH_\Psi^{\text{Fock}} = \HH_\Psi^{\text{GNS}} .
+\label{eq:ads-fock-gns}
+\end{equation}
+This requires the GNS representation to have exactly the structure of a Fock space. In other words, the
+boundary theory must be Gaussian at large $N$: all correlators must factorize into products of two-point
+functions. This property is called "large-$N$ factorization." It follows from 't~Hooft's planar scaling, as
+the following sketch shows.
 
-$$
+\begin{keyresult}[: Sketch of the large-$N$ generalized free field and its CCR algebra]
+**Goal:** Explain why, in a large-$N$ $SU(N)$ gauge theory with fixed 't~Hooft coupling $\lambda = g_{YM}^2 N$:
 
-\HH_\Psi^{\text{Fock}} = \HH_\Psi^{\text{GNS}}
+1. Connected correlators of $n$ single-trace operators scale as $\braket{\mathcal{O}_1 \cdots \mathcal{O}_n}_{\text{conn}} \sim N^{2-n}$.
+2. Commutators of single-trace operators become $c$-numbers: $[\mathcal{O}_A, \mathcal{O}_B] = c_{AB}\id + O(1/N)$.
+3. The resulting boundary algebra is a CCR algebra, whose GNS space is a free Fock space $\HH_\Psi^{\text{Fock}}$.
 
-$$
+This is a standard diagrammatic argument, not a rigorous proof.
 
-(eq.~6.15), which requires the GNS representation to have exactly the structure of a Fock space (a Gaussian theory, meaning correlators factorize into products of two-point functions). While often taken for granted as "standard large-$N$ factorization," this Fock-space structure is a rigorous consequence of 't~Hooft planar scaling:
+**Derivation sketch:**
 
-\begin{keyresult}[: Derivation of the Large-$N$ Generalized Free Field and CCR Algebra]
-**Goal:** Prove that in a large-$N$ $SU(N)$ gauge theory with fixed 't~Hooft coupling $\lambda = g_{YM}^2 N$:
+1. **The 't~Hooft topological expansion.**
+Consider an adjoint matrix field theory with action $S = \frac{N}{\lambda}\int d^d x \Tr\big[\frac{1}{2}(\partial\Phi)^2 + V(\Phi)\big]$. So the propagator carries a factor $g_{YM}^2=\lambda/N$ and each interaction vertex a factor $1/g_{YM}^2=N/\lambda$. In 't~Hooft's double-line notation, a vacuum Feynman graph with $V$ vertices, $E$ edges (propagators), and $F$ closed index loops scales as
+\begin{align}
+(g_{YM}^2)^{E-V} N^F
+&\eqstep{1} \lambda^{E-V} N^{V - E + F}
+\ \eqstep{2}\ \lambda^{E-V} N^\chi
+\ \eqstep{3}\ \lambda^{E-V} N^{2 - 2g} . \notag
+\end{align}
+**(1)** substitute $g_{YM}^2=\lambda/N$, so $(g_{YM}^2)^{E-V}=\lambda^{E-V}N^{-(E-V)}$.\quad
+**(2)** $\chi\equiv V-E+F$ is the Euler characteristic of the surface on which the double-line graph can be
+drawn.\quad
+**(3)** for a closed orientable surface of genus $g$, $\chi=2-2g$.
 
-1. Connected correlators scale as $\braket{\mathcal{O}_1 \cdots \mathcal{O}_n}_{\text{conn}} \sim N^{2-n}$.
-2. Commutators between single-trace operators reduce to exact $c$-numbers: $[\mathcal{O}_A, \mathcal{O}_B] = c_{AB}\id + \mathcal{O}(1/N)$.
-3. The resulting boundary algebra is a CCR algebra whose GNS space is identically a free Fock space $\HH_\Psi^{\text{Fock}}$.
-
-
-**Derivation:**
-
-1. **'t~Hooft topological expansion:**
-Consider an adjoint matrix field theory with action $S = \frac{N}{\lambda}\int d^d x \Tr\big[\frac{1}{2}(\partial\Phi)^2 + V(\Phi)\big]$.
-Define normalized single-trace gauge-invariant operators:
-
-$$
-
-\mathcal{O}_i(x) \equiv \frac{1}{N}\Tr\big(\Phi^{k_i}(x)\big) - \Braket{\frac{1}{N}\Tr\big(\Phi^{k_i}(x)\big)} .
-
-$$
-
-In 't~Hooft double-line notation, a Feynman graph with $V$ vertices, $E$ edges, and $F$ index loops scales as:
-
-$$
-
-(g_{YM}^2)^{E-V} N^F = \lambda^{E-V} N^{V - E + F} = \lambda^{E-V} N^\chi = \lambda^{E-V} N^{2 - 2g} ,
-
-$$
-
-where $\chi = 2 - 2g$ is the Euler characteristic of the Riemann surface of genus $g$. The leading diagrams are planar with sphere topology ($g = 0$, $\chi = 2$), contributing at order $N^2$.
-2. **Scaling of connected correlators:**
-Consider a connected correlator of $n$ single-trace operators: $\braket{\mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n)}_{\text{conn}}$.
-Each operator $\mathcal{O}_i$ carries an explicit normalization factor of $1/N$.
-The planar vacuum diagrams connecting all $n$ external source insertions scale with the leading genus-zero factor $N^2$.
-Therefore:
+The leading diagrams are planar, with the topology of a sphere ($g = 0$, $\chi = 2$). They contribute at order $N^2$.
+2. **Scaling of connected correlators.**
+Define the single-trace operators, with their vacuum value subtracted,
 
 $$
 
-\Braket{\mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n)}_{\text{conn}} \sim N^2 \cdot \left(\frac{1}{N}\right)^n = N^{2-n} .
+\mathcal{O}_i(x) \equiv \Tr\big(\Phi^{k_i}(x)\big) - \Braket{\Tr\big(\Phi^{k_i}(x)\big)} .
 
 $$
 
-Evaluating the leading power of $N$:
+Now consider a connected correlator $\braket{\mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n)}_{\text{conn}}$. Treat each operator insertion as an extra vertex of the graph, so the graph has $V_{\rm int}$ interaction vertices and $n$ insertions. An interaction vertex carries a factor $N/\lambda$ from the action. An insertion carries no such factor. Therefore
+\begin{align}
+\Big(\frac N\lambda\Big)^{V_{\rm int}}\Big(\frac\lambda N\Big)^{E}N^F
+&\eqstep{4} \lambda^{E-V_{\rm int}}\,N^{(V_{\rm int}+n)-E+F}\,N^{-n} \notag\\
+&\eqstep{5} \lambda^{E-V_{\rm int}}\,N^{\chi-n}
+\ \eqstep{6}\ \lambda^{E-V_{\rm int}}\,N^{2-n} . \notag
+\end{align}
+**(4)** collect the powers of $N$, and add and subtract $n$ in the exponent.\quad
+**(5)** counting the insertions as vertices, the Euler characteristic is $\chi=(V_{\rm int}+n)-E+F$.\quad
+**(6)** a connected planar graph has $\chi=2$.
+
+So
+
+$$
+
+\Braket{\mathcal{O}_1(x_1) \cdots \mathcal{O}_n(x_n)}_{\text{conn}} \sim N^{2-n} .
+
+$$
+
+In terms of canonically normalized fields $\varphi=\Phi/g_{YM}$, the same operators are
+$\mathcal O_i=(\lambda/N)^{k_i/2}\Tr\varphi^{k_i}$ minus its mean. For $k_i=2$ this is $\lambda\,N^{-1}\Tr\varphi^2$, the normalization used in the worked example later in this chapter. The leading powers of $N$ are:
 
 
 
-6. **Wick's theorem and Gaussian factorization:**
-Since all connected correlators with $n \ge 3$ vanish strictly in the $N \to \infty$ limit, the cumulant expansion implies that any higher-order correlation function decomposes into the sum of products of two-point functions:
+6. **Wick's theorem and Gaussian factorization.**
+All connected correlators with $n \ge 3$ vanish as $N \to \infty$. By the cumulant expansion, every higher correlation function then splits into a sum of products of two-point functions:
 
 $$
 
@@ -155,26 +191,29 @@ $$
 
 $$
 
-The theory of single-trace operators becomes an exact **Generalized Free Field** (GFF).
-7. **Commutators as $c$-numbers:**
-Now examine the commutator $[\mathcal{O}_A(x), \mathcal{O}_B(y)]$. Its expectation value is a deterministic scalar:
+Correlators with an odd number of operators vanish. A field with this property is called a **generalized free field** (GFF).
+7. **Commutators become $c$-numbers.**
+Now look at the commutator $[\mathcal{O}_A(x), \mathcal{O}_B(y)]$. Its expectation value is a number,
 
 $$
 
-c_{AB}(x, y)\id \equiv \Braket{[\mathcal{O}_A(x), \mathcal{O}_B(y)]} \id \sim \mathcal{O}(1)\id .
+c_{AB}(x, y) \equiv \Braket{[\mathcal{O}_A(x), \mathcal{O}_B(y)]} \sim O(1) .
 
 $$
 
-The quantum fluctuation of the commutator operator itself is given by the connected 4-point function:
+The quantum fluctuation of the commutator around this number is controlled by connected four-point functions:
 
 $$
 
-\Big\| \big([\mathcal{O}_A(x), \mathcal{O}_B(y)] - c_{AB}(x, y)\id\big)\ket\Omega \Big\|^2 \sim \Braket{\mathcal{O}_A\mathcal{O}_B\mathcal{O}_A\mathcal{O}_B}_{\text{conn}} \sim N^{2-4} = \frac{1}{N^2} \xrightarrow{N\to\infty} 0 .
+\begin{split}
+\Big\| \big([\mathcal{O}_A(x), \mathcal{O}_B(y)] - c_{AB}(x, y)\id\big)\ket\Omega \Big\|^2
+&\sim \Braket{\mathcal{O}_A\mathcal{O}_B\mathcal{O}_A\mathcal{O}_B}_{\text{conn}} \\
+&\sim N^{2-4} = \frac{1}{N^2} \xrightarrow{N\to\infty} 0 .
+\end{split}
 
 $$
 
-The operator fluctuations vanish identically as $N \to \infty$!
-Hence the commutator becomes an exact $c$-number:
+The fluctuations vanish as $N \to \infty$, so in the limit the commutator is a $c$-number:
 
 $$
 
@@ -182,8 +221,8 @@ $$
 
 $$
 
-8. **Emergence of bulk Fock space:**
-This commutator relation is the Canonical Commutation Relation (CCR) of a free quantum field. The GNS representation of this CCR algebra on the cyclic vacuum $\ket1_\Psi$ generates an exact multi-particle Fock space:
+8. **A bulk Fock space appears.**
+A commutator that is a $c$-number is the canonical commutation relation (CCR) of a free quantum field. The GNS representation of this CCR algebra, built on the cyclic vector $\ket1_\Psi$, is a multi-particle Fock space:
 
 $$
 
@@ -191,539 +230,693 @@ $$
 
 $$
 
-Boundary single-trace operators act as creation and annihilation operators for the non-interacting bulk quantum field fluctuations $\delta\phi$, proving eq.~6.15. $\blacksquare$
+The boundary single-trace operators act as creation and annihilation operators for the free bulk fluctuations $\delta\phi$. This is the content of \eqref{eq:ads-fock-gns}.
 
 \end{keyresult}
 
-It is now completely natural to identify the two vacua, $\ket0_{\phi_c}=\ket1_\Psi$ (eq.~6.16, where $\ket1_\Psi$ denotes the GNS vector corresponding to the identity operator — literally the same object called $\ket\Omega$ throughout Sec.~II).
+It is then natural to identify the two vacua, $\ket0_{\phi_c}=\ket1_\Psi$. Here $\ket1_\Psi$ is the GNS vector
+that corresponds to the identity operator. It is the same object that was called $\ket\Omega$ throughout
+Chapter~2.
 
 ### Disjoint sectors: no single Hilbert space survives $N\to\infty$
 
-Here is a structural consequence worth sitting with, because it's the direct large-$N$ analogue of exactly
-the obstruction from Sec.~I. Different semiclassical states — different classical bulk geometries — typically
-differ in energy by an amount of order $O(1/G_N)$ (an ordinary classical-gravity energy difference, which
-diverges as $G_N\to0$), whereas states *emph* a single $\HH_\Psi^{\text{GNS}}$ differ from $\Psi$ only
-by $O(G_N^0)$ (an ordinary quantum fluctuation, staying finite). So the GNS Hilbert spaces $\HH_{\Psi_1}$ and
-$\HH_{\Psi_2}$, built around two different classical geometries, cannot overlap at any finite order in
-$G_N$-perturbation theory — and (a further, more subtle point) even two semiclassical states of the
-*emph* energy can still belong to different GNS sectors if they're separated by an infinite entanglement
-barrier in field space, exactly the Sec.~I mechanism. **So in the large-$N$ limit, there is no longer one
-single Hilbert space for the theory — the space of states shatters into disjoint sectors, one per
-semiclassical background**, each with its own GNS Hilbert space and its own emergent operator-algebra
-structure (Fig.~7 of the paper). This is presented explicitly as the direct large-$N$ analogue of the entangled
-spin chain's $N\to\infty$ behavior for different $\theta$ (Sec.~II.E): different $\theta$ gave disjoint sectors
-there; different classical geometries give disjoint sectors here, for exactly the same underlying reason.
+This consequence is the large-$N$ version of the obstruction met in Chapter~1. Different semiclassical states
+correspond to different classical bulk geometries. Their energies typically differ by an amount of order
+$1/G_N$. This is an ordinary classical-gravity energy difference, and it diverges as $G_N\to0$. By contrast,
+states *emph* a single $\HH_\Psi^{\text{GNS}}$ differ from $\Psi$ only by energies of order $G_N^0$,
+which is the size of an ordinary quantum fluctuation and stays finite. So the GNS Hilbert spaces
+$\HH_{\Psi_1}$ and $\HH_{\Psi_2}$, built around two different classical geometries, cannot overlap at any finite
+order in perturbation theory in $G_N$.
 
-### Why boundary time slices carry genuinely independent algebras
+There is a further, more subtle point. Two semiclassical states with the *emph* energy can still lie in
+different GNS sectors. This happens if they are separated by an infinite entanglement barrier, exactly the
+mechanism of Chapter~1.
 
-One more structural fact, worth understanding carefully because it explains something that would otherwise
-look paradoxical: at finite $N$, the algebra of operators on one Cauchy slice determines the algebra
-everywhere (the time-slice axiom, eq.~4.56, from Sec.~IV.D.3) — ordinary causal time evolution lets you
-reconstruct operators at any other time from data on one slice. In the strict $N\to\infty$ limit, this stops
-being true: the boundary field theory becomes a **generalized free field** (a Gaussian field specified
-purely by its two-point function, with *emph* equation of motion governing its time evolution at all), and
-algebras built on different Cauchy slices become genuinely inequivalent (Fig.~8 of the paper).
+**So in the large-$N$ limit there is no longer one single Hilbert space for the theory. The space of
+states splits into disjoint sectors, one for each semiclassical background.** Each sector has its own GNS Hilbert
+space and its own emergent operator algebra. This mirrors the $N\to\infty$ behavior of the entangled spin chain
+with different angles $\theta$ in Chapter~2. There, different values of $\theta$ gave disjoint sectors. Here,
+different classical geometries give disjoint sectors, for the same underlying reason.
 
-The reason traces directly to how the boundary Hamiltonian scales with $N$. The stress tensor has the schematic
-form $T^{\mu\nu}=N\Tr(\cdots)$ (eq.~6.18 — an overall factor of $N$, from the trace running over an
-$N$-dimensional gauge index), so the ordinary boundary Hamiltonian $H=\int d^{d-1}x\,T^{00}$ (eq.~6.17) simply
-does not have a finite $N\to\infty$ limit in any sector — it diverges. The *emph* versions,
-$\widehat T^{\mu\nu}\equiv T^{\mu\nu}/N$ and $\widehat H\equiv H/N$ (eq.~6.19), do survive the limit — but they
-generate only an infinitesimally slow flow, $i[\widehat H,O(x)]=\tfrac1N\partial_tO(x)$ (eq.~6.20): a genuine
-time translation on single-trace operators requires the full, non-rescaled $H$, which doesn't exist in the
-limit. **Ordinary time translation, generated by an integral of a local density over one Cauchy slice,
-simply does not survive the large-$N$ limit.** This is not a contradiction with the fact that semiclassical
-states like the vacuum obviously do have time-translation symmetry — there does exist, within a given sector,
-a genuine time-translation operator $\hat h_\Psi$ satisfying $i[\hat h_\Psi,O(x)]=\partial_tO(x)$ (eq.~6.21) —
-but $\hat h_\Psi$ cannot be written as the integral of a local operator over a single time slice the way $H$
-was. The next subsection (the vacuum sector) makes this completely explicit and constructs $\hat h_\Omega$ by
-hand. (Exactly the same phenomenon applies to any global symmetry, not just time translation — picked back up
-in Sec.~VI.F below for an internal $U(1)$ charge.)
 
-## Sec.~VI.B: the vacuum sector
+> [!NOTE] **Physics Connection: this is an ordinary superselection rule**
+> "Disjoint GNS sectors that no operator connects" already has a name in elementary quantum mechanics:
+> **superselection**. You already know one example. No physical operator connects a state of one total
+> electric charge to a state of a different total charge. So a superposition such as
+> $\ket{\psi}=\alpha\ket{Q{=}0}+\beta\ket{Q{=}1}$ can never be distinguished from the corresponding mixture by any
+> observable. The reason is that every physical operator $O$ must conserve charge, $[O,\hat Q]=0$.
+> 
+> This is exactly a block-diagonal condition. Check it on a toy two-level charge operator
+> $\hat Q=\begin{psmallmatrix}0&0\\0&1\end{psmallmatrix}$. Write a general operator as $O=\begin{psmallmatrix}a&b\\c&d
+> \end{psmallmatrix}$. Then
+> 
+$$
 
-Here every piece of the general story above can be made completely explicit and checked directly, because
-the vacuum sector is the one case where both sides of the duality are known in closed form. The vacuum
-$\ket\Omega$ is dual to empty global AdS (eq.~6.22), with bulk vacuum $\ket0_{\text{AdS}}\in
-\HH_{\text{AdS}}^{\text{Fock}}$; a bulk field has the ordinary mode expansion $\phi(X)=\sum_k(u_k(X)a_k+
-u_k^*(X)a_k^\dagger)$ with $a_k\ket0_{\text{AdS}}=0$ (eq.~6.24), and $\HH_{\text{AdS}}^{\text{Fock}}$ is built by
-acting with creation operators $a_k^\dagger$ on the vacuum, exactly the way you'd build any ordinary Fock
-space.
+> [O,\hat Q] = \begin{pmatrix}a&b\\c&d\end{pmatrix}\begin{pmatrix}0&0\\0&1\end{pmatrix}
+> -\begin{pmatrix}0&0\\0&1\end{pmatrix}\begin{pmatrix}a&b\\c&d\end{pmatrix}
+> = \begin{pmatrix}0&b\\-c&0\end{pmatrix} .
+> 
+$$
 
-On the boundary, vacuum correlators of single-trace operators have the standard large-$N$ scaling,
-$\braket{O}=0$, $\braket{O_1O_2}_c\sim O(N^0)$, $\braket{O_1\cdots O_n}_c\sim N^{2-n}$ (eq.~6.25) — so at
-leading order, every higher correlator factorizes into a sum over products of two-point functions (eq.~6.26),
-exactly the Gaussian/generalized-free-field structure eq.~6.15 demanded. Each single-trace operator behaves
-like a genuine generalized free field, so $\HH_\Omega^{\text{GNS}}$ has the required Fock-space structure, and
-in fact $B(\HH_\Omega^{\text{GNS}})=(\pi_\Omega(\Sscr))''$ (eq.~6.27) — meaning $\omega_\Omega$ is a
-*emph* state with respect to $\Sscr$, and $\Sscr=\Alg_\Omega$: single-trace operators are all there is in
-the vacuum sector, with nothing extra surviving the large-$N$ limit.
+> Requiring this to vanish gives $b=c=0$. So $O$ must be block-diagonal in the charge sectors, and no
+> charge-conserving operator can have a nonzero matrix element between them.
+> 
+> Different semiclassical vacua behave in the same way. The role of the conserved charge is played by an energy
+> or entanglement difference that diverges as $N\to\infty$ (Chapter~1). It forces every operator that survives the
+> large-$N$ limit to have vanishing matrix elements between sectors. The mechanism that produces the split is
+> different: a conserved quantity in one case, an infinite barrier in the other. But the resulting structure is
+> the same superselection structure you already know: disjoint sectors, no operator that crosses between them,
+> and a separate Hilbert space for each sector.
+
+
+### Why boundary time slices carry independent algebras
+
+One more structural fact explains something that would otherwise look paradoxical. At finite $N$, the algebra
+of operators on one Cauchy slice determines the algebra everywhere. This is the time-slice axiom of Chapter~4:
+ordinary time evolution lets you reconstruct operators at any other time from data on one slice. In the strict
+$N\to\infty$ limit this is no longer true. The boundary theory becomes a **generalized free field**. Such a
+field is Gaussian and is specified completely by its two-point function. It has *emph* equation of motion
+that governs its time evolution. As a result, algebras built on different Cauchy slices become inequivalent.
+
+The reason lies in how the boundary Hamiltonian scales with $N$. The stress tensor has the schematic form
+$T^{\mu\nu}=N\Tr(\cdots)$. It has an overall factor of $N$ relative to the normalized single-trace operators.
+So the ordinary boundary Hamiltonian $H=\int d^{d-1}x\,T^{00}$ has no finite $N\to\infty$ limit in any sector:
+it diverges. The *emph* versions $\widehat T^{\mu\nu}\equiv T^{\mu\nu}/N$ and $\widehat H\equiv H/N$ do
+survive the limit. But they generate only an infinitesimally slow flow,
+$i[\widehat H,O(x)]=\tfrac1N\partial_tO(x)$. A full time translation of single-trace operators needs the
+unrescaled $H$, and that operator does not exist in the limit. **Ordinary time translation, generated by
+the integral of a local density over one Cauchy slice, does not survive the large-$N$ limit.**
+
+This does not contradict the fact that semiclassical states such as the vacuum clearly have time-translation
+symmetry. Within a given sector there is a genuine time-translation operator $\hat h_\Psi$ satisfying
+\begin{equation}
+i[\hat h_\Psi,O(x)]=\partial_tO(x) .
+\label{eq:ads-htrans}
+\end{equation}
+But $\hat h_\Psi$ cannot be written as the integral of a local operator over a single time slice, the way $H$
+was. The next section, on the vacuum sector, makes this explicit and constructs $\hat h_\Omega$. The same thing
+happens for any global symmetry, not only time translation. We return to it in the section on $1/N$
+corrections, for an internal $U(1)$ charge.
+
+## The vacuum sector
+
+In the vacuum sector every part of the general story can be made explicit and checked. The reason is that here
+both sides of the duality are known in closed form. The vacuum $\ket\Omega$ is dual to empty global AdS, with
+bulk vacuum $\ket0_{\text{AdS}}\in\HH_{\text{AdS}}^{\text{Fock}}$. A bulk field has the ordinary mode expansion
+\begin{equation}
+\phi(X)=\sum_k\big(u_k(X)a_k+u_k^*(X)a_k^\dagger\big), \qquad a_k\ket0_{\text{AdS}}=0 ,
+\label{eq:ads-bulkmodes}
+\end{equation}
+and $\HH_{\text{AdS}}^{\text{Fock}}$ is built by acting with creation operators $a_k^\dagger$ on the vacuum, just
+as for any ordinary Fock space.
+
+On the boundary, vacuum correlators of single-trace operators have the standard large-$N$ scaling:
+$\braket{O}=0$, $\braket{O_1O_2}_c\sim O(N^0)$, and $\braket{O_1\cdots O_n}_c\sim N^{2-n}$. So at leading order
+every higher correlator factorizes into a sum of products of two-point functions. This is exactly the Gaussian,
+generalized-free-field structure that \eqref{eq:ads-fock-gns} requires. Each single-trace operator behaves like
+a generalized free field, so $\HH_\Omega^{\text{GNS}}$ has the required Fock-space structure. In fact
+
+$$
+
+B(\HH_\Omega^{\text{GNS}})=(\pi_\Omega(\Sscr))'' .
+
+$$
+
+This means that $\omega_\Omega$ is a *emph* state with respect to $\Sscr$, and $\Sscr=\Alg_\Omega$. In the
+vacuum sector, single-trace operators are all there is. Nothing extra survives the large-$N$ limit.
 
 ### Worked calculation: matrix Wick contractions and large-$N$ factorization
 
-To see precisely how large-$N$ factorization produces a free Fock algebra from an interacting matrix theory, let us work out the index contractions for an $N\times N$ hermitian matrix field $M_{ij}(x)$ with Gaussian propagator:
+To see how large-$N$ factorization produces a free Fock algebra from a matrix theory, work out the index
+contractions for an $N\times N$ hermitian matrix field $M_{ij}(x)$ with Gaussian propagator
 
 $$
 
-\braket{M_{ij}(x) M_{kl}(y)}_0 = \delta_{il}\delta_{jk} G(x,y)
+\braket{M_{ij}(x) M_{kl}(y)}_0 = \delta_{il}\delta_{jk} G(x,y) .
 
 $$
 
-where $G(x,y)$ is the scalar two-point function. Define the gauge-invariant, normalized single-trace operator:
+Here $G(x,y)$ is a scalar two-point function. Define the gauge-invariant, normalized single-trace operator
 
 $$
 
-\mathcal{O}(x) \equiv \frac{1}{N} \Tr\big(M(x)^2\big) = \frac{1}{N} \sum_{i,j=1}^N M_{ij}(x) M_{ji}(x)
+\mathcal{O}(x) \equiv \frac{1}{N} \Tr\big(M(x)^2\big) = \frac{1}{N} \sum_{i,j=1}^N M_{ij}(x) M_{ji}(x) ,
 
 $$
 
-Let us evaluate the two-point correlator $\braket{\mathcal{O}(x) \mathcal{O}(y)}_0$:
+understood as normal-ordered. This means contractions between the two $M$'s inside the same $\mathcal O$ are
+left out. Equivalently, the vacuum value $\braket{\mathcal O}_0=N\,G(x,x)$ has been subtracted. The two-point
+correlator is
 
 $$
 
-\braket{\mathcal{O}(x)\mathcal{O}(y)}_0 = \frac{1}{N^2}\sum_{i,j,k,l=1}^N \braket{M_{ij}(x) M_{ji}(x) M_{kl}(y) M_{lk}(y)}_0
+\braket{\mathcal{O}(x)\mathcal{O}(y)}_0 = \frac{1}{N^2}\sum_{i,j,k,l=1}^N \braket{M_{ij}(x) M_{ji}(x) M_{kl}(y) M_{lk}(y)}_0 .
 
 $$
 
-By Wick's theorem, the contractions between $M(x)$ and $M(y)$ are:
+By Wick's theorem, there are two ways to contract each $M(x)$ with an $M(y)$:
 
-1. Contract $M_{ij}(x)$ with $M_{kl}(y)$ and $M_{ji}(x)$ with $M_{lk}(y)$:
+1. Contract $M_{ij}(x)$ with $M_{kl}(y)$, and $M_{ji}(x)$ with $M_{lk}(y)$:
+\begin{align}
+\braket{M_{ij}(x)M_{kl}(y)}_0 \braket{M_{ji}(x)M_{lk}(y)}_0
+&\eqstep{1} (\delta_{il}\delta_{jk} G(x,y))(\delta_{jk}\delta_{il} G(x,y))
+\ \eqstep{2}\ \delta_{il}\delta_{jk} G(x,y)^2 . \notag
+\end{align}
+**(1)** the Gaussian propagator, applied to each contracted pair.\quad
+**(2)** a Kronecker delta squared equals itself, $\delta_{il}\delta_{il}=\delta_{il}$.
 
-$$
-
-\braket{M_{ij}(x)M_{kl}(y)}_0 \braket{M_{ji}(x)M_{lk}(y)}_0 = (\delta_{il}\delta_{jk} G(x,y))(\delta_{jk}\delta_{il} G(x,y)) = \delta_{il}\delta_{jk} G(x,y)^2
-
-$$
-
-Summing over all 4 indices gives:
-
-$$
-
-\sum_{i,j,k,l} \delta_{il}\delta_{jk} = \sum_{i,j=1}^N 1 = N^2
+Summing over all four indices gives
 
 $$
 
-2. Contract $M_{ij}(x)$ with $M_{lk}(y)$ and $M_{ji}(x)$ with $M_{kl}(y)$:
+\sum_{i,j,k,l} \delta_{il}\delta_{jk} = \sum_{i,j=1}^N 1 = N^2 .
 
 $$
 
-\braket{M_{ij}(x)M_{lk}(y)}_0 \braket{M_{ji}(x)M_{kl}(y)}_0 = (\delta_{ik}\delta_{jl} G(x,y))(\delta_{jl}\delta_{ik} G(x,y)) = \delta_{ik}\delta_{jl} G(x,y)^2
+2. Contract $M_{ij}(x)$ with $M_{lk}(y)$, and $M_{ji}(x)$ with $M_{kl}(y)$:
+\begin{align}
+\braket{M_{ij}(x)M_{lk}(y)}_0 \braket{M_{ji}(x)M_{kl}(y)}_0
+&\eqstep{3} (\delta_{ik}\delta_{jl} G(x,y))(\delta_{jl}\delta_{ik} G(x,y))
+\ \eqstep{4}\ \delta_{ik}\delta_{jl} G(x,y)^2 . \notag
+\end{align}
+**(3)** the Gaussian propagator again, with the indices of the second contraction pattern.\quad
+**(4)** a Kronecker delta squared equals itself.
+
+Summing over the indices again gives $\sum_{i,j} 1 = N^2$.
+
+Now multiply by the normalization $\frac{1}{N^2}$:
 
 $$
 
-Summing over indices gives $\sum_{i,j} 1 = N^2$.
-
-Multiplying by the normalization $\frac{1}{N^2}$:
+\braket{\mathcal{O}(x)\mathcal{O}(y)}_0 = \frac{1}{N^2}\Big(N^2 G(x,y)^2 + N^2 G(x,y)^2\Big) = 2\,G(x,y)^2 \sim O(N^0) .
 
 $$
 
-\braket{\mathcal{O}(x)\mathcal{O}(y)}_0 = \frac{1}{N^2}\Big(N^2 G(x,y)^2 + N^2 G(x,y)^2\Big) = 2\,G(x,y)^2 \sim O(N^0)
+
+Next consider the four-point function
+$\braket{\mathcal{O}(x_1)\mathcal{O}(x_2)\mathcal{O}(x_3)\mathcal{O}(x_4)}_0$. Its contractions fall into two
+classes.
+
+- **Disconnected contractions.** These contract the single traces in pairs, for example
+$\mathcal{O}_1$ with $\mathcal{O}_2$ and $\mathcal{O}_3$ with $\mathcal{O}_4$:
 
 $$
 
-Now consider the four-point function $\braket{\mathcal{O}(x_1)\mathcal{O}(x_2)\mathcal{O}(x_3)\mathcal{O}(x_4)}_0$. The contractions split into two classes:
-
-- **Disconnected contractions** (pairwise contractions between single traces, e.g. $\mathcal{O}_1$ with $\mathcal{O}_2$ and $\mathcal{O}_3$ with $\mathcal{O}_4$):
+\braket{\mathcal{O}(x_1)\mathcal{O}(x_2)}_0 \braket{\mathcal{O}(x_3)\mathcal{O}(x_4)}_0 = \big(2 G(x_1,x_2)^2\big)\big(2 G(x_3,x_4)^2\big) \sim O(N^0) .
 
 $$
 
-\braket{\mathcal{O}(x_1)\mathcal{O}(x_2)}_0 \braket{\mathcal{O}(x_3)\mathcal{O}(x_4)}_0 = \big(2 G(x_1,x_2)^2\big)\big(2 G(x_3,x_4)^2\big) \sim O(N^0)
+There are three such pairings: $(12)(34)$, $(13)(24)$, and $(14)(23)$.
+- **Connected contractions.** These link all four operators in a single ring, for example
+$M(x_1) \to M(x_2) \to M(x_3) \to M(x_4) \to M(x_1)$. In double-line notation the ring has two closed index
+loops, one running around its inside and one around its outside. That gives two free index sums and a factor
+$N^2$. With four normalization factors of $1/N$, the connected four-point function scales as
 
 $$
 
-There are 3 such pairings: $(12)(34) + (13)(24) + (14)(23)$.
-- **Connected contractions** (cyclic contractions linking all 4 operators in a single loop, e.g. $M(x_1) \to M(x_2) \to M(x_3) \to M(x_4) \to M(x_1)$):
-The index chain gives a single index summation $\sum_i \delta_{ii} = N$. With four normalization prefactors of $1/N$, the connected four-point amplitude scales as:
+\braket{\mathcal{O}(x_1)\mathcal{O}(x_2)\mathcal{O}(x_3)\mathcal{O}(x_4)}_c \sim \frac{1}{N^4} \times N^2 = \frac{1}{N^2} \to 0 .
 
 $$
 
-\braket{\mathcal{O}(x_1)\mathcal{O}(x_2)\mathcal{O}(x_3)\mathcal{O}(x_4)}_c \sim \frac{1}{N^4} \times N = \frac{1}{N^3} \to 0
+This agrees with the general planar scaling $\braket{\mathcal{O}_1\cdots\mathcal{O}_n}_c \sim N^{2-n}$ at
+$n=4$. The same scaling holds when planar gauge interactions are switched on, at fixed 't~Hooft coupling
+$\lambda = g_{\text{YM}}^2 N$.
+
+As a check at coincident points, with $G=1$: here $\Tr M^2$ is a sum of independent squared Gaussian entries,
+and adding up their cumulants gives exactly $\braket{\mathcal O^2}_0=2$ and a fourth cumulant $48/N^2$. A Monte
+Carlo sample of random Hermitian matrices reproduces the variance $2$.
+
+So at strictly $N\to\infty$,
 
 $$
 
-Even in the presence of planar gauge interactions (with 't~Hooft coupling $\lambda = g_{\text{YM}}^2 N$), planar connected diagrams scale as $\braket{\mathcal{O}_1\cdots\mathcal{O}_n}_c \sim N^{2-n}$. For $n=4$, this gives $\sim O(1/N^2)$.
-
-Thus, at strictly $N\to\infty$:
-
-$$
-
-\braket{\mathcal{O}(x_1)\mathcal{O}(x_2)\mathcal{O}(x_3)\mathcal{O}(x_4)}_0 = \braket{\mathcal{O}_1\mathcal{O}_2}_0\braket{\mathcal{O}_3\mathcal{O}_4}_0 + \braket{\mathcal{O}_1\mathcal{O}_3}_0\braket{\mathcal{O}_2\mathcal{O}_4}_0 + \braket{\mathcal{O}_1\mathcal{O}_4}_0\braket{\mathcal{O}_2\mathcal{O}_3}_0 + O(1/N^2)
-
-$$
-
-Connected $n$-point correlators vanish for all $n \ge 3$. This proves that the single-trace operators satisfy Wick's theorem identically, generating an exact free generalized field Fock space $\HH_\Omega^{\text{GNS}}$.
-
-The correspondence between bulk and boundary mode expansions can be made completely explicit: expanding a
-single-trace operator directly on the GNS Hilbert space, $\pi_\Omega(O(x))=\sum_k(v_k(x)b_k+v_k^*(x)b_k^\dagger)$
-with $b_k\ket1_\Omega=0$ (eq.~6.28), matching the boundary basis functions to the boundary limit of the bulk
-ones, $v_k(x)=\lim_{r\to\infty}r^\Delta u_k(X)$ (eq.~6.29), and the extrapolate dictionary (eq.~6.6) then
-forces the mode operators to be identified directly, $a_k=b_k$ (eq.~6.30) — establishing eq.~6.15 completely
-explicitly in this one solvable case. Rewritten in position space, this identification becomes
+\begin{split}
+\braket{\mathcal{O}(x_1)\mathcal{O}(x_2)\mathcal{O}(x_3)\mathcal{O}(x_4)}_0
+={}& \braket{\mathcal{O}_1\mathcal{O}_2}_0\braket{\mathcal{O}_3\mathcal{O}_4}_0
++ \braket{\mathcal{O}_1\mathcal{O}_3}_0\braket{\mathcal{O}_2\mathcal{O}_4}_0 \\
+&+ \braket{\mathcal{O}_1\mathcal{O}_4}_0\braket{\mathcal{O}_2\mathcal{O}_3}_0 + O(1/N^2) .
+\end{split}
 
 $$
 
-\phi(X) = \int d^dx\,K(X;x)\,\pi_\Omega(O(x))
+Connected $n$-point correlators vanish for all $n \ge 3$. So the single-trace operators obey Wick's theorem
+exactly in the limit, and they generate a generalized-free-field Fock space $\HH_\Omega^{\text{GNS}}$.
+
+The match between bulk and boundary mode expansions can be made explicit. Expand a single-trace operator
+directly on the GNS Hilbert space:
 
 $$
 
-(eq.~6.32), the celebrated **global HKLL construction**: an explicit kernel $K$ that reconstructs the bulk
-field everywhere in AdS directly from boundary single-trace operator data.
-
-### Worked derivation: the HKLL smearing kernel in \texorpdfstring{$\text{AdS_3$}{AdS3}}
-
-To make the HKLL kernel $K(X;x)$ fully concrete, consider a free massless scalar field $\phi(z,t,x)$ in Poincaré $\text{AdS}_3$ with metric:
+\pi_\Omega(O(x))=\sum_k\big(v_k(x)b_k+v_k^*(x)b_k^\dagger\big), \qquad b_k\ket1_\Omega=0 .
 
 $$
 
-ds^2 = \frac{R^2}{z^2}\big(dz^2 - dt^2 + dx^2\big), \qquad z > 0
+Match the boundary mode functions to the boundary limits of the bulk ones:
 
 $$
 
-The bulk Klein—Gordon equation $(\Box - m^2)\phi = 0$ for $m^2=0$ ($\Delta = 2$) reads:
+v_k(x)=\lim_{r\to\infty}r^\Delta u_k(X) .
 
 $$
 
-z^3 \partial_z \left(\frac{1}{z}\partial_z \phi\right) - \partial_t^2 \phi + \partial_x^2 \phi = \partial_z^2 \phi - \frac{1}{z}\partial_z \phi - \partial_t^2 \phi + \partial_x^2 \phi = 0
+The extrapolate dictionary \eqref{eq:ads-extrapolate} then forces the mode operators to be the same,
+$a_k=b_k$. This establishes \eqref{eq:ads-fock-gns} explicitly in this one solvable case. Written in position
+space, the identification becomes
+\begin{equation}
+\phi(X) = \int d^dx\,K(X;x)\,\pi_\Omega(O(x)) .
+\label{eq:ads-hkll}
+\end{equation}
+This is the **global HKLL construction**, named after Hamilton, Kabat, Lifschytz and Lowe. The kernel $K$ is
+explicit, and it reconstructs the bulk field everywhere in AdS from boundary single-trace operators.
+
+### Worked derivation: the HKLL smearing kernel in \texorpdfstring{$\text{AdS}_3$}{AdS3}
+
+To make the HKLL kernel $K(X;x)$ concrete, consider a free massless scalar field $\phi(z,t,x)$ in Poincaré
+$\text{AdS}_3$ with metric
 
 $$
 
-In Fourier space with boundary momentum $(\omega, k)$ such that $\omega^2 - k^2 \equiv q^2 > 0$ (timelike momentum), the mode equation for $\phi(z,t,x) = f(z) e^{-i\omega t + ikx}$ is:
+ds^2 = \frac{R^2}{z^2}\big(dz^2 - dt^2 + dx^2\big), \qquad z > 0 .
 
 $$
 
-f''(z) - \frac{1}{z} f'(z) + q^2 f(z) = 0
+The boundary is at $z=0$. For $m^2=0$ the conformal dimension is $\Delta = 2$. The bulk Klein—Gordon equation
+$(\Box - m^2)\phi = 0$, multiplied through by $R^2/z^2$, reads
 
 $$
 
-Setting $f(z) = z g(z)$ converts this to Bessel's equation of order 1 for $g(z)$:
+z\, \partial_z \left(\frac{1}{z}\partial_z \phi\right) - \partial_t^2 \phi + \partial_x^2 \phi
+= \partial_z^2 \phi - \frac{1}{z}\partial_z \phi - \partial_t^2 \phi + \partial_x^2 \phi = 0 .
 
 $$
 
-g''(z) + \frac{1}{z} g'(z) + \left(q^2 - \frac{1}{z^2}\right)g(z) = 0 \implies f(z) = C\, z J_1(q z)
+The second form follows from the product rule applied to $\partial_z(z^{-1}\partial_z\phi)$.
+
+Go to Fourier space, with boundary momentum $(\omega, k)$ chosen timelike, $\omega^2 - k^2 \equiv q^2 > 0$. For
+$\phi(z,t,x) = f(z) e^{-i\omega t + ikx}$ the mode equation is
 
 $$
 
-Near the boundary $z \to 0$, $J_1(qz) \approx \frac{qz}{2}$, so $f(z) \approx C \frac{q}{2} z^2$. The extrapolate dictionary requires $\lim_{z\to 0} z^{-2} \phi(z,t,x) = \mathcal{O}(t,x) = e^{-i\omega t + ikx}$, fixing $C = \frac{2}{q}$. Hence:
+f''(z) - \frac{1}{z} f'(z) + q^2 f(z) = 0 .
 
 $$
 
-\phi(z,t,x) = \frac{2 z}{q} J_1(q z) \mathcal{O}(t,x)
+Setting $f(z) = z\, g(z)$ turns this into Bessel's equation of order 1 for $g(z)$. The solution that is regular
+in the interior is $J_1$:
 
 $$
 
-Using the integral representation of the Bessel function $J_1(qz) = \frac{q z}{\pi} \int_{-1}^1 dt' \sqrt{1 - t'^2}\, e^{-i q z t'}$, the bulk field can be transformed back into position space as a convolution over the boundary domain:
+g''(z) + \frac{1}{z} g'(z) + \left(q^2 - \frac{1}{z^2}\right)g(z) = 0 \implies f(z) = C\, z J_1(q z) .
 
 $$
 
-\phi(z,t,x) = \frac{1}{2\pi} \int_{t'^2 + x'^2 < z^2} dt' dx' \, \mathcal{O}\big(t + t',\, x + i x'\big)
+Near the boundary, $z \to 0$, we have $J_1(qz) \approx \frac{qz}{2}$, so $f(z) \approx C \frac{q}{2} z^2$. The
+extrapolate dictionary (in Poincaré coordinates, $z^{-\Delta}$ plays the role of $r^{\Delta}$) requires
+$\lim_{z\to 0} z^{-2} \phi(z,t,x) = \mathcal{O}(t,x) = e^{-i\omega t + ikx}$. This fixes $C = \frac{2}{q}$. Hence
 
 $$
 
-or equivalently using real spacelike boundary smearing:
+\phi(z,t,x) = \frac{2 z}{q} J_1(q z)\, \mathcal{O}(t,x) .
 
 $$
 
-\phi(z,t,x) = \frac{1}{\pi} \int_{x'^2 - t'^2 < z^2} dt' dx' \, \frac{\theta(z^2 - x'^2 + t'^2)}{\sqrt{z^2 - x'^2 + t'^2}}\, \mathcal{O}\big(t + t',\, x + x'\big)
+
+Now go back to position space. The result is a smearing of $\mathcal O$ over a disk of radius $z$, with one of
+the boundary coordinates continued to imaginary values:
+\begin{equation*}
+\phi(z,t,x) = \frac{1}{\pi} \int_{t'^2 + y'^2 < z^2} dt'\, dy' \, \mathcal{O}\big(t + t',\, x + i y'\big) .
+\end{equation*}
+To check it, insert $\mathcal O(t,x)=e^{-i\omega t+ikx}$:
+\begin{align}
+&\frac{1}{\pi} \int_{t'^2 + y'^2 < z^2} dt'\,dy'\, e^{-i\omega(t+t')+ik(x+iy')} \notag\\
+&\qquad\eqstep{1} \frac{e^{-i\omega t+ikx}}{\pi}\int_{t'^2 + y'^2 < z^2} dt'\,dy'\,e^{-i\omega t'-ky'} \notag\\
+&\qquad\eqstep{2} \frac{e^{-i\omega t+ikx}}{\pi}\cdot\frac{2\pi z\,J_1(qz)}{q}
+\ \eqstep{3}\ \frac{2z}{q}J_1(qz)\,\mathcal O(t,x) . \notag
+\end{align}
+**(1)** pull the factor that does not depend on $t',y'$ out of the integral.\quad
+**(2)** the disk integral $\int_{|u|<z}d^2u\,e^{ia\cdot u}=2\pi z J_1(|a|z)/|a|$, continued to
+$a=(-\omega,ik)$, for which $a\cdot a=\omega^2-k^2=q^2$.\quad
+**(3)** $e^{-i\omega t+ikx}=\mathcal O(t,x)$.
+
+We also checked step (2) numerically for sample values of $z,\omega,k$. The contour can be rotated back to
+real boundary coordinates. The smearing region then becomes the set of boundary points spacelike-separated from
+the bulk point, which is not compact, and the real-space kernel needs more care; we do not need its explicit
+form.
+
+The disk formula has a clear physical meaning. To evaluate the local bulk operator $\phi(z,t,x)$ at radial
+depth $z$, one must integrate the boundary operator $\mathcal{O}$ over a region of size $z$. The deeper the
+operator sits in the bulk (the larger $z$), the larger the boundary region needed to reconstruct it. This is a
+direct example of the holographic UV/IR relation.
+
+A further fact follows from the representation theory of the boundary conformal group. In global AdS the
+single-particle energy levels are evenly spaced: in units of $1/R$ they are $\Delta+2n+l$, so successive radial
+excitations are spaced by $2$. From this one can show the following result, which we state without proof:
+\begin{equation}
+B(\HH_\Omega^{\text{GNS}}) = Y_{I_w}, \qquad w\ge\pi R .
+\label{eq:ads-timeband}
+\end{equation}
+Here $I_w$ is a boundary time band of width $w$. **The entire operator content of the bulk vacuum
+sector, meaning every bulk field everywhere in AdS, is already generated by boundary operators smeared over a
+time band of width $\pi R$.** You do not need the whole boundary history, or an infinite band. A band of width
+$\pi R$ is already enough to reconstruct the entire bulk. This width is half of $2\pi R$, the time after which
+every single-particle mode returns to itself up to an overall phase. This
+is the clearest and most concrete preview of subregion-subalgebra duality, which Chapter~7 develops as a
+general principle.
+
+Finally, the vacuum-sector time-translation operator $\hat h_\Omega$ from the previous section can be written
+down explicitly. It is the bulk energy integral over a Cauchy slice, schematically
 
 $$
 
-Notice the remarkable physical property of this formula: evaluating the local bulk operator $\phi(z,t,x)$ at radial depth $z$ requires integrating the boundary operator $\mathcal{O}$ over a spatial disk of radius $z$. The deeper the operator is in the bulk (larger $z$), the larger the boundary region needed to reconstruct it — a direct manifestation of the holographic UV/IR relation!
-
-And — a genuinely striking, easy to underappreciate fact worth stating plainly — because the boundary conformal representation has evenly-spaced
-energy levels (spacing $2$, a standard fact about CFT representation theory), it can be shown that
+\hat h_\Omega=\int d\rho\,d^{d-1}\Omega\,\rho^{d-1} T_{tt} ,
 
 $$
 
-B(\HH_\Omega^{\text{GNS}}) = Y_{I_w}, \qquad w\ge\pi R
+with the appropriate metric factors. Here $T_{tt}$ is the bulk stress tensor, which is quadratic in $\phi$ at
+this order. Substitute the mode expansion \eqref{eq:ads-bulkmodes} and use $a_k=b_k$. This turns $\hat h_\Omega$
+into a specific quadratic expression in boundary single-trace operators, which is an operator satisfying
+\eqref{eq:ads-htrans}. Consistent with \eqref{eq:ads-timeband}, this expression involves integrating boundary
+operators over a time band of width $\pi R$, not a single instant.
 
-$$
-
-(eq.~6.33), where $I_w$ is a boundary time band of width $w$: **the entire bulk vacuum sector's operator
-content — every bulk field, everywhere in AdS — is already fully generated by boundary operators smeared
-over a time band of width just $\pi R$, no wider.** You do not need the whole boundary history, an infinite
-band, or even more than half the natural period — a finite window of boundary time is already enough to
-reconstruct the entire bulk. This is worth remembering as the single cleanest, most concrete preview of
-subregion-subalgebra duality, which Sec.~VII develops as the paper's central general principle.
-
-Finally, the vacuum-sector time-translation operator $\hat h_\Omega$ promised in Sec.~VI.A above can be
-written down explicitly, as the bulk energy integral $\hat h_\Omega=\int d\rho\,d^{d-1}\Omega\,\rho^{d-1}
-T_{tt}$ over a Cauchy slice (eq.~6.34, with $T_{tt}$ the bulk stress tensor, quadratic in $\phi$ at this order)
-— substituting the mode expansion (eq.~6.24) and using $a_k=b_k$ turns this directly into a specific quadratic
-expression in boundary single-trace operators, exactly the promised $\hat h_\Omega$ satisfying
-eq.~6.21 — and, consistent with eq.~6.33, it necessarily involves integrating boundary operators over a time
-band of width $\pi R$, not a single instant.
-
-## Sec.~VI.C: thermofield double state
+## The thermofield double state
 
 ### Setup, and the Hawking—Page transition
 
-Take two copies of the boundary CFT, $\text{CFT}_R$ and $\text{CFT}_L$, and build the **thermofield
-double** (TFD) state at finite $N$,
-
-$$
-
+Take two copies of the boundary CFT, $\text{CFT}_R$ and $\text{CFT}_L$. At finite $N$, build the
+**thermofield double** (TFD) state
+\begin{equation}
 \ket{\Psi_\beta} = \frac{1}{\sqrt{Z_\beta}}\sum_n e^{-\beta E_n/2}\ket n_R\ket{\Theta n}_L, \qquad
-Z_\beta=\sum_n e^{-\beta E_n}
+Z_\beta=\sum_n e^{-\beta E_n} .
+\label{eq:ads-tfd}
+\end{equation}
+Here $\Theta$ is the CRT operator (charge conjugation, reflection, and time reversal). It is needed to match
+energy eigenstates correctly across the two copies. Tracing out $L$ gives the ordinary thermal density matrix
+$\rho_\beta=\tfrac1{Z_\beta}e^{-\beta H_R}$ on $R$.
 
-$$
+This is the finite-dimensional worked example of Chapter~4, now applied to a field theory. The algebra
+$B(\HH_R)$ is type I, $\ket{\Psi_\beta}$ is cyclic and separating for it, and the modular operator is
+\begin{equation}
+-\log\Delta_\beta=\beta(H_R-H_L) .
+\label{eq:ads-tfd-modular}
+\end{equation}
+This is the formula $\Delta_\Psi=\rho_R\otimes\rho_L^{-1}$ from Chapter~4, with $\rho_R=e^{-\beta H_R}/Z_\beta$
+and $\rho_L=e^{-\beta H_L}/Z_\beta$. The factors of $Z_\beta$ cancel in the logarithm.
 
-(eq.~6.35, with $\Theta$ the CRT operator — needed to correctly match energy eigenstates across the two
-copies). Tracing out $L$ gives the ordinary thermal density matrix $\rho_\beta=\tfrac1{Z_\beta}e^{-\beta H_R}$
-on $R$ — this is exactly the finite-dimensional worked example from Sec.~IV.A of this companion, applied now
-to a genuine field theory: $B(\HH_R)$ is type I, $\ket{\Psi_\beta}$ is cyclic and separating for it, and the
-modular operator is exactly $-\log\Delta_\beta=\beta(H_R-H_L)$ (eq.~6.36) — literally the same
-$\Delta_\Psi=\rho_R\otimes\rho_L^{-1}$ formula from Sec.~IV.A, with $\rho_R=e^{-\beta H_R}/Z_\beta$.
+In the large-$N$ limit this system has a first-order phase transition at the **Hawking—Page
+temperature** $T_{\text{HP}}$. The free energy jumps in its scaling with $N$: it is of order $N^0$ below
+$T_{\text{HP}}$ and of order $N^2$ above it. The dual bulk geometry jumps at the same point. Below
+$T_{\text{HP}}$ it is *emph*, a thermal gas of particles in ordinary global AdS with no black hole.
+Above $T_{\text{HP}}$ it is an *emph*.
 
-In the large-$N$ limit, this system undergoes a genuine first-order phase transition at the
-**Hawking—Page temperature** $T_{\text{HP}}$: the free energy jumps discontinuously in its $N$-scaling,
-from $O(N^0)$ below $T_{\text{HP}}$ to $O(N^2)$ above it, and the dual bulk geometry correspondingly jumps
-from *emph* (a thermal gas of particles in ordinary global AdS, with no black hole at all) to a
-genuine *emph*.
+**Below $T_{\text{HP**}$.} The energies that contribute to the sum in \eqref{eq:ads-tfd} stay of order
+$N^0$, because higher energies are suppressed by the Boltzmann factor. So in the large-$N$ limit these states lie
+inside the vacuum-sector GNS Hilbert spaces $\HH_\Omega^R$ and $\HH_\Omega^L$ built in the previous section. The
+GNS Hilbert space built from $\ket{\Psi_\beta}$ factorizes, $\HH_{\Psi_\beta}^{\text{GNS}}=
+\HH_\Omega^R\otimes\HH_\Omega^L$. Correspondingly $Y_R=B(\HH_\Omega^R)$ and $Y_L=B(\HH_\Omega^L)$. **So
+$Y_R$ remains type I.** The bulk dual is two separate copies of global AdS, with no geometric connection between
+them. The only link between them is the entanglement carried by the TFD state. The bulk geometry is
+disconnected.
 
-**Below $T_{\text{HP**}$}: energies contributing to the sum in eq.~6.35 stay of order $O(N^0)$ (higher
-energies are Boltzmann-suppressed), so in the large-$N$ limit these states live entirely within the ordinary
-vacuum-sector GNS Hilbert spaces $\HH_\Omega^R,\HH_\Omega^L$ already constructed in Sec.~VI.B. The GNS Hilbert
-space built from $\ket{\Psi_\beta}$ genuinely factorizes, $\HH_{\Psi_\beta}^{\text{GNS}}=\HH_\Omega^R\otimes
-\HH_\Omega^L$ (eq.~6.39), and correspondingly $Y_R=B(\HH_\Omega^R)$, $Y_L=B(\HH_\Omega^L)$ (eq.~6.41) —
-**$Y_R$ remains type I**. The bulk dual is exactly two separate, unentangled-with-each-other-except-via-
-the-state copies of global AdS glued together by the TFD's entanglement pattern (eq.~6.37, Fig.~9(a)) — a
-completely disconnected bulk geometry.
+**Above $T_{\text{HP**}$.} Now the thermal ensemble is dominated by states of energy of order $N^2$. The
+finite-$N$ sum \eqref{eq:ads-tfd} has no sensible limit as $N\to\infty$: neither the energies nor the
+eigenstates converge. In fact the one-point function of a single-trace operator in this state *emph*,
+$\braket{\Psi_\beta|O|\Psi_\beta}\sim O(N)$. The fix is to use "renormalized," mean-subtracted operators
+$\widehat O\equiv O-\braket{\Psi_\beta|O|\Psi_\beta}$. Their connected correlators have sensible large-$N$
+limits of order $N^0$, and they again obey large-$N$ factorization. This produces a good GNS Hilbert space with
+a Fock-space structure. The resulting algebras $Y_R\equiv(\pi_{\Psi_\beta}(\Sscr_\beta^{(R)}))''$ satisfy
+$Y_R'=Y_L$.
 
-**Above $T_{\text{HP**}$}: now the thermal ensemble is dominated by states of energy $O(N^2)$, and the
-naive finite-$N$ sum (eq.~6.35) becomes ill-defined as $N\to\infty$ — neither the energies nor the
-corresponding eigenstates have a sensible limit, and in fact a single-trace operator's one-point function in
-this state actually *emph*, $\braket{\Psi_\beta|O|\Psi_\beta}\sim O(N)$ (eq.~6.43). The fix: work with
-"renormalized," mean-subtracted operators $\widehat O\equiv O-\braket{\Psi_\beta|O|\Psi_\beta}$ (eq.~6.44),
-whose connected correlators do have sensible, $O(N^0)$, large-$N$ limits (eq.~6.45), and which again satisfy
-the large-$N$ factorization property. This produces a perfectly good GNS Hilbert space and a Fock-space
-structure, and the resulting algebras $Y_R\equiv(\pi_{\Psi_\beta}(\Sscr_\beta^{(R)}))''$ satisfy $Y_R'=Y_L$
-(eq.~6.47) — but now, because the entanglement between $\text{CFT}_R$ and $\text{CFT}_L$ has jumped to order
-$O(N^2)$, it has been argued that **$Y_R$ becomes type $\mathrm{III**_1$}, and
-$\HH_{\Psi_\beta}^{\text{GNS}}$ no longer factorizes into separate $R$ and $L$ pieces at all. On the gravity
-side, this matches the eternal-black-hole geometry (eq.~6.38, Fig.~9(b)) exactly, with $Y_R,Y_L$ identified
-with the bulk exterior algebras $\widetilde\M_R,\widetilde\M_L$ (eq.~6.49) — themselves type
-$\mathrm{III}_1$ simply because they're the algebras of subregions of an ordinary continuum quantum field
-theory, exactly Sec.~IV.D's local-algebra story.
+But now the entanglement between $\text{CFT}_R$ and $\text{CFT}_L$ has jumped to order $N^2$. Because of this,
+it has been argued that **$Y_R$ becomes type $\mathrm{III**_1$}, and $\HH_{\Psi_\beta}^{\text{GNS}}$ no
+longer factorizes into separate $R$ and $L$ pieces. On the gravity side this matches the eternal black-hole
+geometry (Fig.~\ref{fig:penrose}). The algebras $Y_R,Y_L$ are identified with the bulk exterior algebras
+$\widetilde\M_R,\widetilde\M_L$. These are type $\mathrm{III}_1$ for a simple reason: they are algebras of
+subregions in an ordinary continuum quantum field theory, which is the local-algebra story of Chapter~4.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.72\textwidth]{figs/fig_penrose.pdf}
-\caption{Penrose diagram of the two-sided eternal AdS black hole dual to the Thermofield Double state $\ket{\Psi_\beta}$. The right ($R$) and left ($L$) exterior wedges are causally disconnected and bounded by the event horizons (dashed red lines), connected in the interior by an Einstein—Rosen bridge (wormhole) between the past ($P$) and future ($F$) curvature singularities (zigzag lines).}
+\caption{Penrose diagram of the two-sided eternal AdS black hole, dual to the thermofield double state $\ket{\Psi_\beta}$. The exterior regions $R$ (blue) and $L$ (gold) end on the AdS boundaries where $\mathrm{CFT}_R$ and $\mathrm{CFT}_L$ live, and are cut off from the interior regions $F$ and $P$ by the event horizons (dashed red), which cross at the bifurcation point (black dot). The wavy lines are the future and past singularities, and the gray horizontal line is the $t=0$ slice, which runs from one boundary to the other through the Einstein—Rosen bridge.}
 \label{fig:penrose}
 \end{figure}
 
 ### Two puzzles, and how algebra resolves the first of them
 
-Before this algebraic reformulation existed, the identification of the $T>T_{\text{HP}}$ phase with an eternal
-black hole — despite passing every quantitative check imaginable — carried two nagging conceptual puzzles,
-worth stating precisely because they're genuinely old, well-known tensions in the holography literature, not
-inventions of this paper.
+The $T>T_{\text{HP}}$ phase is identified with an eternal black hole, and this identification passes every
+quantitative check. Even so, before the algebraic reformulation it carried two conceptual puzzles. Both are
+long-standing and well known in holography.
 
-**The factorization puzzle.** The boundary theory manifestly factorizes as $\text{CFT}_R\otimes
-\text{CFT}_L$ (it's just two separate, non-interacting copies of the same CFT). But the bulk black hole is a
-single, *emph* spacetime — and there exist genuine bulk operators, like a Wilson line stretching all
-the way from the left boundary to the right through the interior (Fig.~9(b)), that stubbornly refuse to be
-written as any product of an operator in $B(\HH_R)$ and one in $B(\HH_L)$. How can a connected bulk object
-correspond to anything in a manifestly disconnected boundary tensor product?
+**The factorization puzzle.** The boundary theory clearly factorizes as $\text{CFT}_R\otimes
+\text{CFT}_L$. It is just two separate, non-interacting copies of the same CFT. But the bulk black hole is a
+single, *emph* spacetime. There are bulk operators, such as a Wilson line stretching from the left
+boundary through the interior to the right boundary (Fig.~\ref{fig:penrose}), that do not seem to split into an
+operator in $B(\HH_R)$ times an operator in $B(\HH_L)$. How can a connected bulk object correspond to anything
+in a boundary tensor product that is clearly disconnected?
 
-**The meeting-behind-the-horizon puzzle.** There's no interaction term at all between $\text{CFT}_R$ and
-$\text{CFT}_L$ (the total Hamiltonian is simply $H_R+H_L$, no cross term) — and yet bulk degrees of freedom
-that originate separately in the $R$ and $L$ exterior regions can cross the horizon and genuinely interact
-with each other in the interior region behind it (Fig.~9(b), arrows). How can two causally, dynamically
-disconnected boundary theories produce bulk physics that isn't disconnected at all, once you look behind the
-horizon?
+**The meeting-behind-the-horizon puzzle.** There is no interaction at all between $\text{CFT}_R$ and
+$\text{CFT}_L$: the total Hamiltonian is simply $H_R+H_L$, with no cross term. Yet bulk degrees of freedom that
+start separately in the $R$ and $L$ exterior regions can cross the horizon and interact with each other in the
+interior. How can two boundary theories that are disconnected, both causally and dynamically, produce bulk
+physics that is connected once you look behind the horizon?
 
-This section resolves the *emph* puzzle directly: the answer is simply that "$B(\HH_R)$" is the wrong
-object to be comparing to the bulk exterior algebra in the first place, once you take $N\to\infty$ seriously.
-$Y_R$ — the actual, large-$N$ limit of the algebra — is type $\mathrm{III}_1$, not type I, precisely because
-of the $O(N^2)$ entanglement between $R$ and $L$; and a type $\mathrm{III}_1$ algebra, unlike an ordinary type I
-tensor factor, has no obstruction whatsoever to containing operators (like the boundary avatar of that Wilson
-line) that aren't literally factorized products of an $R$-piece and an $L$-piece — nothing about $Y_R\otimes
-Y_L$ sitting inside $B(\HH^{\text{GNS}})$ the way an ordinary tensor product would. The apparent contradiction
-was an artifact of insisting, wrongly, on ordinary type I tensor-product intuition in a regime where the
-algebra has already become type $\mathrm{III}_1$. (The second puzzle — meeting behind the horizon — needs
-genuinely more machinery, specifically the emergent commutant and half-sided-modular-inclusion structure of
-Sec.~IV.E, and is deferred explicitly to Sec.~VIII.B, where the bulk causal structure of the eternal black hole
-is built directly from boundary algebra data.)
+The algebraic picture resolves the *emph* puzzle directly. Once $N\to\infty$ is taken seriously,
+"$B(\HH_R)$" is the wrong object to compare with the bulk exterior algebra. The actual large-$N$ limit of the
+algebra is $Y_R$. It is type $\mathrm{III}_1$, not type I, precisely because of the order-$N^2$ entanglement
+between $R$ and $L$. For a type $\mathrm{III}_1$ algebra and its commutant, there is no tensor product structure
+$Y_R\otimes Y_L$ inside $B(\HH^{\text{GNS}})$ of the kind an ordinary tensor product would give. So nothing
+prevents the presence of operators (such as the boundary counterpart of that Wilson line) that are not products
+of an $R$-piece and an $L$-piece. The apparent contradiction came from using type I tensor-product intuition in
+a regime where the algebra has already become type $\mathrm{III}_1$.
 
-A further remark worth keeping, because it becomes the seed of algebraic ER$=$EPR in Sec.~VIII.C: the entire
-qualitative conclusion here — disconnected bulk geometry below $T_{\text{HP}}$, connected black hole above it
-— could, in principle, have been *emph* purely from watching $Y_R$ jump from type I to type
-$\mathrm{III}_1$, with no independent knowledge of the bulk geometry needed at all. Also worth noting: for
-$T>T_{\text{HP}}$, different temperatures $\beta$ genuinely live in different, non-overlapping GNS sectors
-(their entanglement entropies differ by $O(N^2)$, an infinite barrier in the strict limit — exactly Sec.~I's
-mechanism again), whereas below $T_{\text{HP}}$, every $\beta$ shares one common GNS Hilbert space, with the
-different TFD states just being different vectors inside it. And even though the ordinary Hamiltonians
-$H_R,H_L$ don't survive the large-$N$ limit as elements of the algebra (eq.~6.36 stops literally holding), the
-modular operator $\Delta_\beta$ itself *emph* survive, continuing to generate boundary time translation
-in opposite directions on the two sides — factorizing as $-\log\Delta_\beta=\beta(\hat h_R-\hat h_L)$
-(eq.~6.52, with $\hat h$ the bulk vacuum-sector time-translation operator from Sec.~VI.B) below
-$T_{\text{HP}}$, but failing to factorize at all above it — exactly tracking the type I $\to$ type
-$\mathrm{III}_1$ transition.
+The second puzzle, meeting behind the horizon, needs more tools. It needs the emergent commutant and the
+half-sided modular inclusion structure of Chapter~4. It is taken up in Chapter~8, where the bulk causal
+structure of the eternal black hole is built directly from boundary algebra data.
 
-## Sec.~VI.D: general black holes
+Three further remarks prepare the ground for algebraic ER$=$EPR in Chapter~8.
 
-The thermofield double is special: it has an exact, bifurcating (perfectly symmetric) horizon. A more generic
-two-sided semiclassical state $\ket\Psi$, dual to a "long" black hole (Fig.~10 — a black hole with a genuine
-interior region $I$ separating $R$ and $L$, not meeting at a single bifurcation point), makes visible exactly
-the subtlety flagged back in Sec.~VI.A: the inclusion $\Sscr\subseteq\Alg_\Psi$ can now be genuinely
-*emph*. The renormalized single-trace algebras still correctly reproduce the bulk exterior algebras,
-$Y_R=\widetilde\M_R$, $Y_L=\widetilde\M_L$ (eq.~6.53) — but $R$ and $L$ together no longer cover a full Cauchy
-slice, leaving the interior region $I$ genuinely missing. Bulk operators living in $I$ must still correspond to
-*emph* boundary operators surviving the large-$N$ limit (since they're part of the same physical bulk
-field as the exterior operators, just evaluated at a different location) — but those operators are not
-single-trace operators; they must belong to $\Alg_\Psi\setminus\Sscr$. Sec.~VII.B identifies exactly what
-these extra operators are: they turn out to be generated from single-trace operators using *emph* — precisely the mechanism already previewed in Sec.~IV.A's ergodic lemma (a modular flow, run long
-enough, regenerates an entire larger algebra starting from a smaller subalgebra).
+First, the whole qualitative conclusion here (disconnected bulk geometry below $T_{\text{HP}}$, connected black
+hole above it) could in principle have been *emph* just from watching $Y_R$ jump from type I to type
+$\mathrm{III}_1$. No independent knowledge of the bulk geometry is needed.
 
-The same phenomenon — extra, non-single-trace operators needed for a black hole interior — occurs for a
-"long" one-sided black hole too (Fig.~11(a)). But a one-sided black hole formed by ordinary gravitational
-collapse (Fig.~11(b), matter falling in from empty space) is different, and worth flagging as a genuine
-contrast to keep in mind heading into Sec.~VII.E: there, it turns out $\Alg_\Psi=\Sscr$ exactly — single-trace
-operators are already everything, with nothing extra needed at all.
+Second, for $T>T_{\text{HP}}$ different temperatures $\beta$ lie in different, non-overlapping GNS sectors.
+Their entanglement entropies differ by an amount of order $N^2$, which is an infinite barrier in the strict
+limit (the mechanism of Chapter~1 again). Below $T_{\text{HP}}$, by contrast, every $\beta$ shares one common GNS
+Hilbert space, and the different TFD states are just different vectors inside it.
 
-## Sec.~VI.E: a diagnostic of firewalls in generic highly excited states
+Third, the ordinary Hamiltonians $H_R,H_L$ do not survive the large-$N$ limit as elements of the algebra. So
+\eqref{eq:ads-tfd-modular} stops holding literally. But the modular operator $\Delta_\beta$ itself *emph*
+survive, and it still generates boundary time translation in opposite directions on the two sides. Below
+$T_{\text{HP}}$ it splits into an $R$ part and an $L$ part, $-\log\Delta_\beta=\beta(\hat h_R-\hat h_L)$, where
+$\hat h$ is the vacuum-sector time-translation operator of the previous section. Above $T_{\text{HP}}$ it does
+not split at all. This tracks the transition from type I to type $\mathrm{III}_1$ exactly.
 
-Now consider a completely generic, highly excited state $\ket\Psi$ with energy $E_\Psi\sim O(N^2)$ — no
-assumption that it was engineered to have a nice bulk dual, just an arbitrary state of that energy. The
-boundary theory at such energies is expected to be chaotic, and a typical state of that energy should look
-thermal to any single-trace-operator probe, to leading order in $1/N$:
+## General black holes
 
-$$
+The thermofield double is special. It has an exact bifurcate horizon: the future and past horizons meet at a
+single surface in a perfectly symmetric way. A more generic two-sided semiclassical state $\ket\Psi$ is dual to
+a "long" black hole. Such a black hole has a genuine interior region $I$ that separates $R$ and $L$, and its
+horizons do not meet at a single bifurcation surface.
 
+This case shows the subtlety noted at the start of this chapter: the inclusion $\Sscr\subseteq\Alg_\Psi$ can
+now be *emph*. The renormalized single-trace algebras still reproduce the bulk exterior algebras,
+$Y_R=\widetilde\M_R$ and $Y_L=\widetilde\M_L$. But $R$ and $L$ together no longer cover a full Cauchy slice. The
+interior region $I$ is missing. Bulk operators in $I$ must still correspond to *emph* boundary operators
+that survive the large-$N$ limit, since they belong to the same physical bulk field as the exterior operators,
+only evaluated at a different place. But they are not single-trace operators. They must belong to
+$\Alg_\Psi\setminus\Sscr$.
+
+Chapter~7 identifies exactly what these extra operators are. They are generated from single-trace operators by
+*emph*. This mechanism was previewed by the ergodic lemma of Chapter~4: a modular flow, run long
+enough, generates a whole larger algebra starting from a smaller subalgebra.
+
+The same phenomenon (extra, non-single-trace operators needed for a black-hole interior) also occurs for a
+"long" one-sided black hole. A one-sided black hole formed by ordinary gravitational collapse, with matter
+falling in from empty space, is different. This contrast matters in Chapter~7. There, $\Alg_\Psi=\Sscr$
+exactly: single-trace operators are already everything, and nothing extra is needed.
+
+## A diagnostic of firewalls in generic highly excited states
+
+Now consider a completely generic, highly excited state $\ket\Psi$ with energy $E_\Psi\sim O(N^2)$. We do not
+assume that it was prepared to have a nice bulk dual. It is just an arbitrary state of that energy. The
+boundary theory at such energies is expected to be chaotic. A typical state of that energy should then look
+thermal to any probe made of single-trace operators, to leading order in $1/N$:
+\begin{equation}
 \braket{\Psi|O|\Psi}\approx\braket{O}_\beta, \qquad \braket{\Psi|O_1\cdots O_n|\Psi}\approx\braket{O_1\cdots
-O_n}_\beta
+O_n}_\beta ,
+\label{eq:ads-thermal}
+\end{equation}
+with $\beta$ fixed by matching the energy, $E_\Psi=E_\beta$. This is the familiar statement, in the spirit of
+the eigenstate thermalization hypothesis, that a single generic high-energy state reproduces thermal
+correlators. It says that, as far as single-trace operators can tell, $\Psi$ has a smooth black-hole exterior.
+But does it also have a smooth *emph*, a genuine continuation of the geometry behind the horizon? Or
+does the interior simply fail to exist? The second possibility is called a **firewall**.
 
-$$
+The previous section already gave the criterion needed to answer this. A smooth interior requires operators
+that survive the large-$N$ limit *emph* single-trace operators, that is, $\Sscr\subsetneq\Alg_\Psi$. This
+gives a clean, checkable diagnostic. **Suppose a generic highly excited state satisfies the thermal
+condition \eqref{eq:ads-thermal** and *emph* has $\Alg_\Psi=\Sscr$, so that no operators beyond single-trace
+ones survive the limit. Then its bulk dual has a firewall.} In this case $\omega_\Psi$ is a *emph* state on
+$\Alg_\Psi$. This violates the purity condition \eqref{eq:ads-irreducible} assumed earlier for the "nice"
+semiclassical case.
 
-(eq.~6.55, with $\beta$ fixed by matching the energy, $E_\Psi=E_\beta$) — this is the ordinary
-eigenstate-thermalization-hypothesis-style statement that a single generic high-energy state reproduces
-thermal correlators, and it says $\Psi$ looks, to single-trace operators, exactly like it has a smooth black
-hole exterior. But does it also have a smooth *emph* — a genuine continuation of the geometry behind
-the horizon, as in Fig.~11 — or does the interior geometry simply fail to exist, a **firewall**?
+For two-sided generic states there is an analogous statement with one more condition. The correlations between
+the two sides must vanish, $\braket{\Psi|O_RO_L|\Psi}_c\to0$ as $N\to\infty$. This is consistent with there
+being no smooth, connected bridge between the two boundaries in that case.
 
-Sec.~VI.D already established the criterion needed to answer this: a smooth interior requires operators
-surviving the large-$N$ limit *emph* single-trace operators, i.e.\ $\Sscr\subsetneq\Alg_\Psi$. This
-gives a clean, checkable diagnostic, stated as sharply as the paper states it: **if a generic highly
-excited state satisfies the thermal correlator condition (eq.~6.55) and *emph* In this case, $\omega_\Psi$ is a *emph* state with respect to $\Alg_\Psi$, violating the
-purity condition (eq.~6.10) assumed back in Sec.~VI.A for the "nice" semiclassical case. An analogous
-statement for two-sided generic states adds one more condition: correlations between the two sides must
-genuinely vanish, $\braket{\Psi|O_RO_L|\Psi}_c\to0$ as $N\to\infty$ (eq.~6.56) — consistent with there being no
-smooth, connected bridge between the two boundaries at all in that case.
-
-## Sec.~VI.F: perturbative $1/N$ corrections
+## Perturbative $1/N$ corrections
 
 ### Corrections to bulk reconstruction
 
-Everything so far worked at strictly leading order in $G_N$ (equivalently $1/N$). Including subleading orders
-makes the bulk field theory genuinely interacting (the $\kappa S_3+\kappa^2S_4+\cdots$ terms of eq.~6.14 switch
-back on), and correspondingly the boundary theory develops nonzero three- and higher-point functions,
-suppressed by powers of $1/N$. One immediate, checkable consequence: the clean HKLL formula (eq.~6.32) that
-worked perfectly at leading order gets corrected. Solving the interacting bulk equation of motion perturbatively
-in $\kappa$ (eqs.~6.57—6.61, for the simplest case of a cubic self-interaction $\phi^3$) produces extra terms
-in the bulk-to-boundary map order by order,
+Everything so far worked at strictly leading order in $G_N$, or equivalently in $1/N$. Including subleading
+orders makes the bulk field theory interacting: the terms $\kappa S_3+\kappa^2S_4+\cdots$ in the bulk action
+switch back on. Correspondingly, the boundary theory develops nonzero connected three-point and higher
+functions, suppressed by powers of $1/N$.
+
+One direct consequence is that the HKLL formula \eqref{eq:ads-hkll}, exact at leading order, gets corrected.
+Take the simplest case of a cubic self-interaction $\phi^3$ and solve the interacting bulk equation of motion
+perturbatively in $\kappa$. (We do not reproduce this computation.) The result is a series of extra terms in the
+bulk-to-boundary map:
 
 $$
 
-\phi(X) = \int d^dx\,K(X;x)\,O^{(0)}(x) + \kappa\int d^dx_1d^dx_2\,K(X;x_1,x_2)\,O^{(0)}(x_1)O^{(0)}(x_2)
-+ \cdots
+\begin{split}
+\phi(X) ={}& \int d^dx\,K(X;x)\,O^{(0)}(x) \\
+&+ \kappa\int d^dx_1\,d^dx_2\,K(X;x_1,x_2)\,O^{(0)}(x_1)O^{(0)}(x_2) + \cdots
+\end{split}
 
 $$
 
-(eq.~6.62) — the leading-order reconstruction picks up multi-trace corrections, one extra factor of a
-single-trace operator per order in $1/N$. This is worth knowing exists (it's the technical underpinning of
-"$1/N$ corrections to bulk locality," a substantial research topic on its own) without needing to track every
-term; the important structural point, stated explicitly in the paper (and worth remembering for everything
-downstream): to any finite order in the $1/N$ expansion, the leading-order *emph* of every algebra
-discussed above stays exactly the same, because the spectrum of the modular operator is dominated by its
-zeroth-order piece — perturbation theory in $1/N$ never changes an algebra's type; only the strict
-$N\to\infty$ limit itself can do that.
+The leading-order reconstruction picks up multi-trace corrections, with one extra factor of a single-trace
+operator for each order in $1/N$. These corrections underlie the topic of ``$1/N$ corrections to bulk
+locality,'' a substantial research area of its own. We do not need to track every term here.
+
+The structural point that matters for everything downstream is this. To any finite order in the $1/N$
+expansion, the *emph* of each algebra discussed above is expected to stay the same as at leading order.
+The heuristic reason is that the spectrum of the modular operator is controlled by its zeroth-order piece. On
+this picture, perturbation theory in $1/N$ does not change an algebra's type; only the strict $N\to\infty$ limit
+can do that.
 
 ### Conserved charges, and where gravitational dressing first appears
 
-The second new feature is more conceptually important for everything from Sec.~IX onward, so it's worth
-spending real time on it. Suppose the boundary CFT has a global $U(1)$ symmetry, with conserved charge
-$\widehat Q\equiv Q/N$ (rescaled exactly the way $\widehat H=H/N$ was, since the current itself scales as
-$N\Tr(\cdots)$, eq.~6.68). Acting on a single-trace operator of unit charge, $i[\widehat Q,O(x)]=\tfrac1N O(x)$
-(eq.~6.69) — the charge-rotation action is suppressed by $1/N$, exactly mirroring the time-translation story
-of Sec.~VI.A. Within a given sector there's again a genuine large-$N$ operator $\hat q$ generating the full
-rotation, $i[\hat q,O(x)]=O(x)$ (eq.~6.70), that (exactly like $\hat h_\Omega$ before it) cannot be written as
-an integral of a local density on a single time slice.
+The second new feature matters more conceptually, for everything from Chapter~9 onward. Suppose the boundary
+CFT has a global $U(1)$ symmetry. Its conserved charge must be rescaled, $\widehat Q\equiv Q/N$, in exactly the
+way $\widehat H=H/N$ was, because the current itself scales as $N\Tr(\cdots)$. For a single-trace operator of
+unit charge, with the convention $[Q,O(x)]=O(x)$,
+\begin{equation}
+[\widehat Q,O(x)]=\tfrac1N O(x) .
+\label{eq:ads-charge}
+\end{equation}
+So the action of the rescaled charge is suppressed by $1/N$, exactly as in the time-translation story earlier
+in this chapter. Within a given sector there is again a genuine large-$N$ operator $\hat q$ that generates the
+full rotation, $[\hat q,O(x)]=O(x)$. Like $\hat h_\Omega$ before it, $\hat q$ cannot be written as the integral of
+a local density over a single time slice.
 
-The bulk dual of this boundary global $U(1)$ symmetry is a bulk $U(1)$ *emph* symmetry, and here is
-where something genuinely new, and physically important, shows up once $1/N$ corrections are included: the
-suppressed commutator eq.~6.69, translated to the bulk via the extrapolate dictionary, forces the bulk gauge
-field strength and a charged bulk scalar to have a *emph*
-(eq.~6.72) — an explicit, checkable violation of bulk microcausality, order by order in $1/N$, tied directly
-to the bulk Gauss-law constraint (the equation of motion $\nabla_MF^{MN}=\kappa J^N$, eq.~6.75, ties the gauge
-field's behavior at one point to charge located anywhere else on the same Cauchy slice, since Gauss's law is
-intrinsically nonlocal). The resolution, worth knowing because it reappears as the central mechanism of
-Sec.~IX: a bulk charged field $\phi(z,x)$ is not, by itself, gauge invariant; a genuinely gauge-invariant
-operator has to be built by attaching a **Wilson line** running out to the boundary,
+The bulk dual of this boundary global $U(1)$ symmetry is a bulk $U(1)$ *emph* symmetry. Here something new
+and physically important appears once $1/N$ corrections are included. Translate the suppressed commutator
+\eqref{eq:ads-charge} to the bulk with the extrapolate dictionary. It forces the bulk gauge field strength and a
+charged bulk scalar to have a *emph*. This is an explicit violation of
+naive bulk microcausality, order by order in $1/N$.
 
-$$
-
-\Phi(z,x) = e^{-i\kappa V}\phi(z,x), \qquad V=\int_0^z dz'\,A_z(z',x)
-
-$$
-
-(eq.~6.77) — a **dressed observable**, and it's precisely the inherent nonlocality of that Wilson line
-(it depends on the gauge field along an entire path, not just at one point) that produces the nonlocal
-commutation relations eq.~6.72 directly, with no mystery left over.
+The violation comes directly from the bulk Gauss-law constraint. The equation of motion
+$\nabla_MF^{MN}=\kappa J^N$ ties the electric field on a Cauchy slice to the charges on that same slice, because
+Gauss's law is intrinsically nonlocal. The resolution comes back as the central mechanism of Chapter~9. A bulk
+charged field $\phi(z,x)$ is not gauge invariant on its own. To build a gauge-invariant operator, one attaches a
+**Wilson line** that runs from the boundary to the point:
+\begin{equation}
+\Phi(z,x) = e^{-i\kappa V}\phi(z,x), \qquad V=\int_0^z dz'\,A_z(z',x) .
+\label{eq:ads-dressed}
+\end{equation}
+This is a **dressed observable**. The Wilson line is nonlocal: it depends on the gauge field along a whole
+path, not just at one point. This nonlocality produces the nonlocal commutation relations directly, and nothing
+mysterious is left over.
 
 ### Worked calculation: Gauss's law and the dressed operator commutator
 
-To see this mechanism explicitly at the level of canonical quantization, consider the bulk gauge field $A_M = (A_t, A_z, A_x)$ in $A_t = 0$ gauge on a constant-time Cauchy slice. The conjugate momentum to $A_z(z,x)$ is the electric field $E^z(z,x) = F^{zt}(z,x) = \partial_t A_z - \partial_z A_t$. The canonical commutation relation is:
+To see this mechanism explicitly in canonical quantization, consider the bulk gauge field
+$A_M = (A_t, A_z, A_x)$ on a constant-time Cauchy slice, in the gauge $A_t = 0$. We suppress the factors of the
+AdS metric; they do not affect the structure of the argument. The momentum conjugate to $A_z(z,x)$ is the
+electric field $E^z(z,x) = F^{zt}(z,x) = \partial_t A_z - \partial_z A_t$. The canonical commutation relation is
 
 $$
 
-\big[A_z(z',x'),\, F^{zt}(z'',x'')\big] = i\,\delta(z'-z'')\,\delta(x'-x'')
+\big[A_z(z',x'),\, F^{zt}(z'',x'')\big] = i\,\delta(z'-z'')\,\delta(x'-x'') .
 
 $$
 
-Bulk Gauss's law on a state containing a local charged particle $\phi(z,x)$ of unit charge $q=1$ at position $(z,x)$ requires:
+The field $F^{xt}$ is conjugate to $A_x$, so it commutes with $A_z$.
+
+In the quantum theory, Gauss's law is a constraint on physical operators. Define the Gauss operator
 
 $$
 
-\nabla_M F^{Mt} = \partial_{z''} F^{zt}(z'',x'') + \partial_{x''} F^{xt}(z'',x'') = \kappa\, J^t(z'',x'') = \kappa\,\delta(z''-z)\,\delta(x''-x)
+G(z'',x'') \equiv \partial_{z''} F^{zt}(z'',x'') + \partial_{x''} F^{xt}(z'',x'') - \kappa\, J^t(z'',x'') .
 
 $$
 
-If we take the naive, undressed field $\phi(z,x)$, it commutes with the gauge field: $[\phi(z,x), F^{zt}(z'',x'')] = 0$. But this leads to an immediate contradiction: taking the spatial derivative $\partial_{z''}$ yields zero, violating Gauss's law because the charge density is nonzero!
+A physical, gauge-invariant operator must commute with $G$ at every point. Take $\phi(z,x)$ to create one unit
+of charge at $(z,x)$, so that $[J^t(z'',x''),\phi(z,x)]=\delta(z''-z)\,\delta(x''-x)\,\phi(z,x)$.
 
-Now evaluate the commutator using the gauge-invariant, dressed operator $\Phi(z,x) = e^{-i\kappa V(z,x)}\phi(z,x)$ with $V(z,x) = \int_0^z dz' A_z(z',x)$:
-\begin{align*}
-\big[\Phi(z,x),\, F^{zt}(z'',x'')\big] &= \Big[e^{-i\kappa \int_0^z dz' A_z(z',x)},\, F^{zt}(z'',x'')\Big]\,\phi(z,x) \\
-&= -i\kappa \left(\int_0^z dz' \big[A_z(z',x),\, F^{zt}(z'',x'')\big]\right) \Phi(z,x) \\
-&= -i\kappa \left(\int_0^z dz' \, i\,\delta(z'-z'')\,\delta(x-x'')\right) \Phi(z,x) \\
-&= \kappa\,\theta(z - z'')\,\delta(x - x'')\,\Phi(z,x)
-\end{align*}
-where $\theta(z - z'')$ is the step function ($1$ for $0 < z'' < z$, and $0$ for $z'' > z$).
-Now compute the divergence of this commutator with respect to the coordinate $z''$:
+The naive, undressed field fails this test. It commutes with the gauge field, $[\phi(z,x), F^{Mt}] = 0$, so only
+the charge term contributes:
+$[G(z'',x''),\phi(z,x)]=-\kappa\,\delta(z''-z)\,\delta(x''-x)\,\phi(z,x)\ne0$. So $\phi$ is not gauge invariant.
 
-$$
+Now compute with the dressed operator $\Phi(z,x) = e^{-i\kappa V(z,x)}\phi(z,x)$, where
+$V(z,x) = \int_0^z dz' A_z(z',x)$. First, the commutator with the electric field:
+\begin{align}
+\big[\Phi(z,x),\, F^{zt}(z'',x'')\big]
+&\eqstep{1} \Big[e^{-i\kappa \int_0^z dz' A_z(z',x)},\, F^{zt}(z'',x'')\Big]\,\phi(z,x) \notag\\
+&\eqstep{2} -i\kappa \left(\int_0^z dz' \big[A_z(z',x),\, F^{zt}(z'',x'')\big]\right) \Phi(z,x) \notag\\
+&\eqstep{3} -i\kappa \left(\int_0^z dz' \, i\,\delta(z'-z'')\,\delta(x-x'')\right) \Phi(z,x) \notag\\
+&\eqstep{4} \kappa\,\theta(z - z'')\,\delta(x - x'')\,\Phi(z,x) . \notag
+\end{align}
+**(1)** move $\phi(z,x)$ out of the commutator. It commutes with $F^{zt}$, so only the Wilson-line factor
+has to be commuted.\quad
+**(2)** $[V,F^{zt}]$ is a $c$-number, so $[e^{-i\kappa V},F^{zt}]=-i\kappa[V,F^{zt}]\,e^{-i\kappa V}$
+exactly. Then recombine $e^{-i\kappa V}\phi=\Phi$.\quad
+**(3)** substitute the canonical commutator $[A_z(z',x),F^{zt}(z'',x'')]=i\delta(z'-z'')\delta(x-x'')$.\quad
+**(4)** $(-i)(i)=1$. The $\delta(z'-z'')$ collapses the $z'$ integral. The result is $1$ if $0<z''<z$ and $0$
+if $z''>z$, which is the step function $\theta(z-z'')$.
 
-\partial_{z''} \big[\Phi(z,x),\, F^{zt}(z'',x'')\big] = \kappa \frac{d}{dz''}\theta(z - z'')\,\delta(x - x'')\,\Phi(z,x) = -\kappa\,\delta(z'' - z)\,\delta(x'' - x)\,\Phi(z,x)
+Next, differentiate with respect to $z''$:
+\begin{align}
+\partial_{z''} \big[\Phi(z,x),\, F^{zt}(z'',x'')\big]
+&\eqstep{5} \kappa\, \frac{d}{dz''}\theta(z - z'')\;\delta(x - x'')\,\Phi(z,x) \notag\\
+&\eqstep{6} -\kappa\,\delta(z'' - z)\,\delta(x'' - x)\,\Phi(z,x) . \notag
+\end{align}
+**(5)** differentiate the result of step (4). Only the step function depends on $z''$.\quad
+**(6)** $\frac{d}{dz''}\theta(z-z'')=-\delta(z''-z)$, the derivative of a step function.
 
-$$
+Finally, assemble the Gauss operator:
+\begin{align}
+[G(z'',x''),\Phi(z,x)]
+&\eqstep{7} -\partial_{z''}\big[\Phi(z,x),F^{zt}(z'',x'')\big] - \kappa\big[J^t(z'',x''),\Phi(z,x)\big] \notag\\
+&\eqstep{8} \kappa\,\delta(z''-z)\,\delta(x''-x)\,\Phi(z,x) \notag\\
+&\qquad - \kappa\,\delta(z''-z)\,\delta(x''-x)\,\Phi(z,x) \ =\ 0 . \notag
+\end{align}
+**(7)** $[\partial F,\Phi]=-\partial[\Phi,F]$. The $F^{xt}$ term drops out because $\Phi$ contains only
+$A_z$ and $\phi$, both of which commute with $F^{xt}$.\quad
+**(8)** use step (6) for the first term. For the second, $J^t$ commutes with the gauge field, so
+$[J^t,\Phi]=e^{-i\kappa V}[J^t,\phi]=\delta\,\Phi$.
 
-Gauss's law is now satisfied identically as an operator equation!
-Notice that for any point $z'' < z$ along the string running from the boundary to the insertion point, the commutator is non-vanishing even at spacelike separation. The non-local string of the Wilson line is the physical cost of gauge invariance.
+So Gauss's law holds identically as an operator statement for the dressed field. The price is visible in step
+(4). For every point $z''<z$ along the string that runs from the boundary to the insertion point, the
+commutator with the electric field is nonzero, even though that point is spacelike-separated from $(z,x)$. The
+nonlocal string of the Wilson line is the physical cost of gauge invariance.
 
-Exactly the same story holds for
-spacetime symmetries instead of an internal $U(1)$: dressing a bulk operator to the boundary using a
-*emph* Wilson line (or, equivalently, working in a specific gauge and solving the constraint
-directly, mirroring eqs.~6.75—6.78) is required to make it diffeomorphism-invariant, and produces an
-analogous $1/N$ correction to the rescaled Hamiltonian, $\widehat H=\widehat H^{(0)}+\tfrac1N\hat h_\Omega+
-\cdots$ (eq.~6.80). **This is the very first appearance, in perturbation theory, of the exact mechanism
-that Sec.~IX turns into an exact, nonperturbative construction**: gravitationally dressing an operator to a
-physical reference (a Wilson line here; an observer's own clock, via the crossed product of Sec.~V, there) is
-what makes it a genuine, gauge-invariant, physical observable — and it is not optional decoration, but is
-forced directly by the bulk Gauss-law constraint that any theory of gravity or gauge fields must satisfy.
+The same story holds for spacetime symmetries in place of an internal $U(1)$. To make a bulk operator
+diffeomorphism-invariant, one must dress it to the boundary with a *emph* Wilson line.
+Equivalently, one can work in a specific gauge and solve the constraint directly, as in the Gauss-law
+calculation above. This dressing produces an analogous $1/N$ correction to the rescaled Hamiltonian,
+$\widehat H=\widehat H^{(0)}+\tfrac1N\hat h_\Omega+\cdots$. **This is the first appearance, in perturbation
+theory, of the mechanism that Chapter~9 turns into an exact, nonperturbative construction.** Dressing an operator
+gravitationally to a physical reference is what makes it a genuine, gauge-invariant, physical observable. Here
+the reference is a Wilson line; in Chapter~9 it is an observer's own clock, through the crossed product of
+Chapter~5. The dressing is not optional decoration. It is forced by the bulk Gauss-law constraint that any
+theory with gravity or gauge fields must satisfy.
 
 \bigskip
-\noindent With the large-$N$ algebraic structure of AdS/CFT now built — semiclassical states as GNS sectors,
-single-trace algebras $Y_O$, the type transition tracking Hawking—Page, and gravitational dressing already
-visible in perturbation theory — Sec.~VII assembles all of this into the paper's central physical claim:
-**subregion-subalgebra duality**, the statement that an arbitrary bulk causal region is identical, not
-merely related, to a specific emergent boundary operator subalgebra.
+\noindent The large-$N$ algebraic structure of AdS/CFT is now in place: semiclassical states as GNS sectors,
+single-trace algebras $Y_O$, a change of algebra type that tracks the Hawking—Page transition, and
+gravitational dressing already visible in perturbation theory. Chapter~7 assembles all of this into the central
+physical claim of these notes, **subregion-subalgebra duality**. This is the statement that a bulk causal
+region is identical, not merely related, to a specific emergent boundary operator subalgebra.

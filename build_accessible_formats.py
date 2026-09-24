@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Build script to generate accessible HTML and Markdown editions of the
-Hong Liu 'Lectures on Entanglement, von Neumann Algebras, and Emergence of Spacetime' Reading Companion.
+Build script to generate accessible HTML and Markdown editions of the notes
+'Entanglement, Operator Algebras, and the Emergence of Spacetime: A First Introduction for Physicists'.
 """
 
 import os
@@ -10,24 +10,74 @@ import html
 import json
 
 CHAPTERS = [
-    ("01_introduction.tex", "Sec. I: Introduction and Motivations"),
-    ("02_von_neumann_algebras.tex", "Sec. II: Introduction to von Neumann Algebras"),
-    ("03_type_I_and_II.tex", "Sec. III: Type I and II Algebras & Entanglement"),
-    ("04_type_III_modular_theory.tex", "Sec. IV: Type III Algebras & Modular Theory"),
-    ("05_crossed_product.tex", "Sec. V: Crossed Product by Modular Group"),
-    ("06_adscft_large_N.tex", "Sec. VI: AdS/CFT Duality in Large-N Limit"),
-    ("07_subregion_subalgebra_duality.tex", "Sec. VII: Subregion-Subalgebra Duality"),
-    ("08_emergence_of_spacetime.tex", "Sec. VIII: Emergence of Spacetime"),
-    ("09_quantum_gravity_regimes.tex", "Sec. IX: Quantum Gravity Regimes & Toy Models"),
-    ("10_conclusions.tex", "Sec. X: Conclusions & Discussions")
+    ("01_introduction.tex", "Chapter 1: Introduction and Motivations"),
+    ("02_von_neumann_algebras.tex", "Chapter 2: Von Neumann Algebras"),
+    ("03_type_I_and_II.tex", "Chapter 3: Type I and II Algebras and Entanglement"),
+    ("04_type_III_modular_theory.tex", "Chapter 4: Type III Algebras and Modular Theory"),
+    ("05_crossed_product.tex", "Chapter 5: The Crossed Product by the Modular Group"),
+    ("06_adscft_large_N.tex", "Chapter 6: AdS/CFT in the Large-N Limit"),
+    ("07_subregion_subalgebra_duality.tex", "Chapter 7: Subregion-Subalgebra Duality"),
+    ("08_emergence_of_spacetime.tex", "Chapter 8: Emergence of Bulk Geometry"),
+    ("09_quantum_gravity_regimes.tex", "Chapter 9: Quantum-Gravity Regimes and Observers"),
+    ("10_conclusions.tex", "Chapter 10: Conclusions and Outlook")
 ]
+
+def _match_brace(t, i):
+    """Given t[i] == '{', return index just past the matching '}'."""
+    depth = 0
+    for j in range(i, len(t)):
+        if t[j] == '{':
+            depth += 1
+        elif t[j] == '}':
+            depth -= 1
+            if depth == 0:
+                return j + 1
+    return len(t)
+
+def expand_stepwhy(t, fmt):
+    """Replace \\stepwhy{n}{reason} (reason may contain nested braces) using fmt(n, reason)."""
+    out = []
+    i = 0
+    key = '\\stepwhy{'
+    while True:
+        k = t.find(key, i)
+        if k < 0:
+            out.append(t[i:])
+            break
+        out.append(t[i:k])
+        a0 = k + len('\\stepwhy')
+        a1 = _match_brace(t, a0)
+        b1 = _match_brace(t, a1) if a1 < len(t) and t[a1] == '{' else a1
+        out.append(fmt(t[a0 + 1:a1 - 1], t[a1 + 1:b1 - 1]))
+        i = b1
+    return ''.join(out)
+
+def strip_heading_cmds(t, html_mode):
+    """Map chapter-level headings (chapter/section/subsection, optional short title) to HTML or Markdown."""
+    levels = [('chapter', 1), ('section', 2), ('subsection', 3), ('subsubsection', 4)]
+    for name, lvl in levels:
+        pat = re.compile(r'\\' + name + r'\*?(?:\[[^\]]*\])?\{')
+        while True:
+            m = pat.search(t)
+            if not m:
+                break
+            end = _match_brace(t, m.end() - 1)
+            title = t[m.end():end - 1].replace('\\\\', ' ')
+            if html_mode:
+                cls = {1: 'section-title', 2: 'subsection-title', 3: 'subsubsection-title', 4: 'subsubsection-title'}[lvl]
+                tag = 'h%d' % min(lvl + 1, 5)
+                repl = f'<{tag} class="{cls}">{title}</{tag}>'
+            else:
+                repl = '#' * lvl + ' ' + title
+            t = t[:m.start()] + repl + t[end:]
+    return t
 
 def clean_tex_to_text(tex):
     """Strip LaTeX commands for plain text / search indexing."""
     t = tex
     t = re.sub(r'\\texorpdfstring\{([^}]*)\}\{([^}]*)\}', r'\2', t)
     t = re.sub(r'\\(textbf|textit|emph|text|mathrm)\{([^}]*)\}', r'\2', t)
-    t = re.sub(r'\\(section|subsection|subsubsection)\*?\{([^}]*)\}', r'\2', t)
+    t = re.sub(r'\\(chapter|section|subsection|subsubsection)\*?(\[[^\]]*\])?\{([^}]*)\}', r'\3', t)
     t = re.sub(r'\$([^$]*)\$', r'\1', t)
     t = re.sub(r'\\[a-zA-Z]+', ' ', t)
     t = re.sub(r'[{}]', ' ', t)
@@ -65,7 +115,7 @@ def tex_to_html(tex_content):
     # Process yourquestion
     def replace_question(match):
         q_text = match.group(1)
-        return f'\n<div class="callout callout-question" role="region" aria-label="Margin Question"><div class="callout-header"><span class="callout-icon">💡</span> <span class="callout-title">Margin Question</span></div><div class="callout-body"><em>{q_text}</em></div></div>\n'
+        return f'\n<div class="callout callout-question" role="region" aria-label="A Natural Question"><div class="callout-header"><span class="callout-icon">💡</span> <span class="callout-title">A Natural Question</span></div><div class="callout-body"><em>{q_text}</em></div></div>\n'
 
     content = re.sub(r'\\yourquestion\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}', replace_question, content)
 
@@ -78,9 +128,8 @@ def tex_to_html(tex_content):
     content = re.sub(r'\\begin\{quote\}(.*?)\\end\{quote\}', r'<blockquote>\1</blockquote>', content, flags=re.DOTALL)
 
     # Process headings
-    content = re.sub(r'\\section\{([^}]*)\}', r'<h2 class="section-title">\1</h2>', content)
-    content = re.sub(r'\\subsection\{([^}]*)\}', r'<h3 class="subsection-title">\1</h3>', content)
-    content = re.sub(r'\\subsubsection\*?\{([^}]*)\}', r'<h4 class="subsubsection-title">\1</h4>', content)
+    content = strip_heading_cmds(content, True)
+    content = expand_stepwhy(content, lambda n, why: f'<span class="stepwhy"><strong>({n})</strong> {why}</span>')
 
     # Process lists
     def replace_enum(match):
@@ -160,7 +209,7 @@ def tex_to_markdown(tex_content):
 
     def replace_question_md(match):
         q_text = match.group(1).strip()
-        return f"\n> [!TIP] **Margin Question:**\n> *{q_text}*\n"
+        return f"\n> [!TIP] **A Natural Question:**\n> *{q_text}*\n"
 
     content = re.sub(r'\\yourquestion\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}', replace_question_md, content)
 
@@ -173,9 +222,8 @@ def tex_to_markdown(tex_content):
     content = re.sub(r'\\begin\{quote\}\s*\\textit\{Worked example[^}]*\}\.?\s*(.*?)\\end\{quote\}', replace_quote_md, content, flags=re.DOTALL)
 
     # Headings
-    content = re.sub(r'\\section\{([^}]*)\}', r'# \1', content)
-    content = re.sub(r'\\subsection\{([^}]*)\}', r'## \1', content)
-    content = re.sub(r'\\subsubsection\*?\{([^}]*)\}', r'### \1', content)
+    content = strip_heading_cmds(content, False)
+    content = expand_stepwhy(content, lambda n, why: f'**({n})** {why}')
 
     # Lists
     def replace_enum_md(match):
@@ -202,8 +250,17 @@ def tex_to_markdown(tex_content):
 
     return content
 
+def _pdf_pagecount():
+    """Read the page count of main.pdf from main.log, if available."""
+    try:
+        with open("main.log", encoding="latin-1") as f:
+            m = re.search(r'Output written on main\.pdf \((\d+) pages', f.read())
+        return m.group(1) if m else "?"
+    except OSError:
+        return "?"
+
 def build_web_app():
-    """Build the single-page responsive interactive HTML companion."""
+    """Build the single-page responsive interactive HTML edition."""
     chapters_data = []
     
     for filename, title in CHAPTERS:
@@ -219,7 +276,7 @@ def build_web_app():
         
         # Extract subheadings for sidebar navigation
         subheadings = []
-        for sub_match in re.finditer(r'\\subsection\{([^}]*)\}', tex_content):
+        for sub_match in re.finditer(r'\\section\{([^}]*)\}', tex_content):
             sub_title = re.sub(r'\\texorpdfstring\{([^}]*)\}\{([^}]*)\}', r'\1', sub_match.group(1))
             sub_id = re.sub(r'[^a-zA-Z0-9]+', '-', sub_title.lower()).strip('-')
             subheadings.append({"title": sub_title, "id": sub_id})
@@ -236,32 +293,33 @@ def build_web_app():
     # Read introduction from main.tex
     main_intro_html = """
     <div class="companion-intro-hero">
-        <div class="badge">Reading Companion & Mathematical Guide</div>
-        <h1>Lectures on Entanglement, von Neumann Algebras, and Emergence of Spacetime</h1>
-        <p class="subtitle">A pedagogical companion to <strong>Hong Liu (arXiv:2510.07017)</strong></p>
+        <div class="badge">A First Introduction for Physicists</div>
+        <h1>Entanglement, Operator Algebras, and the Emergence of Spacetime</h1>
+        <p class="subtitle">A self-contained introduction for readers who know undergraduate quantum mechanics</p>
         <div class="meta-tags">
-            <span class="tag">10 Complete Chapters</span>
-            <span class="tag">Fully Accessible (Screen Reader & WCAG AAA)</span>
+            <span class="tag">10 Chapters</span>
+            <span class="tag">Screen-reader friendly</span>
             <span class="tag">MathJax 3 Typesetting</span>
-            <span class="tag">Interactive Search & Bookmarks</span>
+            <span class="tag">Search and Bookmarks</span>
         </div>
         <div class="hero-description">
-            <p>This companion is meant to be read alongside Hong Liu's 119-page paper. It follows the paper's section numbers exactly, walked through with every mathematical step spelled out from scratch, derivations fully justified, and worked examples computed with concrete numbers.</p>
+            <p>Ordinary quantum mechanics describes a subsystem as a factor of a tensor product. For quantum fields, for many-body systems in the thermodynamic limit, and for gravity, that description breaks down. These notes develop its replacement, operator algebras, from the beginning, and then uses it to show how regions of spacetime, horizons and black-hole entropy can be read off from a boundary quantum system. Every new idea is checked against a calculation you already know from ordinary quantum mechanics, and every step of every calculation is numbered and explained.</p>
         </div>
         <div class="hero-actions">
-            <a href="main.pdf" class="btn btn-primary" target="_blank">📄 Open Compiled PDF (102 Pages)</a>
+            <a href="main.pdf" class="btn btn-primary" target="_blank">📄 Open the PDF (PAGECOUNT pages)</a>
             <button class="btn btn-secondary" onclick="scrollToChapter('01_introduction')">🚀 Start Reading Online</button>
         </div>
     </div>
     """
+    main_intro_html = main_intro_html.replace('PAGECOUNT', _pdf_pagecount())
 
     html_template = f"""<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reading Companion: Entanglement, von Neumann Algebras & Spacetime (Hong Liu)</title>
-    <meta name="description" content="Pedagogical companion to Hong Liu's Lectures on Entanglement, von Neumann Algebras, and Emergence of Spacetime (arXiv:2510.07017)">
+    <title>Entanglement, Operator Algebras, and Spacetime</title>
+    <meta name="description" content="Entanglement, Operator Algebras, and the Emergence of Spacetime: a first introduction for physicists">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -288,7 +346,10 @@ def build_web_app():
                 ket: ["|#1\\\\rangle", 1],
                 bra: ["\\\\langle #1|", 1],
                 Re: "\\\\operatorname{{Re}}",
-                Im: "\\\\operatorname{{Im}}"
+                Im: "\\\\operatorname{{Im}}",
+                eqstep: ["\\\\overset{{(#1)}}{{=}}", 1],
+                leqstep: ["\\\\overset{{(#1)}}{{\\\\le}}", 1],
+                geqstep: ["\\\\overset{{(#1)}}{{\\\\ge}}", 1]
             }}
         }},
         options: {{
@@ -820,13 +881,13 @@ def build_web_app():
     <header class="top-navbar" role="banner">
         <div class="nav-left">
             <a href="#" class="brand-title">
-                <span>🌌</span> <span>Liu Companion</span>
+                <span>🌌</span> <span>Operator Algebras &amp; Spacetime</span>
             </a>
         </div>
         <div class="nav-right">
             <div class="search-container" role="search">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" class="search-input" placeholder="Search concepts, equations..." aria-label="Search companion notes">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search concepts, equations..." aria-label="Search the notes">
             </div>
             <button class="btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light/Sepia Theme">🌗 Theme</button>
             <a href="main.pdf" class="btn btn-primary" target="_blank" title="Download or view PDF edition">📄 PDF (102p)</a>
@@ -989,8 +1050,8 @@ def build_web_app():
 def build_markdown_editions():
     """Build markdown editions in markdown/ directory."""
     os.makedirs("markdown", exist_ok=True)
-    full_companion_content = [
-        "# Reading Companion to Hong Liu's Lectures on Entanglement, von Neumann Algebras, and Emergence of Spacetime\n",
+    full_notes_content = [
+        "# Entanglement, Operator Algebras, and the Emergence of Spacetime: A First Introduction for Physicists\n",
         "**arXiv:2510.07017**\n\n---\n"
     ]
 
@@ -1008,12 +1069,12 @@ def build_markdown_editions():
         with open(md_path, "w", encoding="utf-8") as f:
             f.write(f"# {title}\n\n" + md_content)
             
-        full_companion_content.append(f"\n\n---\n\n{md_content}")
+        full_notes_content.append(f"\n\n---\n\n{md_content}")
 
-    with open(os.path.join("markdown", "full_companion.md"), "w", encoding="utf-8") as f:
-        f.write('\n'.join(full_companion_content))
+    with open(os.path.join("markdown", "full_notes.md"), "w", encoding="utf-8") as f:
+        f.write('\n'.join(full_notes_content))
         
-    print("Generated Markdown chapters and markdown/full_companion.md successfully.")
+    print("Generated Markdown chapters and markdown/full_notes.md successfully.")
 
 if __name__ == "__main__":
     build_web_app()

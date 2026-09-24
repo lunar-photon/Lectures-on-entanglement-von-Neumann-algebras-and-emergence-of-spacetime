@@ -1,78 +1,59 @@
-\documentclass[tikz,border=6pt]{standalone}
-\usepackage{amsmath,amssymb,mathtools}
-\usepackage{xcolor}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,calc,positioning,decorations.pathmorphing}
-
-\definecolor{cobalt}{HTML}{2b4c7e}
-\definecolor{navyhead}{HTML}{1a365d}
-\definecolor{boxblue}{HTML}{eef3fa}
-\definecolor{boxgreen}{HTML}{eaf6f0}
-\definecolor{ruleblue}{HTML}{2b6cb0}
-\definecolor{rulegold}{HTML}{b7791f}
-\definecolor{rulered}{HTML}{c0392b}
-\definecolor{rulegreen}{HTML}{1f8a5f}
-
+\documentclass[tikz,border=2pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,decorations.pathreplacing,calc}
+\definecolor{cblue}{HTML}{2b6cb0}
+\definecolor{cdeep}{HTML}{1d4ed8}
+\definecolor{cgold}{HTML}{b7791f}
+\definecolor{cred}{HTML}{c0392b}
+\definecolor{cgreen}{HTML}{1f8a5f}
+\definecolor{tblue}{HTML}{e6eef8}
+\definecolor{tgold}{HTML}{f8efdc}
+\definecolor{tgray}{HTML}{efefef}
+\definecolor{tgreen}{HTML}{e3f3eb}
+\definecolor{cgray}{HTML}{8a8a8a}
 \begin{document}
-\begin{tikzpicture}[>=Latex, font=\small]
+\begin{tikzpicture}[font=\small, line cap=round, line join=round]
+  % ---------- (a) empty AdS (conformal strip, width pi R) ----------
+  \def\a{2.5}
+  \fill[tblue] (\a,\a) -- (0,0) -- (\a,-\a) -- cycle;
+  \fill[tblue] (-\a,\a) -- (0,0) -- (-\a,-\a) -- cycle;
+  \draw[cgray, dotted, thin] (0,-3) -- (0,3);
+  \draw[cgray, dashed, thin] (-\a,0) -- (\a,0);
+  \draw[cblue, thin] (\a,\a) -- (0,0) -- (\a,-\a);
+  \draw[cblue, thin] (-\a,\a) -- (0,0) -- (-\a,-\a);
+  \draw[thin] (-\a,-3) -- (-\a,3);
+  \draw[thin] (\a,-3) -- (\a,3);
+  \draw[cblue, line width=1.8pt] (\a,-\a) -- (\a,\a);
+  \draw[cblue, line width=1.8pt] (-\a,-\a) -- (-\a,\a);
+  \fill[cblue] (0,0) circle (1.5pt);
+  \node[cblue, left] at (-\a-0.08,0) {$I_w$};
+  \draw[decorate, decoration={brace, amplitude=4pt}, thin]
+    (\a+0.15,\a) -- (\a+0.15,-\a) node[midway, right=4pt] {$\pi R$};
+  \node[below] at (0,-3) {$r=0$};
+  \node at (0,-3.85) {(a)};
 
-  % ================= PANEL A: EMPTY ADS (T = pi R < infinity) =================
-  \begin{scope}[shift={(0,0)}]
-    \node[font=\bfseries\normalsize\color{navyhead}, align=center] at (2.5, 4.8) 
-      {\textbf{(a)} Empty AdS: Causal Depth $T = \pi R$};
-
-    % AdS boundary cylinder slice
-    \draw[thick] (0, 0) -- (0, 4.0);
-    \draw[thick] (5.0, 0) -- (5.0, 4.0);
-    \draw[dashed, color=gray!60] (0, 2.0) -- (5.0, 2.0) node[right, font=\tiny] {Cauchy slice};
-
-    % Bulk center r=0
-    \draw[dotted, color=gray!50] (2.5, 0) -- (2.5, 4.0);
-    \node[below, font=\scriptsize] at (2.5, 0) {Center $r=0$};
-
-    % Time band Iw on left and right boundaries
-    \draw[line width=2.5pt, color=ruleblue] (0, 0.75) -- (0, 3.25)
-      node[midway, left=2pt, font=\scriptsize\bfseries] {Band $I_w$};
-    \draw[line width=2.5pt, color=ruleblue] (5.0, 0.75) -- (5.0, 3.25);
-
-    % Light rays meeting at center r=0
-    \fill[boxblue, opacity=0.7] (0, 2.0) -- (2.5, 0.75) -- (5.0, 2.0) -- (2.5, 3.25) -- cycle;
-    \draw[thick, ruleblue] (0, 0.75) -- (2.5, 2.0) -- (0, 3.25);
-    \draw[thick, ruleblue] (5.0, 0.75) -- (2.5, 2.0) -- (5.0, 3.25);
-
-    \fill[ruleblue] (2.5, 2.0) circle (2pt);
-    \node[above=3pt, font=\tiny\bfseries\color{ruleblue}] at (2.5, 2.0) {Lightcones cross};
-
-    \node[below=4pt, font=\scriptsize\color{black!80}, align=center] at (2.5, -0.1) 
-      {For $w \ge \pi R$, domain of dependence\\covers entire Cauchy slice $\implies Y_{I_w}' = \mathbb{C}\mathbf{1}$.\\Finite causal depth $T = \pi R$.};
+  % ---------- (b) eternal black hole ----------
+  \begin{scope}[shift={(8.9,0)}]
+    \def\b{3}
+    \def\w{1.6}
+    \pgfmathsetmacro{\m}{\b-\w}
+    \fill[tblue] (\b,\w) -- (\m,0) -- (\b,-\w) -- cycle;
+    \draw[cgray, dashed, thin] (0,0) -- (\b,0);
+    \draw[cblue, thin] (\b,\w) -- (\m,0) -- (\b,-\w);
+    \draw[cred, dashed, thin] (-\b,-\b) -- (\b,\b);
+    \draw[cred, dashed, thin] (-\b,\b) -- (\b,-\b);
+    \draw[decorate, decoration={snake, segment length=6pt, amplitude=1.2pt}, thick]
+      (-\b,\b) -- (\b,\b);
+    \draw[decorate, decoration={snake, segment length=6pt, amplitude=1.2pt}, thick]
+      (-\b,-\b) -- (\b,-\b);
+    \draw[thin] (-\b,-\b) -- (-\b,\b);
+    \draw[thin] (\b,-\b) -- (\b,\b);
+    \draw[cblue, line width=1.8pt] (\b,-\w) -- (\b,\w);
+    \fill (0,0) circle (1.5pt);
+    \node[cblue, right] at (\b+0.08,0) {$I_w$};
+    \node at (0,-3.85) {(b)};
   \end{scope}
-
-  % ================= PANEL B: BLACK HOLE (T = infinity) =================
-  \begin{scope}[shift={(7.5,0)}]
-    \node[font=\bfseries\normalsize\color{navyhead}, align=center] at (2.5, 4.8) 
-      {\textbf{(b)} Black Hole: Causal Depth $T = \infty$};
-
-    % Boundary and Horizon
-    \draw[thick] (0, 0) -- (0, 4.0);
-    \draw[thick] (5.0, 0) -- (5.0, 4.0);
-
-    % Black hole horizon in center
-    \fill[gray!20] (2.0, 0) rectangle (3.0, 4.0);
-    \draw[thick, dashed, color=rulered] (2.0, 0) -- (2.0, 4.0) node[above, font=\tiny] {$r_H$};
-    \draw[thick, dashed, color=rulered] (3.0, 0) -- (3.0, 4.0) node[above, font=\tiny] {$r_H$};
-    \node[font=\scriptsize\bfseries\color{rulered}, rotate=90] at (2.5, 2.0) {Black Hole};
-
-    % Time band on boundary
-    \draw[line width=2.5pt, color=ruleblue] (0, 0.3) -- (0, 3.7)
-      node[midway, left=2pt, font=\scriptsize\bfseries] {Any finite $w$};
-
-    % Infalling null geodesics dragging along horizon
-    \draw[thick, ruleblue] (0, 0.8) .. controls (1.5, 1.6) and (1.9, 2.8) .. (1.99, 4.0);
-    \draw[thick, ruleblue] (0, 3.2) .. controls (1.5, 2.4) and (1.9, 1.2) .. (1.99, 0.0);
-
-    \node[below=4pt, font=\scriptsize\color{black!80}, align=center] at (2.5, -0.1) 
-      {Light rays asymptotically wrap horizon\\without crossing $\implies Y_{I_w}' \ne \mathbb{C}\mathbf{1}$ for all $w < \infty$.\\Causal depth diverges: $T = \infty$ (Horizon signature).};
-  \end{scope}
-
 \end{tikzpicture}
 \end{document}

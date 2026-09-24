@@ -1,50 +1,58 @@
-\documentclass[tikz,border=5pt]{standalone}
-\usepackage{amsmath,amssymb,mathtools}
-\usepackage{braket}
-\usepackage{xcolor}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta,decorations.pathmorphing,decorations.pathreplacing,calc,positioning}
-
-\definecolor{cobalt}{HTML}{2b4c7e}
-\definecolor{boxblue}{HTML}{eef3fa}
-\definecolor{boxgold}{HTML}{fbf3e3}
-\definecolor{boxred}{HTML}{fbecec}
-\definecolor{boxgreen}{HTML}{eaf6f0}
-\definecolor{ruleblue}{HTML}{2b6cb0}
-\definecolor{rulegold}{HTML}{b7791f}
-\definecolor{rulered}{HTML}{c0392b}
-\definecolor{rulegreen}{HTML}{1f8a5f}
-
-\newcommand{\HH}{\mathcal{H}}
-\newcommand{\M}{\mathcal{M}}
-\newcommand{\tr}{\operatorname{tr}}
-\newcommand{\Tr}{\operatorname{Tr}}
-\newcommand{\ii}{\mathrm{i}}
+\documentclass[tikz,border=2pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,decorations.pathreplacing,calc}
+\definecolor{cblue}{HTML}{2b6cb0}
+\definecolor{cdeep}{HTML}{1d4ed8}
+\definecolor{cgold}{HTML}{b7791f}
+\definecolor{cred}{HTML}{c0392b}
+\definecolor{cgreen}{HTML}{1f8a5f}
+\definecolor{tblue}{HTML}{e6eef8}
+\definecolor{tgold}{HTML}{f8efdc}
+\definecolor{tgray}{HTML}{efefef}
+\definecolor{tgreen}{HTML}{e3f3eb}
+\definecolor{cgray}{HTML}{8a8a8a}
 \begin{document}
-\begin{tikzpicture}[scale=1.55, >=Latex]
-  % global AdS constant-time slice as a disk
-  \draw[thick] (0,0) circle (1.6);
-  \fill[boxblue, opacity=0.35] (0,0) circle (1.6);
-  % boundary region A: arc from -50 to 50 deg
-  \draw[very thick, rulered] (1.6*cos{-55}, 1.6*sin{-55}) arc (-55:55:1.6);
-  \node[rulered] at (1.95,0) {$A$};
-  % RT surface: geodesic chord connecting endpoints of A (approx as circular arc bulging left, using a simple chord for schematic)
-  \draw[very thick, ruleblue, decorate, decoration={snake, amplitude=0.4pt, segment length=3pt}]
-     (1.6*cos{-55}, 1.6*sin{-55}) to[out=160,in=-160] (1.6*cos{55}, 1.6*sin{55});
-  \node[ruleblue] at (0.15,0) {$\gamma_A$};
-  % shade entanglement wedge region b_A between A and gamma_A
-  \begin{scope}
-    \clip (1.6*cos{-55}, 1.6*sin{-55}) arc (-55:55:1.6) -- (1.6*cos{55}, 1.6*sin{55}) to[out=-160,in=160] (1.6*cos{-55}, 1.6*sin{-55}) -- cycle;
-    \fill[rulegold, opacity=0.35] (0,0) circle (1.6);
-  \end{scope}
-  \node[font=\footnotesize, align=center] at (1.15,0) {$b_A$\\ entangl.\\ wedge};
-  \node[font=\footnotesize] at (-0.9,1.0) {\it complement $\bar A$};
-  \draw[dashed] (0,0) circle (1.6);
-  % small legend arrow
-  \node[font=\scriptsize, align=left, text width=3.6cm] at (2.9,0.9)
-   {$S_A = \dfrac{\mathrm{Area}(\gamma_A)}{4G_N}+S_{\rm bulk}(b_A)$\\[3pt]
-    $\;=S_{\rm gen}(b_A)$\\[3pt]
-    algebraically: $X_A=\widetilde\M_{b_A}$};
-\end{tikzpicture}
+\begin{tikzpicture}[font=\small, line cap=round]
+  % ---------- (a) constant-time slice (Poincare disk) ----------
+  \def\r{2.6}
+  % geodesic anchored at +-55 deg: circle orthogonal to the boundary,
+  % centre at r/cos55, radius r*tan55
+  \pgfmathsetmacro{\cx}{\r/cos(55)}
+  \pgfmathsetmacro{\gr}{\r*tan(55)}
+  \fill[tblue] (0,0) circle (\r);
+  \fill[tgold] (-55:\r) arc (-55:55:\r)
+     arc[start angle=145, end angle=215, radius=\gr] -- cycle;
+  \draw[thin] (0,0) circle (\r);
+  \draw[cred, line width=1.3pt] (-55:\r) arc (-55:55:\r);
+  \draw[cdeep, line width=1.1pt] (55:\r) arc[start angle=145, end angle=215, radius=\gr];
+  \fill[cred] (55:\r) circle (1.4pt) (-55:\r) circle (1.4pt);
+  \node[cred, right] at (\r+0.05,0) {$A$};
+  \node[left] at (-\r-0.05,0) {$\bar A$};
+  \node[cdeep] at (0.47,0) {$\gamma_A$};
+  \node[cgold!70!black] at (1.75,0) {$b_A$};
+  \node at (0,-\r-0.5) {(a)};
 
+  % ---------- (b) side view: time vs. radius through the middle of A ----------
+  \begin{scope}[shift={(6.2,0)}]
+    \def\h{2.6}                          % half-height of the strip
+    \pgfmathsetmacro{\th}{55/90*2}       % 55 deg in strip units (half-width 2 = pi/2)
+    \pgfmathsetmacro{\tip}{2-\th}
+    \fill[tblue] (-2,-\h) rectangle (2,\h);
+    \fill[tgold] (\tip,0) -- (2,\th) -- (2,-\th) -- cycle;
+    \draw[cgold, thin] (\tip,0) -- (2,\th) (\tip,0) -- (2,-\th);
+    \draw[cgray, thin, dashed] (-2,0) -- (\tip,0);
+    \draw[cgold, thin] (\tip,0) -- (2,0);
+    \draw[thin] (-2,-\h) -- (-2,\h);
+    \draw[thin] (2,-\h) -- (2,\h);
+    \draw[cred, line width=1.3pt] (2,-\th) -- (2,\th);
+    \fill[cdeep] (\tip,0) circle (1.6pt);
+    \node[cdeep, below left] at (\tip+0.02,0) {$\gamma_A$};
+    \node[cgold!70!black] at (1.63,0.36) {$\widehat b_A$};
+    \node[cred, right] at (2.05,0) {$\widehat A$};
+    \draw[-{Latex[length=4pt]}, thin] (-2.45,-0.6) -- (-2.45,0.6) node[above] {$t$};
+    \node at (0,-\h-0.5) {(b)};
+  \end{scope}
+\end{tikzpicture}
 \end{document}
